@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-08-10T03:05:54+09:00",
+  "components": {
+    "kicad": {
+      "origin": "https://gitlab.com/kicad/code/kicad.git",
+      "tag": "10.0.5",
+      "commit": "18fb9289ff0efdca53c0352ed81a0973f0a6b58c",
+      "tag_object": "31f98a7a2589faeccbfb0bfb2ace70eb421fbf56",
+      "commit_date": "2026-07-21T15:13:55-04:00",
+      "local_branch": "hanol-dev/10.0.5",
+      "license": "GPL-3.0-or-later with compatible per-file exceptions",
+      "source_path": "upstream/kicad"
+    },
+    "konnect": {
+      "origin": "https://github.com/mixelpixx/Konnect.git",
+      "tag": "v0.2.2",
+      "commit": "ac878269de0692ca4555f19658dd5af7886a8b78",
+      "tag_object": null,
+      "commit_date": "2026-08-01T09:31:56-04:00",
+      "local_branch": "hanol-dev/v0.2.2",
+      "license": "AGPL-3.0-only",
+      "source_path": "upstream/konnect"
+    }
+  }
+}

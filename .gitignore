@@ -1,0 +1,23 @@
+# 로컬 런타임과 빌드 산출물
+.runtime-home/
+.artifacts/
+dist/
+build/
+
+# 회로 편집기 사용자 상태와 자동 백업
+*.kicad_prl
+*-backups/
+_autosave-*
+*.lck
+
+# 제조 산출물은 명시적으로 승인한 경우에만 추적
+projects/**/manufacturing/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# 편집기
+.idea/
+.vscode/
+*.swp
