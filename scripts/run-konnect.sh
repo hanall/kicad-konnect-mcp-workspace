@@ -25,5 +25,12 @@ export XDG_CACHE_HOME="$RUNTIME_HOME/.cache"
 export XDG_DATA_HOME="$RUNTIME_HOME/.local/share"
 export XDG_STATE_HOME="$RUNTIME_HOME/.local/state"
 
+# KiCad가 Konnect를 자식 프로세스로 실행하면 KICAD_API_SOCKET이 자동으로
+# 전달된다. Codex/Claude가 독립 STDIO 서버로 실행하는 Linux 경로에서는
+# 현재 사용자의 활성 KiCad 10 API socket을 안전하게 자동 발견한다.
+if [[ -z "${KICAD_API_SOCKET:-}" && -S /tmp/kicad/api.sock ]]; then
+  export KICAD_API_SOCKET="ipc:///tmp/kicad/api.sock"
+fi
+
 cd "$ROOT"
 exec "$BIN" "$@"

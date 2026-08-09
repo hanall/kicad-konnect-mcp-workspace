@@ -84,12 +84,25 @@ def main() -> int:
     assert (ROOT / mcp_command).resolve() == (ROOT / "scripts/run-konnect.sh").resolve()
     assert "config/konnect.toml" in server["args"]
 
+    codex_config = tomllib.loads(
+        (ROOT / ".codex/config.toml").read_text(encoding="utf-8")
+    )
+    codex_server = codex_config["mcp_servers"]["konnect"]
+    assert codex_server["command"] == "scripts/run-konnect.sh"
+    assert codex_server["args"] == ["--config", "config/konnect.toml"]
+    assert codex_server["default_tools_approval_mode"] == "writes"
+
     launcher = ROOT / "scripts/run-konnect.sh"
     assert launcher.stat().st_mode & stat.S_IXUSR
     launcher_text = launcher.read_text(encoding="utf-8")
     assert 'export HOME="$RUNTIME_HOME"' in launcher_text
+    assert 'KICAD_API_SOCKET="ipc:///tmp/kicad/api.sock"' in launcher_text
     assert 'cd "$ROOT"' in launcher_text
     assert (ROOT / ".runtime-home").resolve() != Path.home().resolve()
+
+    for script_name in ("install-kicad-appimage.sh", "mcp-live-acceptance.py"):
+        script = ROOT / "scripts" / script_name
+        assert script.stat().st_mode & stat.S_IXUSR, f"실행 권한 누락: {script}"
 
     root_status = run("git", "status", "--porcelain")
     if "upstream/kicad" in root_status or "upstream/konnect" in root_status:

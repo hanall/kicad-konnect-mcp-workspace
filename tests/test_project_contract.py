@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -23,6 +24,42 @@ class ProjectContractTest(unittest.TestCase):
         text = (ROOT / ".mcp.json").read_text(encoding="utf-8")
         self.assertIn("scripts/run-konnect.sh", text)
         self.assertNotIn("target/release/konnect\"", text)
+
+    def test_codex_mcp_config_uses_safe_launcher(self) -> None:
+        config = tomllib.loads((ROOT / ".codex/config.toml").read_text(encoding="utf-8"))
+        server = config["mcp_servers"]["konnect"]
+        self.assertEqual(server["command"], "scripts/run-konnect.sh")
+        self.assertEqual(server["args"], ["--config", "config/konnect.toml"])
+        self.assertEqual(server["default_tools_approval_mode"], "writes")
+
+    def test_launcher_auto_detects_linux_kicad_socket(self) -> None:
+        launcher = (ROOT / "scripts/run-konnect.sh").read_text(encoding="utf-8")
+        self.assertIn('KICAD_API_SOCKET="ipc:///tmp/kicad/api.sock"', launcher)
+        self.assertIn("-S /tmp/kicad/api.sock", launcher)
+
+    def test_runtime_acceptance_entrypoints_are_executable(self) -> None:
+        for relative in (
+            "scripts/install-kicad-appimage.sh",
+            "scripts/mcp-live-acceptance.py",
+        ):
+            path = ROOT / relative
+            self.assertTrue(path.stat().st_mode & 0o100, f"실행 권한 누락: {path}")
+
+    def test_kicad_installer_is_pinned_approved_and_fail_closed(self) -> None:
+        installer = (ROOT / "scripts/install-kicad-appimage.sh").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('VERSION="10.0.5"', installer)
+        self.assertIn('RELEASE_DATE="2026-07-22"', installer)
+        self.assertIn('SOURCE_PAGE="https://www.kicad.org/download/linux/"', installer)
+        self.assertIn('MINISIGN_PUBLIC_KEY_ID="40D6F856001D8BB2"', installer)
+        self.assertIn('"status": "approved"', installer)
+        self.assertIn('"source": "사용자 명시 승인"', installer)
+        self.assertIn('minisign -Vm "$INSTALLED_APPIMAGE"', installer)
+        self.assertIn('-p "$public_key" || return 1', installer)
+        self.assertIn("<<'PY' || return 1", installer)
+        self.assertIn('desktop-file-validate "$desktop" || return 1', installer)
+        self.assertIn('TryExec=/usr/local/bin/kicad', installer)
 
     def test_runtime_home_is_ignored(self) -> None:
         ignored = subprocess.run(

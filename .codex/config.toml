@@ -1,0 +1,7 @@
+[mcp_servers.konnect]
+command = "scripts/run-konnect.sh"
+args = ["--config", "config/konnect.toml"]
+startup_timeout_sec = 20
+tool_timeout_sec = 120
+default_tools_approval_mode = "writes"
+enabled = true

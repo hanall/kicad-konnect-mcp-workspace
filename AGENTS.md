@@ -33,6 +33,8 @@
 - root: `make verify`
 - Konnect: `make test`
 - MCP: `make mcp-smoke`
+- 설치된 KiCad 10 무결성: `make runtime-verify`
+- 실제 GUI/IPC: ACUW 전용 레인에서 KiCad PCB Editor를 연 뒤 `make live-acceptance KICAD_PROJECT=... KICAD_BOARD=...`
 - 제조 기능 변경: 가능한 경우 실제 KiCad 10 `kicad-cli`로 ERC, DRC, Gerber, drill 생성과 결과 파일 존재를 함께 확인한다.
 - KiCad GUI/IPC 기능은 KiCad 10 PCB Editor가 실행된 상태에서 별도 통합 테스트로 확인한다.
 
@@ -41,6 +43,7 @@
 - 기본 MCP 실행은 반드시 `scripts/run-konnect.sh`를 통한다. 이 실행기는 `.runtime-home`을 사용해 upstream의 최초 실행 installer가 실제 사용자 `~/.claude`를 수정하지 못하게 한다.
 - `.mcp.json`에서 upstream binary를 직접 실행하지 않는다.
 - HTTP transport가 필요하면 loopback(`127.0.0.1`)만 사용한다. 외부 bind는 보안 검토 전 금지한다.
+- Codex는 프로젝트의 `.codex/config.toml`, Claude 계열은 `.mcp.json`을 사용한다. 둘 다 `scripts/run-konnect.sh` 외의 binary를 직접 실행하지 않는다.
 - 회로 파일은 원본 백업과 Git 상태를 확인한 뒤 수정한다.
 - 생성된 Gerber가 DRC 통과를 의미하지 않는다. ERC/DRC/DFM을 별도 gate로 유지한다.
 

@@ -52,12 +52,21 @@ make verify
 ./scripts/bootstrap-dev-deps.sh
 make build
 
+# 이 Debian 호스트에 고정된 공식 KiCad 10 AppImage 설치 또는 재검증
+./scripts/install-kicad-appimage.sh
+make runtime-verify
+
 # upstream 테스트와 MCP JSON-RPC smoke
 make test
 make mcp-smoke
 ```
 
 `.mcp.json`은 프로젝트의 안전 실행기를 가리킵니다. 실행기는 Konnect의 최초 실행 설치가 실제 `~/.claude`를 수정하지 않도록 `.runtime-home/`을 전용 HOME으로 사용합니다.
+
+Codex는 공식 설정 형식인 [`.codex/config.toml`](.codex/config.toml)을 사용합니다.
+프로젝트를 trusted로 연 Codex CLI/IDE/desktop 세션에서는 `konnect` STDIO MCP가
+동일한 안전 실행기로 등록됩니다. Linux에서 KiCad API가 활성화되어
+`/tmp/kicad/api.sock`이 존재하면 실행기가 IPC 주소를 자동 전달합니다.
 
 얕은 submodule clone에서 tag ref가 생략됐다면 잠금 파일에 기록된 origin, commit,
 tag를 검증하면서 필요한 tag만 복구할 수 있습니다.
@@ -124,7 +133,9 @@ Konnect 변경은 해당 submodule에서 테스트·커밋·fork push한 뒤 roo
 ## 현재 범위
 
 - 소스 checkout과 MCP 서버 빌드/프로토콜 smoke는 `make check-local`로 로컬 검증합니다.
-- KiCad GUI와 `kicad-cli` 런타임은 별도 시스템 설치가 필요합니다. Debian 13 기본 APT는 KiCad 9.0.2이므로 KiCad 10을 그 경로로 잘못 설치하지 않습니다.
+- 이 호스트에는 공식 full AppImage 기반 KiCad `10.0.5`가 `/opt/kicad/10.0.5`에 설치되어 있으며, `/usr/local/bin/kicad`와 `kicad-cli` 등 8개 진입점을 제공합니다. Debian 13 기본 APT 후보 `9.0.2`는 설치하지 않습니다.
+- `make runtime-verify`는 AppImage SHA-256, minisign, desktop entry와 실제 `kicad-cli --version`을 다시 확인합니다.
+- `make live-acceptance KICAD_PROJECT=... KICAD_BOARD=...`는 실행 중인 KiCad 10 PCB Editor에 Konnect가 실제 IPC로 접속하고, live component 조회와 실제 `kicad-cli` DRC까지 수행합니다. ACUW 실행 절차와 현재 실측은 [`docs/설치-및-ACUW-검증.md`](docs/설치-및-ACUW-검증.md)를 따릅니다.
 - Konnect는 upstream이 명시한 beta 소프트웨어입니다. Linux는 컴파일·CI 대상이지만 Windows만큼 현장 검증이 축적되지 않았습니다.
 
 ## 라이선스
