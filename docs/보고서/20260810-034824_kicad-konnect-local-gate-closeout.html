@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KiCad + Konnect 로컬 검증 체계 종결 보고서</title>
+<style>
+:root{--bg:#0f1419;--panel:#171d26;--panel2:#1e2630;--line:#2b3645;--txt:#e6edf3;--muted:#9aa7b4;--blue:#4ea1ff;--green:#3fb950;--yellow:#e3b341;--red:#f85149;--code:#0b0f14}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.65;font-size:15px}.wrap{display:grid;grid-template-columns:250px 1fr;max-width:1280px;margin:auto}nav{position:sticky;top:0;height:100vh;padding:25px 17px;background:var(--panel);border-right:1px solid var(--line)}nav h2{font-size:13px;color:var(--muted)}nav a{display:block;color:var(--muted);text-decoration:none;padding:6px 9px;border-radius:7px;font-size:13px}nav a:hover{background:var(--panel2);color:var(--txt)}main{padding:34px 42px 80px;min-width:0}h1{font-size:27px;margin:0 0 6px}h2{font-size:21px;margin:42px 0 14px;padding-top:12px;border-top:1px solid var(--line)}h3{font-size:16px;color:#cdd9e5}.sub,.small{color:var(--muted)}.callout{border-radius:11px;padding:16px 18px;margin:16px 0;border-left:4px solid}.good{background:rgba(63,185,80,.08);border-color:var(--green)}.warn{background:rgba(227,179,65,.08);border-color:var(--yellow)}.info{background:rgba(78,161,255,.08);border-color:var(--blue)}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--panel2)}tr:nth-child(even) td{background:#141a22}code{background:#243140;padding:2px 6px;border-radius:5px;color:#ffd9a0;font-family:ui-monospace,monospace;font-size:13px}pre{position:relative;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow:auto}pre code{background:none;color:#d6e2ee;padding:0;white-space:pre}.copybtn{position:absolute;right:8px;top:8px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 9px;cursor:pointer}.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:650}.ok{color:var(--green);border:1px solid rgba(63,185,80,.45);background:rgba(63,185,80,.14)}.no{color:var(--yellow);border:1px solid rgba(227,179,65,.45);background:rgba(227,179,65,.13)}.blue{color:var(--blue);border:1px solid rgba(78,161,255,.45);background:rgba(78,161,255,.13)}.diagram{white-space:pre;font-family:ui-monospace,monospace;font-size:12.5px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;color:#bcd;overflow:auto}a{color:#7db7ff}@media(max-width:880px){.wrap{grid-template-columns:1fr}nav{display:none}main{padding:24px 18px}}
+</style>
+</head>
+<body><div class="wrap">
+<nav><h2>목차</h2><a href="#summary">0. 결론</a><a href="#source">1. Source 계약</a><a href="#billing">2. Actions 과금 통제</a><a href="#workflow">3. 개발 흐름</a><a href="#validation">4. 검증 증거</a><a href="#limits">5. 남은 범위</a><a href="#rollback">6. 롤백</a><a href="#appendix">부록</a></nav>
+<main>
+<h1>KiCad + Konnect 로컬 검증 체계 종결</h1>
+<div class="sub">대상: <code>kicad-konnect-mcp-workspace</code> · 작성 2026-08-10T03:48:24+09:00 · <span class="tag ok">종결</span> <span class="tag blue">Actions 비활성</span></div>
+<h2 id="summary">0. 결론</h2>
+<div class="callout good"><b>개발 기반을 로컬 검증 체계로 종결했습니다.</b> KiCad는 공식 최신 안정 릴리스만 추적하고, Konnect는 공식 upstream과 <code>hanall</code> 개선 fork를 분리했습니다. root와 fork 모두 GitHub Actions가 비활성화되어 새 push가 Actions 과금을 발생시키지 않습니다.</div>
+<table><tr><th>항목</th><th>확정 상태</th></tr>
+<tr><td>프로젝트</td><td><code>/home/hanol/kicad-konnect-mcp-workspace</code> · <a href="https://github.com/hanall/kicad-konnect-mcp-workspace">GitHub root</a></td></tr>
+<tr><td>KiCad</td><td><span class="tag ok">최신 안정</span> <code>10.0.5</code> · 공식 GitLab commit <code>18fb9289ff0e</code></td></tr>
+<tr><td>Konnect</td><td>공식 base <code>v0.2.2</code> · <a href="https://github.com/hanall/Konnect">hanall fork</a> · <code>hanol-dev/v0.2.2</code></td></tr>
+<tr><td>검증</td><td><span class="tag ok">420 tests</span> release build · clippy · MCP smoke · fresh clone 회귀 통과</td></tr>
+<tr><td>GitHub Actions</td><td><span class="tag ok">root disabled</span> <span class="tag ok">fork disabled</span> workflow 파일 0개</td></tr></table>
+
+<h2 id="source">1. Source 계약</h2>
+<div class="diagram">KiCad official GitLab
+  |
+  +-- latest stable tag (exclude *.99.0) --> upstream/kicad [read-only]
+
+mixelpixx/Konnect [official upstream]
+  |
+  +-- review and sync --> hanall/Konnect [development fork]
+                            |
+                            +-- hanol-dev/* --> performance and reliability work</div>
+<table><tr><th>Source</th><th>정본</th><th>자동화</th></tr>
+<tr><td>KiCad</td><td>공식 GitLab tag와 commit</td><td><code>make check-updates</code>, <code>make update-kicad</code></td></tr>
+<tr><td>Konnect upstream</td><td><code>mixelpixx/Konnect</code>의 release tag</td><td><code>upstream_tag</code>와 <code>upstream_commit</code> 보존</td></tr>
+<tr><td>Konnect 개발</td><td><code>hanall/Konnect</code>의 검증된 fork commit</td><td><code>make setup-konnect-dev</code></td></tr></table>
+<div class="callout info"><b>버전 정책:</b> “새 버전”은 공식 안정 릴리스로 해석했습니다. KiCad의 <code>9.99.0</code>, <code>10.99.0</code> 같은 개발 태그는 자동 반영하지 않으며, 미래의 새로운 안정 major/minor/patch는 선택합니다.</div>
+
+<h2 id="billing">2. GitHub Actions 과금 통제</h2>
+<table><tr><th>저장소</th><th>API 실측</th><th>workflow</th></tr>
+<tr><td><code>hanall/kicad-konnect-mcp-workspace</code></td><td><code>enabled=false</code></td><td>삭제됨</td></tr>
+<tr><td><code>hanall/Konnect</code></td><td><code>enabled=false</code></td><td>fork 안의 upstream 파일은 비활성 설정으로 실행 불가</td></tr></table>
+<div class="callout warn"><b>이력:</b> 사용자 정책 확정 전에 최초 root commit에서 실패한 run <code>31329067132</code> 1건이 존재합니다. 이후 Actions를 저장소 수준에서 비활성화한 뒤 commit <code>33cf158</code>을 push했고 새 run이 생성되지 않았습니다.</div>
+
+<h2 id="workflow">3. 로컬 개발 흐름</h2>
+<h3>전체 gate</h3>
+<pre><button class="copybtn" onclick="cp(this)">복사</button><code>cd /home/hanol/kicad-konnect-mcp-workspace
+make check-local</code></pre>
+<h3>KiCad 안정판 갱신</h3>
+<pre><button class="copybtn" onclick="cp(this)">복사</button><code>make check-updates
+make update-kicad
+make check-local</code></pre>
+<h3>Konnect 개선 브랜치</h3>
+<pre><button class="copybtn" onclick="cp(this)">복사</button><code>make setup-konnect-dev
+git -C upstream/konnect status --short --branch
+make test
+make build
+make mcp-smoke</code></pre>
+
+<h2 id="validation">4. 검증 증거</h2>
+<table><tr><th>검증</th><th>결과</th></tr>
+<tr><td>Rust unit/integration/doc</td><td><code>410 passed</code>, 실패 0</td></tr>
+<tr><td>root Python 계약</td><td><code>10 passed</code>, 실패 0</td></tr>
+<tr><td>Rust 정적 gate</td><td><code>cargo fmt --check</code>, <code>clippy -D warnings</code> 통과</td></tr>
+<tr><td>release build</td><td><code>konnect 0.2.2</code> binary 생성</td></tr>
+<tr><td>MCP protocol</td><td><code>2025-06-18</code>, starter tools <code>19</code>, 격리 install marker 확인</td></tr>
+<tr><td>fresh public clone</td><td>얕은 Konnect submodule의 누락 tag 복구, verifier, Python 10개 통과</td></tr>
+<tr><td>원격 정합</td><td>root <code>HEAD...origin/main = 0 0</code>, Konnect dev branch <code>0 0</code></td></tr></table>
+
+<h2 id="limits">5. 남은 범위</h2>
+<div class="callout warn"><b>KiCad 10 runtime은 설치하지 않았습니다.</b> 이 작업은 source·MCP 개발 기반 구축입니다. 따라서 실제 KiCad 10 GUI/IPC, <code>kicad-cli</code> ERC/DRC, Gerber·drill 생성은 아직 실기 검증이 아닙니다.</div>
+<table><tr><th>항목</th><th>상태</th><th>다음 기준</th></tr>
+<tr><td>Konnect 성능 개선 자체</td><td><span class="tag no">아직 미착수</span></td><td>fork와 branch만 준비됨. benchmark를 RED 기준으로 만든 후 변경</td></tr>
+<tr><td>KiCad GUI/IPC</td><td><span class="tag no">미검증</span></td><td>KiCad 10 runtime 확보 후 실제 PCB Editor로 검증</td></tr>
+<tr><td>제조 산출물</td><td><span class="tag no">미검증</span></td><td>fixture의 ERC/DRC 통과 후 Gerber/drill/BOM 교차 확인</td></tr></table>
+
+<h2 id="rollback">6. 롤백</h2>
+<p>root 구조 변경은 commit <code>33cf158</code>을 기준으로 되돌릴 수 있습니다. 다만 GitHub Actions 재활성화와 workflow 복원은 사용자의 과금 방침에 반하므로 수행하지 않습니다. Konnect 개발 fork는 공식 upstream을 변경하지 않으며, root gitlink를 이전 검증 commit으로 돌리면 파생 변경을 격리할 수 있습니다.</p>
+
+<h2 id="appendix">부록. 식별값</h2>
+<table><tr><th>대상</th><th>값</th></tr>
+<tr><td>root feature commit</td><td><code>33cf158</code></td></tr>
+<tr><td>KiCad</td><td><code>10.0.5 / 18fb9289ff0efdca53c0352ed81a0973f0a6b58c</code></td></tr>
+<tr><td>Konnect</td><td><code>v0.2.2 / ac878269de0692ca4555f19658dd5af7886a8b78</code></td></tr>
+<tr><td>Cargo.lock SHA-256</td><td><code>983352bbe8ce1a5dc6a76a0acef802ca201ba2caac62ca0a05a869d2192c2c92</code></td></tr>
+<tr><td>root repo</td><td><code>https://github.com/hanall/kicad-konnect-mcp-workspace</code></td></tr>
+<tr><td>Konnect fork</td><td><code>https://github.com/hanall/Konnect</code></td></tr>
+<tr><td>작성 시각</td><td><code>2026-08-10T03:48:24+09:00</code></td></tr></table>
+<p class="small">자기완결 HTML · 외부 CSS/JS/이미지 의존성 없음.</p>
+</main></div>
+<script>function cp(b){const c=b.parentElement.querySelector('code');navigator.clipboard.writeText(c.innerText).then(()=>{const o=b.textContent;b.textContent='복사됨';setTimeout(()=>b.textContent=o,1200)})};</script>
+</body></html>
