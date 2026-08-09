@@ -3,4 +3,4 @@
 	url = https://gitlab.com/kicad/code/kicad.git
 [submodule "upstream/konnect"]
 	path = upstream/konnect
-	url = https://github.com/mixelpixx/Konnect.git
+	url = https://github.com/hanall/Konnect.git

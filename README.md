@@ -11,6 +11,11 @@ KiCad 10과 Konnect MCP를 재현 가능한 upstream 기준점에 고정하고, 
 
 정확한 출처와 태그 시각은 [`upstreams.lock.json`](upstreams.lock.json)에 기록합니다. 두 소스는 `upstream/` 아래 Git submodule이며, 각각 태그 기준의 로컬 개발 브랜치에서 시작합니다.
 
+KiCad는 공식 GitLab 원본의 최신 안정 릴리스를 read-only 기준으로 추적합니다.
+Konnect는 공식 `mixelpixx/Konnect`를 `upstream`으로 두고
+[`hanall/Konnect`](https://github.com/hanall/Konnect) fork의 개발 브랜치에서
+성능·신뢰성·도구 계약을 개선합니다.
+
 ## 구조
 
 ```text
@@ -37,7 +42,8 @@ KiCad 10 PCB Editor   kicad-cli
 ## 빠른 시작
 
 ```bash
-cd /home/hanol/kicad-konnect-mcp-workspace
+git clone --recurse-submodules https://github.com/hanall/kicad-konnect-mcp-workspace.git
+cd kicad-konnect-mcp-workspace
 
 # 프로젝트 자체와 upstream 고정을 확인
 make verify
@@ -52,6 +58,47 @@ make mcp-smoke
 ```
 
 `.mcp.json`은 프로젝트의 안전 실행기를 가리킵니다. 실행기는 Konnect의 최초 실행 설치가 실제 `~/.claude`를 수정하지 않도록 `.runtime-home/`을 전용 HOME으로 사용합니다.
+
+얕은 submodule clone에서 tag ref가 생략됐다면 잠금 파일에 기록된 origin, commit,
+tag를 검증하면서 필요한 tag만 복구할 수 있습니다.
+
+```bash
+python3 scripts/fetch-locked-tag.py kicad
+python3 scripts/fetch-locked-tag.py konnect
+```
+
+## 검증과 GitHub 운영 정책
+
+`hanall` 계정은 과금 방지를 위해 GitHub Actions를 사용하지 않습니다. 저장소의
+Actions 권한을 비활성화하고 workflow 파일을 두지 않으며, push 전 아래 로컬 gate를
+실행합니다.
+
+```bash
+make check-local
+```
+
+## Upstream 업데이트와 Konnect 개발
+
+KiCad의 `.99.0` 개발 태그는 제외하고, 공식 원본의 가장 최신 안정 릴리스를
+확인하거나 반영합니다. 현재 최신 버전이면 파일을 변경하지 않습니다.
+
+```bash
+make check-updates
+make update-kicad
+```
+
+Konnect 개발을 시작할 때 fork를 `origin`, 공식 저장소를 `upstream`으로
+구성하고 개발 브랜치를 checkout합니다.
+
+```bash
+make setup-konnect-dev
+git -C upstream/konnect fetch upstream --tags
+git -C upstream/konnect status --short --branch
+```
+
+Konnect 변경은 해당 submodule에서 테스트·커밋·fork push한 뒤 root의 gitlink와
+`upstreams.lock.json`의 `commit`을 함께 갱신합니다. 공식 최신 release는
+`upstream_tag`와 `upstream_commit`에 별도로 보존합니다.
 
 ## 디렉터리
 
@@ -76,7 +123,7 @@ make mcp-smoke
 
 ## 현재 범위
 
-- 소스 checkout과 MCP 서버 빌드/프로토콜 smoke는 이 저장소에서 자동 검증합니다.
+- 소스 checkout과 MCP 서버 빌드/프로토콜 smoke는 `make check-local`로 로컬 검증합니다.
 - KiCad GUI와 `kicad-cli` 런타임은 별도 시스템 설치가 필요합니다. Debian 13 기본 APT는 KiCad 9.0.2이므로 KiCad 10을 그 경로로 잘못 설치하지 않습니다.
 - Konnect는 upstream이 명시한 beta 소프트웨어입니다. Linux는 컴파일·CI 대상이지만 Windows만큼 현장 검증이 축적되지 않았습니다.
 

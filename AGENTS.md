@@ -20,13 +20,16 @@
 
 ## 소스 경계
 
-- `upstream/kicad`: 공식 KiCad 소스. 기본 read-only이며 대규모 변경 전 upstream 개발 지침과 IPC 호환성을 검토한다.
-- `upstream/konnect`: MCP 구현. 변경 시 upstream `CONTRIBUTING.md`, `DEV.md`, `docs/NAMING_CONVENTIONS.md`를 먼저 읽는다.
+- `upstream/kicad`: 공식 KiCad 원본의 최신 안정 release를 추적하는 read-only 소스다. `.99.0` 개발 태그와 임의 patch는 반영하지 않는다.
+- `upstream/konnect`: `hanall/Konnect` fork의 MCP 구현이다. 공식 `mixelpixx/Konnect`는 `upstream` remote로 유지한다. 변경 시 upstream `CONTRIBUTING.md`, `DEV.md`, `docs/NAMING_CONVENTIONS.md`를 먼저 읽는다.
 - root의 `scripts`, `config`, `docs`, `projects`: 우리 통합 계층이다.
 - upstream tag를 이동시키지 않는다. 업그레이드는 새 tag와 commit을 `upstreams.lock.json`에 동시에 반영한다.
+- KiCad 갱신은 `make check-updates` 후 `make update-kicad`, Konnect 개발 준비는 `make setup-konnect-dev`를 사용한다.
 
 ## 검증 계약
 
+- `hanall` 계정은 과금 방지를 위해 GitHub Actions를 사용하지 않는다. workflow를 추가하지 않고 저장소 Actions 권한을 비활성 상태로 유지한다.
+- push 전 전체 로컬 gate: `make check-local`
 - root: `make verify`
 - Konnect: `make test`
 - MCP: `make mcp-smoke`

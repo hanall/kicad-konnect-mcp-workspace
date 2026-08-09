@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "retrieved_at": "2026-08-10T03:05:54+09:00",
   "components": {
     "kicad": {
@@ -13,12 +13,14 @@
       "source_path": "upstream/kicad"
     },
     "konnect": {
-      "origin": "https://github.com/mixelpixx/Konnect.git",
-      "tag": "v0.2.2",
+      "origin": "https://github.com/hanall/Konnect.git",
+      "upstream_origin": "https://github.com/mixelpixx/Konnect.git",
+      "upstream_tag": "v0.2.2",
+      "upstream_commit": "ac878269de0692ca4555f19658dd5af7886a8b78",
       "commit": "ac878269de0692ca4555f19658dd5af7886a8b78",
       "tag_object": null,
       "commit_date": "2026-08-01T09:31:56-04:00",
-      "local_branch": "hanol-dev/v0.2.2",
+      "development_branch": "hanol-dev/v0.2.2",
       "license": "AGPL-3.0-only",
       "source_path": "upstream/konnect"
     }

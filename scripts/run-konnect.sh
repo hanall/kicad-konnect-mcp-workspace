@@ -25,4 +25,5 @@ export XDG_CACHE_HOME="$RUNTIME_HOME/.cache"
 export XDG_DATA_HOME="$RUNTIME_HOME/.local/share"
 export XDG_STATE_HOME="$RUNTIME_HOME/.local/state"
 
+cd "$ROOT"
 exec "$BIN" "$@"

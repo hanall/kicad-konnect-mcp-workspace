@@ -1,10 +1,10 @@
 {
   "mcpServers": {
     "konnect": {
-      "command": "/home/hanol/kicad-konnect-mcp-workspace/scripts/run-konnect.sh",
+      "command": "scripts/run-konnect.sh",
       "args": [
         "--config",
-        "/home/hanol/kicad-konnect-mcp-workspace/config/konnect.toml"
+        "config/konnect.toml"
       ]
     }
   }

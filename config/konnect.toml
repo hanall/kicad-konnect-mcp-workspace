@@ -5,8 +5,8 @@ transport = "stdio"
 kicad_cli = "kicad-cli"
 kicad_binary = "kicad"
 
-# 이 저장소 아래에서만 설계 파일을 관리한다.
-project_dir = "/home/hanol/kicad-konnect-mcp-workspace/projects"
+# 실행기가 저장소 루트로 이동하므로 checkout 위치와 무관하다.
+project_dir = "projects"
 
 # 빈 값이면 KiCad가 제공하는 KICAD_API_SOCKET을 사용한다.
 ipc_address = ""

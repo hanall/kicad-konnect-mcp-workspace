@@ -17,5 +17,8 @@ command -v protoc >/dev/null 2>&1 || {
   cargo clippy --workspace --locked -- -D warnings
 )
 
-python3 "$ROOT/tests/test_project_contract.py"
+(
+  cd "$ROOT"
+  python3 -m unittest discover -s tests -p 'test_*.py' -v
+)
 printf 'Konnect와 root contract gate 통과\n'
