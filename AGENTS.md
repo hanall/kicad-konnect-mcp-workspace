@@ -140,20 +140,3 @@ bash /home/hanol/ai-computer-use-workspace/scripts/stop-workspace.sh && unset AC
 
 입력 표면(클릭/타이핑/키/스크롤/드래그/대기)·부분 확대 캡처(zoom)·클립보드·터미널·기본앱/데스크톱앱·브라우저 레인(CDP)·화면 녹화·host-mpx 레인(매뉴얼 §1-5, 계약 §2-3)·**계층적 읽기 채널**(tmux 버퍼 `term-text.sh`·Codex 이벤트 `codex-events.sh`·변화 감시 `watch.sh`/`damage-monitor.py`·PRIMARY 긁기 `read-terminal.sh`·AT-SPI `a11y.sh`·영상 `media.sh`·녹화 digest — 매뉴얼 §5.3-1~§5.3-6)·MCP(`workspace_*` 50종)·트러블슈팅은 위 매뉴얼을 참조하세요. 전체 도구 카탈로그는 `/home/hanol/ai-computer-use-workspace/scripts/REGISTRY.md`.
 <!-- ACUW-MANUAL:END -->
-
-<!-- UNKNOWN-AWARE-PROTOCOL:START -->
-<!-- protocol-version: compact-guarded.1 (derived from 1.0.0-rc.12) -->
-<!-- Regenerate/rollout with ~/.local/bin/inject-unknown-protocol.py . Do not hand-edit between markers. -->
-## Unknown-Aware 작업 규약
-
-- 사용자 요청은 완성 명세가 아니라 의도에 대한 불완전한 관측값이다.
-- 비자명한 작업 전에는 명시 요구·추론 의도·가정·중요 unknown을 내부적으로 분리한다. 결과·범위·안전에 무관한 빈칸은 분류하지 않는다.
-- 코드·문서·설정·테스트·로그·이전 대화로 확인 가능한 것은 질문 전에 스스로 확인한다.
-- 대안이 둘 이상인데 저장소에 선택 기준이 없는 사용자 소유 결정은 질문한다.
-- 저위험·가역 사항만 가정을 명시하고 진행한다. 가정을 사실처럼 서술하지 않는다.
-- 틀리면 결과·방향·안전이 달라지는 가정은 확인 전에 진행하지 않는다.
-- 고위험·비가역 작업(삭제·프로덕션 데이터·보안·공개 인터페이스)은 원본을 보존한 뒤 멈추고 확인을 요청한다.
-- 해소 안 된 중대한 unknown이 남으면 그 부분만 보류하고 영향 없는 범위만 진행한다.
-- 최종 보고에는 결과에 영향을 준 가정과 남은 unknown만 포함한다. 고정 형식은 쓰지 않는다.
-- 이 규약 밖의 구체적인 프로젝트 규칙과 사용자 명시 지시가 이 규약보다 우선한다.
-<!-- UNKNOWN-AWARE-PROTOCOL:END -->
