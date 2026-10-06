@@ -2,14 +2,16 @@
 from __future__ import annotations
 
 import argparse
+from collections import deque
 from datetime import datetime
 import hashlib
 import json
 import os
 from pathlib import Path
-import selectors
+import queue
 import subprocess
 import sys
+import threading
 import time
 from typing import Any
 
@@ -19,11 +21,11 @@ CONFIG = ROOT / "config/konnect.toml"
 
 
 class McpClient:
-    def __init__(self, timeout: float) -> None:
+    def __init__(self, timeout: float, *, command: list[str] | None = None) -> None:
         self.timeout = timeout
         self.next_id = 1
         self.process = subprocess.Popen(
-            [str(LAUNCHER), "--config", str(CONFIG)],
+            command or [str(LAUNCHER), "--config", str(CONFIG)],
             cwd=ROOT,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
@@ -33,8 +35,27 @@ class McpClient:
             env=os.environ.copy(),
         )
         assert self.process.stdout is not None
-        self.selector = selectors.DefaultSelector()
-        self.selector.register(self.process.stdout, selectors.EVENT_READ)
+        self.responses: queue.Queue = queue.Queue(maxsize=1024)
+        self.stderr_lines: deque[str] = deque(maxlen=1000)
+
+        def read_stdout() -> None:
+            assert self.process.stdout is not None
+            for line in self.process.stdout:
+                try:
+                    self.responses.put(json.loads(line))
+                except json.JSONDecodeError:
+                    self.responses.put({"protocol_error": line})
+            self.responses.put(None)
+
+        def read_stderr() -> None:
+            assert self.process.stderr is not None
+            for line in self.process.stderr:
+                self.stderr_lines.append(line)
+
+        self.stdout_thread = threading.Thread(target=read_stdout, daemon=True)
+        self.stderr_thread = threading.Thread(target=read_stderr, daemon=True)
+        self.stdout_thread.start()
+        self.stderr_thread.start()
 
     def send(self, payload: dict[str, Any]) -> None:
         assert self.process.stdin is not None
@@ -47,18 +68,14 @@ class McpClient:
         self.send({"jsonrpc": "2.0", "id": request_id, "method": method, "params": params})
         deadline = time.monotonic() + self.timeout
         while time.monotonic() < deadline:
-            if self.process.poll() is not None:
-                stderr = self.process.stderr.read() if self.process.stderr else ""
-                raise AssertionError(
-                    f"Konnect 조기 종료({self.process.returncode}): {stderr[-4000:]}"
-                )
-            events = self.selector.select(max(0.0, deadline - time.monotonic()))
-            if not events:
+            try:
+                response = self.responses.get(timeout=max(0.001, deadline - time.monotonic()))
+            except queue.Empty:
                 break
-            line = self.process.stdout.readline()
-            if not line:
-                break
-            response = json.loads(line)
+            if response is None:
+                raise AssertionError(f"Konnect 응답 전에 종료: {''.join(self.stderr_lines)[-4000:]}")
+            if "protocol_error" in response:
+                raise AssertionError(f"MCP JSON 응답 형식 오류: {response['protocol_error'][:1000]}")
             if response.get("id") == request_id:
                 if "error" in response:
                     raise AssertionError(f"MCP 오류: {response['error']}")
@@ -83,13 +100,38 @@ class McpClient:
         return parsed
 
     def close(self) -> str:
-        self.process.terminate()
+        if self.process.poll() is None:
+            self.process.terminate()
         try:
             self.process.wait(timeout=5)
         except subprocess.TimeoutExpired:
             self.process.kill()
             self.process.wait(timeout=5)
-        return self.process.stderr.read() if self.process.stderr else ""
+        self.stdout_thread.join(timeout=1)
+        self.stderr_thread.join(timeout=1)
+        for stream in (self.process.stdin, self.process.stdout, self.process.stderr):
+            if stream:
+                stream.close()
+        return "".join(self.stderr_lines)
+
+
+def summarize_drc_report(report: object) -> dict[str, Any]:
+    """실제 저장된 DRC 세 범주를 누락 없이 집계한다."""
+    assert isinstance(report, dict), "DRC report는 범주별 객체여야 합니다."
+    counts: dict[str, Any] = {"error": 0, "warning": 0, "total": 0, "categories": {}}
+    for category in ("violations", "unconnected_items", "schematic_parity"):
+        assert category in report, f"DRC 범주 누락: {category}"
+        values = report[category]
+        assert isinstance(values, list), f"DRC 범주 형식 불일치: {category}"
+        counts["categories"][category] = len(values)
+        for item in values:
+            assert isinstance(item, dict), f"DRC 위반 항목 형식 불일치: {category}"
+            severity = item.get("severity")
+            assert severity in ("error", "warning", "info"), f"DRC severity 불일치: {severity}"
+            counts["total"] += 1
+            if severity in ("error", "warning"):
+                counts[severity] += 1
+    return counts
 
 
 def parse_args() -> argparse.Namespace:
@@ -100,6 +142,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--board", type=Path, required=True, help="열려 있는 .kicad_pcb")
     parser.add_argument("--evidence", type=Path, required=True, help="검증 증거 JSON 출력")
     parser.add_argument("--timeout", type=float, default=120.0)
+    parser.add_argument("--require-clean-design", action="store_true", help="실행 성공뿐 아니라 모든 DRC 범주 0건을 요구")
     return parser.parse_args()
 
 
@@ -115,7 +158,8 @@ def main() -> int:
     )
     assert cli.returncode == 0, cli.stdout + cli.stderr
     cli_version = cli.stdout.strip().splitlines()[0]
-    assert cli_version == "10.0.5", f"KiCad CLI 버전 불일치: {cli_version}"
+    lock = json.loads((ROOT / "upstreams.lock.json").read_text(encoding="utf-8"))
+    assert cli_version == lock["components"]["kicad"]["tag"], f"KiCad CLI 버전 불일치: {cli_version}"
 
     client = McpClient(args.timeout)
     stderr = ""
@@ -128,6 +172,10 @@ def main() -> int:
                 "clientInfo": {"name": "kicad-live-acceptance", "version": "1.0.0"},
             },
         )["result"]
+        expected_server_version = lock["components"]["konnect"].get(
+            "version", lock["components"]["konnect"]["upstream_tag"].removeprefix("v")
+        )
+        assert initialized["serverInfo"]["version"] == expected_server_version, initialized
         client.send({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}})
 
         opened = client.call("open_project", {"path": str(project)})
@@ -136,7 +184,13 @@ def main() -> int:
 
         client.call("load_toolset", {"name": "verification"})
         ui = client.call("check_kicad_ui", {})
-        assert ui == {"ipc_responsive": True, "running": True}, ui
+        assert ui["ipc_responsive"] is True and ui["running"] is True, ui
+        assert ui.get("timed_out") is False and ui.get("ipc_failure") is None, ui
+
+        client.call("load_toolset", {"name": "pcb_board"})
+        board_info = client.call("get_board_info", {"board": str(board)})
+        assert board_info["source"] == "ipc", board_info
+        assert Path(board_info["file"]).resolve() == board, board_info
 
         client.call("load_toolset", {"name": "pcb_components"})
         components = client.call("get_component_list", {"board": str(board)})
@@ -149,30 +203,29 @@ def main() -> int:
             {
                 "board": str(board),
                 "output": str(drc_output),
-                "severity": "warning",
+                "severity": "info",
                 "limit": 50,
+                "sync_live_board": True,
+                "refill_zones": True,
             },
         )
         assert isinstance(drc.get("total_violations"), int), drc
+        assert drc["live_board_synced"] is True, drc
+        assert drc["source"] == "saved_file", drc
+        assert drc["categories_not_reported"] == [], drc
         assert drc_output.is_file(), f"DRC JSON 누락: {drc_output}"
         drc_report = json.loads(drc_output.read_text(encoding="utf-8"))
-        assert isinstance(drc_report, list), "DRC report 최상위 형식은 배열이어야 합니다."
-        assert len(drc_report) == drc["total_violations"], (
+        severity_counts = summarize_drc_report(drc_report)
+        assert severity_counts["total"] == drc["total_violations"], (
             f"DRC 위반 수 불일치: tool={drc['total_violations']} "
-            f"report={len(drc_report)}"
+            f"report={severity_counts['total']}"
         )
-        severity_counts = {"error": 0, "warning": 0}
-        for violation in drc_report:
-            assert isinstance(violation, dict), violation
-            severity = violation.get("severity")
-            if severity in severity_counts:
-                severity_counts[severity] += 1
         assert severity_counts["error"] == drc.get("errors"), severity_counts
         assert severity_counts["warning"] == drc.get("warnings"), severity_counts
         drc_sha256 = hashlib.sha256(drc_output.read_bytes()).hexdigest()
 
         evidence = {
-            "schema_version": 1,
+            "schema_version": 2,
             "verified_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "kicad_cli_version": cli_version,
             "mcp_server": initialized["serverInfo"],
@@ -181,6 +234,7 @@ def main() -> int:
             "board": str(board),
             "ipc": opened,
             "ui": ui,
+            "board_info": board_info,
             "component_count": components["count"],
             "component_references": [
                 item.get("reference") for item in components["components"]
@@ -189,14 +243,23 @@ def main() -> int:
                 "errors": drc.get("errors"),
                 "warnings": drc.get("warnings"),
                 "total_violations": drc["total_violations"],
+                "categories": severity_counts["categories"],
+                "live_board_synced": drc["live_board_synced"],
                 "report": str(drc_output),
                 "report_sha256": drc_sha256,
             },
+            "design_clean": severity_counts["total"] == 0,
         }
         args.evidence.parent.mkdir(parents=True, exist_ok=True)
         args.evidence.write_text(
             json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
+        if args.require_clean_design:
+            assert severity_counts["total"] == 0, (
+                f"엄격 설계 gate 실패: errors={severity_counts['error']} "
+                f"warnings={severity_counts['warning']} total={severity_counts['total']}; "
+                f"증거={args.evidence}"
+            )
         print("KiCad + Konnect live acceptance 통과")
         print(f"  KiCad CLI: {cli_version}")
         print(f"  MCP: {initialized['serverInfo']['name']} {initialized['serverInfo']['version']}")

@@ -1,0 +1,1978 @@
+{
+  "schema_version": 1,
+  "source_commit": "94f80350cf67db27b179a06a8f6dbebfe4717927",
+  "binary_sha256": "cbb5b9785d376ab55a57bbf5723f8e1d79805c5eeeca8d5b1d58b84f7c3d909a",
+  "binary_mtime_ns": 1791257410601774928,
+  "viewer_sha256": "7d7a0799b6210f2be9f4319fbc635e77f0050ebb9a20eaab4ef8bf5e4b80acfa",
+  "inventory": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/catalogue/inventory.json",
+    "sha256": "be1ec457617bfaded04a5dd0ce1ba18e362d90ac71002838ac5167ee944a403d",
+    "toolsets": 21,
+    "domain_tools": 228,
+    "meta_tools": 8,
+    "total_tools": 236
+  },
+  "schema_refusal": {
+    "probe_total": 1017,
+    "probe_passed": 1017,
+    "probe_failed": 0,
+    "protected_digest_unchanged": true
+  },
+  "functional_inputs": {
+    "headless": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/headless/normal-behavior.jsonl",
+      "sha256": "4c1fd9b109eec894900c11323a1eae623570c3673db312972a790063ab328b3b",
+      "records": 114,
+      "verdict_counts": {
+        "passed": 113,
+        "not_applicable": 1
+      }
+    },
+    "services": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/services/evidence.jsonl",
+      "sha256": "dd0a38062df900ecdde501468f404b40cb7aa8b9aa7b3638020a81af39c6150b",
+      "records": 40,
+      "verdict_counts": {
+        "passed": 37,
+        "environment_refusal_observed": 1,
+        "deferred_gui": 1,
+        "deferred_network": 1
+      }
+    },
+    "pcb": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/pcb-functional/final-94f8035/ledger.jsonl",
+      "sha256": "8c503e73e0e19c2c250f91e5cacdd38de3ac5c9edd9d20949e12c88aad5301af",
+      "records": 171,
+      "verdict_counts": {
+        "PASS": 160,
+        "FAIL": 1,
+        "INCOMPLETE": 8,
+        "EXPECTED_LIMITATION": 2
+      }
+    },
+    "jlcpcb_live": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/services/jlcpcb-live/evidence.jsonl",
+      "sha256": "7e8c4cec17b7d182f9aba34e5a86dc5162f55a563139cf60abc0edc1cbf44624",
+      "records": 1,
+      "verdict_counts": {
+        "passed": 1
+      }
+    },
+    "pcb_supplemental": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/pcb-supplemental-functional-evidence.jsonl",
+      "sha256": "1a2f1685158b4447fcbe132203095c88368d0e9253e1eb5da6cebb2fbdb33f77",
+      "records": 3,
+      "verdict_counts": {
+        "passed": 3
+      }
+    },
+    "sync_product_scoped": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/sync-functional-evidence.jsonl",
+      "sha256": "f45e32a24383e428e3a59c2664c6a53fa91d8b3679936fda0ccd0eb407ccc360",
+      "records": 1,
+      "verdict_counts": {
+        "passed": 1
+      }
+    },
+    "root_demo": {
+      "path": "/home/hanol/kicad-konnect-mcp-workspace/.artifacts/20261006-improvement/final-94f8035/demo/functional-evidence.jsonl",
+      "sha256": "6608e93df022cc53e47d801bb1e85455bda7a79bf0975a45292c3a0da085e133",
+      "records": 6,
+      "verdict_counts": {
+        "passed": 6
+      }
+    }
+  },
+  "normal_behavior": {
+    "domain_passed": 228,
+    "domain_total": 228,
+    "meta_passed": 8,
+    "meta_total": 8,
+    "advertised_surface_passed": 236,
+    "advertised_surface_total": 236,
+    "meta_tools": [
+      "get_active_toolsets",
+      "get_installation_info",
+      "get_recent_calls",
+      "list_toolboxes",
+      "load_toolset",
+      "reload_server",
+      "server_stats",
+      "unload_toolset"
+    ],
+    "toolsets": {
+      "config": {
+        "tools": 7,
+        "normal_passed": 7
+      },
+      "design_review": {
+        "tools": 6,
+        "normal_passed": 6
+      },
+      "editor_navigation": {
+        "tools": 5,
+        "normal_passed": 5
+      },
+      "integration": {
+        "tools": 9,
+        "normal_passed": 9
+      },
+      "library": {
+        "tools": 17,
+        "normal_passed": 17
+      },
+      "manufacturing": {
+        "tools": 3,
+        "normal_passed": 3
+      },
+      "pcb_board": {
+        "tools": 13,
+        "normal_passed": 13
+      },
+      "pcb_components": {
+        "tools": 20,
+        "normal_passed": 20
+      },
+      "pcb_export": {
+        "tools": 14,
+        "normal_passed": 14
+      },
+      "pcb_routing": {
+        "tools": 15,
+        "normal_passed": 15
+      },
+      "placement": {
+        "tools": 5,
+        "normal_passed": 5
+      },
+      "project": {
+        "tools": 7,
+        "normal_passed": 7
+      },
+      "sch_analysis": {
+        "tools": 15,
+        "normal_passed": 15
+      },
+      "sch_batch": {
+        "tools": 12,
+        "normal_passed": 12
+      },
+      "sch_bus": {
+        "tools": 4,
+        "normal_passed": 4
+      },
+      "sch_components": {
+        "tools": 18,
+        "normal_passed": 18
+      },
+      "sch_export": {
+        "tools": 10,
+        "normal_passed": 10
+      },
+      "sch_hierarchy": {
+        "tools": 14,
+        "normal_passed": 14
+      },
+      "sch_wiring": {
+        "tools": 20,
+        "normal_passed": 20
+      },
+      "templates": {
+        "tools": 4,
+        "normal_passed": 4
+      },
+      "verification": {
+        "tools": 10,
+        "normal_passed": 10
+      }
+    }
+  },
+  "integrity_dimensions": {
+    "required": {
+      "write_readback": 127,
+      "original_preservation": 107,
+      "external_runtime": 208
+    },
+    "passed": {
+      "write_readback": 66,
+      "original_preservation": 11,
+      "external_runtime": 95
+    },
+    "gaps": {
+      "write_readback": 61,
+      "original_preservation": 96,
+      "external_runtime": 113
+    },
+    "gap_details": {
+      "write_readback": [
+        "add_board_outline",
+        "add_board_text",
+        "add_bus",
+        "add_bus_entry",
+        "add_copper_pour",
+        "add_no_connect",
+        "add_schematic_connection",
+        "add_zone",
+        "apply_specctra_ses",
+        "batch_add_bus",
+        "batch_add_junction",
+        "batch_add_no_connect",
+        "batch_add_wire",
+        "batch_connect_to_net",
+        "batch_delete",
+        "batch_delete_no_connect",
+        "batch_delete_schematic_components",
+        "batch_delete_schematic_wire",
+        "create_footprint",
+        "create_schematic",
+        "create_symbol",
+        "delete_component",
+        "delete_graphics",
+        "delete_no_connect",
+        "delete_schematic_net_label",
+        "delete_schematic_wire",
+        "delete_sheet",
+        "delete_sheet_pin",
+        "delete_trace",
+        "edit_footprint_pad",
+        "export_3d",
+        "export_bom",
+        "export_dxf",
+        "export_gencad",
+        "export_ipc2581",
+        "export_netlist",
+        "export_netlist_summary",
+        "export_odb",
+        "export_pdf",
+        "export_position_file",
+        "export_schematic_pdf",
+        "export_schematic_svg",
+        "export_specctra_dsn",
+        "export_svg",
+        "fix_connectivity",
+        "generate_netlist",
+        "import_svg_logo",
+        "load_user_config",
+        "move_region",
+        "move_sheet",
+        "place_decoupling_caps",
+        "refill_zones",
+        "render_schematic_png",
+        "repair_corrupted_footprints",
+        "route_pad_to_pad",
+        "route_specctra_dsn",
+        "set_placed_footprint_models",
+        "set_schematic_page",
+        "set_visual_baseline",
+        "update_footprints_from_library",
+        "update_symbols_from_library"
+      ],
+      "original_preservation": [
+        "add_board_outline",
+        "add_board_text",
+        "add_bus",
+        "add_bus_entry",
+        "add_component_annotation",
+        "add_copper_pour",
+        "add_design_rule",
+        "add_hierarchical_sheet",
+        "add_junction",
+        "add_layer",
+        "add_mounting_hole",
+        "add_net",
+        "add_no_connect",
+        "add_power_symbol",
+        "add_schematic_component",
+        "add_schematic_connection",
+        "add_schematic_net_label",
+        "add_schematic_text",
+        "add_sheet_pin",
+        "add_wire",
+        "add_zone",
+        "apply_template",
+        "assign_net_to_class",
+        "batch_add_bus",
+        "batch_add_junction",
+        "batch_add_no_connect",
+        "batch_add_wire",
+        "batch_connect_pins",
+        "batch_connect_to_net",
+        "batch_delete",
+        "batch_delete_no_connect",
+        "batch_delete_schematic_components",
+        "batch_delete_schematic_wire",
+        "batch_edit_schematic_components",
+        "batch_place_components",
+        "batch_rotate_labels",
+        "connect_passthrough",
+        "connect_pins",
+        "connect_pins_to_bus",
+        "connect_to_net",
+        "create_footprint",
+        "create_netclass",
+        "create_project",
+        "create_schematic",
+        "create_symbol",
+        "delete_component",
+        "delete_graphics",
+        "delete_no_connect",
+        "delete_schematic_component",
+        "delete_schematic_net_label",
+        "delete_schematic_wire",
+        "delete_sheet_pin",
+        "delete_symbol",
+        "delete_trace",
+        "duplicate_component",
+        "duplicate_sheet",
+        "edit_board_footprint_graphic",
+        "edit_component",
+        "edit_schematic_component",
+        "edit_sheet",
+        "edit_sheet_pin",
+        "import_sheet_pins",
+        "import_svg_logo",
+        "load_user_config",
+        "move_component",
+        "move_labels_by_offset",
+        "move_region",
+        "move_schematic_component",
+        "move_sheet",
+        "mutate_editor_selection",
+        "place_component",
+        "place_component_array",
+        "place_decoupling_caps",
+        "refill_zones",
+        "rename_project",
+        "repair_corrupted_footprints",
+        "rotate_component",
+        "rotate_schematic_component",
+        "rotate_schematic_label",
+        "route_differential_pair",
+        "route_pad_to_pad",
+        "route_trace",
+        "save_project_config",
+        "save_user_config",
+        "set_board_size",
+        "set_component_placements",
+        "set_design_rules",
+        "set_footprint_graphics",
+        "set_footprint_metadata",
+        "set_footprint_models",
+        "set_layer_constraints",
+        "set_placed_footprint_models",
+        "set_predefined_sizes",
+        "set_schematic_page",
+        "set_visual_baseline",
+        "update_footprints_from_library"
+      ],
+      "external_runtime": [
+        {
+          "tool": "add_board_outline",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "add_board_text",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "add_copper_pour",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "add_hierarchical_sheet",
+          "required": [
+            "filesystem",
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "add_layer",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "add_mounting_hole",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "add_power_symbol",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "add_schematic_component",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "add_zone",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "align_components",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "annotate_schematic",
+          "required": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "apply_specctra_ses",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_cli",
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "auto_place_from_schematic",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "ipc",
+            "kicad_cli",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "batch_connect_to_net",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "batch_edit_schematic_components",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "batch_place_components",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "check_clearance",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_cli",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "check_schematic_overlaps",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "connect_to_net",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "create_footprint",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "create_symbol",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "delete_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "delete_graphics",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "delete_schematic_component",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "delete_symbol",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "download_jlcpcb_database",
+          "required": [
+            "filesystem",
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "network_or_external_service"
+          ],
+          "missing": [
+            "jlcpcb_catalogue"
+          ]
+        },
+        {
+          "tool": "duplicate_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "duplicate_sheet",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "edit_board_footprint_graphic",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "edit_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "edit_footprint_pad",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "edit_schematic_component",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "estimate_cost",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "export_ipc2581",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "export_manufacturing_package",
+          "required": [
+            "filesystem",
+            "jlcpcb_catalogue",
+            "kicad_cli",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "export_netlist",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "export_netlist_summary",
+          "required": [
+            "filesystem",
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "export_position_file",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "export_specctra_dsn",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "ipc",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "find_component",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "find_single_pin_nets",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "flip_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_board_2d_view",
+          "required": [
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc",
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "get_board_extents",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_board_info",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "get_board_stackup",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "filesystem",
+            "ipc"
+          ]
+        },
+        {
+          "tool": "get_component_list",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_component_pads",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_design_rules",
+          "required": [
+            "filesystem"
+          ],
+          "covered": [],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "get_drc_violations",
+          "required": [
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "get_footprint_info",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_jlcpcb_database_stats",
+          "required": [
+            "filesystem",
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "jlcpcb_catalogue"
+          ],
+          "missing": [
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "get_jlcpcb_part",
+          "required": [
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "jlcpcb_catalogue"
+          ],
+          "missing": [
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "get_layer_list",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "filesystem",
+            "ipc"
+          ]
+        },
+        {
+          "tool": "get_netclasses",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "filesystem",
+            "ipc"
+          ]
+        },
+        {
+          "tool": "get_nets_list",
+          "required": [
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "get_pad_position",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_predefined_sizes",
+          "required": [
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "get_schematic_layout",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_schematic_pin_locations",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "get_symbol_info",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "import_svg_logo",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "list_board_footprint_graphics",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_footprint_libraries",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_library_footprints",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_schematic_components",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_schematic_nets",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_symbol_libraries",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "list_symbols_in_library",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "move_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "move_region",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "mutate_editor_selection",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "open_schematic_viewer",
+          "required": [
+            "filesystem",
+            "gui_display",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "gui_display"
+          ]
+        },
+        {
+          "tool": "place_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "place_component_array",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "place_decoupling_caps",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "plan_specctra_ses_import",
+          "required": [
+            "ipc",
+            "network_or_external_service"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc",
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "query_traces",
+          "required": [
+            "ipc"
+          ],
+          "covered": [],
+          "missing": [
+            "ipc"
+          ]
+        },
+        {
+          "tool": "refine_placement_force_directed",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "register_footprint_library",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "register_symbol_library",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "rename_project",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "repair_corrupted_footprints",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "replace_component",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "reset_schematic_field_positions",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "resolve_cross_probe_target",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "resolve_navigation_target",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "rotate_component",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "rotate_schematic_component",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "route_pad_to_pad",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "run_design_review",
+          "required": [
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "run_drc",
+          "required": [
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "save_user_config",
+          "required": [
+            "filesystem",
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "score_placement",
+          "required": [
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "search_footprints",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "search_jlcpcb_parts",
+          "required": [
+            "jlcpcb_catalogue",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "jlcpcb_catalogue"
+          ],
+          "missing": [
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "search_symbols",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "search_templates",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_active_layer",
+          "required": [
+            "filesystem",
+            "ipc"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem"
+          ]
+        },
+        {
+          "tool": "set_board_size",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "set_component_placements",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_footprint_graphics",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_footprint_metadata",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_footprint_models",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_placed_footprint_models",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "filesystem",
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "set_predefined_sizes",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        },
+        {
+          "tool": "suggest_jlcpcb_alternatives",
+          "required": [
+            "jlcpcb_catalogue",
+            "kicad_libraries",
+            "network_or_external_service"
+          ],
+          "covered": [
+            "filesystem",
+            "jlcpcb_catalogue"
+          ],
+          "missing": [
+            "kicad_libraries",
+            "network_or_external_service"
+          ]
+        },
+        {
+          "tool": "update_footprints_from_library",
+          "required": [
+            "filesystem",
+            "ipc",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "update_pcb_from_schematic",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "gui_display",
+            "ipc"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "update_symbols_from_library",
+          "required": [
+            "filesystem",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "validate_component_connections",
+          "required": [
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "validate_for_manufacturing",
+          "required": [
+            "kicad_cli",
+            "kicad_libraries"
+          ],
+          "covered": [
+            "filesystem",
+            "kicad_cli"
+          ],
+          "missing": [
+            "kicad_libraries"
+          ]
+        },
+        {
+          "tool": "validate_sheet_pins",
+          "required": [
+            "kicad_cli"
+          ],
+          "covered": [
+            "filesystem"
+          ],
+          "missing": [
+            "kicad_cli"
+          ]
+        }
+      ]
+    },
+    "all_features_integrity_claim_supported": false
+  },
+  "merge": {
+    "rc": 0,
+    "verify_rc": 0,
+    "complete_gate_rc": 3,
+    "stale_ledger_mutation_rc": 2,
+    "summary": {
+      "domain_tool_count": 228,
+      "gaps": {
+        "normal_behavior": 0,
+        "write_readback": 61,
+        "original_preservation": 96,
+        "external_runtime": 113,
+        "refusal_validation": 0,
+        "wrong_type_validation": 0
+      },
+      "all_features_integrity_claim_supported": false,
+      "interpretation": "도구 등록 및 거부 입력 통과는 정상 동작/GUI/IPC/CLI/외부 서비스 성공을 뜻하지 않습니다."
+    },
+    "matrix_sha256": "725b40be44c0ff8624c848797e0442536d15fd8d7891d43d9b5c395d0014e960",
+    "summary_sha256": "1cd1f3a74d91ea840ec57be41de3443a99e78a46d0e5490be311ae9a5e23c280",
+    "csv_sha256": "58b49e2cdf43a0c32d57ea47e88425268fc729e8246435526a70a78ec3374483",
+    "markdown_sha256": "f0da6e6ac349e8179e9e0d2e3b6a93db058999235bd7ec9d929b9cdade6b0855"
+  },
+  "explicit_limits": {
+    "sync_runner_rc": 1,
+    "sync_postprocess_rc": 0,
+    "sync_whole_harness_passed": false,
+    "sync_product_behavior_adopted": true,
+    "jlcpcb_feed": "public unsigned mutable third-party feed",
+    "manufacturing": "artifact existence, size, markers, JSON and SHA only; not full CAM parser or DFM approval",
+    "physical_hardware_tested": false,
+    "all_environments_integrity_guaranteed": false
+  },
+  "final_source_release_poststate": {
+    "commit": "94f80350cf67db27b179a06a8f6dbebfe4717927",
+    "status": "",
+    "server_sha256": "cbb5b9785d376ab55a57bbf5723f8e1d79805c5eeeca8d5b1d58b84f7c3d909a",
+    "server_mtime_ns": 1791257410601774928,
+    "server_size": 40976424,
+    "viewer_sha256": "7d7a0799b6210f2be9f4319fbc635e77f0050ebb9a20eaab4ef8bf5e4b80acfa",
+    "viewer_mtime_ns": 1791257410885781557,
+    "viewer_size": 1453232
+  }
+}

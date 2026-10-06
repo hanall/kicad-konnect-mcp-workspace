@@ -7,6 +7,7 @@ build/
 # 회로 편집기 사용자 상태와 자동 백업
 *.kicad_prl
 *-backups/
+projects/**/.history/
 _autosave-*
 *.lck
 

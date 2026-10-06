@@ -14,13 +14,21 @@
 
 ## 현재 기준
 
-- KiCad `10.0.5`: 공식 GitLab tag와 commit SHA 고정
-- Konnect `v0.2.2`: 공식 GitHub tag와 commit SHA 고정
+- KiCad `10.0.6`: 공식 GitLab tag/commit, AppImage SHA/minisign와 라이브러리 manifest 고정
+- Konnect 공식 `v0.13.0` 및 main `9488e5f0` 기반 자체 `0.13.0+hanall.1`: 공식 tag와 자체 commit을 분리 고정
 - Rust `1.96.0`: upstream `rust-toolchain.toml` 고정
 - `protobuf-compiler 3.21.12-11+deb13u1`: Debian 13 공식 저장소 고정
-- Konnect `Cargo.lock`: crates.io registry source 337개, Git source 0개
+- Konnect `Cargo.lock`: package 497개, crates.io registry source 489개, Git source 0개
+- 별도 viewer lock: package 81개, registry source 78개, Git source 0개
+- Freerouting `2.5.0` 및 전용 JRE: `config/freerouting.lock.json`의 exact SHA와 사용자 예외 기록
 
 Python `.pth` 감사에서 발견되는 `distutils-precedence.pth`는 Debian의
 `python3-setuptools 78.1.1-0.1` 소유 파일이며 `dpkg -V`가 무결성 변경을
 보고하지 않습니다. 실행 줄은 `_distutils_hack` shim으로 확인했으며 임의
 네트워크·subprocess·encoded payload는 없습니다.
+
+## 현재 승인·감사 범위
+
+2026-10-06 사용자가 최신 upstream 업그레이드의 공급망 예외와 Freerouting 2.5.0의 공개 7일 미만 예외를 명시 승인했습니다. Rust에 채택된 registry release는 별도 검토에서 모두 공개 후 7일 이상을 충족했습니다. GitHub asset digest는 독립 서명으로 표현하지 않습니다. audit의 마지막 advisory DB commit/시각, 조회 여부와 0건 결과는 최종 보고서에 함께 기록합니다.
+
+프로젝트 `.artifacts` 아래의 검증 전용 Python venv도 공통 guard·정확 버전/hash lock·`.pth` 감사 대상입니다. runtime/application dependency 또는 사용자 전역 패키지로 조용히 승격하지 않습니다.

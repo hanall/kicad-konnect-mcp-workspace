@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+
+  (lib (name "Device") (type "KiCad") (uri "/opt/kicad/10.0.6/share/kicad/symbols/Device.kicad_symdir") (options "") (descr ""))
+  (lib (name "Connector_Generic") (type "KiCad") (uri "/opt/kicad/10.0.6/share/kicad/symbols/Connector_Generic.kicad_symdir") (options "") (descr ""))
+  (lib (name "power") (type "KiCad") (uri "/opt/kicad/10.0.6/share/kicad/symbols/power.kicad_symdir") (options "") (descr "")))

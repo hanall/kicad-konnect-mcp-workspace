@@ -49,8 +49,8 @@ class ProjectContractTest(unittest.TestCase):
         installer = (ROOT / "scripts/install-kicad-appimage.sh").read_text(
             encoding="utf-8"
         )
-        self.assertIn('VERSION="10.0.5"', installer)
-        self.assertIn('RELEASE_DATE="2026-07-22"', installer)
+        self.assertIn('VERSION="10.0.6"', installer)
+        self.assertIn('RELEASE_DATE="2026-08-29"', installer)
         self.assertIn('SOURCE_PAGE="https://www.kicad.org/download/linux/"', installer)
         self.assertIn('MINISIGN_PUBLIC_KEY_ID="40D6F856001D8BB2"', installer)
         self.assertIn('"status": "approved"', installer)
@@ -92,8 +92,8 @@ class ProjectContractTest(unittest.TestCase):
         konnect = lock["components"]["konnect"]
         self.assertEqual(konnect["origin"], "https://github.com/hanall/Konnect.git")
         self.assertEqual(konnect["upstream_origin"], "https://github.com/mixelpixx/Konnect.git")
-        self.assertEqual(konnect["upstream_tag"], "v0.2.2")
-        self.assertEqual(konnect["development_branch"], "hanol-dev/v0.2.2")
+        self.assertEqual(konnect["upstream_tag"], "v0.13.0")
+        self.assertEqual(konnect["development_branch"], "hanol-dev/v0.13.0")
 
     def test_locked_tag_fetch_restores_a_missing_tag(self) -> None:
         script = ROOT / "scripts/fetch-locked-tag.py"

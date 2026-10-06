@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "runtime_dir": ".artifacts/20261006-improvement/services/freerouting-runtime",
+  "approval": {
+    "recorded_at": "2026-10-06T10:25:53+09:00",
+    "user_authorization": "사용자 최신 메시지: 최신 예외 승인함",
+    "exception": "Freerouting v2.5.0은 공개 후 7일 미만이지만 최신 native MCP autoroute 실증을 위해 명시 승인됨"
+  },
+  "freerouting": {
+    "version": "2.5.0",
+    "tag": "v2.5.0",
+    "tag_commit": "b647a2f824cfbc54bc4dcaee71b03b7cd945eb76",
+    "published_at": "2026-10-05T15:58:39Z",
+    "asset": "freerouting-2.5.0.jar",
+    "url": "https://github.com/freerouting/freerouting/releases/download/v2.5.0/freerouting-2.5.0.jar",
+    "size": 64599107,
+    "sha256": "f6f51bb02245e8e717f9359bd260cc9c5c0b1bc0acc8b7cb2cd5b8ffeb5de3c7",
+    "digest_source": "GitHub Releases API asset digest",
+    "digest_is_signature": false,
+    "signature_limitation": "GitHub asset digest는 독립 서명, Sigstore attestation 또는 source provenance 증명이 아님",
+    "official_release": "https://github.com/freerouting/freerouting/releases/tag/v2.5.0",
+    "official_mcp_docs": "https://github.com/freerouting/freerouting/blob/v2.5.0/docs/API/MCP.md"
+  },
+  "jre": {
+    "package": "openjdk-25-jre-headless",
+    "version": "25.0.4.1+1-1~deb13u1",
+    "architecture": "amd64",
+    "filename": "openjdk-25-jre-headless_25.0.4.1+1-1~deb13u1_amd64.deb",
+    "url": "https://security.debian.org/debian-security/pool/updates/main/o/openjdk-25/openjdk-25-jre-headless_25.0.4.1+1-1~deb13u1_amd64.deb",
+    "size": 53606620,
+    "sha256": "3264ef0e81ac278f9abc7a7b9bda3170302aacc7fad8d89c07f369b21978c0b3",
+    "metadata_source": "Debian trixie-security signed APT metadata",
+    "java_relative_path": "jre25/usr/lib/jvm/java-25-openjdk-amd64/bin/java",
+    "java_version_contains": "openjdk version \"25.0.4.1\"",
+    "etc_relative_path": "jre25/etc/java-25-openjdk",
+    "absolute_symlink_prefix": "/etc/java-25-openjdk/"
+  }
+}

@@ -30,6 +30,26 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def verify_gitlink(root: Path, source_path: str, expected: str, *, initialized: bool) -> None:
+    lines = run("git", "ls-files", "--stage", "--", source_path, cwd=root).splitlines()
+    assert len(lines) == 1, f"gitlink 항목 수 불일치: {source_path}"
+    fields = lines[0].split()
+    assert len(fields) == 4 and fields[0] == "160000" and fields[2:] == ["0", source_path], (
+        f"gitlink mode/stage/path 불일치: {source_path}"
+    )
+    if not initialized:
+        assert fields[1] == expected, f"미초기화 gitlink 불일치: {source_path}"
+        return
+    repo = root / source_path
+    assert run("git", "rev-parse", "HEAD", cwd=repo) == expected, f"checkout 불일치: {source_path}"
+    assert run("git", "status", "--porcelain", cwd=repo) == "", f"submodule dirty: {source_path}"
+    if fields[1] != expected:
+        # 업그레이드는 index를 자동 변경하지 않는다. 기존 HEAD의 gitlink만
+        # 미반영 상태로 허용하고, 임의의 다른 staged SHA는 거부한다.
+        previous = run("git", "rev-parse", f"HEAD:{source_path}", cwd=root)
+        assert fields[1] == previous, f"예상하지 못한 staged gitlink: {source_path}"
+
+
 def main() -> int:
     allow_uninitialized = os.environ.get("VERIFY_ALLOW_UNINITIALIZED") == "1"
     lock = json.loads((ROOT / "upstreams.lock.json").read_text(encoding="utf-8"))
@@ -39,10 +59,9 @@ def main() -> int:
         item = lock["components"][name]
         expected_url = item["origin"]
         repo = ROOT / item["source_path"]
-        index_line = run("git", "ls-files", "--stage", "--", item["source_path"])
-        fields = index_line.split()
-        assert fields[:2] == ["160000", item["commit"]], f"{name} gitlink 불일치"
-        if not repo.is_dir() or not (repo / ".git").exists():
+        initialized = repo.is_dir() and (repo / ".git").exists()
+        verify_gitlink(ROOT, item["source_path"], item["commit"], initialized=initialized)
+        if not initialized:
             assert allow_uninitialized, f"submodule 누락: {repo}"
             continue
         assert run("git", "remote", "get-url", "origin", cwd=repo) == expected_url
@@ -103,12 +122,6 @@ def main() -> int:
     for script_name in ("install-kicad-appimage.sh", "mcp-live-acceptance.py"):
         script = ROOT / "scripts" / script_name
         assert script.stat().st_mode & stat.S_IXUSR, f"실행 권한 누락: {script}"
-
-    root_status = run("git", "status", "--porcelain")
-    if "upstream/kicad" in root_status or "upstream/konnect" in root_status:
-        allowed = {"A  upstream/kicad", "A  upstream/konnect"}
-        actual = {line for line in root_status.splitlines() if "upstream/" in line}
-        assert actual <= allowed, f"예상하지 못한 submodule 상태: {actual}"
 
     print("프로젝트 검증 통과")
     print(f"  KiCad:   {lock['components']['kicad']['tag']} @ {lock['components']['kicad']['commit'][:12]}")

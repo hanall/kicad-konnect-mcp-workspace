@@ -3,6 +3,7 @@
 KICAD_PROJECT ?=
 KICAD_BOARD ?=
 KICAD_EVIDENCE ?=.artifacts/kicad-live-acceptance.json
+KICAD_REQUIRE_CLEAN ?=0
 
 help:
 	@printf '%s\n' \
@@ -42,7 +43,8 @@ live-acceptance:
 	@python3 scripts/mcp-live-acceptance.py \
 	  --project "$(KICAD_PROJECT)" \
 	  --board "$(KICAD_BOARD)" \
-	  --evidence "$(KICAD_EVIDENCE)"
+	  --evidence "$(KICAD_EVIDENCE)" \
+	  $(if $(filter 1,$(KICAD_REQUIRE_CLEAN)),--require-clean-design,)
 
 check-updates:
 	@./scripts/check-updates.sh

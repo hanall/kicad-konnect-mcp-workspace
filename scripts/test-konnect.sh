@@ -14,7 +14,10 @@ command -v protoc >/dev/null 2>&1 || {
   cargo fmt --all -- --check
   cargo test --workspace --locked --lib --tests
   cargo test --workspace --locked --doc
-  cargo clippy --workspace --locked -- -D warnings
+  cargo clippy --workspace --locked --all-targets -- -D warnings
+  cargo fmt --manifest-path crates/schematic-viewer/Cargo.toml -- --check
+  cargo test --locked --manifest-path crates/schematic-viewer/Cargo.toml
+  cargo clippy --locked --manifest-path crates/schematic-viewer/Cargo.toml --all-targets -- -D warnings
 )
 
 (

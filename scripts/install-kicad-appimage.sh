@@ -2,19 +2,22 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-VERSION="10.0.5"
-RELEASE_DATE="2026-07-22"
+VERSION="10.0.6"
+RELEASE_DATE="2026-08-29"
 APPIMAGE="kicad-${VERSION}-x86_64.AppImage"
 ARCHIVE="${APPIMAGE}.tar"
 BASE_URL="https://mirror.tuna.tsinghua.edu.cn/kicad/appimage/stable"
 SOURCE_PAGE="https://www.kicad.org/download/linux/"
-ARCHIVE_SHA256="af65bb1fd5ee2730df860bc2a8c49f507a64c83c15c2ce13927eec74d38eba8f"
-APPIMAGE_SHA256="966a01c0c81473b870c0136a5c2a7c42dc7e7e4fa52a7b95b802b7b5db8d9727"
+ARCHIVE_SHA256="c05fa6760be64aaf55ff476911ce81272b4efb6241f4d7e2b9fdcdc7efbf5808"
+APPIMAGE_SHA256="723b6890c60a5da962d3f4d07e0dba0f3dd2f3deb50d303f06a3d8a2ab7cf7f5"
 MINISIGN_PUBLIC_KEY_ID="40D6F856001D8BB2"
 MINISIGN_PUBLIC_KEY="RWSyix0AVvjWQGZChX64ywBpE5XqV1Eg+ZXYHR3Y27md9EoZ0AtVr9i9"
-APPROVAL_DATE="2026-08-10"
+APPROVAL_DATE="2026-10-06"
 INSTALL_DIR="/opt/kicad/${VERSION}"
 INSTALLED_APPIMAGE="${INSTALL_DIR}/${APPIMAGE}"
+LIBRARY_MANIFEST_NAME="KICAD-LIBRARIES.json"
+LIBRARY_MANIFEST_SHA256="89fa035615628d35b71276799e3318b85a889581a5c64b57c2937ad95c9cde23"
+LIBRARY_MANIFEST="${INSTALL_DIR}/KICAD-LIBRARIES.json"
 ARTIFACT_DIR="${KICAD_INSTALL_ARTIFACT_DIR:-${ROOT}/.artifacts/kicad-${VERSION}-install}"
 MODE="install"
 ENTRYPOINTS=(kicad kicad-cli pcbnew eeschema gerbview bitmap2component pcb_calculator pl_editor)
@@ -24,8 +27,13 @@ usage() {
 사용법: scripts/install-kicad-appimage.sh [--verify-only]
 
 옵션:
-  --verify-only  다운로드나 시스템 변경 없이 현재 설치의 해시, 서명, 실행 진입점을 검증
+  --verify-only  다운로드나 시스템 변경 없이 AppImage, 라이브러리, 실행 진입점을 검증
   -h, --help     도움말 표시
+
+검증 특성:
+  --verify-only는 손상을 복구하지 않는다. 전체 라이브러리를 두 번 읽으므로
+  디스크와 cache 상태에 따라 수 초 이상 걸릴 수 있다. manifest가 없는 기존
+  10.0.6 설치는 이 installer를 한 번 다시 실행해야 새 gate를 활성화한다.
 EOF
 }
 
@@ -65,15 +73,26 @@ verify_runtime() {
     printf 'KiCad minisign 서명이 없습니다: %s\n' "$signature" >&2
     return 1
   }
-  for required_file in "$public_key" "$checksums" "$manifest" "$desktop" "$icon"; do
+  for required_file in \
+    "$public_key" "$checksums" "$manifest" "$LIBRARY_MANIFEST" "$desktop" "$icon"; do
     [[ -r "$required_file" ]] || {
       printf 'KiCad 설치 산출물이 없습니다: %s\n' "$required_file" >&2
+      return 1
+    }
+  done
+  for library_kind in symbols footprints 3dmodels; do
+    [[ -d "${INSTALL_DIR}/share/kicad/${library_kind}" ]] || {
+      printf 'MCP용 KiCad 라이브러리가 없습니다: %s\n' "$library_kind" >&2
       return 1
     }
   done
 
   verify_file "$APPIMAGE_SHA256" "$INSTALLED_APPIMAGE" || return 1
   minisign -Vm "$INSTALLED_APPIMAGE" -x "$signature" -p "$public_key" || return 1
+  python3 "${ROOT}/scripts/verify-kicad-libraries.py" verify \
+    --root "${INSTALL_DIR}/share/kicad" \
+    --manifest "$LIBRARY_MANIFEST" \
+    --manifest-sha256 "$LIBRARY_MANIFEST_SHA256" || return 1
 
   local tool
   for tool in "${ENTRYPOINTS[@]}"; do
@@ -94,7 +113,8 @@ verify_runtime() {
     "$manifest" "$public_key" "$checksums" "$desktop" "$icon" \
     "$VERSION" "$RELEASE_DATE" "$APPIMAGE" "$ARCHIVE_SHA256" "$APPIMAGE_SHA256" \
     "$MINISIGN_PUBLIC_KEY_ID" "$MINISIGN_PUBLIC_KEY" "$SOURCE_PAGE" "$BASE_URL" \
-    "$INSTALL_DIR" "$APPROVAL_DATE" <<'PY' || return 1
+    "$INSTALL_DIR" "$APPROVAL_DATE" \
+    "$LIBRARY_MANIFEST_NAME" "$LIBRARY_MANIFEST_SHA256" <<'PY' || return 1
 import json
 from pathlib import Path
 import stat
@@ -117,6 +137,8 @@ import sys
     base_url,
     install_dir,
     approval_date,
+    library_manifest_name,
+    library_manifest_sha256,
 ) = sys.argv[1:]
 
 entrypoint_names = (
@@ -162,8 +184,14 @@ expected = {
     "sha256": {"tar": archive_sha256, "appimage": appimage_sha256},
     "install_root": install_dir,
     "entrypoints": entrypoints,
+    "libraries": {
+        "roots": ["symbols", "footprints", "3dmodels"],
+        "manifest": library_manifest_name,
+        "manifest_sha256": library_manifest_sha256,
+        "verification": "passed",
+    },
     "reason": (
-        "Debian 13 기본 APT의 KiCad 9.0.2 대신 Konnect v0.2.2 IPC 계약과 "
+        "Debian 13 기본 APT의 KiCad 9.0.2 대신 Konnect v0.13.0 IPC 계약과 "
         f"일치하는 KiCad {version}가 필요함"
     ),
     "alternatives_reviewed": [
@@ -281,9 +309,53 @@ extract_dir="${stage}/desktop"
 mkdir -p "$extract_dir"
 (
   cd "$extract_dir"
-  "${stage}/${APPIMAGE}" --appimage-extract 'org.kicad.kicad.desktop' >/dev/null
-  "${stage}/${APPIMAGE}" --appimage-extract 'kicad.png' >/dev/null
+  # 독립 STDIO 서버는 AppImage의 임시 mount를 상속하지 못한다.
+  # 서명 검증된 같은 이미지에서 라이브러리를 추출해 영속 경로로 제공한다.
+  "${stage}/${APPIMAGE}" --appimage-extract >/dev/null
 )
+for library_kind in symbols footprints 3dmodels; do
+  test -d "${extract_dir}/AppDir/share/kicad/${library_kind}"
+done
+library_source="${extract_dir}/AppDir/share/kicad"
+library_manifest_stage="${stage}/${LIBRARY_MANIFEST_NAME}"
+python3 "${ROOT}/scripts/verify-kicad-libraries.py" create \
+  --root "$library_source" \
+  --output "$library_manifest_stage" \
+  --version "$VERSION"
+verify_file "$LIBRARY_MANIFEST_SHA256" "$library_manifest_stage"
+
+library_install_stage="${stage}/library-install"
+mkdir -p "$library_install_stage"
+for library_kind in symbols footprints 3dmodels; do
+  cp -a "${library_source}/${library_kind}" "$library_install_stage/"
+done
+library_root="${INSTALL_DIR}/share/kicad"
+library_new="${INSTALL_DIR}/share/.kicad.new.$$"
+library_old="${INSTALL_DIR}/share/.kicad.old.$$"
+sudo install -d -m 0755 "${INSTALL_DIR}/share"
+sudo test ! -e "$library_new"
+sudo test ! -e "$library_old"
+sudo cp -a "$library_install_stage" "$library_new"
+sudo chown -hR root:root "$library_new"
+python3 "${ROOT}/scripts/verify-kicad-libraries.py" verify \
+  --root "$library_new" \
+  --manifest "$library_manifest_stage" \
+  --manifest-sha256 "$LIBRARY_MANIFEST_SHA256"
+had_previous_library=0
+if sudo test -e "$library_root"; then
+  sudo mv "$library_root" "$library_old"
+  had_previous_library=1
+fi
+if ! sudo mv "$library_new" "$library_root"; then
+  if [[ "$had_previous_library" == 1 ]]; then
+    sudo mv "$library_old" "$library_root"
+  fi
+  exit 1
+fi
+if [[ "$had_previous_library" == 1 ]]; then
+  sudo rm -rf -- "$library_old"
+fi
+sudo install -m 0644 "$library_manifest_stage" "$LIBRARY_MANIFEST"
 python3 - "${extract_dir}/AppDir/org.kicad.kicad.desktop" <<'PY'
 from pathlib import Path
 import sys
@@ -312,7 +384,8 @@ python3 - \
   "$installed_at" "${stage}/INSTALL-MANIFEST.json" \
   "$VERSION" "$RELEASE_DATE" "$APPIMAGE" "$ARCHIVE_SHA256" "$APPIMAGE_SHA256" \
   "$MINISIGN_PUBLIC_KEY_ID" "$MINISIGN_PUBLIC_KEY" "$SOURCE_PAGE" "$BASE_URL" \
-  "$INSTALL_DIR" "$APPROVAL_DATE" <<'PY'
+  "$INSTALL_DIR" "$APPROVAL_DATE" \
+  "$LIBRARY_MANIFEST_NAME" "$LIBRARY_MANIFEST_SHA256" <<'PY'
 import json
 import sys
 
@@ -330,6 +403,8 @@ import sys
     base_url,
     install_dir,
     approval_date,
+    library_manifest_name,
+    library_manifest_sha256,
 ) = sys.argv[1:]
 
 entrypoints = [
@@ -371,8 +446,14 @@ manifest = {
     },
     "install_root": install_dir,
     "entrypoints": entrypoints,
+    "libraries": {
+        "roots": ["symbols", "footprints", "3dmodels"],
+        "manifest": library_manifest_name,
+        "manifest_sha256": library_manifest_sha256,
+        "verification": "passed",
+    },
     "reason": (
-        "Debian 13 기본 APT의 KiCad 9.0.2 대신 Konnect v0.2.2 IPC 계약과 "
+        "Debian 13 기본 APT의 KiCad 9.0.2 대신 Konnect v0.13.0 IPC 계약과 "
         f"일치하는 KiCad {version}가 필요함"
     ),
     "alternatives_reviewed": [

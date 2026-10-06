@@ -54,6 +54,24 @@ MCP tool 이름, 입력/출력 schema, config key, environment variable, CLI fla
 
 root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiCad는 `LICENSE.README`에 적힌 파일별 라이선스를 보존한다. 사업용 비공개 파생/네트워크 서비스는 Konnect의 상용 라이선스 필요 여부를 먼저 검토한다.
 
+## Agent skills
+
+코드를 수정하기 전에 아래 순서와 [프로젝트 오버레이](docs/agents/20261006-112759_kicad-konnect-overlay.md)를 읽습니다. 글로벌 스킬의 구 도구 개수·극성·뷰어 설명보다 현재 실행 schema와 이 오버레이가 우선합니다.
+
+| 단서 | 먼저 읽을 스킬 |
+|---|---|
+| KiCad, 회로도, PCB, `.kicad_*` | `~/.claude/skills/konnect/SKILL.md` |
+| 오류, 고장, 진단, debug | `~/.claude/skills/diagnose/SKILL.md` |
+| 시험 우선, TDD, red-green | `~/.claude/skills/tdd/SKILL.md` |
+| ERC, DRC, 설계 검토 | `~/.claude/skills/kicad-review/SKILL.md` |
+| 회로도 설계·편집 | `~/.claude/skills/kicad-schematic/SKILL.md` |
+| PCB 배치·배선 | `~/.claude/skills/kicad-pcb/SKILL.md` |
+| 심볼·footprint 라이브러리 | `~/.claude/skills/kicad-library/SKILL.md` |
+| 제조·Gerber·발주 파일 | `~/.claude/skills/kicad-manufacture/SKILL.md` |
+| 분석·진단·검증 결과 보고 | `~/.claude/skills/html-report/SKILL.md` |
+
+복수 단서는 `konnect` 안전 규칙을 먼저 읽고 해당 작업 스킬을 이어 적용합니다. `CLAUDE.md`는 `AGENTS.md`의 symlink이므로 별도 사본을 만들지 않습니다.
+
 <!-- SKILLS-INDEX:START -->
 <!-- Auto-generated index of skills available at ~/.claude/skills/. Regenerate with `~/.local/bin/inject-skills-index.py`. Do not hand-edit between START/END markers — changes will be overwritten. -->
 

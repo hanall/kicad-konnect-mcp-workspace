@@ -1,6 +1,36 @@
 # KiCad 10 설치 및 ACUW live acceptance
 
-## 현재 호스트 계약
+## 현재 호스트 계약 (2026-10-06)
+
+| 항목 | 현재 값 |
+|---|---|
+| KiCad | 공식 stable `10.0.6`, `/opt/kicad/10.0.6` |
+| Konnect | 자체 `0.13.0+hanall.1`, 공식 main `9488e5f0` 기반 |
+| 이전 설치 | `/opt/kicad/10.0.5` 보존 |
+| 시연 레인 | ACUW `kicad-mcp-demo`, 기본 `:99` 무접촉 |
+| 시연 설계 | `projects/mcp-led-demo-20261006/mcp-led-demo` |
+| 기본 MCP HOME | `.runtime-home`, 사용자 전역 설정과 분리 |
+| 기능 시험 HOME | `.artifacts` 하위 각 runner 전용 |
+
+```bash
+./scripts/install-kicad-appimage.sh --verify-only
+make runtime-verify
+make live-acceptance \
+  KICAD_PROJECT=projects/mcp-led-demo-20261006/mcp-led-demo.kicad_pro \
+  KICAD_BOARD=projects/mcp-led-demo-20261006/mcp-led-demo.kicad_pcb \
+  KICAD_REQUIRE_CLEAN=1 \
+  KICAD_EVIDENCE=.artifacts/demo-live-acceptance.json
+```
+
+현재 검증기는 바이너리뿐 아니라 추출 라이브러리 46,048개 항목(일반 파일 45,562개)의 목록·mode·해시·symlink target을 검사합니다. manifest 없는 기존 10.0.6은 installer 재실행이 필요하며, `--verify-only`가 손상을 자동 복구하지는 않습니다.
+
+일반 live acceptance는 실행 계약, `KICAD_REQUIRE_CLEAN=1`은 추가로 DRC의 violations/unconnected_items/schematic_parity 모두 0을 요구합니다. schema 2 증거에는 실제 IPC board target, 버전, report SHA와 범주별 수치가 포함됩니다.
+
+전용 레인의 GUI는 프로젝트별 `XDG_CONFIG_HOME`을 지정합니다. 자동 소켓 검색은 편의 기능일 뿐 여러 편집기의 식별 증명이 아니므로 병렬 시험은 서로 다른 TMPDIR/소켓을 사용하고 exact target을 재조회합니다. 뷰어의 `xdg-open`을 ACUW에 연결하는 별도 launcher는 `XDG_STATE_HOME=/home/hanol/.local/state`로 기존 레인 registry만 참조해야 합니다. Konnect의 격리 HOME 자체를 해제하지 않습니다.
+
+아래 내용은 8월 설치 당시의 원기록이며 그때의 버전·DRC 수치는 현재 개선판 결과와 혼합하지 않습니다.
+
+## 2026-08-10 설치 기록 (이력, 현재판 아님)
 
 | 항목 | 값 |
 |---|---|

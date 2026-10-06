@@ -16,7 +16,10 @@ fi
 
 (
   cd "$KONNECT"
+  unset KONNECT_BUILD_COMMIT
   cargo build --release --locked -p konnect
+  cargo build --release --locked --manifest-path crates/schematic-viewer/Cargo.toml
+  install -m 0755 crates/schematic-viewer/target/release/schematic-viewer target/release/schematic-viewer
 )
 
 BIN="$KONNECT/target/release/konnect"

@@ -1,28 +1,31 @@
 {
   "schema_version": 2,
-  "retrieved_at": "2026-08-10T03:05:54+09:00",
+  "retrieved_at": "2026-10-06T12:28:50+09:00",
   "components": {
     "kicad": {
       "origin": "https://gitlab.com/kicad/code/kicad.git",
-      "tag": "10.0.5",
-      "commit": "18fb9289ff0efdca53c0352ed81a0973f0a6b58c",
-      "tag_object": "31f98a7a2589faeccbfb0bfb2ace70eb421fbf56",
-      "commit_date": "2026-07-21T15:13:55-04:00",
-      "local_branch": "hanol-dev/10.0.5",
+      "tag": "10.0.6",
+      "commit": "caf7377e9cb6fa1535ec3596dcb8c99bf44a996e",
+      "tag_object": "e757247bdec054f139487cc5c63ce6a5e76f7432",
+      "commit_date": "2026-08-28T14:01:37-04:00",
+      "local_branch": "official/10.0.6",
       "license": "GPL-3.0-or-later with compatible per-file exceptions",
       "source_path": "upstream/kicad"
     },
     "konnect": {
       "origin": "https://github.com/hanall/Konnect.git",
       "upstream_origin": "https://github.com/mixelpixx/Konnect.git",
-      "upstream_tag": "v0.2.2",
-      "upstream_commit": "ac878269de0692ca4555f19658dd5af7886a8b78",
-      "commit": "ac878269de0692ca4555f19658dd5af7886a8b78",
-      "tag_object": null,
-      "commit_date": "2026-08-01T09:31:56-04:00",
-      "development_branch": "hanol-dev/v0.2.2",
+      "upstream_tag": "v0.13.0",
+      "upstream_commit": "6bbe3e4f890ba1d37c0e5d5f38ccd03d90958c9e",
+      "commit": "94f80350cf67db27b179a06a8f6dbebfe4717927",
+      "tag_object": "e87a079d8e5c9a7827a6d1b16a478024d4195e28",
+      "commit_date": "2026-10-06T12:28:50+09:00",
+      "development_branch": "hanol-dev/v0.13.0",
       "license": "AGPL-3.0-only",
-      "source_path": "upstream/konnect"
+      "source_path": "upstream/konnect",
+      "upstream_development_commit": "9488e5f09717cb508cb25779dc16586d1f06f758",
+      "upstream_development_ref": "main",
+      "version": "0.13.0+hanall.1"
     }
   }
 }
