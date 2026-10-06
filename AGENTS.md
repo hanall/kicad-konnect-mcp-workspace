@@ -17,6 +17,15 @@
 2. `git status --short --branch`와 `git submodule status`로 root와 두 upstream 상태를 확인한다.
 3. `upstreams.lock.json`과 실제 origin, tag, commit이 일치하는지 `make verify`로 확인한다.
 
+## 최신 Konnect MCP 사용 필수
+
+- 이 저장소의 에이전트는 **프로젝트에서 최신으로 검증·고정한 Konnect MCP**를 사용한다. 기준은 `upstreams.lock.json`의 `components.konnect.version`과 `commit`이며, 임의의 전역 설치본이나 오래된 연결을 사용하지 않는다. 2026-10-06 현재 기준은 `0.13.0+hanall.1`, commit `94f80350cf67db27b179a06a8f6dbebfe4717927`이다. 이후 업그레이드에서는 잠금 파일의 새 검증값이 우선한다.
+- 실행 경로는 반드시 프로젝트의 `scripts/run-konnect.sh`이며, 프로젝트 `.codex/config.toml` 또는 `.mcp.json`의 `konnect` 등록을 사용한다.
+- **디스크 binary가 최신이라는 사실만으로 현재 MCP 연결도 최신이라고 판단하지 않는다.** 회로 변경 전에 현재 연결의 `get_installation_info`에서 `build.version`, `build.commit`, `runtime.executable_path`를 잠금 파일·프로젝트 release binary와 대조한다. Linux에서는 가능하면 실제 서버 PID의 `/proc/<PID>/exe` SHA-256과 디스크 binary SHA-256도 대조한다.
+- `get_installation_info`가 없거나 버전·commit·실행 경로가 다르면 구 연결로 간주하고 **설계 쓰기를 중단**한다. 해당 Konnect 연결을 지원되는 클라이언트 재연결 절차로 갱신한 뒤, 같은 연결에서 버전·commit과 `list_toolboxes`를 다시 확인한다. 새 테스트 프로세스의 성공을 기존 등록 연결의 재시작 성공으로 대신 보고하지 않는다.
+- 재연결 시 다른 세션·다른 MCP 서버·KiCad GUI를 임의 종료하지 않는다. 단일 연결 재시작을 지원하지 않아 공유 daemon 전체에 영향을 주는 방법만 남으면, 영향 범위를 설명하고 별도 승인을 받은 뒤 수행한다.
+- 오래된 도구 목록·글로벌 스킬의 도구 개수보다 **현재 검증된 연결이 반환한 schema와 프로젝트 오버레이**를 우선한다. “최신”을 이유로 공급망 검증이나 잠금 파일 갱신 없이 자동 다운로드·업그레이드하지 않는다.
+
 ## 소스 경계
 
 - `upstream/kicad`: 공식 KiCad 원본의 최신 안정 release를 추적하는 read-only 소스다. `.99.0` 개발 태그와 임의 patch는 반영하지 않는다.
@@ -158,3 +167,14 @@ bash /home/hanol/ai-computer-use-workspace/scripts/stop-workspace.sh && unset AC
 
 입력 표면(클릭/타이핑/키/스크롤/드래그/대기)·부분 확대 캡처(zoom)·클립보드·터미널·기본앱/데스크톱앱·브라우저 레인(CDP)·화면 녹화·host-mpx 레인(매뉴얼 §1-5, 계약 §2-3)·**계층적 읽기 채널**(tmux 버퍼 `term-text.sh`·Codex 이벤트 `codex-events.sh`·변화 감시 `watch.sh`/`damage-monitor.py`·PRIMARY 긁기 `read-terminal.sh`·AT-SPI `a11y.sh`·영상 `media.sh`·녹화 digest — 매뉴얼 §5.3-1~§5.3-6)·MCP(`workspace_*` 50종)·트러블슈팅은 위 매뉴얼을 참조하세요. 전체 도구 카탈로그는 `/home/hanol/ai-computer-use-workspace/scripts/REGISTRY.md`.
 <!-- ACUW-MANUAL:END -->
+
+## 레인 메모리 상한 (2026-10-06 추가 — OOM 사고 재발 방지)
+
+KiCad(kicad+pcbnew+eeschema)를 한 ACUW 레인에 동시에 띄우면 레인 합산 피크가 8G에 닿아 cgroup OOM으로 사살된다(2026-10-06 11:20 실사고: `kicad-native-capability-probe` 레인, slice 피크 8G, kicad PID 1484949 사살 → GNOME "앱 중지함 / 장치 메모리가 거의 가득 찼습니다" 알림). 이 레포에서 레인을 열 때는 **`ACUW_LANE_MEMORY_MAX=16G`를 env로 명시**한다. 전역 기본값(8G)은 호스트 보호용이므로 ACUW 쪽은 바꾸지 않는다(매뉴얼 §6-4).
+
+```bash
+ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/instance.sh open kicad-konnect
+# start-workspace.sh / run-in-workspace.sh 를 직접 부르는 경로도 같은 env 를 앞에 둔다
+```
+
+- `scripts/mcp-pcb-functional.py`(781행 부근)가 `run-in-workspace.sh`를 직접 호출한다 — 그 호출부에도 env 전달이 필요하다(코드 미수정, 담당 세션 판단).
