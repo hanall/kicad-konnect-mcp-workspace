@@ -1,0 +1,253 @@
+{
+  "coordinates": {
+    "kicad_version": "10.0.6",
+    "reason": "KiCad 10.0.6 writes every ERC JSON coordinate at 1/100 of its true value (kicad#25582, fixed in 10.0.7); Konnect multiplied it back. A length quoted inside KiCad's own violation text is scaled the same way and is left as KiCad wrote it.",
+    "scale_applied": 100.0,
+    "status": "corrected"
+  },
+  "errors": 0,
+  "total": 15,
+  "violations": [
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 V1 [VDC]",
+      "items": [
+        {
+          "description": "심볼 V1 [VDC]",
+          "uuid": "cad571cf-5527-4192-834a-4e176fe18071",
+          "x": 50.8,
+          "y": 88.9
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 88.9
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR01 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR01 [GND]",
+          "uuid": "59de5bb0-480e-4a3d-92f4-a0ac429fa853",
+          "x": 50.8,
+          "y": 96.52
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 96.52
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG01 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG01 [PWR_FLAG]",
+          "uuid": "5914d2a6-d3a6-4d64-b798-0950118e75cf",
+          "x": 50.8,
+          "y": 152.4
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 152.4
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 V2 [VDC]",
+      "items": [
+        {
+          "description": "심볼 V2 [VDC]",
+          "uuid": "40dfadad-7e5a-48b3-92ff-9b98dab9e513",
+          "x": 76.2,
+          "y": 88.9
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 76.2,
+      "y": 88.9
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR02 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR02 [GND]",
+          "uuid": "b4f81de2-47ba-4ceb-bd92-7fff53ee95c6",
+          "x": 76.2,
+          "y": 96.52
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 76.2,
+      "y": 96.52
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG02 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG02 [PWR_FLAG]",
+          "uuid": "760b72cd-2552-4b52-bded-78bf0c1788d8",
+          "x": 76.2,
+          "y": 152.4
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 76.2,
+      "y": 152.4
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 V3 [VSIN]",
+      "items": [
+        {
+          "description": "심볼 V3 [VSIN]",
+          "uuid": "56562364-e4bf-42d9-b2ca-03b67e52792b",
+          "x": 101.6,
+          "y": 88.9
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 88.9
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR03 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR03 [GND]",
+          "uuid": "9bc5aec9-e658-4107-a00a-569bf44a8972",
+          "x": 101.6,
+          "y": 96.52
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 96.52
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG03 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG03 [PWR_FLAG]",
+          "uuid": "974cf66c-6c7e-4550-99aa-ec25b83f714e",
+          "x": 101.6,
+          "y": 152.4
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 152.4
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG04 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG04 [PWR_FLAG]",
+          "uuid": "75bbf32c-d5ab-4dd5-8148-fa198d06198c",
+          "x": 127.0,
+          "y": 152.4
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 127.0,
+      "y": 152.4
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR05 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR05 [GND]",
+          "uuid": "632c0a5a-2b28-4049-9377-bb3ac32b87c7",
+          "x": 127.0,
+          "y": 154.94
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 127.0,
+      "y": 154.94
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Device'가 포함되어 있지 않음: 심볼 R1 [R]",
+      "items": [
+        {
+          "description": "심볼 R1 [R]",
+          "uuid": "eff87d45-da16-4927-a907-7764329fe2f2",
+          "x": 139.7,
+          "y": 127.0
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 139.7,
+      "y": 127.0
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR04 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR04 [GND]",
+          "uuid": "1a24ac37-cc6b-4677-8882-6c56fdbc2bf8",
+          "x": 139.7,
+          "y": 133.35
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 139.7,
+      "y": 133.35
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 U1 [OPAMP]",
+      "items": [
+        {
+          "description": "심볼 U1 [OPAMP]",
+          "uuid": "6660c0d7-d602-41d5-8aff-c2dcde799b9c",
+          "x": 152.4,
+          "y": 88.9
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 152.4,
+      "y": 88.9
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Device'가 포함되어 있지 않음: 심볼 R2 [R]",
+      "items": [
+        {
+          "description": "심볼 R2 [R]",
+          "uuid": "525170f5-8298-44f3-b860-324572e04d1f",
+          "x": 177.8,
+          "y": 127.0
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 177.8,
+      "y": 127.0
+    }
+  ],
+  "warnings": 15
+}

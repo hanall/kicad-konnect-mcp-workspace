@@ -1,0 +1,26 @@
+* Qucs 26.1.1  /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/03-opamp-noninv.sch
+.INCLUDE "/tmp/.mount_Qucs-SagcClK/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+.INCLUDE "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/kicad_builtin_opamp.lib"
+VCC vcc  0 DC 15
+VEE vee  0 DC -15
+VIN in  0 DC 0 SIN(0 0.1 1k) AC 1
+XX1  in inn vcc vee out kicad_builtin_opamp POLE=20 GAIN=20k VOFF=0 ROUT=10
+R1 0  inn 1k
+R2 inn  out 9k
+
+.control
+
+tran 1e-06 0.003 0 
+write spice4qucs.tr1.plot v(in) v(inn) v(out) v(vcc) v(vee)
+destroy all
+reset
+
+ac dec 100 1 10meg 
+let gain_db = db(v(out))
+write spice4qucs.ac1.plot v(in) v(inn) v(out) v(vcc) v(vee) gain_db
+destroy all
+reset
+
+exit
+.endc
+.END

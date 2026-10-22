@@ -1,0 +1,68 @@
+{
+ "id": "02-mosfet-gate",
+ "results": [
+  {
+   "name": "vgs_at_tau",
+   "kind": "FIND",
+   "theory": 6.321205588285577,
+   "unit": "V",
+   "console_value": 6.318125,
+   "csv_value": 6.318124445554446,
+   "csv_note": "CSV 열 V(g), time=1u 선형 보간",
+   "csv_vs_console_rel": 8.77547617935907e-08,
+   "value": 6.318125,
+   "value_source": "console_text",
+   "err_rel": 0.0004873418911236451,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "t_vth",
+   "kind": "WHEN",
+   "theory": 2.2314355131420975e-07,
+   "unit": "s",
+   "console_value": 2.23712e-07,
+   "csv_value": 2.237125e-07,
+   "csv_note": "CSV 열 V(g), RISE=1 교차 선형 보간",
+   "csv_vs_console_rel": 2.2350164496644436e-06,
+   "value": 2.23712e-07,
+   "value_source": "console_text",
+   "err_rel": 0.002547457376394579,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "vds_on",
+   "kind": "FIND",
+   "theory": 0.02998122655522195,
+   "unit": "V",
+   "console_value": 0.02998124,
+   "csv_value": 0.0299812,
+   "csv_note": "CSV 열 V(d), time=15u 선형 보간",
+   "csv_vs_console_rel": 1.3341676328184708e-06,
+   "value": 0.02998124,
+   "value_source": "console_text",
+   "err_rel": 4.4843989364672034e-07,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "id_on_derived",
+   "kind": "DERIVED",
+   "theory": 0.11970018773444778,
+   "unit": "A",
+   "value": 0.11970018760000001,
+   "value_source": "derived",
+   "err_rel": 1.1232043566880875e-09,
+   "pass": true,
+   "tol": "rel 0.02",
+   "formula": "(12 - vds_on)/100"
+  }
+ ],
+ "console_failed_lines": [],
+ "console_values": {
+  "vgs_at_tau": 6.318125,
+  "t_vth": 2.23712e-07,
+  "vds_on": 0.02998124
+ }
+}

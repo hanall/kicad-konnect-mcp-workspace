@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux 회로 시뮬레이터 구축·검증과 AI MCP 체계 — 2026-10-22</title>
+<style>
+  :root{--bg:#0f1419;--panel:#171d26;--panel2:#1e2630;--line:#2b3645;--txt:#e6edf3;--muted:#9aa7b4;--accent:#4ea1ff;--good:#3fb950;--warn:#e3b341;--bad:#f85149;--code:#0b0f14;--chip:#243140;--purple:#bc8cff;}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;line-height:1.7;font-size:15px}
+  .wrap{display:grid;grid-template-columns:256px 1fr;max-width:1320px;margin:0 auto}
+  nav.toc{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 18px;border-right:1px solid var(--line);background:var(--panel)}
+  nav.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 14px}
+  nav.toc a{display:block;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:7px;font-size:13.5px;margin-bottom:2px;border-left:2px solid transparent}
+  nav.toc a:hover{color:var(--txt);background:var(--panel2)} nav.toc a.sub{padding-left:22px;font-size:13px}
+  main{padding:34px 42px 90px;min-width:0} h1{font-size:26px;margin:0 0 6px;line-height:1.28}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+  h2.sec{font-size:21px;margin:46px 0 14px;padding-top:14px;border-top:1px solid var(--line);scroll-margin-top:14px}
+  h3{font-size:16.5px;margin:24px 0 8px;color:#cdd9e5} p{margin:10px 0}
+  code{background:var(--chip);padding:1.5px 6px;border-radius:5px;font-size:13px;font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;color:#ffd9a0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:#cdd9e5;font-weight:600} tr:nth-child(even) td{background:#141a22}
+  .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+  .t-good{background:rgba(63,185,80,.15);color:var(--good);border:1px solid rgba(63,185,80,.4)}
+  .t-warn{background:rgba(227,179,65,.13);color:var(--warn);border:1px solid rgba(227,179,65,.4)}
+  .t-bad{background:rgba(248,81,73,.13);color:var(--bad);border:1px solid rgba(248,81,73,.4)}
+  .t-info{background:rgba(78,161,255,.13);color:var(--accent);border:1px solid rgba(78,161,255,.4)}
+  .t-best{background:rgba(188,140,255,.14);color:var(--purple);border:1px solid rgba(188,140,255,.45)}
+  .callout{border-radius:12px;padding:16px 18px;margin:16px 0;border-left:4px solid}
+  .c-key{background:rgba(78,161,255,.07);border-color:var(--accent)} .c-warn{background:rgba(227,179,65,.07);border-color:var(--warn)}
+  .c-bad{background:rgba(248,81,73,.08);border-color:var(--bad)} .c-good{background:rgba(63,185,80,.07);border-color:var(--good)}
+  .callout b{color:#fff}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;position:relative;margin:10px 0}
+  pre code{background:none;color:#d6e2ee;padding:0;font-size:12.8px;line-height:1.65;white-space:pre}
+  .cmnt{color:#6e7d8c}
+  .copybtn{position:absolute;top:8px;right:8px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 9px;font-size:11px;cursor:pointer}
+  .copybtn:hover{color:var(--txt);border-color:var(--accent)}
+  .diagram{font-family:ui-monospace,monospace;font-size:12.5px;color:#bcd;white-space:pre;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto}
+  .small{font-size:12.5px;color:var(--muted)} hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+  .big-warn{background:linear-gradient(180deg,rgba(248,81,73,.13),rgba(248,81,73,.05));border:1.5px solid var(--bad);border-radius:12px;padding:18px 20px;margin:18px 0}
+  .big-warn h3{margin-top:0;color:var(--bad)}
+  @media(max-width:880px){.wrap{grid-template-columns:1fr}nav.toc{display:none}main{padding:24px 18px}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="toc">
+    <h2>목차</h2>
+    <a href="#summary">0. 요약 / 결론</a>
+    <a href="#claims">1. 클라우드 분석 검증</a>
+    <a href="#install">2. 설치 구성</a>
+    <a href="#validation">3. 검증 회로 5종 결과</a>
+    <a href="#v-measure" class="sub">└ 3.1 측정값 전표</a>
+    <a href="#v-kicad" class="sub">└ 3.2 KiCad 회로도 → MCP 경로</a>
+    <a href="#mcp">4. AI MCP 체계</a>
+    <a href="#docs">5. 문서·스킬 갱신</a>
+    <a href="#risk">6. 리스크와 결정 필요</a>
+    <a href="#rollback">7. 롤백</a>
+    <a href="#appendix">부록. 식별값·증거</a>
+  </nav>
+  <main>
+    <h1>Linux 회로 시뮬레이터 구축·검증과 AI MCP 체계</h1>
+    <div class="sub">대상: <code>kicad-konnect-mcp-workspace</code> · Debian 13 · 작성 <b>2026-10-22 20:17 KST</b> · <span class="tag t-good">설치·검증 완료</span> <span class="tag t-info">MCP 도구 4종</span> <span class="tag t-good">사용자 결정 4건 반영</span></div>
+
+    <h2 class="sec" id="summary">0. 요약 / 결론</h2>
+    <div class="callout c-good"><b>클라우드 분석의 핵심 추천(Qucs-S + ngspice)은 타당하지만 이 시스템에는 더 나은 전제가 있었다.</b> KiCad 10.0.6 AppImage가 ngspice 45.2를 번들하므로 내장 시뮬레이터는 추가 설치 없이 동작한다. 사용자 승인 아래 시스템 ngspice 44.2(apt), Qucs-S 26.1.1(AppImage 고정), LTspice 24.0.12(Wine)를 더해 네 경로를 만들었고, 검증 회로 5종 17개 측정 항목이 네 경로 모두 이론값 2% 이내로 일치했다. AI가 사용자 대신 전 과정을 수행하도록 Konnect MCP 시뮬레이션 도구 4종(<code>KONNECT_SIM=1</code>)과 프로젝트 스킬 <code>kicad-simulation</code>, 계약 문서, 회귀 테스트를 구축하고 기존 문서 9종에 통합했다.</div>
+    <table>
+      <tr><th style="width:28%">항목</th><th>결과</th></tr>
+      <tr><td>설치</td><td>ngspice 44.2+ds-1(apt) · Qucs-S 26.1.1(<code>/opt/qucs-s/26.1.1</code>, SHA 2중 검증) · LTspice 24.0.12.0(Wine 10.0, 사용자 prefix) · KiCad 번들 ngspice 45.2(기존). <code>make sim-runtime-verify</code> 통과</td></tr>
+      <tr><td>검증 회로 5종 × 17 측정</td><td>시스템 ngspice 17/17 <span class="tag t-good">통과</span> · KiCad 번들 17/17 <span class="tag t-good">통과</span> · LTspice 17/17 <span class="tag t-good">통과</span> · Qucs-S 17/17 <span class="tag t-good">통과</span>. 적대적 검증 LTspice 5/5, Qucs-S 5/5 confirmed</td></tr>
+      <tr><td>KiCad 회로도 → MCP 경로</td><td>Konnect MCP로 작성한 회로도 5/5 넷리스트 동등, ngspice 판정 5/5 통과(수기 넷리스트와 상호 차 0)</td></tr>
+      <tr><td>경로 간 1% 교차</td><td>1건 미달 (6절). 이론값 2% 기준은 전부 통과</td></tr>
+      <tr><td>AI MCP 체계</td><td>도구 4종 <code>list_simulation_engines</code> <code>export_spice_netlist</code> <code>set_simulation_model</code> <code>run_spice_simulation</code>, 계약 테스트 13건 + 체인 스모크 통과(<code>make test-sim-mcp</code>), 입력 경계(.control/shell 거부, 허용 루트) 포함</td></tr>
+      <tr><td>사용자 결정(2026-10-22)</td><td>apt hold 없이 fail-closed 유지 · Wine 하드닝 보류 · 품질 스킬 패키지 밖 연결 유지 · ERC 설정 유지, 넷리스트 진단으로 대체 (6절)</td></tr>
+    </table>
+
+    <h2 class="sec" id="claims">1. 클라우드 분석 검증</h2>
+    <p>2026-10-18 기준 클라우드 분석의 주장을 공식 자료와 이 호스트 실측으로 대조했다. 판정은 사실·부분 정정·부적합으로 나눈다.</p>
+    <table><tr><th>주장</th><th>판정</th><th>근거</th></tr><tr><td>방법 B `apt install kicad ngspice libngspice0`</td><td><span class="tag t-bad">이 시스템에 부적합</span></td><td>apt kicad는 9.0.2. KiCad 10.0.6 AppImage가 이미 설치되어 있고 ngspice 45.2를 번들함(kicad-cli version --format about 실측)</td></tr><tr><td>Qucs-S는 Debian 패키지 또는 AppImage</td><td><span class="tag t-warn">부분 정정</span></td><td>Debian 공식 저장소에 qucs-s 없음. 개발자 OBS 저장소·GitHub AppImage·Flathub만 존재</td></tr><tr><td>Qucs-S AppImage에 ngspice 미포함</td><td><span class="tag t-good">사실</span></td><td>공식 페이지 원문과 추출본 실측. Flatpak판은 ngspice 47 번들</td></tr><tr><td>Debian 13 ngspice 제공</td><td><span class="tag t-good">사실, 44.2+ds-1</span></td><td>KiCad 번들 45.2보다 낮음. Qucs-S 마이크로스트립 해석은 45 이상 필요</td></tr><tr><td>PSpice for TI 타사 모델 시 3노드 프로브 제한</td><td><span class="tag t-good">사실</span></td><td>TI SLYP725 원문 확인</td></tr><tr><td>PSpice for TI 주기적 온라인 라이선스 갱신</td><td><span class="tag t-warn">부분 정정</span></td><td>Cadence FAQ: 1년 단위 라이선스, 오프라인 실행 가능</td></tr><tr><td>LTspice는 Wine으로 실행</td><td><span class="tag t-good">사실, 실증</span></td><td>ADI 공식 FAQ. 이 호스트에서 Wine 10.0으로 배치·GUI 기동 확인</td></tr><tr><td>QSPICE Windows 전용, 상업적 무료</td><td><span class="tag t-good">사실</span></td><td>Qorvo 제품 페이지</td></tr><tr><td>ngspice는 PSpice/LTspice 호환, 암호화 모델 불가</td><td><span class="tag t-good">사실</span></td><td>ngspice 공식 문서. KiCad 10은 호환 모드 설정 내장</td></tr><tr><td>Altium Mixed Simulation 먼저 확인</td><td><span class="tag t-bad">해당 없음</span></td><td>사용자 확인: Windows PC·VM·Altium 없음</td></tr></table>
+    <div class="callout c-key"><b>핵심:</b> 클라우드 분석이 몰랐던 사실은 "KiCad 10.0.6 AppImage에 ngspice 45.2가 이미 번들되어 있다"는 점과 "이 사용자는 Windows·Altium이 없다"는 점이다. 그래서 방법 B(apt kicad)와 Altium 1순위 권고는 이 시스템에 적용되지 않는다.</div>
+
+    <h2 class="sec" id="install">2. 설치 구성</h2>
+    <table>
+      <tr><th>구성요소</th><th>버전</th><th>설치 방식 · 승인</th><th>검증</th></tr>
+      <tr><td>KiCad 내장 시뮬레이터</td><td>KiCad 10.0.6, ngspice 45.2 번들</td><td>기존 설치. 공유 라이브러리를 GUI 없이 직접 로드 가능(<code>scripts/ngspice_shared_batch.py</code>)</td><td><code>kicad-cli version --format about</code></td></tr>
+      <tr><td>시스템 ngspice</td><td>44.2+ds-1</td><td>Debian 13 공식 apt. 그릴링 Q2 승인</td><td>배치 스모크, 5종 회귀</td></tr>
+      <tr><td>Qucs-S</td><td>26.1.1 (2026-04-26 게시, age 179일)</td><td>GitHub AppImage를 <code>/opt/qucs-s/26.1.1</code>에 고정, SHA256을 API digest·hashes.sha256 교차 검증. 그릴링 Q1 승인</td><td><code>make install-qucs-s --verify-only</code>, GUI 기동·5종 실행</td></tr>
+      <tr><td>LTspice</td><td>24.0.12.0 (MSI 2024-04-19)</td><td>ADI 공식 MSI를 사용자 Wine prefix에 조용한 설치. 직접 URL 예외 승인(Q3), Wine 전체 wine32 포함(Q10)</td><td>배치 <code>-b</code> 5종, GUI 기동 캡처</td></tr>
+      <tr><td>Wine</td><td>10.0~repack-6</td><td>Debian 13 공식 apt, 287개 패키지</td><td><code>wine --version</code></td></tr>
+    </table>
+    <p>잠금: <code>config/qucs-s.lock.json</code>, <code>config/ltspice.lock.json</code>. 재현 스크립트: <code>scripts/install-qucs-s-appimage.sh</code>, <code>scripts/install-ltspice-wine.sh</code>. 설치 계약: <code>docs/agents/20261022-172859_circuit-simulators-linux.md</code>.</p>
+
+    <h2 class="sec" id="validation">3. 검증 회로 5종 결과</h2>
+    <p>사양 <code>projects/sim-validation-20261022/spec/spec.json</code>(<code>theory.py</code>가 생성)의 이론값과 각 엔진 측정값. 허용 오차는 이론값 대비 2%. 값은 결과 JSON에서 읽었다.</p>
+    <h3 id="v-measure">3.1 측정값 전표</h3>
+    <table>
+      <tr><th>회로</th><th>측정</th><th>이론값</th><th>시스템 ngspice 44.2</th><th>KiCad 번들 ngspice 45.2</th><th>LTspice 24.0.12 (Wine)</th><th>Qucs-S 26.1.1</th></tr>
+      <tr><td>01-rc-step</td><td><code>v_at_tau</code></td><td>3.1606 V</td><td>3.1606<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>3.1606<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>3.15955<br><span class='small'>0.033% <span class="tag t-good">ok</span></span></td><td>3.1606<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>01-rc-step</td><td><code>v_at_3tau</code></td><td>4.75106 V</td><td>4.75106<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>4.75106<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>4.75127<br><span class='small'>0.004% <span class="tag t-good">ok</span></span></td><td>4.75106<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>01-rc-step</td><td><code>t_rise_10_90</code></td><td>0.00219722 s</td><td>0.00219722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.00219722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.00219741<br><span class='small'>0.008% <span class="tag t-good">ok</span></span></td><td>0.00219722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>02-mosfet-gate</td><td><code>vgs_at_tau</code></td><td>6.32121 V</td><td>6.31813<br><span class='small'>0.049% <span class="tag t-good">ok</span></span></td><td>6.31813<br><span class='small'>0.049% <span class="tag t-good">ok</span></span></td><td>6.31731<br><span class='small'>0.062% <span class="tag t-good">ok</span></span></td><td>6.31813<br><span class='small'>0.049% <span class="tag t-good">ok</span></span></td></tr><tr><td>02-mosfet-gate</td><td><code>t_vth</code></td><td>2.23144e-07 s</td><td>2.23713e-07<br><span class='small'>0.255% <span class="tag t-good">ok</span></span></td><td>2.23713e-07<br><span class='small'>0.255% <span class="tag t-good">ok</span></span></td><td>2.2383e-07<br><span class='small'>0.308% <span class="tag t-good">ok</span></span></td><td>2.23713e-07<br><span class='small'>0.255% <span class="tag t-good">ok</span></span></td></tr><tr><td>02-mosfet-gate</td><td><code>vds_on</code></td><td>0.0299812 V</td><td>0.0299812<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.0299812<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.0299812<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.0299812<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>02-mosfet-gate</td><td><code>id_on_derived</code></td><td>0.1197 A</td><td>0.1197<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.1197<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.1197<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.1197<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>03-opamp-noninv</td><td><code>vout_pk_1k</code></td><td>0.999187 V</td><td>0.999185<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.999185<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.998084<br><span class='small'>0.110% <span class="tag t-good">ok</span></span></td><td>0.999185<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>03-opamp-noninv</td><td><code>gain_db_10hz</code></td><td>19.9957 dB</td><td>19.9957<br><span class='small'>— <span class="tag t-good">ok</span></span></td><td>19.9957<br><span class='small'>— <span class="tag t-good">ok</span></span></td><td>19.9957<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>19.9957<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>03-opamp-noninv</td><td><code>f_3db</code></td><td>39959.8 Hz</td><td>39864.6<br><span class='small'>0.238% <span class="tag t-good">ok</span></span></td><td>39864.6<br><span class='small'>0.238% <span class="tag t-good">ok</span></span></td><td>39865.3<br><span class='small'>0.236% <span class="tag t-good">ok</span></span></td><td>39864.4<br><span class='small'>0.239% <span class="tag t-good">ok</span></span></td></tr><tr><td>04-diode-rectifier</td><td><code>vout_pk</code></td><td>9.28724 V</td><td>9.28722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>9.28722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>9.27483<br><span class='small'>0.134% <span class="tag t-good">ok</span></span></td><td>9.28722<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>04-diode-rectifier</td><td><code>vf_pk_derived</code></td><td>0.712762 V</td><td>0.712777<br><span class='small'>0.002% <span class="tag t-good">ok</span></span></td><td>0.712777<br><span class='small'>0.002% <span class="tag t-good">ok</span></span></td><td>0.72517<br><span class='small'>1.741% <span class="tag t-good">ok</span></span></td><td>0.712777<br><span class='small'>0.002% <span class="tag t-good">ok</span></span></td></tr><tr><td>05-precharge</td><td><code>i_pk</code></td><td>1.02128 A</td><td>1.02127<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>1.02127<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>1.02127<br><span class='small'>0.001% <span class="tag t-good">ok</span></span></td><td>1.02127<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>05-precharge</td><td><code>p_pk</code></td><td>49.0213 W</td><td>49.0211<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>49.0211<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>49.0211<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>49.0211<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>05-precharge</td><td><code>v_bus_at_tau</code></td><td>30.3418 V</td><td>30.3418<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>30.3418<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>30.3415<br><span class='small'>0.001% <span class="tag t-good">ok</span></span></td><td>30.3417<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>05-precharge</td><td><code>t_95</code></td><td>0.661757 s</td><td>0.661758<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.661758<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>0.661699<br><span class='small'>0.009% <span class="tag t-good">ok</span></span></td><td>0.661758<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr><tr><td>05-precharge</td><td><code>e_r</code></td><td>5.4144 J</td><td>5.41439<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>5.41439<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td><td>5.41428<br><span class='small'>0.002% <span class="tag t-good">ok</span></span></td><td>5.41439<br><span class='small'>0.000% <span class="tag t-good">ok</span></span></td></tr>
+    </table>
+    <h3 id="v-kicad">3.2 KiCad 회로도 → Konnect MCP → kicad-cli 넷리스트 경로</h3>
+    <p>Konnect MCP(0.13.0+hanall.1, commit 94f8035)로 회로도를 작성하고 kicad-cli로 SPICE 넷리스트를 내보내 수기 넷리스트와 토폴로지 동등성을 비교한 뒤, 두 넷리스트를 같은 측정으로 ngspice에서 실행해 상호 차를 봤다.</p>
+    <table><tr><th>회로</th><th>넷리스트 동등</th><th>네트</th><th>ngspice 판정</th><th>수기↔KiCad 상호 차</th><th>적대적 검증</th></tr><tr><td>01-rc-step</td><td><span class="tag t-good">동등</span></td><td>GND, in, out</td><td><span class="tag t-good">통과</span></td><td class='small'>v_at_tau 0.000%, v_at_3tau 0.000%, t_rise_10_90 0.000%</td><td><span class="tag t-good">confirmed</span></td></tr><tr><td>02-mosfet-gate</td><td><span class="tag t-good">동등</span></td><td>GND, d, g, gsrc, vdd</td><td><span class="tag t-good">통과</span></td><td class='small'>vgs_at_tau 0.000%, t_vth 0.000%, vds_on 0.000%, id_on_derived 0.000%</td><td><span class="tag t-good">confirmed</span></td></tr><tr><td>03-opamp-noninv</td><td><span class="tag t-good">동등</span></td><td>GND, in, inn, out, vcc, vee</td><td><span class="tag t-good">통과</span></td><td class='small'>vout_pk_1k 0.000%, gain_db_10hz 0.000%, f_3db 0.000%</td><td><span class="tag t-good">confirmed</span></td></tr><tr><td>04-diode-rectifier</td><td><span class="tag t-good">동등</span></td><td>in, out, GND</td><td><span class="tag t-good">통과</span></td><td class='small'>vout_pk 0.000%, vf_pk_derived 0.000%</td><td><span class="tag t-good">confirmed</span></td></tr><tr><td>05-precharge</td><td><span class="tag t-good">동등</span></td><td>GND, bus, ia, in, p</td><td><span class="tag t-good">통과</span></td><td class='small'>i_pk 0.000%, p_pk 0.000%, v_bus_at_tau 0.000%, t_95 0.000%, e_r 0.000%</td><td><span class="tag t-good">confirmed</span></td></tr></table>
+    <div class="callout c-warn"><b>실측 함정:</b> 배치 도구는 라이브러리 Sim 필드를 인스턴스에 복사하지 않아 kicad-cli가 rc=0으로 <code>V1 in GND DC VPULSE</code> 같은 잘못된 줄을 낸다. MOS1 모델은 4단자라 3핀 NMOS 심볼의 벌크가 떠 버린다. PWR_FLAG는 GND 네트에 필요하다. 전부 <code>skills/kicad-simulation/references/kicad-sim-fields.md</code>에 기록했고, <code>export_spice_netlist</code> 진단(<code>suspicious_values</code>)이 첫 번째 함정을 잡는다.</div>
+    
+    <h3>3.3 KiCad 편집기 시뮬레이터 GUI 검증 (ACUW 레인, 번들 ngspice)</h3>
+    <p>KiCad 10.0.6 회로도 편집기 내장 SPICE 시뮬레이터(AppImage 번들 ngspice 45.2)가 Konnect MCP로 작성하고 .meas를 추가한 5개 회로도 사본을 ACUW 레인 kicad-smps-sync-gui(:182, 16G)에서 모두 실행했다. 측정 17개(.meas 15 + DERIVED 2) 중 17개가 사양 허용 오차(이론 대비 2%, 03 이득은 0.17 dB) 안에서 통과했다. 값은 GUI 콘솔의 .meas 출력을 클립보드로 받은 텍스트이며, GUI의 &#x27;현재 플롯을 CSV로 내보내기&#x27; 파일로 다시 계산한 값과 상대 2.4e-5 이내, 이전 단계의 번들 ngspice 45.2·시스템 ngspice 44.2 배치 값과 상대 4.5e-6 이내(교차 허용 1%)로 같았다. 03은 자동 생성 TRAN 탭에서 AC .meas가 출력되지 않아, GUI에서 AC 탭을 추가해 AC 측정 2개를 얻었다. 사용자 화면(:0)과 원본 kicad/는 쓰지 않았고, PID 491090 KiCad와 공유 Konnect 연결은 종료하거나 재시작하지 않았다. KiCad KiCad 10.0.6, release build (AppImage /opt/kicad/10.0.6/kicad-10.0.6-x86_64.AppImage, Build Date Aug 28 2026 19:23:16, wxWidgets 3.3.2, Debian 13 x86_64, UI ko_KR), 시뮬레이터 엔진 ngspice 45.2: 도움말-&gt;KiCad 정보-&gt;버전 탭 Build Info &#x27;ngspice: 45.2&#x27;(kicad-about-version-ngspice.png, kicad-version-info.txt); 실행 중 eeschema가 번들 libngspice.so.0.0.14(문자열 45.2)를 매핑.</p>
+    <table><tr><th>회로</th><th>상태 · 값 출처</th><th>측정(이론 대비)</th><th>비고</th><th>캡처</th></tr><tr><td>01-rc-step</td><td><span class="tag t-good">ran</span><br><span class='small'>console_text</span></td><td class='small'><code>v_at_tau</code> 3.1606 (0.000%) <span class="tag t-good">ok</span><br><code>v_at_3tau</code> 4.75106 (0.000%) <span class="tag t-good">ok</span><br><code>t_rise_10_90</code> 0.00219722 (0.000%) <span class="tag t-good">ok</span></td><td class='small'>모든 측정 통과 | 적대적 재판독: confirmed</td><td class='small'>01-rc-step-open.png<br>01-rc-step-analysis-tab.png<br>01-rc-step-netlist.png<br>01-rc-step-run.png<br>01-rc-step-signals.png<br>01-rc-step-console-meas.png<br>01-rc-step-sim-full.png</td></tr><tr><td>02-mosfet-gate</td><td><span class="tag t-good">ran</span><br><span class='small'>console_text</span></td><td class='small'><code>vgs_at_tau</code> 6.31813 (0.049%) <span class="tag t-good">ok</span><br><code>t_vth</code> 2.23712e-07 (0.255%) <span class="tag t-good">ok</span><br><code>vds_on</code> 0.0299812 (0.000%) <span class="tag t-good">ok</span><br><code>id_on_derived</code> 0.1197 (0.000%) <span class="tag t-good">ok</span></td><td class='small'>모든 측정 통과 | 적대적 재판독: confirmed</td><td class='small'>02-mosfet-gate-open.png<br>02-mosfet-gate-analysis-tab.png<br>02-mosfet-gate-netlist.png<br>02-mosfet-gate-run.png<br>02-mosfet-gate-signals.png<br>02-mosfet-gate-console-meas.png</td></tr><tr><td>03-opamp-noninv</td><td><span class="tag t-good">ran</span><br><span class='small'>console_text</span></td><td class='small'><code>vout_pk_1k</code> 0.999185 (0.000%) <span class="tag t-good">ok</span><br><code>gain_db_10hz</code> 19.9957 (0.000%) <span class="tag t-good">ok</span><br><code>f_3db</code> 39864.6 (0.238%) <span class="tag t-good">ok</span></td><td class='small'>모든 측정 통과; 회로도의 .tran/.ac 중 시뮬레이터는 &#x27;분석 1 - TRAN&#x27; 탭만 자동 생성했다. 이 탭 실행은 넷리스트에 .tran과 .ac를 함께 넣어 AC(701행)와 TRAN(3008행)을 모두 돌렸지만 콘솔에는 &#x27;Measurements for AC Analysis&#x27; 머리말 아래 vout_pk_1k만 나오고 AC .meas 2개는 출력되지 않았다. 새 분석 탭(AC, dec 100 1 10meg)을 GUI에서 추가해 실행하자 넷리스트가 &#x27;.ac dec 100 1 10Meg&#x27; 하나가 되고 f_3db·gain_db_10hz가 출력됐다. | 적대적 재판독: confirmed</td><td class='small'>03-opamp-noninv-open.png<br>03-opamp-noninv-analysis-tab-tran.png<br>03-opamp-noninv-netlist-tran.png<br>03-opamp-noninv-run-tran.png<br>03-opamp-noninv-signals-tran.png<br>03-opamp-noninv-console-meas-tran.png<br>03-opamp-noninv-analysis-tab-ac.png<br>03-opamp-noninv-netlist-ac.png<br>03-opamp-noninv-run-ac.png<br>03-opamp-noninv-signals-ac.png<br>03-opamp-noninv-console-meas-ac.png</td></tr><tr><td>04-diode-rectifier</td><td><span class="tag t-good">ran</span><br><span class='small'>console_text</span></td><td class='small'><code>vout_pk</code> 9.28722 (0.000%) <span class="tag t-good">ok</span><br><code>vf_pk_derived</code> 0.712777 (0.002%) <span class="tag t-good">ok</span></td><td class='small'>모든 측정 통과 | 적대적 재판독: confirmed</td><td class='small'>04-diode-rectifier-open.png<br>04-diode-rectifier-analysis-tab.png<br>04-diode-rectifier-netlist.png<br>04-diode-rectifier-run.png<br>04-diode-rectifier-signals.png<br>04-diode-rectifier-measurements-panel.png<br>04-diode-rectifier-console-meas.png</td></tr><tr><td>05-precharge</td><td><span class="tag t-good">ran</span><br><span class='small'>console_text</span></td><td class='small'><code>i_pk</code> 1.02127 (0.000%) <span class="tag t-good">ok</span><br><code>p_pk</code> 49.0211 (0.000%) <span class="tag t-good">ok</span><br><code>v_bus_at_tau</code> 30.3418 (0.000%) <span class="tag t-good">ok</span><br><code>t_95</code> 0.661758 (0.000%) <span class="tag t-good">ok</span><br><code>e_r</code> 5.41439 (0.000%) <span class="tag t-good">ok</span></td><td class='small'>모든 측정 통과 | 적대적 재판독: confirmed</td><td class='small'>05-precharge-open.png<br>05-precharge-analysis-tab.png<br>05-precharge-netlist.png<br>05-precharge-run.png<br>05-precharge-signals.png<br>05-precharge-measurements-panel.png<br>05-precharge-console-meas.png</td></tr></table>
+    <p class="small">화면 판독(screen_reading) 값은 캡처에 표시된 자릿수까지만 유효하다. 결정적 판정은 3.1·3.2절의 배치 경로가 담당한다.</p>
+
+    <h2 class="sec" id="mcp">4. AI MCP 체계</h2>
+    <div class="diagram">MCP client (Claude / Codex)
+      |  initialize, tools/list, tools/call
+      v
+scripts/run-konnect.sh
+      +-- KONNECT_GUI_SYNC=1 -- konnect-mcp-gui.py --&gt; synchronize_schematic_edit (+1)
+      +-- KONNECT_SIM=1 ------- konnect-mcp-sim.py --&gt; list_simulation_engines / export_spice_netlist /
+      |                                                 set_simulation_model / run_spice_simulation (+4)
+      v
+Konnect 0.13.0+hanall.1 (core 228+8 도구, HOME 격리)
+      +-- kicad-cli sch export netlist --format spice --&gt; .cir
+      +-- edit_schematic_component --&gt; Sim.* 필드
+시뮬레이션 중계 --&gt; 시스템 ngspice -b | KiCad 번들 libngspice(ctypes) | LTspice -b (ACUW 레인)</div>
+    <table>
+      <tr><th>도구</th><th>역할</th><th>쓰기</th><th>안전 경계</th></tr>
+      <tr><td><code>list_simulation_engines</code></td><td>엔진 설치 상태·버전·경로</td><td>없음</td><td>—</td></tr>
+      <tr><td><code>export_spice_netlist</code></td><td>kicad-cli SPICE 넷리스트 + 진단(미할당 모델, 값 자리 심볼명, include 누락)</td><td><code>.artifacts/sim-exports/</code></td><td>읽기 허용 루트, 출력은 레포 안</td></tr>
+      <tr><td><code>set_simulation_model</code></td><td>Sim.Device/Type/Params/Pins/Library/Name/Enable 설정 + readback</td><td>회로도(upstream edit_schematic_component만)</td><td>sch_components 로드 필요, 쓰기 허용 루트</td></tr>
+      <tr><td><code>run_spice_simulation</code></td><td>해석·측정 지시 조립, 엔진 실행, 이론값 판정, 파형 CSV</td><td>작업 디렉터리</td><td>.control 항상 제거, 지시어 화이트리스트, 제어 토큰 거부, include 검사, timeout ≤100s</td></tr>
+    </table>
+    <p>회귀: <code>make test-sim-mcp</code> = 계약 테스트 13건(실제 회로도 복사본 왕복, .control/shell 무력화 3경로, 허용 루트 밖 거부 포함) + GUI·시뮬레이션 체인 스모크(starter 도구 27개). 기존 계약 테스트 30건, 품질 스킬 107건, 설치 계약 8건, root Python 시험 전체 211건(<code>unittest discover</code>)도 통과.</p>
+    <pre><button class="copybtn" onclick="cp(this)">복사</button><code>make sim-runtime-verify   <span class="cmnt"># 설치 상태</span>
+make sim-verify           <span class="cmnt"># 검증 회로 5종, 시스템 ngspice</span>
+python3 scripts/sim-validation-run.py --engine kicad-bundled   <span class="cmnt"># KiCad 번들 ngspice</span>
+make test-sim-mcp         <span class="cmnt"># MCP 중계 계약 + 체인 스모크</span></code></pre>
+
+    <h2 class="sec" id="docs">5. 문서·스킬 갱신</h2>
+    <div class="grid2">
+      <div class="card"><h3 style="margin-top:0">신규</h3><ul style="margin:0;padding-left:18px">
+        <li><code>skills/kicad-simulation/</code> SKILL.md + references 6종(mcp-tools, kicad-sim-fields, measurements, engines, vendor-models, legacy-skill-overrides C14~C21), <code>.claude/skills</code>·<code>.agents/skills</code> 상대 링크</li>
+        <li><code>docs/agents/20261022-172859_circuit-simulators-linux.md</code> 설치 계약</li>
+        <li><code>docs/agents/20261022-172859_simulation-mcp-tools.md</code> MCP 도구 공개 API 계약(호환성·migration·rollback·회귀)</li>
+        <li><code>scripts/konnect-mcp-sim.py</code>, <code>scripts/sim_engines.py</code>, <code>scripts/sim-validation-run.py</code>, <code>scripts/ngspice_shared_batch.py</code>, 설치 스크립트 2종</li>
+        <li><code>tests/test_sim_mcp_extension.py</code>, <code>tests/test_sim_validation.py</code></li>
+        <li><code>docs/검증/20261022-172859-circuit-simulators/</code> 증거 폴더</li>
+      </ul></div>
+      <div class="card"><h3 style="margin-top:0">기존 문서 갱신</h3><ul style="margin:0;padding-left:18px">
+        <li><code>AGENTS.md</code>(=CLAUDE.md): 시작 게이트, 최신 연결 확인(<code>simulation_extension</code>), 소스 경계, 검증 계약, 안전 계약, 공개 API, 라이선스, 스킬 표·라우팅·교정 체계, 레인 메모리</li>
+        <li><code>README.md</code>: 구조도, 빠른 시작, 디렉터리 표, 현재 범위, Linux 회로 시뮬레이션 절</li>
+        <li><code>docs/아키텍처.md</code>: 중계 체인 구조도, 데이터 경계, 안전 실행, 검증 계층, 회로 시뮬레이션 경계 절</li>
+        <li><code>docs/개발-로드맵.md</code>: 0단계 런타임, 갱신 계약, 5단계 시뮬레이션 검증, 2026-10-22 검증 범위</li>
+        <li><code>docs/보안-및-라이선스.md</code>: 공급망 표, 서명 범위, MCP 실행 위험, 라이선스 표, 2026-10-22 승인 예외와 잔여 리스크</li>
+        <li><code>docs/설치-및-ACUW-검증.md</code>, <code>docs/20261006-112759_업그레이드-및-검증-계약.md</code>: 현재판 설치 절·버전 표·rollback·재현 gate</li>
+        <li><code>docs/agents/20261006-112759_kicad-konnect-overlay.md</code>: 도구 개수·기본 순서·교정 표</li>
+        <li><code>docs/agents/20261012-040121_standard-quality-user-guide.md</code>: 시뮬레이션 연결(패키지 밖)</li>
+        <li><code>Makefile</code>: install-qucs-s, install-ltspice, sim-runtime-verify, sim-verify, test-sim-mcp, help</li>
+      </ul></div>
+    </div>
+    <p>품질 스킬 패키지 <code>skills/kicad-schematic-quality</code> 내부는 package identity(c77ca8ed…)를 보존하려고 수정하지 않았다. 시뮬레이션 연결은 전부 패키지 밖에 두었다.</p>
+
+    <h2 class="sec" id="risk">6. 리스크와 사용자 결정</h2>
+    <p>아래 네 건은 2026-10-22 마지막 라운드에서 사용자가 결정했다(모두 현재 상태 유지).</p>
+    <table>
+      <tr><th>리스크</th><th>등급</th><th>대응 · 결정</th></tr>
+      <tr><td>시스템 ngspice·Wine이 unattended-upgrades로 바뀌면 <code>make sim-runtime-verify</code>가 버전 불일치로 실패(fail-closed)</td><td><span class="tag t-warn">중</span></td><td><b>결정:</b> <code>apt-mark hold</code>를 쓰지 않는다. 보안 업데이트를 막지 않고, 버전이 바뀌면 회귀를 재실행한 뒤 설치 스크립트 상수(<code>NGSPICE_PACKAGE_VERSION</code>, <code>WINE_PACKAGE_VERSION</code>)와 계약 문서를 갱신한다</td></tr>
+      <tr><td>Wine은 샌드박스가 아님. <code>z:</code>가 <code>/</code>, COM 포트가 ttyUSB/ttyACM에 매핑. LTspice Web Sync 업데이트 확인이 네트워크 접근</td><td><span class="tag t-warn">중</span></td><td><b>결정:</b> 하드닝 보류. 사용자 권한·ACUW 레인에서만 실행하며 신뢰 경계 밖 모델 파일은 내용 확인 뒤 사용</td></tr>
+      <tr><td>경로 간 1% 교차 기준 미달 1건 (아래 표)</td><td><span class="tag t-warn">하</span></td><td>이론값 2%는 통과. LTspice 다이오드 기본 파라미터·파형 압축(<code>.options plotwinsize=0</code>) 재실행은 로드맵 5단계 미완료 항목</td></tr>
+      <tr><td>품질 스킬 패키지 내부에는 시뮬레이션 관문이 없음(identity 보존 때문에 패키지 밖에만 연결)</td><td><span class="tag t-info">정보</span></td><td><b>결정:</b> 패키지 밖 연결 유지. package identity c77ca8ed…와 107건 테스트 수치를 보존하고, AGENTS 라우팅·오버레이·user-guide·<code>kicad-simulation</code>으로 잇는다</td></tr>
+      <tr><td>KiCad 기본 ERC는 <code>simulation_model_issue</code>를 무시하므로 ERC 0이 모델 완비가 아님</td><td><span class="tag t-info">정보</span></td><td><b>결정:</b> ERC 설정은 바꾸지 않고 <code>export_spice_netlist</code> 진단(<code>unassigned_models</code>·<code>suspicious_values</code>)을 시뮬레이션 범위의 관문으로 쓴다</td></tr>
+      <tr><td><code>projects/sim-validation-20261022/</code>가 약 15 MB(Qucs 데이터셋·LTspice raw)</td><td><span class="tag t-info">정보</span></td><td>커밋 전 <code>.raw</code>·<code>.dat.ngspice</code>를 <code>.gitignore</code>하거나 증거 폴더 사본만 남길지 결정</td></tr>
+      <tr><td>2차 과제: 사용자 핵심 IC 미정</td><td><span class="tag t-info">정보</span></td><td>부품명·모델 형식(텍스트/암호화) 확인부터. 암호화 모델은 Linux 오픈 엔진에서 불가</td></tr>
+    </table>
+    <h3>경로 간 1% 교차 미달 항목(시스템 ngspice 기준)</h3>
+    <table><tr><th>회로</th><th>측정</th><th>엔진</th><th>ngspice</th><th>해당 엔진</th><th>상대 차(이론값 기준)</th></tr><tr><td>04-diode-rectifier</td><td><code>vf_pk_derived</code></td><td>LTspice 24.0.12 (Wine)</td><td>0.712777</td><td>0.72517</td><td>1.739%</td></tr></table>
+
+    <h2 class="sec" id="rollback">7. 롤백</h2>
+    <pre><button class="copybtn" onclick="cp(this)">복사</button><code><span class="cmnt"># MCP 시뮬레이션 도구 비활성화(새 연결부터): .mcp.json/.codex/config.toml의 KONNECT_SIM을 0으로</span>
+<span class="cmnt"># Qucs-S 제거</span>
+sudo rm -rf /opt/qucs-s/26.1.1 /usr/local/bin/qucs-s /usr/local/share/applications/qucs-s.desktop /usr/local/share/icons/hicolor/scalable/apps/qucs-s.svg
+<span class="cmnt"># LTspice 제거(사용자 홈만)</span>
+rm -rf ~/.local/share/wineprefixes/ltspice ~/.local/bin/ltspice
+<span class="cmnt"># Debian 패키지 제거(wine 287개 포함)</span>
+sudo apt-get remove --purge ngspice wine wine64 wine32:i386 libwine && sudo apt-get autoremove</code></pre>
+    <p class="small">레포 파일은 untracked 상태이며 커밋하지 않았다. <code>git status</code>로 목록을 보고 필요 시 삭제한다. 품질 스킬 패키지는 변경되지 않았다.</p>
+
+    <h2 class="sec" id="appendix">부록. 식별값·증거</h2>
+    <table>
+      <tr><th>대상</th><th>값</th></tr>
+      <tr><td>Qucs-S AppImage SHA256</td><td><code>a86ab951118bfdffc8acfda8893cde0e2aeedc7129cc73978ae7d16761ec5cb5</code></td></tr>
+      <tr><td>LTspice64.msi SHA256</td><td><code>62a9f20b630738e6ade20a37551baa91b20760bfb718807d8a2be4caa3421a36</code></td></tr>
+      <tr><td>LTspice.exe SHA256(설치본)</td><td><code>17f5efb978c0df2e164328b7352801fdc1ed0225827e41669bd9da25893fe96d</code></td></tr>
+      <tr><td>KiCad AppImage SHA256</td><td><code>723b6890c60a5da962d3f4d07e0dba0f3dd2f3deb50d303f06a3d8a2ab7cf7f5</code></td></tr>
+      <tr><td>Konnect 연결</td><td>0.13.0+hanall.1 · commit <code>94f80350cf67db27b179a06a8f6dbebfe4717927</code> · exe SHA <code>cbb5b9785d376ab55a57bbf5723f8e1d79805c5eeeca8d5b1d58b84f7c3d909a</code></td></tr>
+      <tr><td>사양 SHA256</td><td>spec.json <code>c5863dcf4a4e3d0af5364dddd505d2b48e95b065175562badbf3eda7e47e9856</code> · theory.py <code>2f0e53232b5b5d3db5d8da54c0fb8c5ce342336cd88fab7b4bfafb70098e1e01</code></td></tr>
+      <tr><td>엔진 라벨(결과 JSON)</td><td>system /usr/bin/ngspice: ngspice-44.2 : Circuit level simulation program · kicad-bundled /home/hanol/kicad-konnect-mcp-workspace/.artifacts/kicad-10.0.6-install/libraries/AppDir/shared/lib/libngspice.so.0.0.14: ngspice-45.2 shared library · LTspice 24.0.12 for Windows · Qucs-S 26.1.1 — 레인 :188에서 &quot;qucs-s -v&quot; 출력 &quot;qucs s26.1.1 (b88d</td></tr>
+      <tr><td>ACUW 레인</td><td>kicad-standard-quality(:188, Qucs-S·LTspice), kicad-smps-sync-gui(:182, LTspice GUI·KiCad GUI)</td></tr>
+    </table>
+    <h3>증거 폴더 <code>docs/검증/20261022-172859-circuit-simulators/</code></h3>
+    <ul class="small"><li><code>20261022-172859_circuit-simulators-linux.html</code></li><li><code>install-manifests/apt-packages.txt</code></li><li><code>install-manifests/kicad-10.0.6-INSTALL-MANIFEST.json</code></li><li><code>install-manifests/kicad-cli-version-about.txt</code></li><li><code>install-manifests/ltspice-24.0.12-INSTALL-MANIFEST.json</code></li><li><code>install-manifests/ltspice.lock.json</code></li><li><code>install-manifests/qucs-s-26.1.1-INSTALL-MANIFEST.json</code></li><li><code>install-manifests/qucs-s.lock.json</code></li><li><code>kicad-netlists/01-rc-step.kicad.cir</code></li><li><code>kicad-netlists/02-mosfet-gate.erc.json</code></li><li><code>kicad-netlists/02-mosfet-gate.kicad.cir</code></li><li><code>kicad-netlists/03-opamp-noninv.erc.json</code></li><li><code>kicad-netlists/03-opamp-noninv.kicad.cir</code></li><li><code>kicad-netlists/04-diode-rectifier.erc.json</code></li><li><code>kicad-netlists/04-diode-rectifier.kicad.cir</code></li><li><code>kicad-netlists/05-precharge.erc.json</code></li><li><code>kicad-netlists/05-precharge.kicad.cir</code></li><li><code>regression/kicad-gui-report-input.json</code></li><li><code>regression/kicad-gui-workflow.json</code></li><li><code>regression/kicad-workflow.json</code></li><li><code>regression/ltspice-workflow.json</code></li><li><code>regression/ngspice-regression-kicad-bundled.json</code></li><li><code>regression/ngspice-regression-system.json</code></li><li><code>regression/qucs-s-workflow.json</code></li><li><code>regression/spec.json</code></li><li><code>screenshots/kicad-gui-01-rc-step-analysis-tab.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-console-meas.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-netlist.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-open.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-run.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-signals.png</code></li><li><code>screenshots/kicad-gui-01-rc-step-sim-full.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-analysis-tab.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-console-meas.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-netlist.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-open.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-run.png</code></li><li><code>screenshots/kicad-gui-02-mosfet-gate-signals.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-analysis-tab-ac.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-analysis-tab-tran.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-console-meas-ac.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-console-meas-tran.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-netlist-ac.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-netlist-tran.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-open.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-run-ac.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-run-tran.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-signals-ac.png</code></li><li><code>screenshots/kicad-gui-03-opamp-noninv-signals-tran.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-analysis-tab.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-console-meas.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-measurements-panel.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-netlist.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-open.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-run.png</code></li><li><code>screenshots/kicad-gui-04-diode-rectifier-signals.png</code></li><li><code>screenshots/kicad-gui-05-precharge-analysis-tab.png</code></li><li><code>screenshots/kicad-gui-05-precharge-console-meas.png</code></li><li><code>screenshots/kicad-gui-05-precharge-measurements-panel.png</code></li><li><code>screenshots/kicad-gui-05-precharge-netlist.png</code></li><li><code>screenshots/kicad-gui-05-precharge-open.png</code></li><li><code>screenshots/kicad-gui-05-precharge-run.png</code></li><li><code>screenshots/kicad-gui-05-precharge-signals.png</code></li><li><code>screenshots/kicad-gui-kicad-about-version-ngspice.png</code></li><li><code>screenshots/kicad-gui-kicad-about-version.png</code></li><li><code>screenshots/ltspice-24.0.12-wine-gui-05-precharge.png</code></li><li><code>screenshots/qucs-s-00-first-run-set-simulator.png</code></li><li><code>screenshots/qucs-s-00-simulators-settings.png</code></li><li><code>screenshots/qucs-s-01-rc-step-gui-result.png</code></li><li><code>screenshots/qucs-s-02-mosfet-gate-gui-result.png</code></li><li><code>screenshots/qucs-s-03-opamp-noninv-gui-result.png</code></li><li><code>screenshots/qucs-s-04-diode-rectifier-gui-result.png</code></li><li><code>screenshots/qucs-s-05-precharge-gui-result.png</code></li></ul>
+    <hr>
+    <p class="small">작성: Claude Code (Fable 5.1) · 2026-10-22 20:17 KST · 생성기 <code>scripts/sim-validation-report.py</code>. 본 문서는 자기완결 HTML(외부 의존성 없음). 측정값 일치는 모델 정확성·정격·실물 안전의 승인이 아니다.</p>
+  </main>
+</div>
+<script>
+function cp(btn){const code=btn.parentElement.querySelector('code');navigator.clipboard.writeText(code.innerText).then(()=>{const o=btn.textContent;btn.textContent='복사됨 ✓';setTimeout(()=>btn.textContent=o,1200);});}
+</script>
+</body>
+</html>

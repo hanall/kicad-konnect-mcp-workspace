@@ -2,6 +2,26 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+case "${KONNECT_GUI_SYNC:-0}" in
+  0) ;;
+  1)
+    case " $* " in
+      *" --version "*|*" -V "*|*" --help "*|*" -h "*) ;;
+      *) exec python3 "$ROOT/scripts/konnect-mcp-gui.py" "$@" ;;
+    esac
+    ;;
+  *) printf 'KONNECT_GUI_SYNC는 0 또는 1이어야 합니다.\n' >&2; exit 2 ;;
+esac
+case "${KONNECT_SIM:-0}" in
+  0) ;;
+  1)
+    case " $* " in
+      *" --version "*|*" -V "*|*" --help "*|*" -h "*) ;;
+      *) exec python3 "$ROOT/scripts/konnect-mcp-sim.py" "$@" ;;
+    esac
+    ;;
+  *) printf 'KONNECT_SIM은 0 또는 1이어야 합니다.\n' >&2; exit 2 ;;
+esac
 BIN="$ROOT/upstream/konnect/target/release/konnect"
 RUNTIME_HOME="$(python3 - "$ROOT" "${KONNECT_RUNTIME_HOME:-.runtime-home}" <<'PY'
 from pathlib import Path

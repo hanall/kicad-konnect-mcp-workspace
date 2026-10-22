@@ -1,0 +1,213 @@
+{
+  "engine": "kicad-bundled",
+  "ngspice": "kicad-bundled /home/hanol/kicad-konnect-mcp-workspace/.artifacts/kicad-10.0.6-install/libraries/AppDir/shared/lib/libngspice.so.0.0.14: ngspice-45.2 shared library",
+  "spec": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/spec/spec.json",
+  "circuits": [
+    {
+      "id": "01-rc-step",
+      "title": "RC 과도응답 (시정수)",
+      "pass": true,
+      "runs": [
+        {
+          "file": "tran.cir",
+          "returncode": 0
+        }
+      ],
+      "measurements": [
+        {
+          "name": "v_at_tau",
+          "theory": 3.1606027941427883,
+          "value": 3.160602,
+          "err_rel": 2.512630786412278e-07,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "v_at_3tau",
+          "theory": 4.75106465816068,
+          "value": 4.751065,
+          "err_rel": 7.195004575036212e-08,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "t_rise_10_90",
+          "theory": 0.0021972245773362194,
+          "value": 0.002197224,
+          "err_rel": 2.627570370298963e-07,
+          "pass": true,
+          "unit": "s"
+        }
+      ]
+    },
+    {
+      "id": "02-mosfet-gate",
+      "title": "MOSFET 게이트 구동 스위칭 (level 1)",
+      "pass": true,
+      "runs": [
+        {
+          "file": "tran.cir",
+          "returncode": 0
+        }
+      ],
+      "measurements": [
+        {
+          "name": "vgs_at_tau",
+          "theory": 6.321205588285577,
+          "value": 6.318125,
+          "err_rel": 0.0004873418911236451,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "t_vth",
+          "theory": 2.2314355131420975e-07,
+          "value": 2.23713e-07,
+          "err_rel": 0.002551938796512309,
+          "pass": true,
+          "unit": "s"
+        },
+        {
+          "name": "vds_on",
+          "theory": 0.02998122655522195,
+          "value": 0.02998124,
+          "err_rel": 4.4843989364672034e-07,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "id_on_derived",
+          "theory": 0.11970018773444778,
+          "value": 0.11970018760000001,
+          "err_rel": 1.1232043566880875e-09,
+          "pass": true,
+          "unit": "A"
+        }
+      ]
+    },
+    {
+      "id": "03-opamp-noninv",
+      "title": "OP AMP 비반전 증폭기 (KiCad 내장 단극 모델)",
+      "pass": true,
+      "runs": [
+        {
+          "file": "tran.cir",
+          "returncode": 0
+        },
+        {
+          "file": "ac.cir",
+          "returncode": 0
+        }
+      ],
+      "measurements": [
+        {
+          "name": "vout_pk_1k",
+          "theory": 0.999186924427368,
+          "value": 0.999185,
+          "err_rel": 1.9259933461591597e-06,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "gain_db_10hz",
+          "theory": 19.995653799782048,
+          "value": 19.99565,
+          "err_abs": 3.7997820463431253e-06,
+          "pass": true,
+          "unit": "dB"
+        },
+        {
+          "name": "f_3db",
+          "theory": 39959.771783613694,
+          "value": 39864.6,
+          "err_rel": 0.002381689868727503,
+          "pass": true,
+          "unit": "Hz"
+        }
+      ]
+    },
+    {
+      "id": "04-diode-rectifier",
+      "title": "다이오드 반파 정류 (Shockley 모델)",
+      "pass": true,
+      "runs": [
+        {
+          "file": "tran.cir",
+          "returncode": 0
+        }
+      ],
+      "measurements": [
+        {
+          "name": "vout_pk",
+          "theory": 9.287238242074574,
+          "value": 9.287223,
+          "err_rel": 1.6411848364001321e-06,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "vf_pk_derived",
+          "theory": 0.7127617579254255,
+          "value": 0.7127770000000009,
+          "err_rel": 2.138452913037324e-05,
+          "pass": true,
+          "unit": "V"
+        }
+      ]
+    },
+    {
+      "id": "05-precharge",
+      "title": "프리차지 RC 돌입전류와 저항 순간전력",
+      "pass": true,
+      "runs": [
+        {
+          "file": "tran.cir",
+          "returncode": 0
+        }
+      ],
+      "measurements": [
+        {
+          "name": "i_pk",
+          "theory": 1.0212765957446808,
+          "value": 1.021274,
+          "err_rel": 2.541666666573221e-06,
+          "pass": true,
+          "unit": "A"
+        },
+        {
+          "name": "p_pk",
+          "theory": 49.02127659574468,
+          "value": 49.02105,
+          "err_rel": 4.6223958332770725e-06,
+          "pass": true,
+          "unit": "W"
+        },
+        {
+          "name": "v_bus_at_tau",
+          "theory": 30.341786823770768,
+          "value": 30.34175,
+          "err_rel": 1.2136322419222e-06,
+          "pass": true,
+          "unit": "V"
+        },
+        {
+          "name": "t_95",
+          "theory": 0.6617572592280766,
+          "value": 0.661758,
+          "err_rel": 1.119401280496316e-06,
+          "pass": true,
+          "unit": "s"
+        },
+        {
+          "name": "e_r",
+          "theory": 5.414399999991343,
+          "value": 5.41439,
+          "err_rel": 1.8469251149827046e-06,
+          "pass": true,
+          "unit": "J"
+        }
+      ]
+    }
+  ],
+  "all_pass": true
+}

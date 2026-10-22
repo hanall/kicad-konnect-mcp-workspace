@@ -1,0 +1,6 @@
+libwine 10.0~repack-6 amd64
+libwine 10.0~repack-6 i386
+ngspice 44.2+ds-1 amd64
+wine 10.0~repack-6 all
+wine32 10.0~repack-6 i386
+wine64 10.0~repack-6 amd64

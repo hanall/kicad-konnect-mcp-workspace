@@ -1,0 +1,14 @@
+.title KiCad schematic
+.save all
+.probe alli
+.probe p(C1)
+.probe p(R1)
+.probe p(V1)
+.meas tran v_at_tau FIND v(out) AT=1m
+.meas tran v_at_3tau FIND v(out) AT=3m
+.meas tran t_rise_10_90 TRIG v(out) VAL=0.5 RISE=1 TARG v(out) VAL=4.5 RISE=1
+.tran 1u 5m
+C1 out GND 1u
+R1 in out 1k
+V1 in GND PULSE( 0 5 0 1n 1n 10m 20m ) 
+.end

@@ -22,3 +22,7 @@ __pycache__/
 .idea/
 .vscode/
 *.swp
+
+# 회로 시뮬레이션 대용량 파형 산출물(측정값·넷리스트·로그·캡처는 추적)
+*.raw
+*.dat.ngspice

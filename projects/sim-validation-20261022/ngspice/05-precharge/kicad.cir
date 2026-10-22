@@ -1,0 +1,13 @@
+.title KiCad schematic
+C1 bus GND 4700u
+B1 p GND v=i(V1)*i(V1)*47
+V1 in GND PULSE( 0 48 0 1u 1u 10 20 ) 
+R1 in bus 47
+B2 ia GND v=-i(V1)
+.tran 100u 3
+.meas tran i_pk MAX v(ia) FROM=0 TO=3
+.meas tran p_pk MAX v(p) FROM=0 TO=3
+.meas tran v_bus_at_tau FIND v(bus) AT=0.2209
+.meas tran t_95 WHEN v(bus)=45.599999999999994 RISE=1
+.meas tran e_r INTEG v(p) FROM=0 TO=3
+.end

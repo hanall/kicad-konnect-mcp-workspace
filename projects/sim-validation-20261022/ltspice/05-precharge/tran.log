@@ -1,0 +1,20 @@
+LTspice 24.0.12 for Windows
+Circuit: * 05 precharge inrush
+Start Time: Thu Oct 22 17:19:25 2026
+solver = Normal
+Maximum thread count: 64
+tnom = 27
+temp = 27
+method = modified trap
+WARNING: Less than two connections to node p.  This node is used by b1.
+WARNING: Less than two connections to node ia.  This node is used by b2.
+.OP point found by inspection.
+
+i_pk: MAX(v(ia))=1.02127 FROM 0 TO 3
+p_pk: MAX(v(p))=49.0211 FROM 0 TO 3
+v_bus_at_tau: v(bus)=30.3415 at 0.2209
+t_95: v(bus)=45.6 AT 0.661699
+e_r: INTEG(v(p))=5.41428 FROM 0 TO 3
+
+Total elapsed time: 0.017 seconds.
+

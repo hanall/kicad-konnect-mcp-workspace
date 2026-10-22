@@ -1,0 +1,1474 @@
+{
+  "schema_version": 1,
+  "archive": {
+    "path": "docs/검증/20261012-standard-quality/standard-evidence.tar.gz",
+    "size": 849256,
+    "sha256": "d691bdcc6a291e748921aed4608ea4a60313b68092290478830e7cd5a7bfd1f4",
+    "format": "USTAR + gzip",
+    "gzip_mtime": 0,
+    "uid": 0,
+    "gid": 0,
+    "mode": "0644",
+    "mtime": 0,
+    "members_regular_only": true,
+    "source_relative_paths_preserved": true,
+    "readback_sha_size_pass": true
+  },
+  "source_root": ".artifacts/20261012-040121-standard-quality",
+  "source_package_identity": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca",
+  "source_package_file_count": 17,
+  "aliases_metadata_only": [
+    {
+      "path": ".agents/skills/kicad-schematic-quality",
+      "type": "symlink_metadata_only",
+      "target": "../../skills/kicad-schematic-quality",
+      "dereferenced_contents_archived": false
+    },
+    {
+      "path": ".claude/skills/kicad-schematic-quality",
+      "type": "symlink_metadata_only",
+      "target": "../../skills/kicad-schematic-quality",
+      "dereferenced_contents_archived": false
+    }
+  ],
+  "selection_policy": {
+    "raw_model_logs": false,
+    "global_legacy_skill_bodies": false,
+    "full_raw_schema": false,
+    "installed_binaries": false,
+    "token_auth_credentials_runtime": false,
+    "customer_accounts_rollout_CURRENT": false,
+    "actual_c1_x1": "별도 c1 archive. 여기에는 포함하지 않음",
+    "helpers": "원실행 증거. 재배치 재현 보장0"
+  },
+  "results": {
+    "mock_mutations": 37,
+    "caught": 37,
+    "actual_T05_semantic_pass": true,
+    "actual_T05_format_exact_pass": false,
+    "docs_public_tests": 15,
+    "latest_standard_total": 107,
+    "core_standard": 92,
+    "latest_root_python": 190,
+    "rust_passed": 2513,
+    "rust_failed": 0,
+    "rust_ignored": 50,
+    "root_make_rc": 0,
+    "original_full_FAIL_preserved_in_separate_c1_archive": true,
+    "upstream_port_race_fixed": false
+  },
+  "sensitive_scan": {
+    "email": 0,
+    "token": 0,
+    "PEM": 0,
+    "ELF": 0,
+    "scope": "선택 regular bytes. 민감 파일명/범주 별도 denylist. 모든 알려지지 않은 secret 부재의 보편 증명은 아님"
+  },
+  "original_manifest_sha_readback_checks": [
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/final-full-test.txt",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/final-full-test.stderr",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/final-full-test.rc",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.rc",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/root-full-test-type-fixed.txt",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/root-full-test-type-fixed.rc",
+      "kind": "SHA",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/guarded_mcp.py",
+      "kind": "현재 source",
+      "match": true
+    },
+    {
+      "path": "tests/test_standard_quality_mcp.py",
+      "kind": "현재 source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/package_identity.py",
+      "kind": "현재 source",
+      "match": true
+    },
+    {
+      "path": "/home/hanol/battery-module-cycler/scripts/schematic_quality_mcp.py",
+      "kind": "현재 source",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/integration-audit/final-mcp-probes.json",
+      "kind": "독립 모의 proof",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/integration-audit/final-early-exit-race.json",
+      "kind": "독립 모의 proof",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/integration-audit/final-read-identity-mismatch.json",
+      "kind": "독립 모의 proof",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/integration-audit/final-make-test-standard-quality.log",
+      "kind": "독립 모의 proof",
+      "match": true
+    },
+    {
+      "path": "tests/test_standard_quality_docs_safety.py",
+      "kind": "현재 public test source",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/final-manifest.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/package-gate.rc",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/package-gate.stderr.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/package-gate.stdout.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/green2.rc",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/green2.stderr.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/green2.stdout.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/mutation-survivor-before-test-strengthening.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/receipt.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/red.rc",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/red.stderr.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/docs-safety-test/public-regression/red.stdout.txt",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/README.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/SOURCE-FREEZE-ACK.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/final-manifest.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/input-manifest.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/AGENTS.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/TASK.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/candidate-plan.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/AGENTS.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/TASK.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/candidate-plan.md",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/installed-source-observation.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package.identity.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/results/case-a.normalized.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/results/case-b.normalized.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/results/t05-verdict.json",
+      "kind": "원 SHA256SUMS",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/AGENTS.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/TASK.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-a/candidate-plan.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/AGENTS.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/TASK.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/inputs/case-b/candidate-plan.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/installed-source-observation.json",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/SKILL.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/assets/common-plan.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/assets/page-plan.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/assets/plan-index.example.json",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/assets/review-record.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/profiles/general.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/profiles/smps.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/common-workflow.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/electrical-rules.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/legacy-skill-overrides.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/tool-compatibility.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/verification.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/references/visual-rules.md",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/scripts/collect_evidence.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/scripts/guarded_mcp.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/scripts/package_identity.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package/scripts/verify_quality.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/package.identity.json",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/probe.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/run_readonly.py",
+      "kind": "frozen input 전체 readback",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/SKILL.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/common-plan.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/page-plan.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/plan-index.example.json",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/review-record.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/profiles/general.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/profiles/smps.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/common-workflow.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/electrical-rules.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/legacy-skill-overrides.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/tool-compatibility.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/verification.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/visual-rules.md",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/collect_evidence.py",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/guarded_mcp.py",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/package_identity.py",
+      "kind": "현재 frozen package source",
+      "match": true
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/verify_quality.py",
+      "kind": "현재 frozen package source",
+      "match": true
+    }
+  ],
+  "historical_doc_manifest_drift": [
+    {
+      "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+      "recorded_sha256": "f42c07485607c531281e0959f126708b26c26463a8bda6713810ae46f328302c",
+      "current_sha256_observed": "d211bb952d1c05e9748af65c56c5cad1099e5f83442e5106055f6a265f03b96b",
+      "match": false,
+      "interpretation": "원 당시 snapshot. 현재 writer 문서는 archive 제외. 부모 승인한 공개 drift 경계."
+    },
+    {
+      "path": "docs/보고서/20261012-040121_standard-quality.html",
+      "recorded_sha256": "7dc48b5ed84d7c1f736e865f48cb6441812bba9a3e1e0f1fe4399489178a02bc",
+      "current_sha256_observed": "7baef4563f50a794725f615405829c8a999cca31bb015c0e1aacb626a0ca57fb",
+      "match": false,
+      "interpretation": "원 당시 snapshot. 현재 writer 문서는 archive 제외. 부모 승인한 공개 drift 경계."
+    }
+  ],
+  "files": [
+    {
+      "path": "docs-safety-test/final-manifest.json",
+      "size": 1420,
+      "sha256": "a9bac23934e1bf678448d1d3cfc8c67c2acf8500ed3bb12fb57523e17c2371be",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/package-gate.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/package-gate.stderr.txt",
+      "size": 17496,
+      "sha256": "6ccaf97366a1e52b9b9797eaf903f34f4b82fff9dc82b98601862cd176b06bb1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/package-gate.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/green2.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/green2.stderr.txt",
+      "size": 262,
+      "sha256": "5c180b5b7f36b8b13fb66e40928c991330a79d5608227c061eb4e3835f72c247",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/green2.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/mutation-survivor-before-test-strengthening.json",
+      "size": 1158,
+      "sha256": "961d3a852504033e3f72467efed41f401b7c0288223c1a364780f98bc05814f2",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/receipt.json",
+      "size": 1241,
+      "sha256": "db320c1c4d70cd3cc3205ebf109fa73aed0710b6670b99644aa28bbd8d425bc2",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/red.rc",
+      "size": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/red.stderr.txt",
+      "size": 1371,
+      "sha256": "6b5eacd464f673d0b825413dbb54802fe174153b16fc343ca8b46ec639800b38",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "docs-safety-test/public-regression/red.stdout.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-full-test.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-full-test.stderr",
+      "size": 34992,
+      "sha256": "2ce05094b524847372be73e8140e2ac824953e4d76b8e90ebbdf6ed33bb8c917",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-full-test.txt",
+      "size": 241288,
+      "sha256": "ee10cb773fdbadc2b78579aae9bdd5ffd117ff8b09f856175afd51f0e82825f8",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-gate-summary.json",
+      "size": 1182,
+      "sha256": "c95f12ef4308abacd4b29e62ec2c3f354d392645b8d094f6bcd3a2edfc33bdd0",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-runtime-verify.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-runtime-verify.txt",
+      "size": 252,
+      "sha256": "b77b25f0624fad30d9f41fd9a2ba9914a841f5c9f1ad5f63b804a014d4a2415f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-skill-validation.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-skill-validation.txt",
+      "size": 16,
+      "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-standard-tests.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-standard-tests.txt",
+      "size": 17496,
+      "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-verify.rc",
+      "size": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "final-verify.txt",
+      "size": 246,
+      "sha256": "617ab2be39073cd66bea09228bebeb3af9e47afed284fe09471436666ab878af",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "integration-audit/final-early-exit-race.json",
+      "size": 5545,
+      "sha256": "fe0db57f3326a476b0a4f47eae32360d4235a9a099384c6dd8c0ef78fcd710fe",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "integration-audit/final-make-test-standard-quality.log",
+      "size": 13906,
+      "sha256": "758c0d2552e746171d96742a08828f7c140c7e805497685c81bea488c0720acc",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "integration-audit/final-mcp-probes.json",
+      "size": 1945,
+      "sha256": "1ba2a8687e4942d010e175a3ddf6af1a1d6c709db337b8ef18c9fb2373a96f75",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "integration-audit/final-read-identity-mismatch.json",
+      "size": 219,
+      "sha256": "5917fd8b2536a2bed519148b091e54faa82e0f8d49e523e4292998555b09116a",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/early-exit-green.json",
+      "size": 5545,
+      "sha256": "fe0db57f3326a476b0a4f47eae32360d4235a9a099384c6dd8c0ef78fcd710fe",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/early-exit-green.log",
+      "size": 5545,
+      "sha256": "fe0db57f3326a476b0a4f47eae32360d4235a9a099384c6dd8c0ef78fcd710fe",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/final-manifest.json",
+      "size": 3508,
+      "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/green2-strict-type-final.txt",
+      "size": 143,
+      "sha256": "1d021c53abf07dd244457d823da233f2103e72d0932fd71ccadc552a71db5ecf",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/make-test-standard-quality-strict-green2.txt",
+      "size": 15183,
+      "sha256": "5070adb7b26f1f6acbb67a93527b2451acd02687bbc22a5650ac0b522848ae2c",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M01-review-write.log",
+      "size": 789,
+      "sha256": "e7143b2c52050ef92e0016fa9446e24feef48aba2975558370ef8416407b6fb1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M01-review-write.py",
+      "size": 95515,
+      "sha256": "79dc1fe4684fa185baf214851452e0facf97d18403e3b0e369e55f9b1e125431",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M02-all-plans-flag.log",
+      "size": 772,
+      "sha256": "0ab0f20ece3b1d5155b4ced338491a4fe2a0992732f312108cc0a4daab696346",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M02-all-plans-flag.py",
+      "size": 95515,
+      "sha256": "10dd31f586b097369663b3cf832c3c46e2bf81c543cce4be8dfebaba23656255",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M03-unknown-tool.log",
+      "size": 1632,
+      "sha256": "12604af4aca2d5918eced0cc1303005eaee56a50f36feff2f8c8046619ee18c0",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M03-unknown-tool.py",
+      "size": 95539,
+      "sha256": "c54582af91f5f0ba267b49e79c64f81592e7d1dda4dfbcd7eac4b2e89698cdb6",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M04-runtime-version.log",
+      "size": 1389,
+      "sha256": "06c2ba3af898c20e71004060125ebd2ac57efbb0250335833d694c7459810e6e",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M04-runtime-version.py",
+      "size": 95515,
+      "sha256": "9ed335f764ebde76fc02fc6528c2aa058617f1b722bba13102287699f83866ff",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M05-empty-toolset.log",
+      "size": 963,
+      "sha256": "7eed210e0ab17b220c0f0adcaef843c2ed678410e925ce719ed944324e74c50a",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M05-empty-toolset.py",
+      "size": 95513,
+      "sha256": "0920e9010b530a6ce7de63739aba4d0365ddfb238e0e5aea48e80c4977e572c1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M06-evidence-outside.log",
+      "size": 841,
+      "sha256": "093ec71f177e6a67a374b7fd0924ed5dd0ded3f8a1f4e81c07eacb47b1538af1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M06-evidence-outside.py",
+      "size": 95434,
+      "sha256": "f994b08daf350d0884b7adf7f1e8f56eadb92858fce5e3170abcc7598e468db9",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M07-editor-lock.log",
+      "size": 783,
+      "sha256": "bdff63ad928a9e6c921f7660581d6e53847ef5cbf40e77ba37a15f080c5d1395",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M07-editor-lock.py",
+      "size": 95527,
+      "sha256": "c3ac053b7ddb36271ddd131f642bd0d5470a62824e590624ddbbede1ec704514",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M08-index-change.log",
+      "size": 808,
+      "sha256": "6eec71759e366d614af9d882b66cff3439c4051d62b976d3d143b69fd5f55d4d",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M08-index-change.py",
+      "size": 95539,
+      "sha256": "171ab72448a1d6ba42f799755c679bda4a1ee88b4e4cda57eaaeb68d140d72b5",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M09-schema-pollution.log",
+      "size": 751,
+      "sha256": "8ead1e2c9d333b81f0ec01d6f3ddbe0358973061dabc603a34ce60b2f98cf24e",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M09-schema-pollution.py",
+      "size": 95465,
+      "sha256": "495d057a8bb4cbbece70f065b65b5188405549e0beda0458f29c2af917542f87",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M10-symbol-unit.log",
+      "size": 3129,
+      "sha256": "68eb350d173e34a8c6f76732343253b6709a47f076bc3665c78f3ed63f746b3f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M10-symbol-unit.py",
+      "size": 95513,
+      "sha256": "7d6d3fd35b00943e4836be9b85eb34f0fb797db5cd307d43fa620ac0c81d0dad",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M11-read-only.log",
+      "size": 779,
+      "sha256": "3f5f80eb12f88c578483f2812f7a6ecb9f30dc6e94f96c2a77a78a0b39343834",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M11-read-only.py",
+      "size": 95515,
+      "sha256": "6980df30299db4e3d20b09cf5e8221f144291446584232bfd893d6c05bb733c3",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M12-serving-config.log",
+      "size": 835,
+      "sha256": "d9908bd9d8af18a60ed9c4fa7c1c0cf4edbccfa89439f537084a90dd3993793a",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M12-serving-config.py",
+      "size": 95515,
+      "sha256": "bd7f220d5982335d52f6fb3d4c0e06602c68f939f2b554d458f7b34cf08fec3f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M13-global-library.log",
+      "size": 830,
+      "sha256": "c91a1cf5c775da92aec4760f7d8567e18be47d25403b95218fb31d505a240791",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M13-global-library.py",
+      "size": 95515,
+      "sha256": "4c3d8ad563f055b2b6743da4324ab80138a5c582671c5516adb31b35cebb6899",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M14-allowed-symlink.log",
+      "size": 1754,
+      "sha256": "379333dc4be632ab91f84f3e5e1a2bc31fbb2d0a59cd26461a8701f4444ce358",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M14-allowed-symlink.py",
+      "size": 95515,
+      "sha256": "f6fb6b9b7b12598324e416fdc6586b7bdd69d674ca53b9f3f66f05017e60b8d7",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M15-critical-signatures.log",
+      "size": 3661,
+      "sha256": "c640e13407957de09b3c8ad0e14638a2ea210a3281df0047eedd6602ce02589d",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M15-critical-signatures.py",
+      "size": 95486,
+      "sha256": "e2b9e5153cfc56f1cfe5ccfcf55db08a631f8c91724dd20bf3071f01d946b757",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M16-owning-root-erc.log",
+      "size": 816,
+      "sha256": "7105067bf8155849ec0fb385df8c2a169852c853bbbed2edf2bf80413ad0a5e5",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M16-owning-root-erc.py",
+      "size": 95515,
+      "sha256": "0c68636195b5a38bf89e7aa3776f43df1ebb4db14a60e6d45a4fa0c7eaec4296",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M17-pin-zero-false-green.log",
+      "size": 5514,
+      "sha256": "6158015941546d192db729230a720287615e2347a78dc6670150f3a879ac2894",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M17-pin-zero-false-green.py",
+      "size": 95525,
+      "sha256": "b93d751b5e57c14f6a2ce702dc6d85da2e86b71ddd6787520c3315f7215bdfed",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M18-writer-lock-symlink.log",
+      "size": 1122,
+      "sha256": "cb4f87b8abd39b12443a69eef1a2a0103f2442c7a4928e6e6f07651b3694eb43",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M18-writer-lock-symlink.py",
+      "size": 95533,
+      "sha256": "2f74fae20afefc3acbef2db15402f15c0ffd792dbc6ccbf3e1dd86c724c44e0c",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M19-pcb-save-tool.log",
+      "size": 922,
+      "sha256": "4a038b426a41b9e8f315fa0beb0a88732b79054633a12edca5f994d88cae90c5",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M19-pcb-save-tool.py",
+      "size": 95531,
+      "sha256": "c260a57ea70dd95a5e0063b6db978875de9c3cab9a7a77e409afdd64a26d1fd5",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M20-library-declared-exact.log",
+      "size": 828,
+      "sha256": "6ef1526676a8b7f77047d4872704f1b8051d153767507c31e38d55c0d07a6257",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M20-library-declared-exact.py",
+      "size": 95515,
+      "sha256": "92de00fc1a0f5a49a5a16ba49c190a51a99b261b9ed92427a7075d67d9fcfa79",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M21-evidence-symlink.log",
+      "size": 820,
+      "sha256": "9c7ecb4b862caf8f9563214e18988d712494083f0c43c2e92b94a900df0150a8",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M21-evidence-symlink.py",
+      "size": 95515,
+      "sha256": "a68c84df76b234457fc42d483fc87803637ed44cd4d3c5219189777667e46282",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M22-backend-final-identity.log",
+      "size": 787,
+      "sha256": "f76171e61b705e5dbb577371ad96e2559d0adf59ce6bfb445e1986f99917a595",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M22-backend-final-identity.py",
+      "size": 95500,
+      "sha256": "05a63b28b8d020fcd996c0ec59c431c06362983e13cf1f1d5204777498a0df58",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M23-review-board-path.log",
+      "size": 861,
+      "sha256": "9606669d3419f06d2de48481828e158935b019da89f041b2b7bb603052a8ac3a",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M23-review-board-path.py",
+      "size": 95515,
+      "sha256": "debd72fd1e678b223050021874fb1a41a8e04f563e548eb3122735f53c678aab",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M24-cad-intent-toctou.log",
+      "size": 814,
+      "sha256": "d5dedc935991f0cea4d794aee6dba63b3ae58648439de6991d93e81968771f6a",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M24-cad-intent-toctou.py",
+      "size": 95376,
+      "sha256": "4f2c38b0098e2e461aa0e9c9b15983dbb18157ee60d58f4e9de6ac928b7bb1f5",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M25-close-broken-pipe.log",
+      "size": 1159,
+      "sha256": "e19b436a9d353fa0d0cdb0453e4d863d8d62d0abd646f219bea256f90fa1cc0f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M25-close-broken-pipe.py",
+      "size": 95487,
+      "sha256": "a2756694f9015ec7f5a3a6f7623a322cdeefbad318257e36edc4cc147e5bc840",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M26-power-flag-net.log",
+      "size": 813,
+      "sha256": "f62767a427fad7cf16326eb9d056cd381fcaaee42adc9f140afc909016799a8b",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M26-power-flag-net.py",
+      "size": 95515,
+      "sha256": "f93ff7387a70702679789b41e5178a181746726004962616f2889babddb392f7",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M27-power-flag-new-lib.log",
+      "size": 890,
+      "sha256": "0bdd6ce959dee17acdda25d8bab53f8a3de335e0faeb2810b9ba2d9179d47d14",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M27-power-flag-new-lib.py",
+      "size": 95492,
+      "sha256": "ceffa220303589ff9e2891442b48500cfb716589f11e4dc321461d9062ef6dd7",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M28-mutation-no-change.log",
+      "size": 789,
+      "sha256": "018f4e1caeee7ceb852f95641d429b6922876bbaddad9b3c66860cd51dee4d68",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M28-mutation-no-change.py",
+      "size": 95515,
+      "sha256": "43c56fe9fae59551d938b89229a11355ab36d65042875d8f25578ce988ee0632",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M29-mutation-target-drift.log",
+      "size": 716,
+      "sha256": "10ddb825fd88c9d6426d6899426612a4251f4dc33980ce4f961f228f4c2ddbca",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M29-mutation-target-drift.py",
+      "size": 95515,
+      "sha256": "749743490be3ba92433ecdbd0ed813ae94d85a177eadea3deb62697787da7166",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M30-package-identity.log",
+      "size": 787,
+      "sha256": "00b2a61b58d423ef17e4b63a9dd5b7e5e92144d1244587006cce680535d85b46",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M30-package-identity.py",
+      "size": 95507,
+      "sha256": "9fe0a4905f51229abbf9bbd08eb30da2fcaa932ced963085f41f5faff4c19caa",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M31-dry-run-classification.log",
+      "size": 3055,
+      "sha256": "559c726503c60fc3ea3779c5f0cd845fb37a34be4218dfc694dbb439fbf68ce0",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M31-dry-run-classification.py",
+      "size": 95515,
+      "sha256": "4d830ef924f3339cd3b3c1380ddecc0af66ae499196ba4c719536f3c2d715edc",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M32-symbol-pin-count.log",
+      "size": 757,
+      "sha256": "4e32b3337843473500baf452ec076cc3479711beea3ea4375b29595802674b26",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M32-symbol-pin-count.py",
+      "size": 95517,
+      "sha256": "617737a4d21b62aa934729d47350822aca90002d063f3eb270f4f9e3a5d01c40",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M33-symbol-name.log",
+      "size": 921,
+      "sha256": "fb60fe37a5d8c9ed37fc1a40ec67379e9167d10da6cc23a7a82297ab58093c51",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M33-symbol-name.py",
+      "size": 95517,
+      "sha256": "a364f4be7b98cb10053d286a5dedb841f6276e326fb522fbca95b4b2fcdf7785",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M34-symbol-type.log",
+      "size": 921,
+      "sha256": "df1aa5dac80b14378289c1adab3eae68f0cd38cabd4d94a7e6c64cc6081f8edf",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M34-symbol-type.py",
+      "size": 95517,
+      "sha256": "680b7b31643739565bac54992b29831249fb655086cd7ab661750b4ee7c59b3d",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M35-symbol-unit.log",
+      "size": 1828,
+      "sha256": "4467228ef0451119b153a44676f1e6389c72da538d02eb48ebf2e25e26ab7869",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M35-symbol-unit.py",
+      "size": 95517,
+      "sha256": "0d6356ba506f37bf4b82da2971460749d4eec75d96fd879a3fa5dfdce3b405ee",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M36-mutation-negative-outcome.log",
+      "size": 789,
+      "sha256": "cf7bc505fb7a2a4f25c1795a18b4b1aba3ae5d5e6392d9e99add79226c244211",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M36-mutation-negative-outcome.py",
+      "size": 95515,
+      "sha256": "4f699fab00dfaf9a9e6e89eca83cb15e12f8873f1d105889124c120f0aa246c4",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M37-plan-schema-version-type.log",
+      "size": 1534,
+      "sha256": "f73b37d58340a70ddc14ba8e8db00fd14bdc8b5b375ea4898eda04436a2f314f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/M37-plan-schema-version-type.py",
+      "size": 95466,
+      "sha256": "bf6682f595174703a39c24c39ada64d412d18933df9ea2be9e8d7d004b574bea",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutants/package_identity.py",
+      "size": 4071,
+      "sha256": "4bdf252d16baf1164d91d62e2b325b4135bc39ba908d7e2ae24bbf63b285f78e",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutation-results.json",
+      "size": 4878,
+      "sha256": "8b06e56efc83b91c53719ac327d9fe9196dd743f8a3bde58dffb40f368a29098",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/mutation-run-strict-type.txt",
+      "size": 4878,
+      "sha256": "8b06e56efc83b91c53719ac327d9fe9196dd743f8a3bde58dffb40f368a29098",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/original-tests-strict-final.txt",
+      "size": 120,
+      "sha256": "460759763482139412897e891eebf9259511f88d0f3f2145aa75510d1ed3fa38",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/red-audit-blockers-expanded.txt",
+      "size": 11884,
+      "sha256": "788f1858dfc1727117a129796c39124ca126e6e494087200b4e1c988d9c4f51d",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/red-audit-blockers.txt",
+      "size": 6782,
+      "sha256": "d6232fceb52581a4e10c8a179e53769661c22348f08bb55a8e21498839bdda17",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/red-initial.txt",
+      "size": 2252,
+      "sha256": "882f2a5c6b0cc0e614cfc22349afe1cb10e517a06bfa80d9dd2c409afd7a7dd1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/red-strict-schema-type.txt",
+      "size": 1534,
+      "sha256": "f2d935d8559bcd12ad7b31f3a21ef14c742009ce08e1bd9330c3b4af78fbf621",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/run_mutations.py",
+      "size": 6719,
+      "sha256": "25ae8cdbfccbbbb7909eb10119093222d00c7fda08fb2da8d2a9e561b635f824",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "mcp-dev/source-audit-test-mapping.json",
+      "size": 4192,
+      "sha256": "ca4023897d1c6218c32b7414399e4c78344ce2d00bb7fd2bb6aa8389b87e4a51",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/README.md",
+      "size": 4190,
+      "sha256": "938bb351277f48100afdb8e4c890e76bc4c730e62a12119ffd2533859df8f76b",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/SOURCE-FREEZE-ACK.json",
+      "size": 629,
+      "sha256": "850f5b00e4227533a03498c53d72b5f865680705ea7cb400439988b917cd30d3",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/final-manifest.json",
+      "size": 1376,
+      "sha256": "3183d47213a9ae49387b56daec25e09fc504d2d65987f16379bcf61c4a837909",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/input-manifest.json",
+      "size": 4438,
+      "sha256": "1bc2b5374a939fb3772c020a0e6429719ad78a669a1223564458c168387408de",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-a/AGENTS.md",
+      "size": 578,
+      "sha256": "6e2092aed98f384c4dd2fb361a6995a8c475ba335f657845f859a50431ea78e7",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-a/TASK.md",
+      "size": 1179,
+      "sha256": "9ba19eb5f94a36c2b200e6057aaf2f366a37d6c9e9480cd0bd37a4f2ff323fc1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-a/candidate-plan.md",
+      "size": 511,
+      "sha256": "2b29b4a9b3d00c260adb6ae2bb1e9864457a1f583e512477247530242e8b2268",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-b/AGENTS.md",
+      "size": 578,
+      "sha256": "6e2092aed98f384c4dd2fb361a6995a8c475ba335f657845f859a50431ea78e7",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-b/TASK.md",
+      "size": 1179,
+      "sha256": "9ba19eb5f94a36c2b200e6057aaf2f366a37d6c9e9480cd0bd37a4f2ff323fc1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/inputs/case-b/candidate-plan.md",
+      "size": 511,
+      "sha256": "a6efdd0bad030ad7e65184fd0877b8cdc5aa8b9fe833f5b7ccd402097d03a7f1",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/installed-source-observation.json",
+      "size": 349,
+      "sha256": "4de71268f345aa5ec0f89ae4b156a3b2f178256a0a4158506ac835e0f8ded270",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/package.identity.json",
+      "size": 2866,
+      "sha256": "fd56744c5825ef80bc3b10373ae4a5f418bcbc2215b9dff24153841f452bb6e2",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/results/case-a.normalized.json",
+      "size": 5891,
+      "sha256": "9f822c3927b379490d6a67752a414e73ff9ce60c5a6e9c897b154ea5555c60bf",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/results/case-b.normalized.json",
+      "size": 7172,
+      "sha256": "3c27c98426f283d6ac1b1a4c710f97e27e1670d9faa5abb0229a211e8e24053f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "polarity-g0/results/t05-verdict.json",
+      "size": 1391,
+      "sha256": "bfdd658b53f115b9cd894d27e6034865e87c52df037e604f9487833a2e277b67",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "source-audit/README.md",
+      "size": 30465,
+      "sha256": "d900d7b88e2ce2bb7f5f4501fbe9b67451ad7859921dedf56f6666f3dd3f4f8e",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "source-audit/audit.json",
+      "size": 56424,
+      "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+      "type": "regular",
+      "derived_minimal_receipt": false
+    },
+    {
+      "path": "upstream-flake-probe/standard-handover-selection/model-receipts/case-a.minimal.json",
+      "size": 926,
+      "sha256": "ea137ea2422ded80376ac98e7f12bf77380002b5ef48f289ce8d3b1aef2d7f21",
+      "type": "regular",
+      "derived_minimal_receipt": true
+    },
+    {
+      "path": "upstream-flake-probe/standard-handover-selection/model-receipts/case-b.minimal.json",
+      "size": 926,
+      "sha256": "d18ca17097071f16a0f2b97e8fc97adb39be9d33a50796b8a534e19f7be547ef",
+      "type": "regular",
+      "derived_minimal_receipt": true
+    }
+  ]
+}

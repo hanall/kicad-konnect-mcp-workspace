@@ -11,6 +11,7 @@
 | 시연 설계 | `projects/mcp-led-demo-20261006/mcp-led-demo` |
 | 기본 MCP HOME | `.runtime-home`, 사용자 전역 설정과 분리 |
 | 기능 시험 HOME | `.artifacts` 하위 각 runner 전용 |
+| 회로 시뮬레이터 (2026-10-22 추가) | 시스템 ngspice `44.2+ds-1`(apt), Qucs-S `26.1.1` `/opt/qucs-s/26.1.1`, LTspice `24.0.12.0` Wine prefix `~/.local/share/wineprefixes/ltspice`, KiCad 번들 ngspice `45.2` |
 
 ```bash
 ./scripts/install-kicad-appimage.sh --verify-only
@@ -28,6 +29,41 @@ make live-acceptance \
 
 전용 레인의 GUI는 프로젝트별 `XDG_CONFIG_HOME`을 지정합니다. 자동 소켓 검색은 편의 기능일 뿐 여러 편집기의 식별 증명이 아니므로 병렬 시험은 서로 다른 TMPDIR/소켓을 사용하고 exact target을 재조회합니다. 뷰어의 `xdg-open`을 ACUW에 연결하는 별도 launcher는 `XDG_STATE_HOME=/home/hanol/.local/state`로 기존 레인 registry만 참조해야 합니다. Konnect의 격리 HOME 자체를 해제하지 않습니다.
 
+## 회로 시뮬레이터 설치와 ACUW 검증 (2026-10-22)
+
+구성·버전·잠금의 정본은 [회로 시뮬레이터 계약](agents/20261022-172859_circuit-simulators-linux.md)입니다. 이 절은 설치·재검증 순서와 ACUW 레인 규칙만 다룹니다.
+
+| 구성요소 | 설치 | 선행 조건 | DISPLAY |
+|---|---|---|---|
+| 시스템 ngspice `44.2+ds-1` | Debian 공식 apt. 설치기는 패키지 버전만 검사 | — | 불필요 |
+| Wine `10.0~repack-6` | Debian 공식 apt `wine`, `wine64`, `wine32:i386` | i386 아키텍처 | 불필요 |
+| Qucs-S `26.1.1` | `make install-qucs-s` (`sudo`로 `/opt/qucs-s/26.1.1`, `/usr/local/bin/qucs-s`, desktop·icon 설치) | ngspice `44.2+ds-1` | 설치는 불필요, GUI 스모크는 레인 |
+| LTspice `24.0.12.0` | `make install-ltspice` (사용자 Wine prefix와 `~/.local/bin/ltspice`) | wine·wine64 `10.0~repack-6` | 실제 설치 단계에서 필요 |
+
+두 설치기는 이미 검증된 설치를 다시 쓰지 않습니다. `make install-ltspice`는 검증이 통과하면 재검증만 하고 끝나며, 미설치·검증 실패로 실제 설치에 들어갈 때만 DISPLAY를 요구합니다(없으면 다운로드 전에 exit 2).
+
+```bash
+# 레인은 open과 run 모두 16G로 실행한다
+ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/instance.sh \
+  open kicad-konnect-sim --backend visible-xvfb --size 1600x1000x24
+
+# LTspice 실제 설치: Wine prefix와 래퍼가 실제 HOME 아래라 --host-home 필수
+ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/instance.sh \
+  run kicad-konnect-sim -- run-in-workspace.sh --wait --host-home --cwd "$PWD" -- \
+  make install-ltspice
+
+# 재검증은 레인 밖에서 실행
+make sim-runtime-verify
+make sim-verify
+```
+
+- `run-in-workspace.sh`는 호출마다 레인 slice의 `MemoryMax`를 `ACUW_LANE_MEMORY_MAX`(없으면 기본 8G)로 다시 설정합니다. open에만 16G를 주고 run에서 빠뜨리면 같은 레인의 KiCad까지 8G로 내려가 2026-10-06 OOM 조건이 돌아옵니다. 2026-10-22에도 env 없이 실행한 LTspice 배치와 첫 `qucs-s --help`가 `MemoryMax=8G` scope에서 돌았습니다.
+- Qt 앱(Qucs-S)에는 `--expect-window`를 쓰지 않습니다. 창을 찾지 못하면 실행기가 앱 프로세스를 정리합니다. 백그라운드로 띄운 뒤 `capture.sh`로 확인합니다. `--wait`와 `--expect-window`는 원래 함께 쓸 수 없습니다.
+- `--host-home`은 실제 HOME을 씁니다. KiCad 레인의 프로젝트별 `XDG_CONFIG_HOME`과 달리 Qucs-S는 `~/.config/qucs/qucs_s.conf`를 만들고 `~/.cache/qucs-s/`를 실행마다 덮어씁니다. 첫 실행의 "Set simulator" 대화상자는 `/usr/bin/ngspice`를 자동 감지합니다.
+- 새 레인이 DISPLAY(100~199)·포트(VNC 5910+/noVNC 6081+/CDP 9223+)를 할당받지 못하면 `instance.sh list`에서 이 프로젝트가 연 실행 중 레인을 찾아 재사용합니다(2026-10-22: `kicad-standard-quality`, `:188`). 실행 중 레인에는 `run-in-workspace.sh --no-start`를 붙여 꺼진 레인을 자동 기동하지 않게 합니다. `gc --reclaim`은 브라우저 프로필까지 지우는 비가역 동작이므로 `--dry-run`으로 대상을 먼저 보고, 남이 연 레인은 회수·중지하지 않습니다.
+- LTspice 배치 로그는 ASCII·CRLF이므로 `tr -d '\r'`로 읽습니다. Qucs-S가 만든 넷리스트는 AppImage 임시 마운트 경로의 `.INCLUDE`를 포함하므로 외부 ngspice로 다시 실행하지 않습니다. 재현은 `qucs-s -n -i <id>.sch -o <id>.dat --ngspice --run`으로 합니다.
+
+`make sim-runtime-verify`의 `ngspice --version` 줄은 표시용입니다. ngspice 존재와 패키지 버전은 Qucs-S `--verify-only`의 `dpkg-query` 검사가 게이트합니다. KiCad 번들 ngspice 45.2는 `make runtime-verify`의 KiCad manifest 검사 범위입니다. 이 명령들의 성공은 설치 무결성 판정이며 회로 설계 승인이 아닙니다.
 아래 내용은 8월 설치 당시의 원기록이며 그때의 버전·DRC 수치는 현재 개선판 결과와 혼합하지 않습니다.
 
 ## 2026-08-10 설치 기록 (이력, 현재판 아님)

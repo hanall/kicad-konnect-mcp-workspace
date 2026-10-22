@@ -5,7 +5,11 @@
       "args": [
         "--config",
         "config/konnect.toml"
-      ]
+      ],
+      "env": {
+        "KONNECT_GUI_SYNC": "1",
+        "KONNECT_SIM": "1"
+      }
     }
   }
 }

@@ -1,0 +1,23 @@
+* 03 non-inverting op amp, KiCad built-in single-pole model
+VCC vcc 0 DC 15
+VEE vee 0 DC -15
+VIN in 0 DC 0 SIN(0 0.1 1k) AC 1
+X1 in inn vcc vee out kicad_builtin_opamp POLE=20 GAIN=20k VOFF=0 ROUT=10
+R1 inn 0 1k
+R2 out inn 9k
+.subckt kicad_builtin_opamp in+ in- vcc vee out params: POLE=20 GAIN=20k VOFF=10m ROUT=10
+  Voff in+ inoff dc {VOFF}
+  G10 0 int inoff in- 100u
+  R1 int 0 {GAIN/100u}
+  C1 int 0 {1/(6.28*(GAIN/100u)*POLE)}
+  Eout 2 0 int 0 1
+  Rout 2 out {ROUT}
+  Elow lee 0 vee 0 1
+  Ehigh lcc 0 vcc 0 1
+  Dlow lee int Dlimit
+  Dhigh int lcc Dlimit
+  .model Dlimit D N=0.01
+.ends
+.tran 1u 3m
+.meas tran vout_pk_1k MAX V(out) FROM 2m TO 3m
+.end

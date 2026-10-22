@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "product": "LTspice",
+  "vendor": "Analog Devices Inc.",
+  "version": "24.0.12.0",
+  "retrieved_at": "2026-10-22T16:54:00+09:00",
+  "license": "ADI LTspice 사용권 (무료, 비공개 소스, 설치 시 동의)",
+  "source": {
+    "page": "https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html",
+    "linux_faq": "https://github.com/analogdevicesinc/ltspice-reference/blob/main/ai_ref/FAQ-AND-TIPS.md",
+    "msi_url": "https://ltspice.analog.com/download/latest/LTspice64.msi",
+    "msi_url_note": "latest 고정 URL이라 파일이 바뀔 수 있다. 설치 스크립트는 아래 SHA256과 불일치하면 중단한다."
+  },
+  "assets": {
+    "LTspice64.msi": {
+      "size": 82139136,
+      "sha256": "62a9f20b630738e6ade20a37551baa91b20760bfb718807d8a2be4caa3421a36",
+      "http_last_modified": "2024-04-19T04:24:45Z",
+      "msi_product_version": "24.0.12.0",
+      "sha256_sources": ["local sha256sum after download"]
+    }
+  },
+  "signature": null,
+  "signature_note": "MSI Authenticode 서명은 로컬 검증 도구가 없어 검증하지 않았다. 출처는 ADI 공식 다운로드 호스트(ltspice.analog.com)이며 HTTPS로 받았다.",
+  "runtime": {
+    "layer": "Wine",
+    "wine_source": "Debian 13 공식 저장소",
+    "wine_packages": ["wine 10.0~repack-6", "wine64 10.0~repack-6", "wine32:i386 10.0~repack-6"],
+    "wineprefix": "~/.local/share/wineprefixes/ltspice",
+    "winearch": "win64",
+    "entrypoints": ["~/.local/bin/ltspice"],
+    "scope": "사용자 홈 전용, 시스템 전역 변경은 Debian wine 패키지 설치뿐"
+  },
+  "age_gate": {
+    "policy_days": 7,
+    "age_days_at_approval": 916,
+    "status": "pass"
+  },
+  "approval": {
+    "status": "approved",
+    "approved_at": "2026-10-22",
+    "scope": "wine 전체(wine32 포함) apt 설치와 LTspice64.msi 직접 URL 다운로드 설치",
+    "source": "사용자 명시 승인 (그릴링 2라운드 Q3, 3라운드 Q10, 2026-10-22)",
+    "exception": "공급망 지침 §3.1.6 직접 URL 설치 기본 금지에 대한 사용자 승인 예외. ADI는 공식 Linux 배포판을 제공하지 않으며 Wine 실행을 공식 FAQ에서 안내한다.",
+    "alternatives_reviewed": [
+      "보류: ADI 부품 모델이 필요한 회로가 생길 때 설치",
+      "영구 제외: ADI 모델을 ngspice 호환 .lib로만 활용",
+      "Windows 네이티브: 사용자 환경에 Windows PC/VM 없음"
+    ]
+  }
+}

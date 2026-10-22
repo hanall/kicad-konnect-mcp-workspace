@@ -1,0 +1,9 @@
+* 04 half-wave rectifier
+V1 in 0 SIN(0 10 1k)
+D1 in out DVAL
+RL out 0 1k
+.model DVAL D(IS=1e-14 N=1 RS=0 CJO=0)
+.tran 1u 2m
+.meas tran vout_pk MAX V(out) FROM 0 TO 2m
+.meas tran vf_pk_derived PARAM 10-vout_pk
+.end

@@ -1,0 +1,8 @@
+* 05 precharge inrush
+V1 in 0 PULSE(0 48 0 1u 1u 10 20)
+RPRE in bus 47
+CBUS bus 0 4700u
+B1 p 0 V=i(V1)*i(V1)*47
+B2 ia 0 V=-i(V1)
+.tran 100u 3
+.end

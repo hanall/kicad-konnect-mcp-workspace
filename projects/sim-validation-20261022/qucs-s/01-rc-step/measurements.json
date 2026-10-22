@@ -1,0 +1,56 @@
+{
+  "id": "01-rc-step",
+  "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/01-rc-step.dat.ngspice",
+  "dataset_header": "<Qucs Dataset 26.1.1>",
+  "dataset_vectors": [
+    "time",
+    "tran.v(in)",
+    "tran.v(out)"
+  ],
+  "independent_points": {
+    "time": 5023
+  },
+  "results": [
+    {
+      "name": "v_at_tau",
+      "kind": "FIND",
+      "theory": 3.1606027941427883,
+      "value": 3.1606019434905184,
+      "unit": "V",
+      "err_rel": 2.6914241534348357e-07,
+      "pass": true,
+      "note": "tran.v(out) at 0.001 s (linear interpolation); tol_rel=0.02"
+    },
+    {
+      "name": "v_at_3tau",
+      "kind": "FIND",
+      "theory": 4.75106465816068,
+      "value": 4.751064584526592,
+      "unit": "V",
+      "err_rel": 1.5498439498968437e-08,
+      "pass": true,
+      "note": "tran.v(out) at 0.003 s (linear interpolation); tol_rel=0.02"
+    },
+    {
+      "name": "t_rise_10_90",
+      "kind": "TRIG_TARG",
+      "theory": 0.0021972245773362194,
+      "value": 0.0021972244231137127,
+      "unit": "s",
+      "err_rel": 7.018968762584503e-08,
+      "pass": true,
+      "note": "tran.v(out) RISE=1: t(4.5) - t(0.5) = 0.0023025855259856845 - 0.00010536110287197182; tol_rel=0.02"
+    }
+  ],
+  "all_pass": true,
+  "alt_dataset": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/cli-run/01-rc-step.cli-run.dat",
+    "all_pass": true,
+    "values": [
+      3.1606019434905184,
+      4.751064584526592,
+      0.0021972244231137127
+    ],
+    "max_rel_diff_vs_gui": 0.0
+  }
+}

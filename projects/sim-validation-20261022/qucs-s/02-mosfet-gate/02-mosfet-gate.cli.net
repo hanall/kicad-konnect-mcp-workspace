@@ -1,0 +1,21 @@
+* Qucs 26.1.1  /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/02-mosfet-gate.sch
+.INCLUDE "/tmp/.mount_Qucs-SAALNmH/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+VG gsrc  0 PULSE(0 10 0 1n 1n 50u 100u)
+RG gsrc  g 100
+CG g  0 10n
+M1 d  g  0  0 NM1 W=100u L=100u
+RL d  vdd 100
+VDD vdd  0 DC 12
+
+.model NM1 NMOS(LEVEL=1 VTO=2 KP=0.5 LAMBDA=0 TOX=1e-7 CGSO=0 CGDO=0 CBD=0 CBS=0)
+
+.control
+
+tran 1e-09 2e-05 0 
+write spice4qucs.tr1.plot v(d) v(g) v(gsrc) v(vdd)
+destroy all
+reset
+
+exit
+.endc
+.END

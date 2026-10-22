@@ -1,0 +1,57 @@
+{
+ "id": "03-opamp-noninv",
+ "results": [
+  {
+   "name": "vout_pk_1k",
+   "kind": "MAX",
+   "theory": 0.999186924427368,
+   "unit": "V",
+   "console_value": 0.999185,
+   "csv_value": 0.999185,
+   "csv_note": "CSV 열 V(out), [2m, 3m] 최대(경계 보간 포함)",
+   "csv_vs_console_rel": 0.0,
+   "value": 0.999185,
+   "value_source": "console_text",
+   "err_rel": 1.9259933461591597e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "gain_db_10hz",
+   "kind": "AC_FIND_DB",
+   "theory": 19.995653799782048,
+   "unit": "dB",
+   "console_value": 19.99565,
+   "csv_value": 19.9957,
+   "csv_note": "CSV 열 V(out) (게인), frequency=10 선형 보간",
+   "csv_vs_console_rel": 2.500543868196688e-06,
+   "value": 19.99565,
+   "value_source": "console_text",
+   "err_abs": 3.7997820463431253e-06,
+   "err_rel": 1.9003039782497848e-07,
+   "pass": true,
+   "tol": "abs 0.17"
+  },
+  {
+   "name": "f_3db",
+   "kind": "AC_WHEN_DB",
+   "theory": 39959.771783613694,
+   "unit": "Hz",
+   "console_value": 39864.6,
+   "csv_value": 39865.40150260027,
+   "csv_note": "CSV 열 V(out) (게인), FALL=1 교차 선형 보간",
+   "csv_vs_console_rel": 2.0105622539008975e-05,
+   "value": 39864.6,
+   "value_source": "console_text",
+   "err_rel": 0.002381689868727503,
+   "pass": true,
+   "tol": "rel 0.02"
+  }
+ ],
+ "console_failed_lines": [],
+ "console_values": {
+  "vout_pk_1k": 0.999185,
+  "f_3db": 39864.6,
+  "gain_db_10hz": 19.99565
+ }
+}

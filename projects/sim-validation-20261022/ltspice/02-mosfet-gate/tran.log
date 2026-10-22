@@ -1,0 +1,17 @@
+LTspice 24.0.12 for Windows
+Circuit: * 02 MOSFET gate drive switching
+Start Time: Thu Oct 22 17:19:48 2026
+solver = Normal
+Maximum thread count: 64
+tnom = 27
+temp = 27
+method = modified trap
+Direct Newton iteration for .op point succeeded.
+
+vgs_at_tau: v(g)=6.31731 at 1e-06
+t_vth: v(g)=2 AT 2.2383e-07
+vds_on: v(d)=0.0299812 at 1.5e-05
+id_on_derived: (12-vds_on)/100=0.1197
+
+Total elapsed time: 0.016 seconds.
+

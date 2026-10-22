@@ -1,0 +1,9 @@
+* 01 RC step response
+V1 in 0 PULSE(0 5 0 1n 1n 10m 20m)
+R1 in out 1k
+C1 out 0 1u
+.tran 1u 5m
+.meas tran v_at_tau FIND V(out) AT 1m
+.meas tran v_at_3tau FIND V(out) AT 3m
+.meas tran t_rise_10_90 TRIG V(out) VAL=0.5 RISE=1 TARG V(out) VAL=4.5 RISE=1
+.end

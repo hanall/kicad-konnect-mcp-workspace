@@ -1,0 +1,36 @@
+{
+ "id": "04-diode-rectifier",
+ "results": [
+  {
+   "name": "vout_pk",
+   "kind": "MAX",
+   "theory": 9.287238242074574,
+   "unit": "V",
+   "console_value": 9.287223,
+   "csv_value": 9.28722,
+   "csv_note": "CSV 열 V(out), [0, 2m] 최대(경계 보간 포함)",
+   "csv_vs_console_rel": 3.2302443900950323e-07,
+   "value": 9.287223,
+   "value_source": "console_text",
+   "err_rel": 1.6411848364001321e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "vf_pk_derived",
+   "kind": "DERIVED",
+   "theory": 0.7127617579254255,
+   "unit": "V",
+   "value": 0.7127770000000009,
+   "value_source": "derived",
+   "err_rel": 2.138452913037324e-05,
+   "pass": true,
+   "tol": "rel 0.02",
+   "formula": "10 - vout_pk"
+  }
+ ],
+ "console_failed_lines": [],
+ "console_values": {
+  "vout_pk": 9.287223
+ }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "product": "Qucs-S",
+  "version": "26.1.1",
+  "tag": "26.1.1",
+  "published_at": "2026-04-26T13:20:34Z",
+  "retrieved_at": "2026-10-22T16:51:00+09:00",
+  "license": "GPL-2.0-or-later",
+  "source": {
+    "page": "https://ra3xdh.github.io/",
+    "repository": "https://github.com/ra3xdh/qucs_s",
+    "release_api": "https://api.github.com/repos/ra3xdh/qucs_s/releases/tags/26.1.1",
+    "asset_base_url": "https://github.com/ra3xdh/qucs_s/releases/download/26.1.1"
+  },
+  "assets": {
+    "Qucs-S-26.1.1-linux-x86_64.AppImage": {
+      "size": 43526648,
+      "sha256": "a86ab951118bfdffc8acfda8893cde0e2aeedc7129cc73978ae7d16761ec5cb5",
+      "sha256_sources": [
+        "GitHub releases API asset digest",
+        "release asset hashes.sha256",
+        "local sha256sum after download"
+      ]
+    },
+    "hashes.sha256": {
+      "size": 670,
+      "sha256": "4bca7925f73bd7926cb6cbc966a77211c84deeb6da19345241f5a8b09f5f934e"
+    }
+  },
+  "signature": null,
+  "signature_note": "Qucs-S 릴리스는 minisign/GPG 서명을 제공하지 않는다. AppImage SHA256을 GitHub API digest와 hashes.sha256 두 출처로 교차 검증한다.",
+  "runtime": {
+    "format": "AppImage type 2 (FUSE)",
+    "qt": "Qt6 (번들)",
+    "glibc_required": "2.34",
+    "platform_plugins": ["xcb"],
+    "install_root": "/opt/qucs-s/26.1.1",
+    "entrypoints": ["/usr/local/bin/qucs-s"]
+  },
+  "engine": {
+    "ngspice": {
+      "bundled": false,
+      "source": "Debian 13 공식 저장소",
+      "package": "ngspice",
+      "version": "44.2+ds-1",
+      "note": "AppImage는 ngspice를 번들하지 않는다. Qucs-S 25.2.0 이후 마이크로스트립 해석은 ngspice 45 이상을 요구하므로 Debian 44.2에서는 그 기능만 제한된다."
+    }
+  },
+  "age_gate": {
+    "policy_days": 7,
+    "age_days_at_approval": 179,
+    "status": "pass"
+  },
+  "approval": {
+    "status": "approved",
+    "approved_at": "2026-10-22",
+    "scope": "Qucs-S 26.1.1 AppImage를 /opt/qucs-s/26.1.1에 고정 설치",
+    "source": "사용자 명시 승인 (그릴링 1라운드 Q1, 2026-10-22)",
+    "alternatives_reviewed": [
+      "OBS home:ra3xdh Debian_13 저장소 26.1.1-1: 개인 저장소 서명키(69B1 C091 6FDB 15A8 7417 43E8 184B 98BE 3E68 CD11)를 apt 신뢰 체인에 영구 추가하고 자동 갱신됨",
+      "Flathub io.github.ra3xdh.qucs_s 26.1.1: flatpak 런타임 신규 설치 필요, Unverified 표시, ngspice 47 번들",
+      "보류: KiCad 10.0.6 내장 시뮬레이터(ngspice 45.2 번들)만 사용"
+    ]
+  }
+}

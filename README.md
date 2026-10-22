@@ -27,6 +27,8 @@ MCP client
     v
 scripts/run-konnect.sh
     |
+    +-- KONNECT_GUI_SYNC=1: scripts/konnect-mcp-gui.py 중계 (+1 도구)
+    +-- KONNECT_SIM=1: scripts/konnect-mcp-sim.py 중계 (+4 도구)
     +-- project-isolated HOME
     |
     v
@@ -39,9 +41,33 @@ KiCad 10 PCB Editor   kicad-cli
     +----------+----------+
                v
  schematic / PCB / ERC / DRC / Gerber / drill / BOM / position
+               |
+               | kicad-cli sch export netlist --format spice
+               v
+ SPICE netlist -> ngspice 44.2 / KiCad 번들 ngspice 45.2 / LTspice(Wine) / Qucs-S
 ```
 
 ## 빠른 시작
+
+### 프로젝트 독립 회로도 품질 스킬
+
+[`skills/kicad-schematic-quality/`](skills/kicad-schematic-quality/SKILL.md)는 요구·전기·시각·증거 검증을 분리하는 표준 스킬 정본입니다. Claude와 Codex 진입점은 `.claude/skills/`와 `.agents/skills/`의 상대 링크로 같은 패키지를 읽습니다. 다른 프로젝트에는 패키지 폴더를 복사하고 그 프로젝트의 권한·핀 원문·설계 계약·도구 경로를 입력합니다. 제품 정격이나 기존 프로젝트의 GUI 승인은 자동 승계하지 않습니다.
+
+일반/SMPS profile, 계획 양식, 안전 MCP 어댑터, native 증거 수집기와 정적 검증기를 포함합니다. 기존 세 스킬의 교정은 [패키지 내부 오버레이](skills/kicad-schematic-quality/references/legacy-skill-overrides.md)에 있으며 글로벌 원문을 덮어쓰지 않습니다. 현재 판본은 **v0.1 candidate**이고 검증된 지원 범위는 동일 패키지 SHA의 실행 receipt로만 판단합니다. [구축·검증 계획](docs/agents/20261012-040121_schematic-quality-standardization-plan.md)을 참조하세요.
+
+```bash
+make test-standard-quality
+```
+
+이 명령은 합성·이식성 회귀입니다. 실제 CAD 작성·GUI 왕복·전페이지 시각 검토 및 전기 정격 검증을 대신하지 않습니다. [사용·설치·안전 원복과 지원 현황](docs/agents/20261012-040121_standard-quality-user-guide.md), [검증 보고서](docs/보고서/20261012-040121_standard-quality.html)를 함께 확인하세요. 원복은 이번 두 상대 링크만 확인 후 해제하고 복사한 패키지는 별도 보존하며, 기존 CAD·글로벌 스킬·계정 설정은 변경하지 않습니다.
+
+### 공유 화면 회로도 편집
+
+사용자가 보는 KiCad GUI 직접 편집은 2026-10-07 영구 승인됐다. MCP에는 선택적 `synchronize_schematic_edit`를 추가했다. 미저장 변경·대화상자를 거부하고, 정상 종료 → 기존 MCP 편집 → 같은 레인 재열기를 한 호출로 조율한다. 잠금 우회나 native 메모리 실시간 편집이 아니다. [안전 인계 계약·사용법·검증 범위](docs/agents/20261007-121257_schematic-gui-sync.md)를 먼저 읽는다.
+
+프로젝트 MCP 등록은 `KONNECT_GUI_SYNC=1`로 이 기능을 켠다. core 도구 수와 upstream binary는 그대로이며 STDIO 중계 도구 1개가 추가된다. 기존 연결은 임의 종료하지 않는다.
+
+### 설치와 기본 검증
 
 ```bash
 git clone --recurse-submodules https://github.com/hanall/kicad-konnect-mcp-workspace.git
@@ -61,6 +87,10 @@ make build
 # 이 Debian 호스트에 고정된 공식 KiCad 10 AppImage 설치 또는 재검증
 ./scripts/install-kicad-appimage.sh
 make runtime-verify
+
+# 회로 시뮬레이터(ngspice/Qucs-S/LTspice) 설치 재검증과 검증 회로 5종 회귀
+make sim-runtime-verify
+make sim-verify
 
 # upstream 테스트와 MCP JSON-RPC smoke
 make test
@@ -122,7 +152,7 @@ Konnect 변경은 해당 submodule에서 테스트·커밋·fork push한 뒤 roo
 | `upstream/kicad/` | KiCad 10.0.6 소스 submodule |
 | `upstream/konnect/` | Konnect 0.13.0+hanall.1 소스 submodule |
 | `projects/` | 우리가 만드는 KiCad 설계 프로젝트 |
-| `config/` | 재현 가능한 Konnect 설정 |
+| `config/` | 재현 가능한 Konnect 설정과 외부 도구 잠금(Freerouting, Qucs-S, LTspice, PCM validator) |
 | `scripts/` | bootstrap, build, 검증, MCP 실행 |
 | `docs/` | 아키텍처, 로드맵, 보안·라이선스 문서 |
 | `.runtime-home/` | 전역 설정을 보호하는 로컬 런타임 상태, Git 제외 |
@@ -142,6 +172,7 @@ Konnect 변경은 해당 submodule에서 테스트·커밋·fork push한 뒤 roo
 - 이 호스트에는 공식 full AppImage 기반 KiCad `10.0.6`가 `/opt/kicad/10.0.6`에 설치되어 있으며, `/usr/local/bin/kicad`와 `kicad-cli` 등 8개 진입점을 제공합니다. Debian 13 기본 APT 후보 `9.0.2`는 설치하지 않습니다.
 - `make runtime-verify`는 AppImage SHA-256, minisign, 46,048개 라이브러리 항목의 고정 manifest, desktop entry와 실제 `kicad-cli --version`을 다시 확인합니다.
 - `make live-acceptance KICAD_PROJECT=... KICAD_BOARD=...`는 실행 중인 KiCad 10 PCB Editor에 Konnect가 실제 IPC로 접속하고, live component 조회와 실제 `kicad-cli` DRC까지 수행합니다. ACUW 실행 절차와 현재 실측은 [`docs/설치-및-ACUW-검증.md`](docs/설치-및-ACUW-검증.md)를 따릅니다.
+- 회로 시뮬레이터는 KiCad 번들 ngspice 45.2에 더해 시스템 ngspice 44.2(apt), Qucs-S 26.1.1(`/opt/qucs-s/26.1.1`), LTspice 24.0.12.0(사용자 Wine prefix)를 2026-10-22에 설치했습니다. `make sim-runtime-verify`가 설치를, `make sim-verify`가 검증 회로 5종을 다시 확인합니다. 사용법은 [Linux 회로 시뮬레이션](#linux-회로-시뮬레이션)을 따릅니다.
 - Konnect는 upstream이 명시한 beta 소프트웨어입니다. Linux는 컴파일·CI 대상이지만 Windows만큼 현장 검증이 축적되지 않았습니다.
 
 ## 개선판 검증과 사용 경계
@@ -165,3 +196,15 @@ Konnect 변경은 해당 submodule에서 테스트·커밋·fork push한 뒤 roo
 - [업그레이드·개선·공개 기능 검증](docs/보고서/20261006-125005_kicad-konnect-upgrade-validation.html)
 - 정상 경로 228/228 및 meta 8/8, schema·거부 입력 1,017/1,017을 확인했습니다.
 - 전면 무결성 게이트는 rc 3으로 미통과입니다. 재조회 61건, 원본 보존 96건, 외부 실행 113건의 명시적 증거 공백과 sync 하네스 rc1/독립 재검증 rc0을 보고서에 구분했습니다.
+
+## Linux 회로 시뮬레이션
+
+KiCad 10.0.6 AppImage는 ngspice 45.2를 번들하므로 내장 시뮬레이터는 추가 설치 없이 동작한다. 2026-10-22 사용자 승인으로 시스템 ngspice 44.2(apt), Qucs-S 26.1.1(AppImage 고정 설치), LTspice 24.0.12(Wine)를 추가했다. 설치 재검증은 `make sim-runtime-verify`, 검증 회로 5종 회귀는 `make sim-verify`다. 계약과 제약은 [`docs/agents/20261022-172859_circuit-simulators-linux.md`](docs/agents/20261022-172859_circuit-simulators-linux.md), 검증 결과는 [보고서](docs/보고서/20261022-172859_circuit-simulators-linux.html)를 참조한다.
+
+AI는 Konnect MCP의 시뮬레이션 중계 도구 4종(`KONNECT_SIM=1`, 프로젝트 `.mcp.json`·`.codex/config.toml` 기본 활성)으로 사용자 대신 전 과정을 수행한다: `list_simulation_engines` → `set_simulation_model`(회로도 Sim 필드) → `export_spice_netlist`(모델 미할당·include 진단) → `run_spice_simulation`(해석·측정·이론값 판정·파형 CSV). 작업 절차와 엔진 사용법은 프로젝트 스킬 [`skills/kicad-simulation/`](skills/kicad-simulation/SKILL.md), 도구 계약은 [`docs/agents/20261022-172859_simulation-mcp-tools.md`](docs/agents/20261022-172859_simulation-mcp-tools.md), 회귀는 `make test-sim-mcp`다.
+
+```bash
+make sim-runtime-verify   # ngspice·Qucs-S·LTspice 설치 상태
+make sim-verify           # 검증 회로 5종 ngspice 회귀
+make test-sim-mcp         # 시뮬레이션 MCP 중계 계약 11건 + 체인 스모크
+```

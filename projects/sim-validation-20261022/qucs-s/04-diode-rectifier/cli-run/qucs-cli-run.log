@@ -1,0 +1,7 @@
+[ai-cu] 레인 메모리 상한 적용: slice=acuw_lane_a38f52f252bdc6891e8db68cddfc3eba72792f0e.slice, scope=acuw-lane-xvfb-x11-188-4024284-3106517671.scope, MemoryMax=16G
+[ai-cu] foreground 실행: DISPLAY=:188, cwd=/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/cli-run, DBUS=host
+QGuiApplication::font(): no QGuiApplication instance and no application font set.
+QGuiApplication::font(): no QGuiApplication instance and no application font set.
+Warning: QFont::fromString: Invalid description ',-1,-1,5,400,0,0,0,0,0,0,0,0,0,0,1' (:0, )
+Warning: QFont::fromString: Invalid description ',-1,-1,5,400,0,0,0,0,0,0,0,0,0,0,1' (:0, )
+Warning: QFont::fromString: Invalid description '(empty)' (:0, )

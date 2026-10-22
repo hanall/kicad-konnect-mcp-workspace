@@ -1,0 +1,17 @@
+.title KiCad schematic
+.model __D1 D
++           is=10f
++           rs=0
++           n=1
++           cjo=0
+.save all
+.probe alli
+.probe p(D1)
+.probe p(V1)
+.probe p(R1)
+.meas tran vout_pk MAX v(out) FROM=0 TO=2m
+.tran 1u 2m
+D1 in out __D1
+V1 in GND DC 0 SIN( 0 10 1k ) 
+R1 out GND 1k
+.end

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "product": "KiCad",
+  "version": "10.0.6",
+  "variant": "full-with-3d-packages",
+  "architecture": "x86_64",
+  "format": "official AppImage",
+  "release_date": "2026-08-29",
+  "installed_at": "2026-10-06T10:14:21+09:00",
+  "source_page": "https://www.kicad.org/download/linux/",
+  "source_url": "https://mirror.tuna.tsinghua.edu.cn/kicad/appimage/stable/kicad-10.0.6-x86_64.AppImage.tar",
+  "signature_url": "https://mirror.tuna.tsinghua.edu.cn/kicad/appimage/stable/kicad-10.0.6-x86_64.AppImage.minisig",
+  "signature": {
+    "algorithm": "minisign",
+    "public_key_id": "40D6F856001D8BB2",
+    "public_key": "RWSyix0AVvjWQGZChX64ywBpE5XqV1Eg+ZXYHR3Y27md9EoZ0AtVr9i9",
+    "verification": "passed",
+    "trusted_comment": "KiCad-10.0.6-x86_64.AppImage"
+  },
+  "sha256": {
+    "tar": "c05fa6760be64aaf55ff476911ce81272b4efb6241f4d7e2b9fdcdc7efbf5808",
+    "appimage": "723b6890c60a5da962d3f4d07e0dba0f3dd2f3deb50d303f06a3d8a2ab7cf7f5"
+  },
+  "install_root": "/opt/kicad/10.0.6",
+  "entrypoints": [
+    "/usr/local/bin/kicad",
+    "/usr/local/bin/kicad-cli",
+    "/usr/local/bin/pcbnew",
+    "/usr/local/bin/eeschema",
+    "/usr/local/bin/gerbview",
+    "/usr/local/bin/bitmap2component",
+    "/usr/local/bin/pcb_calculator",
+    "/usr/local/bin/pl_editor"
+  ],
+  "libraries": {
+    "roots": [
+      "symbols",
+      "footprints",
+      "3dmodels"
+    ],
+    "manifest": "KICAD-LIBRARIES.json",
+    "manifest_sha256": "89fa035615628d35b71276799e3318b85a889581a5c64b57c2937ad95c9cde23",
+    "verification": "passed"
+  },
+  "reason": "Debian 13 기본 APT의 KiCad 9.0.2 대신 Konnect v0.13.0 IPC 계약과 일치하는 KiCad 10.0.6가 필요함",
+  "alternatives_reviewed": [
+    "Debian 13 APT 9.0.2: Konnect의 KiCad 10 요구사항 불충족",
+    "Flatpak: host kicad-cli와 IPC socket 연동이 간접적",
+    "source build: 공식 AppImage보다 설치 재현성과 공급망 검증 비용이 큼"
+  ],
+  "approval": {
+    "status": "approved",
+    "approved_at": "2026-10-06",
+    "scope": "KiCad 10.0.6 시스템 설치",
+    "source": "사용자 명시 승인"
+  }
+}

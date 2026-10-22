@@ -1,0 +1,41 @@
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+Using SPARSE 1.3 as Direct Linear Solver
+Initial Transient Solution
+--------------------------
+Node                                   Voltage
+----                                   -------
+probe_int_in_d1_1                            0
+probe_int_probe_int_out_d1_d1_2    -7.35712e-29
+probe_int_out_d1                  -7.35712e-29
+d1probe_int_vref                  -3.67856e-29
+d1:power                           1.05182e-30
+in                                           0
+out                               -7.35712e-29
+probe_int_in_v1_1                            0
+probe_int_gnd_v1_2                           0
+v1probe_int_vref                             0
+v1:power                                     0
+probe_int_out_r1_1                -7.35712e-29
+probe_int_probe_int_gnd_r1_r1_2               0
+probe_int_gnd_r1                             0
+r1probe_int_vref                  -3.67856e-29
+r1:power                          -1.05182e-30
+bprobe_int_r1power#branch                    0
+r1:probe_int_n1#branch            -7.35712e-32
+r1:probe_int_n2#branch             7.35712e-32
+bprobe_int_r1vref#branch                     0
+bprobe_int_v1power#branch                    0
+v1:probe_int_n1#branch             7.35712e-32
+v1:probe_int_n2#branch            -7.35712e-32
+bprobe_int_v1vref#branch                     0
+bprobe_int_d1power#branch                    0
+d1:probe_int_a#branch             -7.35712e-32
+d1:probe_int_c#branch              7.35712e-32
+bprobe_int_d1vref#branch                     0
+r1#branch                         -7.35712e-32
+v1#branch                          7.35712e-32
+d1#branch                         -7.35712e-32
+ Reference value :  0.00000e+00
+No. of Data Rows : 2008
+Measurements for Transient Analysis
+vout_pk             =  9.287223e+00 at=  1.250280e-03

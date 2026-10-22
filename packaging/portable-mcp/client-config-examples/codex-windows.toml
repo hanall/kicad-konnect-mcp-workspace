@@ -1,0 +1,4 @@
+# 기존 설정을 덮지 말고 command 경로를 본인 PC에 맞춰 이 항목만 추가합니다.
+[mcp_servers.konnect]
+command = 'C:\Tools\Konnect-MCP-Portable\Start-Konnect.exe'
+args = []

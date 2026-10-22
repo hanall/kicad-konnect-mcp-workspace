@@ -1,0 +1,322 @@
+{
+  "spec": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/spec/spec.json",
+  "circuits": [
+    {
+      "id": "01-rc-step",
+      "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/01-rc-step.dat.ngspice",
+      "dataset_header": "<Qucs Dataset 26.1.1>",
+      "dataset_vectors": [
+        "time",
+        "tran.v(in)",
+        "tran.v(out)"
+      ],
+      "independent_points": {
+        "time": 5023
+      },
+      "results": [
+        {
+          "name": "v_at_tau",
+          "kind": "FIND",
+          "theory": 3.1606027941427883,
+          "value": 3.1606019434905184,
+          "unit": "V",
+          "err_rel": 2.6914241534348357e-07,
+          "pass": true,
+          "note": "tran.v(out) at 0.001 s (linear interpolation); tol_rel=0.02"
+        },
+        {
+          "name": "v_at_3tau",
+          "kind": "FIND",
+          "theory": 4.75106465816068,
+          "value": 4.751064584526592,
+          "unit": "V",
+          "err_rel": 1.5498439498968437e-08,
+          "pass": true,
+          "note": "tran.v(out) at 0.003 s (linear interpolation); tol_rel=0.02"
+        },
+        {
+          "name": "t_rise_10_90",
+          "kind": "TRIG_TARG",
+          "theory": 0.0021972245773362194,
+          "value": 0.0021972244231137127,
+          "unit": "s",
+          "err_rel": 7.018968762584503e-08,
+          "pass": true,
+          "note": "tran.v(out) RISE=1: t(4.5) - t(0.5) = 0.0023025855259856845 - 0.00010536110287197182; tol_rel=0.02"
+        }
+      ],
+      "all_pass": true,
+      "alt_dataset": {
+        "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/cli-run/01-rc-step.cli-run.dat",
+        "all_pass": true,
+        "values": [
+          3.1606019434905184,
+          4.751064584526592,
+          0.0021972244231137127
+        ],
+        "max_rel_diff_vs_gui": 0.0
+      }
+    },
+    {
+      "id": "02-mosfet-gate",
+      "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/02-mosfet-gate.dat.ngspice",
+      "dataset_header": "<Qucs Dataset 26.1.1>",
+      "dataset_vectors": [
+        "time",
+        "tran.v(d)",
+        "tran.v(g)",
+        "tran.v(gsrc)",
+        "tran.v(vdd)"
+      ],
+      "independent_points": {
+        "time": 20015
+      },
+      "results": [
+        {
+          "name": "vgs_at_tau",
+          "kind": "FIND",
+          "theory": 6.321205588285577,
+          "value": 6.31812523794267,
+          "unit": "V",
+          "err_rel": 0.0004873042491474922,
+          "pass": true,
+          "note": "tran.v(g) at 1e-06 s (linear interpolation); tol_rel=0.02"
+        },
+        {
+          "name": "t_vth",
+          "kind": "WHEN",
+          "theory": 2.2314355131420975e-07,
+          "value": 2.2371257279673785e-07,
+          "unit": "s",
+          "err_rel": 0.0025500243192188806,
+          "pass": true,
+          "note": "tran.v(g) RISE=1 crossing of 2.0; tol_rel=0.02"
+        },
+        {
+          "name": "vds_on",
+          "kind": "FIND",
+          "theory": 0.02998122655522195,
+          "value": 0.029981238100400934,
+          "unit": "V",
+          "err_rel": 3.85080275541901e-07,
+          "pass": true,
+          "note": "tran.v(d) at 1.5e-05 s (linear interpolation); tol_rel=0.02"
+        },
+        {
+          "name": "id_on_derived",
+          "kind": "DERIVED",
+          "theory": 0.11970018773444778,
+          "value": 0.11970018761899599,
+          "unit": "A",
+          "err_rel": 9.645079861993658e-10,
+          "pass": true,
+          "note": "formula (12 - vds_on)/100; tol_rel=0.02"
+        }
+      ],
+      "all_pass": true,
+      "alt_dataset": {
+        "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/cli-run/02-mosfet-gate.cli-run.dat",
+        "all_pass": true,
+        "values": [
+          6.31812523794267,
+          2.2371257279673785e-07,
+          0.029981238100400934,
+          0.11970018761899599
+        ],
+        "max_rel_diff_vs_gui": 0.0
+      }
+    },
+    {
+      "id": "03-opamp-noninv",
+      "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/03-opamp-noninv.dat.ngspice",
+      "dataset_header": "<Qucs Dataset 26.1.1>",
+      "dataset_vectors": [
+        "ac.gain_db",
+        "ac.v(in)",
+        "ac.v(inn)",
+        "ac.v(out)",
+        "ac.v(vcc)",
+        "ac.v(vee)",
+        "frequency",
+        "time",
+        "tran.v(in)",
+        "tran.v(inn)",
+        "tran.v(out)",
+        "tran.v(vcc)",
+        "tran.v(vee)"
+      ],
+      "independent_points": {
+        "time": 3008,
+        "frequency": 701
+      },
+      "results": [
+        {
+          "name": "vout_pk_1k",
+          "kind": "MAX",
+          "theory": 0.999186924427368,
+          "value": 0.9991849717728,
+          "unit": "V",
+          "err_rel": 1.9542435157037635e-06,
+          "pass": true,
+          "note": "tran.v(out) max over [0.002, 0.003] s; tol_rel=0.02"
+        },
+        {
+          "name": "gain_db_10hz",
+          "kind": "AC_FIND_DB",
+          "theory": 19.995653799782048,
+          "value": 19.995651789756334,
+          "unit": "dB",
+          "err_rel": 1.0052313037616801e-07,
+          "pass": true,
+          "note": "ac.v(out) 20*log10|V| at 10 Hz (log-f interpolation); tol_abs=0.17"
+        },
+        {
+          "name": "f_3db",
+          "kind": "AC_WHEN_DB",
+          "theory": 39959.771783613694,
+          "value": 39864.40924922355,
+          "unit": "Hz",
+          "err_rel": 0.002386463438944096,
+          "pass": true,
+          "note": "ac.v(out) dB FALL=1 crossing of 16.995653799782048 (log-f interpolation); tol_rel=0.02"
+        }
+      ],
+      "all_pass": true,
+      "alt_dataset": {
+        "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/cli-run/03-opamp-noninv.cli-run.dat",
+        "all_pass": true,
+        "values": [
+          0.9991849717728,
+          19.995651789756334,
+          39864.40924922355
+        ],
+        "max_rel_diff_vs_gui": 0.0
+      }
+    },
+    {
+      "id": "04-diode-rectifier",
+      "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/04-diode-rectifier.dat.ngspice",
+      "dataset_header": "<Qucs Dataset 26.1.1>",
+      "dataset_vectors": [
+        "time",
+        "tran.v(in)",
+        "tran.v(out)"
+      ],
+      "independent_points": {
+        "time": 2008
+      },
+      "results": [
+        {
+          "name": "vout_pk",
+          "kind": "MAX",
+          "theory": 9.287238242074574,
+          "value": 9.287223050754,
+          "unit": "V",
+          "err_rel": 1.6357199178968196e-06,
+          "pass": true,
+          "note": "tran.v(out) max over [0, 0.002] s; tol_rel=0.02"
+        },
+        {
+          "name": "vf_pk_derived",
+          "kind": "DERIVED",
+          "theory": 0.7127617579254255,
+          "value": 0.7127769492460008,
+          "unit": "V",
+          "err_rel": 2.131332160619081e-05,
+          "pass": true,
+          "note": "formula 10 - vout_pk; tol_rel=0.02"
+        }
+      ],
+      "all_pass": true,
+      "alt_dataset": {
+        "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/cli-run/04-diode-rectifier.cli-run.dat",
+        "all_pass": true,
+        "values": [
+          9.287223050754,
+          0.7127769492460008
+        ],
+        "max_rel_diff_vs_gui": 0.0
+      }
+    },
+    {
+      "id": "05-precharge",
+      "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/05-precharge.dat.ngspice",
+      "dataset_header": "<Qucs Dataset 26.1.1>",
+      "dataset_vectors": [
+        "time",
+        "tran.v(bus)",
+        "tran.v(ia)",
+        "tran.v(in)",
+        "tran.v(p)"
+      ],
+      "independent_points": {
+        "time": 30023
+      },
+      "results": [
+        {
+          "name": "i_pk",
+          "kind": "MAX",
+          "theory": 1.0212765957446808,
+          "value": 1.021274283889,
+          "unit": "A",
+          "err_rel": 2.2636920206560904e-06,
+          "pass": true,
+          "note": "tran.v(ia) max over [0, 3] s; tol_rel=0.02"
+        },
+        {
+          "name": "p_pk",
+          "kind": "MAX",
+          "theory": 49.02127659574468,
+          "value": 49.02105465785,
+          "unit": "W",
+          "err_rel": 4.5273789279148205e-06,
+          "pass": true,
+          "note": "tran.v(p) max over [0, 3] s; tol_rel=0.02"
+        },
+        {
+          "name": "v_bus_at_tau",
+          "kind": "FIND",
+          "theory": 30.341786823770768,
+          "value": 30.34174684068808,
+          "unit": "V",
+          "err_rel": 1.3177563641428625e-06,
+          "pass": true,
+          "note": "tran.v(bus) at 0.2209 s (linear interpolation); tol_rel=0.02"
+        },
+        {
+          "name": "t_95",
+          "kind": "WHEN",
+          "theory": 0.6617572592280766,
+          "value": 0.6617577514072228,
+          "unit": "s",
+          "err_rel": 7.43745745669008e-07,
+          "pass": true,
+          "note": "tran.v(bus) RISE=1 crossing of 45.599999999999994; tol_rel=0.02"
+        },
+        {
+          "name": "e_r",
+          "kind": "INTEG",
+          "theory": 5.414399999991343,
+          "value": 5.414391756818877,
+          "unit": "J",
+          "err_rel": 1.5224535434246438e-06,
+          "pass": true,
+          "note": "tran.v(p) trapezoidal integral over [0, 3] s; tol_rel=0.02"
+        }
+      ],
+      "all_pass": true,
+      "alt_dataset": {
+        "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/cli-run/05-precharge.cli-run.dat",
+        "all_pass": true,
+        "values": [
+          1.021274283889,
+          49.02105465785,
+          30.34174684068808,
+          0.6617577514072228,
+          5.414391756818877
+        ],
+        "max_rel_diff_vs_gui": 0.0
+      }
+    }
+  ]
+}

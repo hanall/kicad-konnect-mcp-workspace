@@ -1,0 +1,7 @@
+# 경로를 본인 PC에 맞게 고친 뒤 active.toml로 저장합니다.
+transport = "stdio"
+project_dir = "/absolute/path/to/project"
+kicad_cli = "/usr/bin/kicad-cli"
+kicad_binary = "/usr/bin/kicad"
+ipc_address = ""
+log_level = "info"

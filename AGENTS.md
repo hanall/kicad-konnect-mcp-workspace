@@ -16,12 +16,13 @@
 1. `/home/hanol/AI_AGENT_DEPENDENCY_SECURITY_STANDARD.md`를 읽고 새 의존성, 설치, 버전 변경에 적용한다.
 2. `git status --short --branch`와 `git submodule status`로 root와 두 upstream 상태를 확인한다.
 3. `upstreams.lock.json`과 실제 origin, tag, commit이 일치하는지 `make verify`로 확인한다.
+4. 회로 시뮬레이션 작업이면 `make sim-runtime-verify`로 Qucs-S·LTspice 잠금(`config/qucs-s.lock.json`, `config/ltspice.lock.json`)과 설치 매니페스트·SHA·래퍼, 시스템 ngspice 버전을 확인한다. `make verify`는 시뮬레이터 잠금을 검사하지 않는다.
 
 ## 최신 Konnect MCP 사용 필수
 
 - 이 저장소의 에이전트는 **프로젝트에서 최신으로 검증·고정한 Konnect MCP**를 사용한다. 기준은 `upstreams.lock.json`의 `components.konnect.version`과 `commit`이며, 임의의 전역 설치본이나 오래된 연결을 사용하지 않는다. 2026-10-06 현재 기준은 `0.13.0+hanall.1`, commit `94f80350cf67db27b179a06a8f6dbebfe4717927`이다. 이후 업그레이드에서는 잠금 파일의 새 검증값이 우선한다.
 - 실행 경로는 반드시 프로젝트의 `scripts/run-konnect.sh`이며, 프로젝트 `.codex/config.toml` 또는 `.mcp.json`의 `konnect` 등록을 사용한다.
-- **디스크 binary가 최신이라는 사실만으로 현재 MCP 연결도 최신이라고 판단하지 않는다.** 회로 변경 전에 현재 연결의 `get_installation_info`에서 `build.version`, `build.commit`, `runtime.executable_path`를 잠금 파일·프로젝트 release binary와 대조한다. Linux에서는 가능하면 실제 서버 PID의 `/proc/<PID>/exe` SHA-256과 디스크 binary SHA-256도 대조한다.
+- **디스크 binary가 최신이라는 사실만으로 현재 MCP 연결도 최신이라고 판단하지 않는다.** 회로 변경 전에 현재 연결의 `get_installation_info`에서 `build.version`, `build.commit`, `runtime.executable_path`를 잠금 파일·프로젝트 release binary와 대조한다. Linux에서는 가능하면 실제 서버 PID의 `/proc/<PID>/exe` SHA-256과 디스크 binary SHA-256도 대조한다. 회로 시뮬레이션 작업이면 같은 응답의 `simulation_extension`(도구 4종·엔진 목록)이 있는지도 확인하고, 없으면 `KONNECT_SIM=1`이 아닌 구 연결로 본다.
 - `get_installation_info`가 없거나 버전·commit·실행 경로가 다르면 구 연결로 간주하고 **설계 쓰기를 중단**한다. 해당 Konnect 연결을 지원되는 클라이언트 재연결 절차로 갱신한 뒤, 같은 연결에서 버전·commit과 `list_toolboxes`를 다시 확인한다. 새 테스트 프로세스의 성공을 기존 등록 연결의 재시작 성공으로 대신 보고하지 않는다.
 - 재연결 시 다른 세션·다른 MCP 서버·KiCad GUI를 임의 종료하지 않는다. 단일 연결 재시작을 지원하지 않아 공유 daemon 전체에 영향을 주는 방법만 남으면, 영향 범위를 설명하고 별도 승인을 받은 뒤 수행한다.
 - 오래된 도구 목록·글로벌 스킬의 도구 개수보다 **현재 검증된 연결이 반환한 schema와 프로젝트 오버레이**를 우선한다. “최신”을 이유로 공급망 검증이나 잠금 파일 갱신 없이 자동 다운로드·업그레이드하지 않는다.
@@ -31,6 +32,8 @@
 - `upstream/kicad`: 공식 KiCad 원본의 최신 안정 release를 추적하는 read-only 소스다. `.99.0` 개발 태그와 임의 patch는 반영하지 않는다.
 - `upstream/konnect`: `hanall/Konnect` fork의 MCP 구현이다. 공식 `mixelpixx/Konnect`는 `upstream` remote로 유지한다. 변경 시 upstream `CONTRIBUTING.md`, `DEV.md`, `docs/NAMING_CONVENTIONS.md`를 먼저 읽는다.
 - root의 `scripts`, `config`, `docs`, `projects`: 우리 통합 계층이다.
+- 회로 시뮬레이터(시스템 ngspice 44.2·Qucs-S 26.1.1·LTspice 24.0.12·Wine)는 upstream 소스가 아닌 외부 설치 런타임이다. 정본은 `config/qucs-s.lock.json`, `config/ltspice.lock.json`과 각 `INSTALL-MANIFEST.json`이며, KiCad 번들 ngspice 45.2는 `upstreams.lock.json`의 KiCad 10.0.6 AppImage에 속한다. 자동 갱신하지 않는다. 갱신은 새 SHA256·버전·게시일을 잠금 파일과 설치 스크립트 상단 상수에 동시에 반영한 뒤 `make install-qucs-s`/`make install-ltspice`로 수행하며 7일 age gate를 지킨다.
+- `projects/sim-validation-20261022/`는 엔진 검증 fixture다. 사양 정본은 `spec/theory.py`가 생성하는 `spec/spec.json`이며, fixture 회로를 바꾸면 `make sim-verify` 기준선이 함께 바뀐다.
 - upstream tag를 이동시키지 않는다. 업그레이드는 새 tag와 commit을 `upstreams.lock.json`에 동시에 반영한다.
 - KiCad 갱신은 `make check-updates` 후 `make update-kicad`, Konnect 개발 준비는 `make setup-konnect-dev`를 사용한다.
 
@@ -42,26 +45,41 @@
 - Konnect: `make test`
 - MCP: `make mcp-smoke`
 - 설치된 KiCad 10 무결성: `make runtime-verify`
+- 회로 시뮬레이터(ngspice apt, Qucs-S AppImage, LTspice Wine) 설치 상태: `make sim-runtime-verify`, 검증 회로 5종 회귀: `make sim-verify`, 시뮬레이션 MCP 중계 계약: `make test-sim-mcp` ([설치 계약](docs/agents/20261022-172859_circuit-simulators-linux.md), [MCP 도구 계약](docs/agents/20261022-172859_simulation-mcp-tools.md))
+- KiCad 번들 ngspice 45.2 경로 회귀: `python3 scripts/sim-validation-run.py --engine kicad-bundled` (`make sim-verify`는 시스템 ngspice만 실행한다)
+- 시뮬레이션 MCP 중계(`KONNECT_SIM=1`) 도구 4종 계약: `make test-sim-mcp`. `make check-local`의 `make test`는 root Python 시험(`tests/test_sim_validation.py`, `tests/test_sim_mcp_extension.py` 포함)을 돌리지만 `make mcp-smoke`는 중계 env 없이 core만 확인하고, 실제 엔진 회귀(`make sim-verify`)와 설치 검증(`make sim-runtime-verify`)은 포함하지 않는다. 시뮬레이션 중계·엔진·잠금을 바꾸면 이 타깃들을 따로 실행한다.
+- 시뮬레이션 기대값 판정 통과는 그 모델·파라미터·해석 조건 범위의 결과다. ERC/DRC, 제조, 정격·열·EMI, 통전 승인으로 승격하지 않는다.
 - 실제 GUI/IPC: ACUW 전용 레인에서 KiCad PCB Editor를 연 뒤 `make live-acceptance KICAD_PROJECT=... KICAD_BOARD=...`
 - 제조 기능 변경: 가능한 경우 실제 KiCad 10 `kicad-cli`로 ERC, DRC, Gerber, drill 생성과 결과 파일 존재를 함께 확인한다.
 - KiCad GUI/IPC 기능은 KiCad 10 PCB Editor가 실행된 상태에서 별도 통합 테스트로 확인한다.
 
 ## 안전 계약
 
+- **사용자 영구 승인(2026-10-07)**: 「공유 화면의 KiCad GUI에서 직접 편집하세요, 영구 승인함.」 사용자가 보는 AI 공유 창의 KiCad에서 프로젝트·페이지/표제란·심볼·배선 등을 직접 편집·저장할 수 있다. 기존 MCP 전용 규칙의 명시적 예외이며 재승인을 반복 요구하지 않는다. 회로 파일 직접 텍스트 편집, GUI/MCP 동시 쓰기, 살아 있는 편집기 잠금 삭제·우회는 여전히 금지한다. 이 승인은 commit·push·제조 발주·통전 승인이 아니다. 상세는 프로젝트 오버레이를 따른다.
 - 기본 MCP 실행은 반드시 `scripts/run-konnect.sh`를 통한다. 이 실행기는 `.runtime-home`을 사용해 upstream의 최초 실행 installer가 실제 사용자 `~/.claude`를 수정하지 못하게 한다.
 - `.mcp.json`에서 upstream binary를 직접 실행하지 않는다.
 - HTTP transport가 필요하면 loopback(`127.0.0.1`)만 사용한다. 외부 bind는 보안 검토 전 금지한다.
 - Codex는 프로젝트의 `.codex/config.toml`, Claude 계열은 `.mcp.json`을 사용한다. 둘 다 `scripts/run-konnect.sh` 외의 binary를 직접 실행하지 않는다.
 - 회로 파일은 원본 백업과 Git 상태를 확인한 뒤 수정한다.
 - 생성된 Gerber가 DRC 통과를 의미하지 않는다. ERC/DRC/DFM을 별도 gate로 유지한다.
+- 시뮬레이션 중계 도구 중 회로도 쓰기는 `set_simulation_model`뿐이며 내부적으로 core `edit_schematic_component`를 호출해 core 잠금 검사를 그대로 받는다. 공유 화면 KiCad가 같은 회로도를 열고 있으면 이 도구를 직접 호출하지 않고 `synchronize_schematic_edit`의 `edit_schematic_component` operation(`fields`에 `Sim.*`)으로 인계한다. `list_simulation_engines`, `export_spice_netlist`, `run_spice_simulation`은 `.kicad_*`를 쓰지 않는다.
+- 시뮬레이션은 저장된 회로도를 `kicad-cli`가 읽어 넷리스트를 만든다. GUI 미저장 상태나 쓰기 뒤 readback 전에는 실행하지 않는다.
+- 산출물은 `run_spice_simulation`의 기본 `.artifacts/sim-runs/<시각>-<stem>/`에 둔다. `export_spice_netlist`는 `output`을 생략하면 대상 프로젝트 안 `.konnect-sim/`에 쓰므로, 사용자 프로젝트의 Git 상태를 바꾸지 않으려면 `output`을 `.artifacts/` 아래 절대경로로 준다.
+- 제조사 SPICE 모델(.lib/.sub/.sp)은 출처·SHA-256·라이선스·암호화 여부를 기록하고 사용자 승인 뒤 반입한다. 재배포 제한 모델과 시뮬레이터 바이너리를 저장소에 커밋하지 않는다.
+- LTspice·Qucs-S·KiCad 시뮬레이터 GUI와 LTspice 배치는 명명된 ACUW 전용 레인에서만 실행한다(아래 레인 메모리 상한).
 
 ## 공개 API
 
 MCP tool 이름, 입력/출력 schema, config key, environment variable, CLI flag, IPC protobuf는 공개 계약이다. 변경 시 호환성, migration, rollback, 회귀 테스트를 문서화한다.
 
+공유 화면 회로도 안전 인계는 `KONNECT_GUI_SYNC=1`의 `synchronize_schematic_edit`로 제공한다. [계약](docs/agents/20261007-121257_schematic-gui-sync.md)을 먼저 읽고 dry_run revision과 실제 캡처를 검증한다. 이는 정상 종료·MCP 편집·같은 레인 재열기이며 열린 회로도 메모리 수정이나 잠금 우회가 아니다. 미저장/대화상자/다른 문서/낡은 revision은 거부한다. 회귀는 `make test-gui-sync`; 기존 core/GUI 연결은 임의 재시작하지 않는다.
+
+회로 시뮬레이션은 `KONNECT_SIM=1`의 중계 도구 4종(`list_simulation_engines`, `export_spice_netlist`, `set_simulation_model`, `run_spice_simulation`)으로 제공한다. [계약](docs/agents/20261022-172859_simulation-mcp-tools.md)을 먼저 읽는다. 회로도 쓰기는 upstream `edit_schematic_component`만 수행하고, 엔진은 시스템 ngspice·KiCad 번들 ngspice·LTspice(레인)다. 기존 지시어는 제거되고 호출 인자만 적용되며 `timeout_seconds`는 100초 이하다. 회귀는 `make test-sim-mcp`; 되돌리기는 `KONNECT_SIM=0`.
+
 ## 라이선스
 
 root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiCad는 `LICENSE.README`에 적힌 파일별 라이선스를 보존한다. 사업용 비공개 파생/네트워크 서비스는 Konnect의 상용 라이선스 필요 여부를 먼저 검토한다.
+회로 시뮬레이터는 저장소에 포함하지 않는 외부 런타임이며 각자의 라이선스를 따른다. Qucs-S 26.1.1은 GPL-2.0-or-later, LTspice 24.0.12는 ADI 무료 비공개 사용권이다(각 잠금 파일 `license`). 시스템 ngspice 44.2는 Debian `/usr/share/doc/ngspice/copyright` 기준 본체가 BSD-3-clause이고 일부 문서·설정 파일은 CC-BY-SA-4.0·GPL-2+ 등이다. 시뮬레이터 바이너리, Wine prefix, 제조사 모델을 저장소에 커밋·재배포하지 않는다. `scripts/konnect-mcp-sim.py`, `scripts/sim_engines.py`는 root 통합 계층으로 `AGPL-3.0-only`를 따른다.
 
 ## Agent skills
 
@@ -69,6 +87,8 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 
 | 단서 | 먼저 읽을 스킬 |
 |---|---|
+| 회로도 신규 설계·가독성 재작성·승인된 전기 변경·품질 검토 | 프로젝트 정본 [`skills/kicad-schematic-quality/SKILL.md`](skills/kicad-schematic-quality/SKILL.md)를 먼저 읽고 모드를 선택. 현재 실행 조합의 지원은 동일 패키지 SHA의 실제 receipt로 판단 |
+| 회로 시뮬레이션·SPICE 모델·ngspice/LTspice/Qucs-S·동작 검토 | 프로젝트 정본 [`skills/kicad-simulation/SKILL.md`](skills/kicad-simulation/SKILL.md). MCP 도구 4종(`KONNECT_SIM=1`)과 엔진 사용법은 그 references가 정본 |
 | KiCad, 회로도, PCB, `.kicad_*` | `~/.claude/skills/konnect/SKILL.md` |
 | 오류, 고장, 진단, debug | `~/.claude/skills/diagnose/SKILL.md` |
 | 시험 우선, TDD, red-green | `~/.claude/skills/tdd/SKILL.md` |
@@ -79,7 +99,10 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 | 제조·Gerber·발주 파일 | `~/.claude/skills/kicad-manufacture/SKILL.md` |
 | 분석·진단·검증 결과 보고 | `~/.claude/skills/html-report/SKILL.md` |
 
-복수 단서는 `konnect` 안전 규칙을 먼저 읽고 해당 작업 스킬을 이어 적용합니다. `CLAUDE.md`는 `AGENTS.md`의 symlink이므로 별도 사본을 만들지 않습니다.
+회로도 품질 단서가 있으면 프로젝트 품질 스킬의 모드를 먼저 고르고 `konnect` 안전 규칙과 해당 작업 스킬을 이어 적용합니다. 시뮬레이션 단서가 있으면 `konnect` 안전 규칙 다음에 프로젝트 시뮬레이션 스킬을 적용하고, Sim 모델 부착처럼 회로도 쓰기가 필요하면 품질 스킬의 모드를 먼저 고릅니다. 그 외 복수 단서는 `konnect` 안전 규칙부터 적용합니다. `CLAUDE.md`는 `AGENTS.md`의 symlink이므로 별도 사본을 만들지 않습니다.
+
+회로도 품질 작업은 위 프로젝트 정본과 [`기존 스킬 교정`](skills/kicad-schematic-quality/references/legacy-skill-overrides.md)의 C01~C13을 함께 적용합니다. `konnect`, `kicad-schematic`, `kicad-review`의 고정 도구 수·잘못된 배선 인자·핀 극성·누락 검사를 PASS로 보는 설명은 현재 schema와 이 교정으로 대체하며, 외부 글로벌 원문은 수정하지 않습니다. `.claude/skills/kicad-schematic-quality`와 `.agents/skills/kicad-schematic-quality`는 같은 패키지의 상대 링크입니다. `make test-standard-quality`는 합성·이식성 회귀이며 실제 CAD/GUI·제조/통전 합격을 뜻하지 않습니다. [구축 범위와 검증 요구](docs/agents/20261012-040121_schematic-quality-standardization-plan.md), [사용·원복·현재 지원표](docs/agents/20261012-040121_standard-quality-user-guide.md)를 따릅니다.
+회로 시뮬레이션 작업은 [`kicad-simulation`](skills/kicad-simulation/SKILL.md)과 그 패키지의 [시뮬레이션 교정](skills/kicad-simulation/references/legacy-skill-overrides.md) C14~C21을 함께 적용합니다. 글로벌 `konnect`·`kicad-schematic`·`kicad-review`에는 SPICE·시뮬레이션 지침이 없으므로(2026-10-22 확인) 그 흐름이 검증·저장·verdict로 끝나는 지점에 이 스킬을 잇습니다. C14~C21은 품질 패키지 identity를 바꾸지 않도록 `kicad-schematic-quality` 밖에 둡니다. `.claude/skills/kicad-simulation`과 `.agents/skills/kicad-simulation`은 같은 패키지의 상대 링크입니다.
 
 <!-- SKILLS-INDEX:START -->
 <!-- Auto-generated index of skills available at ~/.claude/skills/. Regenerate with `~/.local/bin/inject-skills-index.py`. Do not hand-edit between START/END markers — changes will be overwritten. -->
@@ -132,6 +155,7 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 - **전체 사용 매뉴얼(SSOT)**: `/home/hanol/ai-computer-use-workspace/docs/운영/AGENT-WORKSPACE-MANUAL.md`
 - **모델(독립 입력 채널)**: 기본 레인은 격리 `DISPLAY=:99` — 에이전트가 :99만 조작하고 사용자는 실제 화면의 Chrome noVNC observer 창으로 같은 장면을 함께 봅니다. 선택 레인 `host-mpx`는 사용자 **실제 화면(:0)에 AI 전용 커서/키보드**(MPX/XInput2 마스터)를 만듭니다. 다만 Chromium X11은 추가 MasterKeyboard에서 사용자 core DOM 키를 폐기하므로 host-mpx는 기본 차단된 실험 레인입니다.
 - **정책**: 기본 visible 레인은 개방. host-mpx는 `ACUW_MPX_ALLOW_CHROMIUM_INPUT_RISK=1`의 명시 위험 수용이 있어야 시작합니다. live truth는 `bash /home/hanol/ai-computer-use-workspace/scripts/status.sh`.
+- **오류·대기·종료 보장**: MCP/공동 메모는 잘못된 Unicode·JSON 입력 뒤에도 정상 작업을 계속할 수 있고, watch/term-text 대기는 외부 도구 호출까지 같은 deadline을 적용합니다. media 강제 종료는 자체 PID 세대와 socket 결속을 확인합니다. 상세는 정본 매뉴얼을 따릅니다.
 
 **다른 프로젝트에서 쓸 때의 원칙(필수)**: 기본 인스턴스(`:99`)는 공유 자원이라 이미 다른 AI가 작업 중일 수 있습니다. **자기 프로젝트 전용 병렬 레인을 열어 작업하세요** — 기본 인스턴스에 브라우저/앱을 띄우면 남의 작업을 오염시킵니다(안전 게이트·상세는 매뉴얼 §9).
 
@@ -178,3 +202,4 @@ ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/inst
 ```
 
 - `scripts/mcp-pcb-functional.py`(781행 부근)가 `run-in-workspace.sh`를 직접 호출한다 — 그 호출부에도 env 전달이 필요하다(코드 미수정, 담당 세션 판단).
+- 회로 시뮬레이터 GUI(LTspice·Qucs-S·KiCad 시뮬레이터)와 LTspice 배치도 같은 규칙을 따른다. 레인은 `ACUW_LANE_MEMORY_MAX=16G ... instance.sh open <레인>`으로 미리 연다. `run_spice_simulation(engine='ltspice', lane=...)`은 `instance.sh run`만 호출하며(레인을 열지 않음) `ACUW_LANE_MEMORY_MAX`가 비어 있으면 16G를 넣는다. 2026-10-22 LTspice 검증 1건은 이 env 없이 `MemoryMax=8G` 레인에서 실행됐다(`projects/sim-validation-20261022/results/ltspice-workflow.json`).

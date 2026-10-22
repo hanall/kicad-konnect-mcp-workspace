@@ -1,0 +1,56 @@
+{
+ "id": "01-rc-step",
+ "results": [
+  {
+   "name": "v_at_tau",
+   "kind": "FIND",
+   "theory": 3.1606027941427883,
+   "unit": "V",
+   "console_value": 3.160602,
+   "csv_value": 3.160605631262525,
+   "csv_note": "CSV 열 V(out), time=1m 선형 보간",
+   "csv_vs_console_rel": 1.148914834862046e-06,
+   "value": 3.160602,
+   "value_source": "console_text",
+   "err_rel": 2.512630786412278e-07,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "v_at_3tau",
+   "kind": "FIND",
+   "theory": 4.75106465816068,
+   "unit": "V",
+   "console_value": 4.751065,
+   "csv_value": 4.751065,
+   "csv_note": "CSV 열 V(out), time=3m 선형 보간",
+   "csv_vs_console_rel": 0.0,
+   "value": 4.751065,
+   "value_source": "console_text",
+   "err_rel": 7.195004575036212e-08,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "t_rise_10_90",
+   "kind": "TRIG_TARG",
+   "theory": 0.0021972245773362194,
+   "unit": "s",
+   "console_value": 0.002197224,
+   "csv_value": 0.0021972188312958433,
+   "csv_note": "CSV 열 V(out), t(4.5)-t(0.5) = 0.00230258 - 0.000105361169",
+   "csv_vs_console_rel": 2.3523792551499786e-06,
+   "value": 0.002197224,
+   "value_source": "console_text",
+   "err_rel": 2.627570370298963e-07,
+   "pass": true,
+   "tol": "rel 0.02"
+  }
+ ],
+ "console_failed_lines": [],
+ "console_values": {
+  "v_at_tau": 3.160602,
+  "v_at_3tau": 4.751065,
+  "t_rise_10_90": 0.002197224
+ }
+}

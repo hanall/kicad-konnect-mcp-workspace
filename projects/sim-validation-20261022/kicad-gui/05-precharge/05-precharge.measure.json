@@ -1,0 +1,88 @@
+{
+ "id": "05-precharge",
+ "results": [
+  {
+   "name": "i_pk",
+   "kind": "MAX",
+   "theory": 1.0212765957446808,
+   "unit": "A",
+   "console_value": 1.021274,
+   "csv_value": 1.02127,
+   "csv_note": "CSV 열 V(ia), [0, 3] 최대(경계 보간 포함)",
+   "csv_vs_console_rel": 3.916676621665706e-06,
+   "value": 1.021274,
+   "value_source": "console_text",
+   "err_rel": 2.541666666573221e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "p_pk",
+   "kind": "MAX",
+   "theory": 49.02127659574468,
+   "unit": "W",
+   "console_value": 49.02105,
+   "csv_value": 49.0211,
+   "csv_note": "CSV 열 V(p), [0, 3] 최대(경계 보간 포함)",
+   "csv_vs_console_rel": 1.0199699923717341e-06,
+   "value": 49.02105,
+   "value_source": "console_text",
+   "err_rel": 4.6223958332770725e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "v_bus_at_tau",
+   "kind": "FIND",
+   "theory": 30.341786823770768,
+   "unit": "V",
+   "console_value": 30.34175,
+   "csv_value": 30.34174,
+   "csv_note": "CSV 열 V(bus), time=0.2209 선형 보간",
+   "csv_vs_console_rel": 3.29578880572855e-07,
+   "value": 30.34175,
+   "value_source": "console_text",
+   "err_rel": 1.2136322419222e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "t_95",
+   "kind": "WHEN",
+   "theory": 0.6617572592280766,
+   "unit": "s",
+   "console_value": 0.661758,
+   "csv_value": 0.6617588181818176,
+   "csv_note": "CSV 열 V(bus), RISE=1 교차 선형 보간",
+   "csv_vs_console_rel": 1.2363761641416473e-06,
+   "value": 0.661758,
+   "value_source": "console_text",
+   "err_rel": 1.119401280496316e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  },
+  {
+   "name": "e_r",
+   "kind": "INTEG",
+   "theory": 5.414399999991343,
+   "unit": "J",
+   "console_value": 5.41439,
+   "csv_value": 5.414390754964809,
+   "csv_note": "CSV 열 V(p), [0, 3] 사다리꼴 적분",
+   "csv_vs_console_rel": 1.3943672489258168e-07,
+   "value": 5.41439,
+   "value_source": "console_text",
+   "err_rel": 1.8469251149827046e-06,
+   "pass": true,
+   "tol": "rel 0.02"
+  }
+ ],
+ "console_failed_lines": [],
+ "console_values": {
+  "i_pk": 1.021274,
+  "p_pk": 49.02105,
+  "v_bus_at_tau": 30.34175,
+  "t_95": 0.661758,
+  "e_r": 5.41439
+ }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "04-diode-rectifier",
+  "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/04-diode-rectifier.dat.ngspice",
+  "dataset_header": "<Qucs Dataset 26.1.1>",
+  "dataset_vectors": [
+    "time",
+    "tran.v(in)",
+    "tran.v(out)"
+  ],
+  "independent_points": {
+    "time": 2008
+  },
+  "results": [
+    {
+      "name": "vout_pk",
+      "kind": "MAX",
+      "theory": 9.287238242074574,
+      "value": 9.287223050754,
+      "unit": "V",
+      "err_rel": 1.6357199178968196e-06,
+      "pass": true,
+      "note": "tran.v(out) max over [0, 0.002] s; tol_rel=0.02"
+    },
+    {
+      "name": "vf_pk_derived",
+      "kind": "DERIVED",
+      "theory": 0.7127617579254255,
+      "value": 0.7127769492460008,
+      "unit": "V",
+      "err_rel": 2.131332160619081e-05,
+      "pass": true,
+      "note": "formula 10 - vout_pk; tol_rel=0.02"
+    }
+  ],
+  "all_pass": true,
+  "alt_dataset": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/cli-run/04-diode-rectifier.cli-run.dat",
+    "all_pass": true,
+    "values": [
+      9.287223050754,
+      0.7127769492460008
+    ],
+    "max_rel_diff_vs_gui": 0.0
+  }
+}

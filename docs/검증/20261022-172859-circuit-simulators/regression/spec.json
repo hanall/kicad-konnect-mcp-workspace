@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "generated_by": "projects/sim-validation-20261022/spec/theory.py",
+  "temperature_C": 27,
+  "tolerances": {
+    "theory_rel": 0.02,
+    "cross_tool_rel": 0.01
+  },
+  "engines": {
+    "kicad_gui": "KiCad 10.0.6 AppImage 내장 ngspice 45.2",
+    "ngspice_cli": "Debian 13 ngspice 44.2+ds-1 배치(-b)",
+    "qucs_s": "Qucs-S 26.1.1 AppImage + 시스템 ngspice 44.2",
+    "ltspice_wine": "LTspice 24.0.12 (Wine 10.0)"
+  },
+  "circuits": [
+    {
+      "id": "01-rc-step",
+      "title": "RC 과도응답 (시정수)",
+      "purpose": "엔진의 과도해석 기본 정확성. tau=RC, 10-90% 상승시간=tau*ln(9)",
+      "analysis": {
+        "type": "tran",
+        "tstep": "1u",
+        "tstop": "5m"
+      },
+      "netlist_body": [
+        "* 01 RC step response",
+        "V1 in 0 PULSE(0 5 0 1n 1n 10m 20m)",
+        "R1 in out 1k",
+        "C1 out 0 1u"
+      ],
+      "kicad": {
+        "components": [
+          {
+            "ref": "V1",
+            "lib_id": "Simulation_SPICE:VPULSE",
+            "sim_params": "y1=0 y2=5 td=0 tr=1n tf=1n tw=10m per=20m"
+          },
+          {
+            "ref": "R1",
+            "lib_id": "Device:R",
+            "value": "1k"
+          },
+          {
+            "ref": "C1",
+            "lib_id": "Device:C",
+            "value": "1u"
+          }
+        ],
+        "nets": {
+          "in": [
+            "V1.1",
+            "R1.1"
+          ],
+          "out": [
+            "R1.2",
+            "C1.1"
+          ],
+          "GND": [
+            "V1.2",
+            "C1.2"
+          ]
+        },
+        "directives": [
+          ".tran 1u 5m"
+        ]
+      },
+      "measurements": [
+        {
+          "name": "v_at_tau",
+          "kind": "FIND",
+          "signal": "v(out)",
+          "at": "1m",
+          "theory": 3.1606027941427883,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "v_at_3tau",
+          "kind": "FIND",
+          "signal": "v(out)",
+          "at": "3m",
+          "theory": 4.75106465816068,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "t_rise_10_90",
+          "kind": "TRIG_TARG",
+          "signal": "v(out)",
+          "trig_val": 0.5,
+          "targ_val": 4.5,
+          "edge": "RISE=1",
+          "theory": 0.0021972245773362194,
+          "unit": "s",
+          "tol_rel": 0.02
+        }
+      ],
+      "theory_notes": {
+        "tau_s": 0.001
+      }
+    },
+    {
+      "id": "02-mosfet-gate",
+      "title": "MOSFET 게이트 구동 스위칭 (level 1)",
+      "purpose": "게이트 RC 충전, Vth 도달 시각, ON 상태 Vds/Id의 level 1 모델 해석해 비교",
+      "analysis": {
+        "type": "tran",
+        "tstep": "1n",
+        "tstop": "20u"
+      },
+      "netlist_body": [
+        "* 02 MOSFET gate drive switching",
+        "VDD vdd 0 DC 12",
+        "VG gsrc 0 PULSE(0 10 0 1n 1n 50u 100u)",
+        "RG gsrc g 100",
+        "CG g 0 10n",
+        "RL vdd d 100",
+        "M1 d g 0 0 NM1 W=100u L=100u",
+        ".model NM1 NMOS(LEVEL=1 VTO=2 KP=0.5 LAMBDA=0 TOX=1e-7 CGSO=0 CGDO=0 CBD=0 CBS=0)"
+      ],
+      "kicad": {
+        "components": [
+          {
+            "ref": "V1",
+            "lib_id": "Simulation_SPICE:VDC",
+            "sim_params": "dc=12"
+          },
+          {
+            "ref": "V2",
+            "lib_id": "Simulation_SPICE:VPULSE",
+            "sim_params": "y1=0 y2=10 td=0 tr=1n tf=1n tw=50u per=100u"
+          },
+          {
+            "ref": "R1",
+            "lib_id": "Device:R",
+            "value": "100",
+            "role": "RG"
+          },
+          {
+            "ref": "C1",
+            "lib_id": "Device:C",
+            "value": "10n",
+            "role": "CG"
+          },
+          {
+            "ref": "R2",
+            "lib_id": "Device:R",
+            "value": "100",
+            "role": "RL"
+          },
+          {
+            "ref": "M1",
+            "lib_id": "Simulation_SPICE:NMOS",
+            "sim_type": "MOS1",
+            "sim_params": "vto=2 kp=0.5 lambda=0 tox=1e-7 cgso=0 cgdo=0 cbd=0 cbs=0 w=100u l=100u"
+          }
+        ],
+        "nets": {
+          "vdd": [
+            "V1.1",
+            "R2.1"
+          ],
+          "gsrc": [
+            "V2.1",
+            "R1.1"
+          ],
+          "g": [
+            "R1.2",
+            "C1.1",
+            "M1.2"
+          ],
+          "d": [
+            "R2.2",
+            "M1.1"
+          ],
+          "GND": [
+            "V1.2",
+            "V2.2",
+            "C1.2",
+            "M1.3"
+          ]
+        },
+        "directives": [
+          ".tran 1n 20u"
+        ],
+        "note": "NMOS 심볼 기본 Sim.Type=VDMOS를 MOS1로 바꾼다. kicad-cli 넷리스트에서 LEVEL=1 모델이 나오는지 확인한다."
+      },
+      "measurements": [
+        {
+          "name": "vgs_at_tau",
+          "kind": "FIND",
+          "signal": "v(g)",
+          "at": "1u",
+          "theory": 6.321205588285577,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "t_vth",
+          "kind": "WHEN",
+          "signal": "v(g)",
+          "val": 2.0,
+          "edge": "RISE=1",
+          "theory": 2.2314355131420975e-07,
+          "unit": "s",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "vds_on",
+          "kind": "FIND",
+          "signal": "v(d)",
+          "at": "15u",
+          "theory": 0.02998122655522195,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "id_on_derived",
+          "kind": "DERIVED",
+          "formula": "(12 - vds_on)/100",
+          "theory": 0.11970018773444778,
+          "unit": "A",
+          "tol_rel": 0.02
+        }
+      ],
+      "theory_notes": {
+        "tau_gate_s": 1e-06,
+        "vds_on_V": 0.02998122655522195,
+        "id_on_A": 0.11970018773444778
+      }
+    },
+    {
+      "id": "03-opamp-noninv",
+      "title": "OP AMP 비반전 증폭기 (KiCad 내장 단극 모델)",
+      "purpose": "서브서킷 모델 호환성과 AC/TRAN 해석. 이득 10, 폐루프 대역폭 fp*(1+A*beta)",
+      "analysis": {
+        "type": "tran",
+        "tstep": "1u",
+        "tstop": "3m",
+        "ac": "dec 100 1 10meg"
+      },
+      "netlist_body": [
+        "* 03 non-inverting op amp, KiCad built-in single-pole model",
+        "VCC vcc 0 DC 15",
+        "VEE vee 0 DC -15",
+        "VIN in 0 DC 0 SIN(0 0.1 1k) AC 1",
+        "X1 in inn vcc vee out kicad_builtin_opamp POLE=20 GAIN=20k VOFF=0 ROUT=10",
+        "R1 inn 0 1k",
+        "R2 out inn 9k",
+        ".subckt kicad_builtin_opamp in+ in- vcc vee out params: POLE=20 GAIN=20k VOFF=10m ROUT=10",
+        "  Voff in+ inoff dc {VOFF}",
+        "  G10 0 int inoff in- 100u",
+        "  R1 int 0 {GAIN/100u}",
+        "  C1 int 0 {1/(6.28*(GAIN/100u)*POLE)}",
+        "  Eout 2 0 int 0 1",
+        "  Rout 2 out {ROUT}",
+        "  Elow lee 0 vee 0 1",
+        "  Ehigh lcc 0 vcc 0 1",
+        "  Dlow lee int Dlimit",
+        "  Dhigh int lcc Dlimit",
+        "  .model Dlimit D N=0.01",
+        ".ends"
+      ],
+      "kicad": {
+        "components": [
+          {
+            "ref": "V1",
+            "lib_id": "Simulation_SPICE:VDC",
+            "sim_params": "dc=15",
+            "role": "VCC"
+          },
+          {
+            "ref": "V2",
+            "lib_id": "Simulation_SPICE:VDC",
+            "sim_params": "dc=15",
+            "role": "VEE (+핀을 GND, -핀을 vee에 연결해 -15V)"
+          },
+          {
+            "ref": "V3",
+            "lib_id": "Simulation_SPICE:VSIN",
+            "sim_params": "dc=0 ampl=0.1 f=1k ac=1"
+          },
+          {
+            "ref": "U1",
+            "lib_id": "Simulation_SPICE:OPAMP",
+            "sim_params": "POLE=20 GAIN=20k VOFF=0 ROUT=10"
+          },
+          {
+            "ref": "R1",
+            "lib_id": "Device:R",
+            "value": "1k"
+          },
+          {
+            "ref": "R2",
+            "lib_id": "Device:R",
+            "value": "9k"
+          }
+        ],
+        "nets": {
+          "in": [
+            "V3.1",
+            "U1.1"
+          ],
+          "inn": [
+            "U1.2",
+            "R1.1",
+            "R2.2"
+          ],
+          "out": [
+            "U1.5",
+            "R2.1"
+          ],
+          "vcc": [
+            "V1.1",
+            "U1.3"
+          ],
+          "vee": [
+            "V2.2",
+            "U1.4"
+          ],
+          "GND": [
+            "V1.2",
+            "V2.1",
+            "V3.2",
+            "R1.2"
+          ]
+        },
+        "directives": [
+          ".tran 1u 3m",
+          ".ac dec 100 1 10meg"
+        ],
+        "note": "OPAMP 심볼은 Sim.Library=${KICAD9_SYMBOL_DIR}/Simulation_SPICE.sp, Sim.Name=kicad_builtin_opamp 기본값을 그대로 쓴다. kicad-cli 넷리스트에 .include 경로가 절대경로로 풀리는지 확인한다."
+      },
+      "measurements": [
+        {
+          "name": "vout_pk_1k",
+          "kind": "MAX",
+          "signal": "v(out)",
+          "from": "2m",
+          "to": "3m",
+          "theory": 0.999186924427368,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "gain_db_10hz",
+          "kind": "AC_FIND_DB",
+          "signal": "vdb(out)",
+          "at": "10",
+          "theory": 19.995653799782048,
+          "unit": "dB",
+          "tol_abs": 0.17,
+          "note": "0.17 dB는 선형 2%에 해당. AC 해석을 지원하는 경로(ngspice CLI, KiCad)에서만"
+        },
+        {
+          "name": "f_3db",
+          "kind": "AC_WHEN_DB",
+          "signal": "vdb(out)",
+          "val": 16.995653799782048,
+          "edge": "FALL=1",
+          "theory": 39959.771783613694,
+          "unit": "Hz",
+          "tol_rel": 0.02,
+          "note": "AC 해석을 지원하는 경로에서만"
+        }
+      ],
+      "theory_notes": {
+        "fp_Hz": 19.989860852342055,
+        "a0_eff": 19980.01998001998,
+        "gcl0": 9.994997503749373,
+        "fcl_Hz": 39959.771783613694,
+        "mag_1k": 9.99186924427368
+      }
+    },
+    {
+      "id": "04-diode-rectifier",
+      "title": "다이오드 반파 정류 (Shockley 모델)",
+      "purpose": "비선형 소자 모델 일치. 피크 출력 = Vpk - Vf, Vf는 지수식 해",
+      "analysis": {
+        "type": "tran",
+        "tstep": "1u",
+        "tstop": "2m"
+      },
+      "netlist_body": [
+        "* 04 half-wave rectifier",
+        "V1 in 0 SIN(0 10 1k)",
+        "D1 in out DVAL",
+        "RL out 0 1k",
+        ".model DVAL D(IS=1e-14 N=1 RS=0 CJO=0)"
+      ],
+      "kicad": {
+        "components": [
+          {
+            "ref": "V1",
+            "lib_id": "Simulation_SPICE:VSIN",
+            "sim_params": "dc=0 ampl=10 f=1k"
+          },
+          {
+            "ref": "D1",
+            "lib_id": "Simulation_SPICE:D",
+            "sim_params": "is=1e-14 n=1 rs=0 cjo=0"
+          },
+          {
+            "ref": "R1",
+            "lib_id": "Device:R",
+            "value": "1k"
+          }
+        ],
+        "nets": {
+          "in": [
+            "V1.1",
+            "D1.2"
+          ],
+          "out": [
+            "D1.1",
+            "R1.1"
+          ],
+          "GND": [
+            "V1.2",
+            "R1.2"
+          ]
+        },
+        "directives": [
+          ".tran 1u 2m"
+        ],
+        "note": "Simulation_SPICE:D 핀은 1=K 2=A. 기본 Sim.Params(rs=50m cjo=10p)를 덮어쓴다."
+      },
+      "measurements": [
+        {
+          "name": "vout_pk",
+          "kind": "MAX",
+          "signal": "v(out)",
+          "from": "0",
+          "to": "2m",
+          "theory": 9.287238242074574,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "vf_pk_derived",
+          "kind": "DERIVED",
+          "formula": "10 - vout_pk",
+          "theory": 0.7127617579254255,
+          "unit": "V",
+          "tol_rel": 0.02
+        }
+      ],
+      "theory_notes": {
+        "V_T": 0.025864925786328753,
+        "vf_V": 0.7127617579254255
+      }
+    },
+    {
+      "id": "05-precharge",
+      "title": "프리차지 RC 돌입전류와 저항 순간전력",
+      "purpose": "돌입 전류 피크, 저항 피크 전력, 충전 시간, 저항 소산 에너지(=1/2 C V^2)",
+      "analysis": {
+        "type": "tran",
+        "tstep": "100u",
+        "tstop": "3"
+      },
+      "netlist_body": [
+        "* 05 precharge inrush",
+        "V1 in 0 PULSE(0 48 0 1u 1u 10 20)",
+        "RPRE in bus 47",
+        "CBUS bus 0 4700u",
+        "B1 p 0 V=i(V1)*i(V1)*47",
+        "B2 ia 0 V=-i(V1)"
+      ],
+      "kicad": {
+        "components": [
+          {
+            "ref": "V1",
+            "lib_id": "Simulation_SPICE:VPULSE",
+            "sim_params": "y1=0 y2=48 td=0 tr=1u tf=1u tw=10 per=20"
+          },
+          {
+            "ref": "R1",
+            "lib_id": "Device:R",
+            "value": "47"
+          },
+          {
+            "ref": "C1",
+            "lib_id": "Device:C",
+            "value": "4700u"
+          },
+          {
+            "ref": "B1",
+            "lib_id": "Simulation_SPICE:BSOURCE",
+            "sim_params": "type=\"B\" model=\"v=i(V1)*i(V1)*47\""
+          },
+          {
+            "ref": "B2",
+            "lib_id": "Simulation_SPICE:BSOURCE",
+            "sim_params": "type=\"B\" model=\"v=-i(V1)\""
+          }
+        ],
+        "nets": {
+          "in": [
+            "V1.1",
+            "R1.1"
+          ],
+          "bus": [
+            "R1.2",
+            "C1.1"
+          ],
+          "p": [
+            "B1.1"
+          ],
+          "ia": [
+            "B2.1"
+          ],
+          "GND": [
+            "V1.2",
+            "C1.2",
+            "B1.2",
+            "B2.2"
+          ]
+        },
+        "directives": [
+          ".tran 100u 3"
+        ],
+        "note": "B 소스는 측정 보조. KiCad 넷리스트에서 전압원 이름이 V1로 유지되는지 확인한다."
+      },
+      "measurements": [
+        {
+          "name": "i_pk",
+          "kind": "MAX",
+          "signal": "v(ia)",
+          "from": "0",
+          "to": "3",
+          "theory": 1.0212765957446808,
+          "unit": "A",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "p_pk",
+          "kind": "MAX",
+          "signal": "v(p)",
+          "from": "0",
+          "to": "3",
+          "theory": 49.02127659574468,
+          "unit": "W",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "v_bus_at_tau",
+          "kind": "FIND",
+          "signal": "v(bus)",
+          "at": "0.2209",
+          "theory": 30.341786823770768,
+          "unit": "V",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "t_95",
+          "kind": "WHEN",
+          "signal": "v(bus)",
+          "val": 45.599999999999994,
+          "edge": "RISE=1",
+          "theory": 0.6617572592280766,
+          "unit": "s",
+          "tol_rel": 0.02
+        },
+        {
+          "name": "e_r",
+          "kind": "INTEG",
+          "signal": "v(p)",
+          "from": "0",
+          "to": "3",
+          "theory": 5.414399999991343,
+          "unit": "J",
+          "tol_rel": 0.02
+        }
+      ],
+      "theory_notes": {
+        "tau_s": 0.2209
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  1.00000e+00
+No. of Data Rows : 701
+Initial Transient Solution
+--------------------------
+Node                                   Voltage
+----                                   -------
+probe_int_inn_r1_1                           0
+probe_int_probe_int_gnd_r1_r1_2               0
+probe_int_gnd_r1                             0
+r1probe_int_vref                             0
+r1:power                                     0
+inn                                          0
+probe_int_out_r2_1                           0
+probe_int_probe_int_inn_r2_r2_2               0
+probe_int_inn_r2                             0
+r2probe_int_vref                             0
+r2:power                                     0
+out                                          0
+probe_int_probe_int_in_xu1_1_xu1_1               0
+xu1.inoff                                    0
+xu1.int                                      0
+probe_int_probe_int_inn_xu1_2_xu1_2               0
+xu1.2                                        0
+probe_int_probe_int_out_xu1_5_xu1_5               0
+xu1.lee                                    -15
+probe_int_probe_int_vee_xu1_4_xu1_4             -15
+xu1.lcc                                     15
+probe_int_probe_int_vcc_xu1_3_xu1_3              15
+probe_int_out_xu1_5                          0
+xu1probe_int_vref                            0
+xu1:power                                    0
+probe_int_vee_xu1_4                        -15
+probe_int_vcc_xu1_3                         15
+probe_int_inn_xu1_2                          0
+probe_int_in_xu1_1                           0
+in                                           0
+vcc                                         15
+vee                                        -15
+probe_int_in_v3_1                            0
+probe_int_gnd_v3_2                           0
+v3probe_int_vref                             0
+v3:power                                     0
+probe_int_vcc_v1_1                          15
+probe_int_gnd_v1_2                           0
+v1probe_int_vref                           7.5
+v1:power                                     0
+probe_int_gnd_v2_1                           0
+probe_int_vee_v2_2                         -15
+v2probe_int_vref                          -7.5
+v2:power                                     0
+bprobe_int_v2power#branch                    0
+v2:probe_int_n1#branch                       0
+v2:probe_int_n2#branch                       0
+bprobe_int_v2vref#branch                     0
+bprobe_int_v1power#branch                    0
+v1:probe_int_n1#branch                       0
+v1:probe_int_n2#branch                       0
+bprobe_int_v1vref#branch                     0
+bprobe_int_v3power#branch                    0
+v3:probe_int_n1#branch                       0
+v3:probe_int_n2#branch                       0
+bprobe_int_v3vref#branch                     0
+bprobe_int_xu1power#branch                   0
+xu1:probe_int_in+#branch                     0
+xu1:probe_int_in-#branch                     0
+xu1:probe_int_vcc#branch                     0
+xu1:probe_int_vee#branch                     0
+xu1:probe_int_out#branch                     0
+bprobe_int_xu1vref#branch                    0
+bprobe_int_r2power#branch                    0
+r2:probe_int_n1#branch                       0
+r2:probe_int_n2#branch                       0
+bprobe_int_r2vref#branch                     0
+bprobe_int_r1power#branch                    0
+r1:probe_int_n1#branch                       0
+r1:probe_int_n2#branch                       0
+bprobe_int_r1vref#branch                     0
+e.xu1.ehigh#branch                  -1.501e-11
+e.xu1.elow#branch                    1.501e-11
+e.xu1.eout#branch                            0
+v2#branch                                    0
+v1#branch                                    0
+v3#branch                                    0
+xu1:out#branch                               0
+xu1:vee#branch                               0
+xu1:vcc#branch                               0
+xu1:in-#branch                               0
+xu1:in+#branch                               0
+v.xu1.voff#branch                            0
+r2#branch                                    0
+r1#branch                                    0
+No. of Data Rows : 3008
+Measurements for AC Analysis
+vout_pk_1k          =  9.991850e-01 at=  2.254280e-03

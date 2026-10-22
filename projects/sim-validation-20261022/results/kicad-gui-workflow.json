@@ -1,0 +1,463 @@
+{
+  "agents": [
+    {
+      "label": null,
+      "result": {
+        "kicad_version": "KiCad 10.0.6, release build (AppImage /opt/kicad/10.0.6/kicad-10.0.6-x86_64.AppImage, Build Date Aug 28 2026 19:23:16, wxWidgets 3.3.2, Debian 13 x86_64, UI ko_KR)",
+        "ngspice_version_in_gui": "ngspice 45.2: 도움말->KiCad 정보->버전 탭 Build Info 'ngspice: 45.2'(kicad-about-version-ngspice.png, kicad-version-info.txt); 실행 중 eeschema가 번들 libngspice.so.0.0.14(문자열 45.2)를 매핑",
+        "summary": "KiCad 10.0.6 회로도 편집기 내장 SPICE 시뮬레이터(AppImage 번들 ngspice 45.2)가 Konnect MCP로 작성하고 .meas를 추가한 5개 회로도 사본을 ACUW 레인 kicad-smps-sync-gui(:182, 16G)에서 모두 실행했다. 측정 17개(.meas 15 + DERIVED 2) 중 17개가 사양 허용 오차(이론 대비 2%, 03 이득은 0.17 dB) 안에서 통과했다. 값은 GUI 콘솔의 .meas 출력을 클립보드로 받은 텍스트이며, GUI의 '현재 플롯을 CSV로 내보내기' 파일로 다시 계산한 값과 상대 2.4e-5 이내, 이전 단계의 번들 ngspice 45.2·시스템 ngspice 44.2 배치 값과 상대 4.5e-6 이내(교차 허용 1%)로 같았다. 03은 자동 생성 TRAN 탭에서 AC .meas가 출력되지 않아, GUI에서 AC 탭을 추가해 AC 측정 2개를 얻었다. 사용자 화면(:0)과 원본 kicad/는 쓰지 않았고, PID 491090 KiCad와 공유 Konnect 연결은 종료하거나 재시작하지 않았다.",
+        "circuits": [
+          {
+            "id": "01-rc-step",
+            "status": "ran",
+            "values": {
+              "v_at_tau": 3.160602,
+              "v_at_3tau": 4.751065,
+              "t_rise_10_90": 0.002197224
+            },
+            "screenshots": [
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-open.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-analysis-tab.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-netlist.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-run.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-signals.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-console-meas.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step-sim-full.png"
+            ],
+            "results": [
+              {
+                "name": "v_at_tau",
+                "theory": 3.1606027941427883,
+                "value": 3.160602,
+                "pass": true,
+                "err_rel": 2.512630786412278e-07,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 3.16060563 (CSV 열 V(out), time=1m 선형 보간), 콘솔 대비 상대차 1.15e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 3.160602, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 3.160602, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "v_at_3tau",
+                "theory": 4.75106465816068,
+                "value": 4.751065,
+                "pass": true,
+                "err_rel": 7.195004575036212e-08,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 4.751065 (CSV 열 V(out), time=3m 선형 보간), 콘솔 대비 상대차 0.00e+00; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 4.751065, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 4.751065, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "t_rise_10_90",
+                "theory": 0.0021972245773362194,
+                "value": 0.002197224,
+                "pass": true,
+                "err_rel": 2.627570370298963e-07,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 0.00219721883 (CSV 열 V(out), t(4.5)-t(0.5) = 0.00230258 - 0.000105361169), 콘솔 대비 상대차 2.35e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.002197224, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.002197224, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              }
+            ],
+            "issues": [
+              "넷리스트 대조 01-rc-step.gui-netlist.cir: kicad-cli(01-rc-step.mcp-meas.cir)와 소자 줄 동일, .meas 3줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "MCP add_schematic_text uuid: a00a2a53-b660-4bf5-b232-2a9f2c5ed212, 536d72d7-48bd-478d-81f4-0c0ead41fac7, a564ebae-eb47-4dd4-8a63-ceb502ae59f6. 사본 회로도 SHA-256(.meas 추가 후, GUI는 저장하지 않음) 476a9b1ff6d4e6f9528354820c71949e8db8b2b28b50efbab57a835edab1868a.",
+              "수치 파일: CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step/01-rc-step-tran.csv; 콘솔 텍스트 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step/01-rc-step.gui-console.txt; 측정 판정 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step/01-rc-step.measure.json"
+            ],
+            "copy_schematic": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step/01-rc-step.kicad_sch",
+            "csv": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/01-rc-step/01-rc-step-tran.csv",
+            "method": "원본 kicad/<id>/를 cp -a로 kicad-gui/<id>/에 복사 -> 공유 Konnect MCP(0.13.0+hanall.1, commit 94f80350, PID 953244 exe SHA-256=디스크 binary)의 sch_batch add_schematic_text로 사양 measurements(.meas, DERIVED 제외)를 사본 회로도에 한 줄씩 추가 -> kicad-cli 넷리스트로 지시어 포함 확인 -> MCP 쓰기 종료 후 ACUW 전용 레인 kicad-smps-sync-gui(:182, ACUW_LANE_MEMORY_MAX=16G, --host-home)에서 /usr/local/bin/eeschema(KiCad 10.0.6 AppImage)로 사본을 열고 검사->시뮬레이터 -> 회로도 지시어로 자동 생성된 '분석 1 - TRAN' 탭 확인(분석 탭 편집 캡처) -> SPICE 넷리스트 보기 캡처·클립보드 저장 -> 실행 버튼 -> 콘솔 .meas 결과 캡처·클립보드 저장 -> 신호 플롯 추가 -> 파일->현재 플롯을 CSV로 내보내기 -> 통합 문서 변경 폐기·회로도 변경 폐기로 종료.",
+            "note": "모든 측정 통과",
+            "value_source": "console_text"
+          },
+          {
+            "id": "02-mosfet-gate",
+            "status": "ran",
+            "values": {
+              "vgs_at_tau": 6.318125,
+              "t_vth": 2.23712e-07,
+              "vds_on": 0.02998124,
+              "id_on_derived": 0.11970018760000001
+            },
+            "screenshots": [
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-open.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-analysis-tab.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-netlist.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-run.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-signals.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate-console-meas.png"
+            ],
+            "results": [
+              {
+                "name": "vgs_at_tau",
+                "theory": 6.321205588285577,
+                "value": 6.318125,
+                "pass": true,
+                "err_rel": 0.0004873418911236451,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 6.31812445 (CSV 열 V(g), time=1u 선형 보간), 콘솔 대비 상대차 8.78e-08; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 6.318125, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 6.318125, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "t_vth",
+                "theory": 2.2314355131420975e-07,
+                "value": 2.23712e-07,
+                "pass": true,
+                "err_rel": 0.002547457376394579,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 2.237125e-07 (CSV 열 V(g), RISE=1 교차 선형 보간), 콘솔 대비 상대차 2.24e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 2.23713e-07, 상대차 4.47e-06 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 2.23713e-07, 상대차 4.47e-06 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "vds_on",
+                "theory": 0.02998122655522195,
+                "value": 0.02998124,
+                "pass": true,
+                "err_rel": 4.4843989364672034e-07,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 0.0299812 (CSV 열 V(d), time=15u 선형 보간), 콘솔 대비 상대차 1.33e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.02998124, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.02998124, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "id_on_derived",
+                "theory": 0.11970018773444778,
+                "value": 0.11970018760000001,
+                "pass": true,
+                "err_rel": 1.1232043566880875e-09,
+                "note": "DERIVED: (12 - vds_on)/100 (GUI 콘솔 값에서 계산, .meas 미추가); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.119700188, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.119700188, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              }
+            ],
+            "issues": [
+              "넷리스트 대조 02-mosfet-gate.gui-netlist.cir: kicad-cli(02-mosfet-gate.mcp-meas.cir)와 소자 줄 동일, .meas 3줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "MCP add_schematic_text uuid: 18104d10-dc9e-4cc6-905a-f5c6a1f0de73, 6bc7ec5e-0d7f-4f0d-b117-5bacc9988c6a, bee71a49-ea07-491f-8f50-d935c530aa2d. 사본 회로도 SHA-256(.meas 추가 후, GUI는 저장하지 않음) ce20be8a3d5e6707e2fc4fc7c45ad0ea28133d90937b914e9fb88a9873ac1c92.",
+              "수치 파일: CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate-tran.csv; 콘솔 텍스트 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate.gui-console.txt; 측정 판정 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate.measure.json"
+            ],
+            "copy_schematic": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate.kicad_sch",
+            "csv": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate-tran.csv",
+            "method": "원본 kicad/<id>/를 cp -a로 kicad-gui/<id>/에 복사 -> 공유 Konnect MCP(0.13.0+hanall.1, commit 94f80350, PID 953244 exe SHA-256=디스크 binary)의 sch_batch add_schematic_text로 사양 measurements(.meas, DERIVED 제외)를 사본 회로도에 한 줄씩 추가 -> kicad-cli 넷리스트로 지시어 포함 확인 -> MCP 쓰기 종료 후 ACUW 전용 레인 kicad-smps-sync-gui(:182, ACUW_LANE_MEMORY_MAX=16G, --host-home)에서 /usr/local/bin/eeschema(KiCad 10.0.6 AppImage)로 사본을 열고 검사->시뮬레이터 -> 회로도 지시어로 자동 생성된 '분석 1 - TRAN' 탭 확인(분석 탭 편집 캡처) -> SPICE 넷리스트 보기 캡처·클립보드 저장 -> 실행 버튼 -> 콘솔 .meas 결과 캡처·클립보드 저장 -> 신호 플롯 추가 -> 파일->현재 플롯을 CSV로 내보내기 -> 통합 문서 변경 폐기·회로도 변경 폐기로 종료.",
+            "note": "모든 측정 통과",
+            "value_source": "console_text"
+          },
+          {
+            "id": "03-opamp-noninv",
+            "status": "ran",
+            "values": {
+              "vout_pk_1k": 0.999185,
+              "gain_db_10hz": 19.99565,
+              "f_3db": 39864.6
+            },
+            "screenshots": [
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-open.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-analysis-tab-tran.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-netlist-tran.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-run-tran.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-signals-tran.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-console-meas-tran.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-analysis-tab-ac.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-netlist-ac.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-run-ac.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-signals-ac.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv-console-meas-ac.png"
+            ],
+            "results": [
+              {
+                "name": "vout_pk_1k",
+                "theory": 0.999186924427368,
+                "value": 0.999185,
+                "pass": true,
+                "err_rel": 1.9259933461591597e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 0.999185 (CSV 열 V(out), [2m, 3m] 최대(경계 보간 포함)), 콘솔 대비 상대차 0.00e+00; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.999185, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.999185, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "gain_db_10hz",
+                "theory": 19.995653799782048,
+                "value": 19.99565,
+                "pass": true,
+                "err_rel": 1.9003039782497848e-07,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 19.9957 (CSV 열 V(out) (게인), frequency=10 선형 보간), 콘솔 대비 상대차 2.50e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 19.99565, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 19.99565, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 abs 0.17"
+              },
+              {
+                "name": "f_3db",
+                "theory": 39959.771783613694,
+                "value": 39864.6,
+                "pass": true,
+                "err_rel": 0.002381689868727503,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 39865.4015 (CSV 열 V(out) (게인), FALL=1 교차 선형 보간), 콘솔 대비 상대차 2.01e-05; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 39864.6, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 39864.6, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              }
+            ],
+            "issues": [
+              "넷리스트 대조 03-opamp-noninv.gui-netlist-ac.cir: kicad-cli(03-opamp-noninv.mcp-meas.cir)와 소자 줄 동일, .meas 3줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "넷리스트 대조 03-opamp-noninv.gui-netlist-tran.cir: kicad-cli(03-opamp-noninv.mcp-meas.cir)와 소자 줄 동일, .meas 3줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "MCP add_schematic_text uuid: 9c088fa6-c8e1-4676-9d91-02310b9b36b6, 8931dd59-3ff5-4f90-a8a4-3c46338402de, 0389d0b2-fd20-4afd-abfd-4a9c20dc3963. 사본 회로도 SHA-256(.meas 추가 후, GUI는 저장하지 않음) 95ca3a53378eaab73c05de36ba97c19405f2b4b03a6aa4f065e23a6f74b222a3.",
+              "수치 파일: CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv-ac.csv, /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv-tran.csv; 콘솔 텍스트 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv.gui-console-ac.txt, /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv.gui-console-tran.txt; 측정 판정 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv.measure.json",
+              "[관측] TRAN 자동 탭의 GUI 넷리스트에는 '.tran 1u 3m'과 '.ac dec 100 1 10meg'가 함께 들어 있고, 분석 탭 편집 대화상자에는 초기 시간 0·최대 시간 단계 0이 채워져 있었다(다른 회로는 빈칸). AC 측정은 수동 AC 탭에서만 얻었다. AC 탭 설정값(100/1/10meg)은 회로도 지시어를 보고 GUI에 직접 입력했다."
+            ],
+            "copy_schematic": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv.kicad_sch",
+            "csv": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/03-opamp-noninv/03-opamp-noninv-ac.csv",
+            "method": "원본 kicad/<id>/를 cp -a로 kicad-gui/<id>/에 복사 -> 공유 Konnect MCP(0.13.0+hanall.1, commit 94f80350, PID 953244 exe SHA-256=디스크 binary)의 sch_batch add_schematic_text로 사양 measurements(.meas, DERIVED 제외)를 사본 회로도에 한 줄씩 추가 -> kicad-cli 넷리스트로 지시어 포함 확인 -> MCP 쓰기 종료 후 ACUW 전용 레인 kicad-smps-sync-gui(:182, ACUW_LANE_MEMORY_MAX=16G, --host-home)에서 /usr/local/bin/eeschema(KiCad 10.0.6 AppImage)로 사본을 열고 검사->시뮬레이터 -> 회로도 지시어로 자동 생성된 '분석 1 - TRAN' 탭 확인(분석 탭 편집 캡처) -> SPICE 넷리스트 보기 캡처·클립보드 저장 -> 실행 버튼 -> 콘솔 .meas 결과 캡처·클립보드 저장 -> 신호 플롯 추가 -> 파일->현재 플롯을 CSV로 내보내기 -> 통합 문서 변경 폐기·회로도 변경 폐기로 종료.",
+            "note": "모든 측정 통과; 회로도의 .tran/.ac 중 시뮬레이터는 '분석 1 - TRAN' 탭만 자동 생성했다. 이 탭 실행은 넷리스트에 .tran과 .ac를 함께 넣어 AC(701행)와 TRAN(3008행)을 모두 돌렸지만 콘솔에는 'Measurements for AC Analysis' 머리말 아래 vout_pk_1k만 나오고 AC .meas 2개는 출력되지 않았다. 새 분석 탭(AC, dec 100 1 10meg)을 GUI에서 추가해 실행하자 넷리스트가 '.ac dec 100 1 10Meg' 하나가 되고 f_3db·gain_db_10hz가 출력됐다.",
+            "value_source": "console_text"
+          },
+          {
+            "id": "04-diode-rectifier",
+            "status": "ran",
+            "values": {
+              "vout_pk": 9.287223,
+              "vf_pk_derived": 0.7127770000000009
+            },
+            "screenshots": [
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-open.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-analysis-tab.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-netlist.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-run.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-signals.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-measurements-panel.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier-console-meas.png"
+            ],
+            "results": [
+              {
+                "name": "vout_pk",
+                "theory": 9.287238242074574,
+                "value": 9.287223,
+                "pass": true,
+                "err_rel": 1.6411848364001321e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 9.28722 (CSV 열 V(out), [0, 2m] 최대(경계 보간 포함)), 콘솔 대비 상대차 3.23e-07; KiCad 측정 패널 'MAX V(out)' = 9.29V (화면 판독, 표시 3자리; 콘솔 대비 상대차 3.0e-04); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 9.287223, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 9.287223, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "vf_pk_derived",
+                "theory": 0.7127617579254255,
+                "value": 0.7127770000000009,
+                "pass": true,
+                "err_rel": 2.138452913037324e-05,
+                "note": "DERIVED: 10 - vout_pk (GUI 콘솔 값에서 계산, .meas 미추가); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.712777, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.712777, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              }
+            ],
+            "issues": [
+              "넷리스트 대조 04-diode-rectifier.gui-netlist.cir: kicad-cli(04-diode-rectifier.mcp-meas.cir)와 소자 줄 동일, .meas 1줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "MCP add_schematic_text uuid: f6cff788-f974-41fd-8943-b62c55d23ff5. 사본 회로도 SHA-256(.meas 추가 후, GUI는 저장하지 않음) 50af72a841c2c94233289fb1f9c73172a76b0ccb4ecdb8f8775ead0973329cb1.",
+              "수치 파일: CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/04-diode-rectifier-tran.csv; 콘솔 텍스트 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/04-diode-rectifier.gui-console.txt; 측정 판정 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/04-diode-rectifier.measure.json"
+            ],
+            "copy_schematic": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/04-diode-rectifier.kicad_sch",
+            "csv": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/04-diode-rectifier-tran.csv",
+            "method": "원본 kicad/<id>/를 cp -a로 kicad-gui/<id>/에 복사 -> 공유 Konnect MCP(0.13.0+hanall.1, commit 94f80350, PID 953244 exe SHA-256=디스크 binary)의 sch_batch add_schematic_text로 사양 measurements(.meas, DERIVED 제외)를 사본 회로도에 한 줄씩 추가 -> kicad-cli 넷리스트로 지시어 포함 확인 -> MCP 쓰기 종료 후 ACUW 전용 레인 kicad-smps-sync-gui(:182, ACUW_LANE_MEMORY_MAX=16G, --host-home)에서 /usr/local/bin/eeschema(KiCad 10.0.6 AppImage)로 사본을 열고 검사->시뮬레이터 -> 회로도 지시어로 자동 생성된 '분석 1 - TRAN' 탭 확인(분석 탭 편집 캡처) -> SPICE 넷리스트 보기 캡처·클립보드 저장 -> 실행 버튼 -> 콘솔 .meas 결과 캡처·클립보드 저장 -> 신호 플롯 추가 -> 파일->현재 플롯을 CSV로 내보내기 -> 통합 문서 변경 폐기·회로도 변경 폐기로 종료.",
+            "note": "모든 측정 통과",
+            "value_source": "console_text"
+          },
+          {
+            "id": "05-precharge",
+            "status": "ran",
+            "values": {
+              "i_pk": 1.021274,
+              "p_pk": 49.02105,
+              "v_bus_at_tau": 30.34175,
+              "t_95": 0.661758,
+              "e_r": 5.41439
+            },
+            "screenshots": [
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-open.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-analysis-tab.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-netlist.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-run.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-signals.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-measurements-panel.png",
+              "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge-console-meas.png"
+            ],
+            "results": [
+              {
+                "name": "i_pk",
+                "theory": 1.0212765957446808,
+                "value": 1.021274,
+                "pass": true,
+                "err_rel": 2.541666666573221e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 1.02127 (CSV 열 V(ia), [0, 3] 최대(경계 보간 포함)), 콘솔 대비 상대차 3.92e-06; KiCad 측정 패널 'MAX V(ia)' = 1.02V (화면 판독, 표시 3자리; 콘솔 대비 상대차 1.2e-03); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 1.021274, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 1.021274, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "p_pk",
+                "theory": 49.02127659574468,
+                "value": 49.02105,
+                "pass": true,
+                "err_rel": 4.6223958332770725e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 49.0211 (CSV 열 V(p), [0, 3] 최대(경계 보간 포함)), 콘솔 대비 상대차 1.02e-06; KiCad 측정 패널 'MAX V(p)' = 49.0V (화면 판독, 표시 3자리; 콘솔 대비 상대차 4.3e-04); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 49.02105, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 49.02105, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "v_bus_at_tau",
+                "theory": 30.341786823770768,
+                "value": 30.34175,
+                "pass": true,
+                "err_rel": 1.2136322419222e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 30.34174 (CSV 열 V(bus), time=0.2209 선형 보간), 콘솔 대비 상대차 3.30e-07; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 30.34175, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 30.34175, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "t_95",
+                "theory": 0.6617572592280766,
+                "value": 0.661758,
+                "pass": true,
+                "err_rel": 1.119401280496316e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 0.661758818 (CSV 열 V(bus), RISE=1 교차 선형 보간), 콘솔 대비 상대차 1.24e-06; KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 0.661758, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 0.661758, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              },
+              {
+                "name": "e_r",
+                "theory": 5.414399999991343,
+                "value": 5.41439,
+                "pass": true,
+                "err_rel": 1.8469251149827046e-06,
+                "note": "GUI 콘솔 .meas 출력(클립보드 복사 텍스트) 값; GUI CSV 내보내기 재계산 5.41439075 (CSV 열 V(p), [0, 3] 사다리꼴 적분), 콘솔 대비 상대차 1.39e-07; KiCad 측정 패널 'INTEG V(p)' = 5.41V.s (화면 판독, 표시 3자리; 콘솔 대비 상대차 8.1e-04); KiCad 번들 ngspice 45.2 배치(사양 넷리스트) 5.41439, 상대차 0.00e+00 (교차 허용 1e-02 통과); 시스템 ngspice 44.2 배치 5.41439, 상대차 0.00e+00 (교차 허용 1e-02 통과); 허용 오차 rel 0.02"
+              }
+            ],
+            "issues": [
+              "넷리스트 대조 05-precharge.gui-netlist.cir: kicad-cli(05-precharge.mcp-meas.cir)와 소자 줄 동일, .meas 5줄 동일. GUI는 .save all/.probe alli/.probe p(...)를 추가한다.",
+              "MCP add_schematic_text uuid: 5be05009-f2cc-41d5-adfb-c0bce844db28, f6126d28-1ae2-431b-86ea-f78c4cb0c792, 620ab3a6-8f76-4c24-bcc4-d02f488a3b55, b9d6df8b-6ebe-45d8-b3ee-4598ab472197, db9c84de-b702-4795-b6f3-6ff707a0a3db. 사본 회로도 SHA-256(.meas 추가 후, GUI는 저장하지 않음) 88f41a492c007d6b2ce24e631f63fb7fad60bb4fe9c3efead3853513d21a5b3d.",
+              "수치 파일: CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge-tran.csv; 콘솔 텍스트 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge.gui-console.txt; 측정 판정 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge.measure.json"
+            ],
+            "copy_schematic": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge.kicad_sch",
+            "csv": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge-tran.csv",
+            "method": "원본 kicad/<id>/를 cp -a로 kicad-gui/<id>/에 복사 -> 공유 Konnect MCP(0.13.0+hanall.1, commit 94f80350, PID 953244 exe SHA-256=디스크 binary)의 sch_batch add_schematic_text로 사양 measurements(.meas, DERIVED 제외)를 사본 회로도에 한 줄씩 추가 -> kicad-cli 넷리스트로 지시어 포함 확인 -> MCP 쓰기 종료 후 ACUW 전용 레인 kicad-smps-sync-gui(:182, ACUW_LANE_MEMORY_MAX=16G, --host-home)에서 /usr/local/bin/eeschema(KiCad 10.0.6 AppImage)로 사본을 열고 검사->시뮬레이터 -> 회로도 지시어로 자동 생성된 '분석 1 - TRAN' 탭 확인(분석 탭 편집 캡처) -> SPICE 넷리스트 보기 캡처·클립보드 저장 -> 실행 버튼 -> 콘솔 .meas 결과 캡처·클립보드 저장 -> 신호 플롯 추가 -> 파일->현재 플롯을 CSV로 내보내기 -> 통합 문서 변경 폐기·회로도 변경 폐기로 종료.",
+            "note": "모든 측정 통과",
+            "value_source": "console_text"
+          }
+        ],
+        "results_json_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/results.json",
+        "issues": [
+          "[출처] Konnect 공유 연결의 get_installation_info: build.version 0.13.0+hanall.1, commit 94f80350cf67db27b179a06a8f6dbebfe4717927, executable_path /home/hanol/kicad-konnect-mcp-workspace/upstream/konnect/target/release/konnect. upstreams.lock.json과 같다. 서버 PID 953244의 /proc exe SHA-256(cbb5b9785d376ab55a57bbf5723f8e1d79805c5eeeca8d5b1d58b84f7c3d909a)은 디스크 binary와 같다. sch_batch는 이전 단계에서 이미 로드되어 있었고 load_toolset을 다시 호출해 성공했다. 이번에는 이 클라이언트에서 add_schematic_text를 바로 쓸 수 있어 전용 STDIO 세션을 열지 않았다. 연결에는 gui_sync_extension은 있고 simulation_extension은 없다. 이 작업에는 KONNECT_SIM 도구가 필요하지 않았다.",
+          "[출처] KiCad: /usr/local/bin/eeschema -> /opt/kicad/10.0.6/kicad-10.0.6-x86_64.AppImage (SHA-256 723b6890c60a5da962d3f4d07e0dba0f3dd2f3deb50d303f06a3d8a2ab7cf7f5, docs/검증/20261022-172859-circuit-simulators/install-manifests/kicad-10.0.6-INSTALL-MANIFEST.json과 같음). 정보 대화상자의 '버전 정보 복사' 텍스트는 kicad-gui/kicad-version-info.txt에 있다(Version 10.0.6 release build, Build Date Aug 28 2026 19:23:16, ngspice 45.2, KICAD_IPC_API=ON, Lang ko_KR).",
+          "[출처] 실행 중인 eeschema(PID 3280771)의 /proc maps에는 번들 /tmp/.mount_kicadremp9728916709621493320/shared/lib/libngspice.so.0.0.14(SHA-256 9fd55167db67277942dc7fa6a92360f5c5303b949284dcd3e8d7760624b87b29, 문자열 '45.2' 포함)가 매핑되어 있었다. 시뮬레이터 콘솔에는 ngspice 배너가 나오지 않는다. 그래서 버전은 정보 대화상자와 프로세스 매핑으로 확인했다.",
+          "[환경 위험, 결과 영향 없음] 번들 libngspice 45.2의 SPICE_LIB_DIR은 /usr/share/ngspice로 컴파일되어 있다. 그래서 호스트 Debian ngspice 44.2 패키지의 /usr/share/ngspice/scripts/spinit을 읽고, 시스템 코드모델 /usr/lib/x86_64-linux-gnu/ngspice/{spice2poly,analog,digital,xtradev,xtraevt,table}.cm도 로드했다. 번들 코드모델(analog, digital, ivlng, spice2poly, table, tlines, xtradev, xtraevt)과 겹친다. 이 5개 회로는 XSPICE 코드모델을 쓰지 않으므로 결과에는 영향이 없다. XSPICE/디지털 회로에서 44.2 코드모델이 45.2 엔진에 중복 로드될 때의 영향은 확인하지 않았다.",
+          "[환경] 새로 띄운 eeschema는 PID 491090 사용자 KiCad가 쓰는 AppImage dwarfs 마운트 /tmp/.mount_kicadremp9728916709621493320(PID 491102)을 그대로 재사용했다(AppImage 런타임의 동작). 마운트는 읽기만 했고 마운트를 만들거나 해제하지 않았다. 작업 뒤에도 491090, 491102, 491252, 그리고 공유 Konnect 953166/953244가 살아 있음을 확인했다.",
+          "[가정] 레인 kicad-smps-sync-gui는 열거나 닫지 않았다. ACUW_LANE_MEMORY_MAX=16G를 붙인 run-in-workspace.sh가 레인 slice acuw_lane_dd7afbd93d7963ccf58423f74a7b18c4dc54214d.slice의 MemoryMax를 8G에서 16G로 다시 설정했고, 작업 뒤에도 16G(17179869184)로 남아 있다. 되돌리지 않았으며 레인 stop 때 정리된다. 피크 사용량은 측정하지 않았다. 실행 중 eeschema RSS는 약 1.5~1.6 GB였고 OOM은 없었다.",
+          "[관측, 03] 회로도에 .tran과 .ac가 함께 있지만 시뮬레이터는 '분석 1 - TRAN' 탭 하나만 자동으로 만들었다. 그 탭의 넷리스트에는 두 해석이 모두 들어가 AC(701행)와 TRAN(3008행)이 모두 실행됐다. 그런데 콘솔에는 'Measurements for AC Analysis' 머리말 아래 vout_pk_1k만 나오고 .meas ac 2개는 출력되지 않았다. 원인은 규명하지 않았다. ngspice shared 모드에서 bg_run 한 번에 두 해석을 돌리면 .meas를 마지막에 한 번만 평가하는 것으로 보이지만 확인하지 않은 추정이다. [가정] GUI '새 분석 탭'에서 AC(100 points/dec, 1 Hz~10meg)를 회로도 지시어와 같은 값으로 직접 입력했다. 이것은 회로도 편집이 아니라 시뮬레이터 통합 문서 설정이며 저장하지 않았다.",
+          "[관측] GUI 실행은 호환 모드 'ps lt a'(PSpice와 LTspice)를 쓰고, 넷리스트에 .save all, .probe alli, .probe p(...)를 추가한다. 소자 줄과 .meas 줄은 kicad-cli 넷리스트와 같았다(회로별 issues 참조). 측정값은 배치 실행과 6자리까지 같았고, 02 t_vth만 마지막 자리가 달랐다(2.23712e-07 대 2.23713e-07, 상대 4.5e-6).",
+          "[관측] 각 사본 디렉터리에 KiCad 10.0.6이 로컬 히스토리 .history/를 만들었다. 커밋이 0개인 빈 git 저장소에 README.txt와 .gitignore만 있다. 상위 레포에서 kicad-gui/를 git add하면 내장 git 저장소로 잡힐 수 있으므로, 커밋 전에 제외하거나 지울지 결정해야 한다. 지우지 않았다.",
+          "[관측] 회로도를 열면 '이 파일은 이전 버전의 KiCad에서 만들었습니다. 저장 시 새 형식으로 변환됩니다.' 배너가 뜬다. 시뮬레이터를 실행하면 회로도 창 제목에 '*'(수정됨)이 붙는다. 시뮬레이터 통합 문서와 회로도 모두 '변경 내용 폐기'로 닫았다. 사본 .kicad_sch는 MCP 쓰기 상태(mtime 18:45:09~18:46:00) 그대로이고 GUI는 아무것도 저장하지 않았다.",
+          "[안전] 원본 projects/sim-validation-20261022/kicad/의 29개 파일 SHA-256이 작업 전후 같다(기록 /tmp/claude-1000/-home-hanol-kicad-konnect-mcp-workspace/7504464b-d412-488b-a994-7814e8e9e524/scratchpad/kicad-gui-orig-sha256.txt). 원본에는 .lck와 .history가 없다. 쓰기는 kicad-gui/ 아래에서만 했다. 회로 파일은 텍스트로 편집하지 않았다(.meas는 MCP add_schematic_text). GUI와 MCP를 동시에 쓰지 않았다(MCP 마지막 쓰기 18:46:00, 첫 GUI 실행 18:46:38).",
+          "[프로세스] 내가 띄운 eeschema 5개(PGID 1802297, 2272395, 2618983, 3083052, 3280762)는 GUI 메뉴 '종료'로 모두 끝났고, exit 기록은 모두 0, 남은 프로세스는 없다. 사본의 ~*.lck는 KiCad가 스스로 지웠고 수동으로 지운 잠금은 없다. pkill/killall은 쓰지 않았고 사용자 화면(:0)도 쓰지 않았다.",
+          "[판정] value는 GUI 콘솔 .meas 텍스트(clipboard.sh get, value_source=console_text)다. CSV(GUI 내보내기, 세미콜론, 유효숫자 6자리)로 다시 계산한 값은 콘솔과 상대 2.4e-5 이내였다. KiCad 측정 패널 값(04 MAX V(out)=9.29V, 05 MAX V(ia)=1.02V, MAX V(p)=49.0V, INTEG V(p)=5.41V.s)은 표시가 3자리라 화면 판독 보조 증거로만 쓴다. 03 f_3db는 이론 대비 0.24%로 허용 2% 안이며, 이전 엔진들의 39864.6과 같다.",
+          "[레인] 작업이 끝났을 때 kicad-smps-sync-gui(:182)의 창은 0개였다. instance.sh status는 최근 활동 때문에 'busy'로 표시했고, 무활동 시간이 지나면 idle로 돌아갈 것으로 예상한다. 레인 자체는 정리하지 않았다.",
+          "[도구] 측정·묶음 스크립트(레포 밖): /tmp/claude-1000/-home-hanol-kicad-konnect-mcp-workspace/7504464b-d412-488b-a994-7814e8e9e524/scratchpad/gui/measure_kicad_gui.py, /tmp/claude-1000/-home-hanol-kicad-konnect-mcp-workspace/7504464b-d412-488b-a994-7814e8e9e524/scratchpad/gui/build_results.py, /tmp/claude-1000/-home-hanol-kicad-konnect-mcp-workspace/7504464b-d412-488b-a994-7814e8e9e524/scratchpad/gui/write_results.py. 실행 과정의 중간 캡처는 /tmp/claude-1000/-home-hanol-kicad-konnect-mcp-workspace/7504464b-d412-488b-a994-7814e8e9e524/scratchpad/gui/ 에 있다."
+        ]
+      }
+    },
+    {
+      "label": null,
+      "result": {
+        "id": "01-rc-step",
+        "verdict": "confirmed",
+        "reread_values": {
+          "v_at_tau": 3.160602,
+          "v_at_3tau": 4.751065,
+          "t_rise_10_90": 0.002197224,
+          "csv_v_at_tau": 3.160605631,
+          "csv_v_at_3tau": 4.751065,
+          "csv_t_rise_10_90": 0.0021972188,
+          "console_targ": 0.002302586,
+          "console_trig": 0.0001053611,
+          "data_rows": 5023
+        },
+        "objections": [
+          "판정을 뒤집을 반박은 찾지 못했다. 7개 캡처 모두 KiCad 10 창의 01-rc-step 회로다(회로도 편집기 제목 '01-rc-step', 시뮬레이터 탭 '분석 1 - TRAN'). 오류 대화상자나 빈 최종 플롯은 없다. signals와 sim-full 캡처의 V(out)는 0 V에서 시작해 약 5 V로 가는 지수 곡선이다. 1 ms에서 약 3.2 V, 3 ms에서 약 4.75 V로 보여 콘솔 .meas 값과 맞는다.",
+          "run 캡처의 플롯이 비어 있는 것은 신호를 고르기 전 상태라서 정상이다. signals 캡처에서 V(in)와 V(out)를 체크한 뒤에는 파형이 나온다.",
+          "GUI의 '측정' 패널은 세 캡처 모두 비어 있다. .meas 결과는 ngspice 콘솔 출력에만 있다. 값의 출처는 GUI 측정 패널이 아니라 콘솔 텍스트로 한정된다. 보고서도 value_source=console_text로 적고 있어 서술과 어긋나지는 않는다.",
+          "CSV(5023행, 열 time;V(in);V(out))를 다시 계산했다. 1 ms 보간값 3.1606056(이론 대비 상대오차 9.0e-07), 3 ms 4.751065, 10-90% 상승시간 0.0021972188(t(4.5)=0.00230258, t(0.5)=1.0536e-04)이다. 입력에 적힌 CSV 재계산값과 같다. 캡처의 trig/targ 값과도 일치한다.",
+          "물리량과 해석이 사양과 같다. 해석은 tran 1u 5m이다. FIND v(out) AT=1m, AT=3m, TRIG v(out) VAL=0.5 RISE=1 TARG v(out) VAL=4.5 RISE=1의 세 측정은 사양 measurements와 같다. 사양의 tol_rel이 0.02인데 상대오차는 1e-6 수준이다.",
+          "netlist 캡처와 01-rc-step.gui-netlist.cir가 일치한다. kicad-cli 넷리스트(01-rc-step.mcp-meas.cir)와 비교하면 소자 줄과 .meas 줄이 같고, 줄 순서와 .save/.probe만 다르다. 사양의 netlist_body와 비교하면 GND와 0, PULSE 매개변수가 같은 의미다.",
+          "사소한 점: open 캡처에 '이전 버전의 KiCad에서 만들었습니다' 경고 배너가 있다. GUI는 저장하지 않았다. 사본 회로도 SHA-256은 476a9b1f…1868a로, 보고값과 일치한다.",
+          "확인하지 못한 것: ngspice 45.2 번들 버전, 시스템 ngspice 44.2 교차 실행, PID와 exe SHA-256 대조는 이번 재판독에서 직접 재현하지 않았다. 입력 메타데이터를 그대로 받은 것이다."
+        ],
+        "notes": "근거 파일(모두 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/ 아래): 캡처 kicad-gui/01-rc-step-*.png 7개, CSV kicad-gui/01-rc-step/01-rc-step-tran.csv, 콘솔 텍스트 kicad-gui/01-rc-step/01-rc-step.gui-console.txt, 넷리스트 kicad-gui/01-rc-step/01-rc-step.gui-netlist.cir와 kicad-gui/01-rc-step/01-rc-step.mcp-meas.cir, 판정 kicad-gui/01-rc-step/01-rc-step.measure.json, 사양 spec/spec.json. 레인 조작과 파일 쓰기는 하지 않았다(읽기 전용 재판독)."
+      }
+    },
+    {
+      "label": null,
+      "result": {
+        "id": "05-precharge",
+        "verdict": "confirmed",
+        "reread_values": {
+          "i_pk": 1.021274,
+          "p_pk": 49.02105,
+          "v_bus_at_tau": 30.34175,
+          "t_95": 0.661758,
+          "e_r": 5.41439,
+          "csv_i_pk": 1.02127,
+          "csv_p_pk": 49.0211,
+          "csv_v_bus_at_tau": 30.34174,
+          "csv_t_95": 0.6617588,
+          "csv_e_r": 5.4143908,
+          "panel_max_v_ia": 1.02,
+          "panel_max_v_p": 49,
+          "panel_integ_v_p": 5.41
+        },
+        "objections": [
+          "반박 근거 없음. 캡처 7장 모두 05-precharge 회로이고 오류 대화상자가 없다. 첫 화면은 05-precharge 회로도 편집기로, .tran 100u 3과 .meas 5줄이 보인다. 이어서 '분석 1 - TRAN' 과도 해석 탭(100u/3), SPICE 넷리스트(.meas 5줄, V1 PULSE(0 48 0 1u 1u 10 20), R1 47, C1 4700u, B1 v=i(V1)*i(V1)*47, B2 v=-i(V1)), 실행 후 콘솔, V(bus)·V(ia)·V(p) 파형, 측정 패널 순으로 캡처됐다.",
+          "콘솔 캡처 재판독값은 i_pk=1.021274e+00(at 1e-06), p_pk=4.902105e+01, v_bus_at_tau=3.034175e+01, t_95=6.61758e-01, e_r=5.41439e+00이다. 보고값과 정확히 같고 05-precharge.gui-console.txt 49~54행과도 같다.",
+          "파형 해석: V(bus)는 0에서 48V로 지수 충전되고 V(p)는 약 49에서 감쇠한다. V(ia)는 약 1에서 감쇠하는데 같은 축에서 작게 보인다. 플롯이 비어 있지 않고 물리적으로 맞는 모양이다.",
+          "CSV(세미콜론 구분, 30023행)는 콘솔의 'No. of Data Rows : 30023'과 행 수가 같다. 독립 재계산값은 max V(ia)=1.02127(t=1us), max V(p)=49.0211, V(bus)@0.2209=30.34174, 45.6V 상승 교차 0.6617588, 사다리꼴 적분 V(p)=5.4143908, 마지막 V(bus)=47.9999이다. 행마다 p와 47*ia^2의 차는 최대 4.7e-4로 서로 맞는다.",
+          "이론값을 독립 검산했다. 48/47=1.02128, 48^2/47=49.0213, 48(1-e^-1)=30.3418, tau*ln20=0.66176, 0.5*4700u*48^2=5.4144이다. 사양 measurements(MAX/MAX/FIND AT/WHEN RISE=1/INTEG)와 물리량·해석 종류(tran)가 일치하고, 모든 항목의 상대오차가 2e-2보다 훨씬 작다.",
+          "GUI 넷리스트(.title/.save/.probe 줄 제외)와 mcp-meas.cir를 정렬해 diff하니 같았다. 사본 회로도 SHA-256 88f41a49…a5b3d도 보고값과 같다.",
+          "사소한 점: 측정 패널은 3자리 표시라 정밀 검증 근거가 될 수 없고, 정밀값의 근거는 콘솔 텍스트다. 첫 캡처의 '이전 버전의 KiCad에서 만들었습니다' 배너는 형식 변환 안내일 뿐 결과에 영향이 없다. 번들 ngspice 45.2와 시스템 ngspice 44.2 교차값은 재실행하지 않고 보고 내용을 그대로 받아들였다."
+        ],
+        "notes": "재판독 근거: 캡처 PNG 7장을 직접 보았고, 05-precharge-tran.csv를 python3 -I로 다시 계산했으며, gui-console.txt와 netlist를 diff했다. GUI 레인은 조작하지 않았다(읽기 전용 검증). 파일 경로: /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge-tran.csv, /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/05-precharge/05-precharge.gui-console.txt"
+      }
+    },
+    {
+      "label": null,
+      "result": {
+        "id": "04-diode-rectifier",
+        "verdict": "confirmed",
+        "reread_values": {
+          "vout_pk": 9.287223,
+          "vout_pk_measure_panel": 9.29,
+          "vout_pk_at_s": 0.00125028,
+          "vout_pk_csv_recomputed": 9.28722,
+          "vout_pk_csv_at_s": 0.00025028,
+          "vin_max_csv": 9.99998,
+          "vin_minus_vout_at_peak_csv": 0.71276,
+          "vf_pk_derived": 0.712777,
+          "theory_vout_independent": 9.287238242074576,
+          "theory_vf_independent": 0.7127617579254242,
+          "csv_data_rows": 2008
+        },
+        "objections": [
+          "반박 근거를 찾지 못했다. 아래는 확인했지만 판정을 바꾸지 않는 사항이다.",
+          "vf_pk_derived는 GUI에서 측정한 값이 아니다. 콘솔 vout_pk에서 10 - vout_pk로 계산한 DERIVED 값이다. 사양 kind가 DERIVED이므로 사양과는 맞는다. 별도로 CSV 피크 시점의 V(in)-V(out)를 계산하면 0.71276으로, 이론값 0.712762와 일치한다.",
+          "콘솔 .meas는 최댓값 시점을 1.250280e-03 s(두 번째 피크)로, CSV 재계산은 0.25028 ms(첫 번째 피크)로 보고한다. 두 피크 모두 9.28722로 같아서 동률을 처리하는 방식 차이로 본다. 서로 모순되지 않는다.",
+          "측정 패널 'MAX V(out) = 9.29V'는 3자리까지만 표시된다. 그래서 정밀한 대조는 콘솔 텍스트와 CSV에 의존한다.",
+          "넷리스트 is=10f는 1e-14와 같다. 'D1 in out'의 노드 순서는 애노드=in, 캐소드=out이라 사양의 극성(핀 1=K, 2=A)과 맞다. rs=0, cjo=0으로 기본값을 덮어쓴 것도 확인했다. 해석 종류는 .tran 1u 2m이고 사양 tran과 같다.",
+          "이론값은 VT=0.0258649(TNOM 27°C)와 Vpk=10을 가정한다. CSV에서 실제 V(in) 최댓값은 시간 이산화 때문에 9.99998이다. 오차 기여가 1e-6 수준이라 허용 오차 rel 0.02에 비해 무시할 수 있다."
+        ],
+        "notes": "판정은 confirmed다. GUI 결과를 반박할 근거를 찾지 못했다.\n\n**캡처 7장 직접 판독**\n- **회로가 맞다:** 04-diode-rectifier 회로도에 .tran 1u 2m과 .meas tran vout_pk MAX v(out) FROM=0 TO=2m 지시어가 보이고, 분석 탭 'TRAN 1u/2m'이 열려 있다.\n- **넷리스트가 사양과 같다:** is=10f, n=1, rs=0, cjo=0이고 연결은 D1 in out, V1 SIN(0 10 1k), R1 1k다.\n- **파형이 정상이다:** V(in)은 ±10V 사인파, V(out)은 약 9.3V 피크의 반파 정류 파형으로 표시된다. 빈 플롯이나 오류 대화상자는 없다.\n- **콘솔 결과가 보고값과 같다:** 'vout_pk = 9.287223e+00 at= 1.250280e-03'이며 데이터 행은 2008개다.\n\n**CSV 재계산 (세미콜론 구분, 2008행)**\n- V(out) 최댓값은 9.28722(0.25028 ms)다. 콘솔 값과의 상대차는 3.2e-7이다.\n\n**이론값 독립 검산 (Shockley 식을 이분법으로 풂)**\n- 이론 vout은 9.2872382, vf는 0.7127618이다.\n- 콘솔 값과의 상대오차는 vout이 1.64e-6, vf_pk_derived가 2.14e-5다.\n- 둘 다 허용 오차 rel 0.02보다 훨씬 작다.\n\n**사본 파일 상태**\n- 사본 회로도 SHA-256은 보고값 50af72a8…cb1과 같다.\n- 산출물 폴더에 .lck 파일이 남아 있지 않다.\n\n이번 검증은 읽기 전용으로만 했다. 레인 조작, 파일 쓰기, 프로세스 조작은 하지 않았다.\n\n**확인한 파일 (모두 /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/04-diode-rectifier/ 아래)**\n- 04-diode-rectifier-tran.csv\n- 04-diode-rectifier.gui-console.txt\n- 04-diode-rectifier.gui-netlist.cir\n- 04-diode-rectifier.measure.json"
+      }
+    },
+    {
+      "label": null,
+      "result": {
+        "id": "02-mosfet-gate",
+        "verdict": "confirmed",
+        "reread_values": {
+          "vgs_at_tau": 6.318125,
+          "t_vth": 2.23712e-07,
+          "vds_on": 0.02998124,
+          "id_on_derived": 0.1197001876,
+          "csv_vgs_at_tau": 6.318124445554446,
+          "csv_t_vth": 2.237125e-07,
+          "csv_vds_on": 0.0299812,
+          "csv_id_on_derived": 0.119700188,
+          "csv_data_rows": 20015,
+          "console_data_rows": 20015
+        },
+        "objections": [
+          "반박 근거를 찾지 못했다. 아래는 결과를 뒤집지 않는 작은 관찰이다.",
+          "02-mosfet-gate-run.png는 실행 직후 화면이라 플롯이 비어 있다(축만 0~16us). 파형은 02-mosfet-gate-signals.png에만 있다. 거기서 V(d)(파랑)는 12V에서 시작해 약 0.03V로 떨어지고, V(g)(빨강)는 tau 약 1us로 10V까지 RC 충전하며, V(gsrc)(초록)는 10V 계단이다. 빈 플롯이 최종 결과는 아니다.",
+          "02-mosfet-gate-analysis-tab.png는 실행 전에 찍은 '분석 1 - TRAN' 편집 대화상자다(시간 단계 1n, 최종 시간 20u). 사양 analysis(tran, tstep 1n, tstop 20u)와 일치한다. 이 캡처의 콘솔에는 아직 결과가 없다.",
+          "GUI 넷리스트의 '.model __M1 NMOS'에는 LEVEL=1이 명시돼 있지 않다. 사양 넷리스트에는 LEVEL=1이 있다. ngspice의 MOS 기본 level이 1이라 결과는 같고, 사양 배치 결과와도 상대차 0이다. 그래도 명시는 빠져 있다. tox=100n은 1e-7과 같고, W=L=100u이다.",
+          "id_on_derived는 GUI가 직접 측정한 값이 아니다. 콘솔 vds_on에서 (12 - vds_on)/100으로 계산했다. CSV로 다시 계산해도 0.119700188로 같다.",
+          "독립 재계산 결과: CSV(20015행, 시간 단조 증가, 0~20us)를 선형 보간한 값이 보고값과 1e-5 이내로 일치한다. 콘솔 캡처 판독값 6.318125e+00, 2.23712e-07, 2.998124e-02도 보고값과 같다. 콘솔 'No. of Data Rows : 20015'는 CSV 행 수와 같다. 이론값과 비교한 편차는 t_vth +0.57ns(펄스 상승 1n의 약 절반으로 설명된다), vgs_at_tau -0.05%, vds_on 1e-6 이하로, 모두 허용 오차 rel 0.02 안이다.",
+          "회로도 캡처(02-mosfet-gate-open.png)의 제목은 02-mosfet-gate이고 V1 12, V2 VPULSE, R1, C1 10n, R2, M1 NMOS와 .tran 1n 20u, .meas 3줄이 보인다. 다른 회로의 창이나 오류 대화상자는 없다. 상단 띠에 보이는 '이전 버전 파일' 경고는 저장 형식 안내일 뿐이다."
+        ],
+        "notes": "결론: 반박하지 못해 confirmed로 판정한다. 캡처 6장을 직접 열어 확인했다. 시뮬레이터 콘솔에 .meas 결과 3개가 출력돼 있고, 신호 플롯에 V(d), V(g), V(gsrc) 파형이 제대로 그려져 있다. 넷리스트 캡처는 사양 넷리스트와 소자·모델 파라미터·.meas 지시어가 모두 같다. 해석 종류는 사양과 같은 tran(1n, 20u)이다. 측정 대상 물리량도 사양과 같다: FIND v(g) AT=1u, WHEN v(g)=2 RISE=1, FIND v(d) AT=15u. CSV /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/kicad-gui/02-mosfet-gate/02-mosfet-gate-tran.csv로 독립 재계산한 값도 보고값과 일치한다. 실제 V(g) 값으로 level 1 선형 영역 이론식을 풀면 vds_on은 0.02998122655로, 사양 이론값과 같다. 이번 판독에서는 레인과 GUI를 조작하지 않았고 파일도 쓰지 않았다."
+      }
+    },
+    {
+      "label": null,
+      "result": {
+        "id": "03-opamp-noninv",
+        "verdict": "confirmed",
+        "reread_values": {
+          "vout_pk_1k": 0.999185,
+          "gain_db_10hz": 19.99565,
+          "f_3db": 39864.6
+        },
+        "objections": [
+          "TRAN 콘솔에서 vout_pk_1k가 'Measurements for AC Analysis' 머리말 아래 찍혀 있어 처음엔 해석 종류가 의심스러웠다. 하지만 'at= 2.254280e-03'은 시간값이고 [2m,3m] 창 안에 있으며, 1kHz 사인의 세 번째 피크(2.25ms)와 맞는다. TRAN CSV를 다시 계산해도 같은 점(t=2.25428ms, 0.999185)이 나왔다. 따라서 이 값은 TRAN 측정이고, 문제는 ngspice 머리말 표기뿐이다.",
+          "자동 생성된 '분석 1 - TRAN' 탭의 넷리스트에는 .tran과 .ac가 함께 들어갔다. AC도 실행됐지만(701행) AC .meas 2개는 콘솔에 나오지 않았다. AC 값은 사람이 GUI에 직접 입력해 만든 '분석 2 - AC' 탭에서만 나왔다. 입력값(dec 100, 1, 10meg)은 사양 analysis.ac와 같고, 캡처한 넷리스트에도 '.ac dec 100 1 10Meg'가 있다. 다만 회로도 지시어만으로 GUI가 AC를 자동 측정한 것은 아니다.",
+          "TRAN 분석 편집 대화상자에는 초기 시간 0과 최대 시간 단계 0이 채워져 있었다. 캡처한 GUI 넷리스트는 '.tran 1u 3m' 한 줄뿐이라 결과에는 영향이 없어 보인다.",
+          "콘솔 측정 크롭 캡처 2장(console-meas-*)만으로는 어느 창인지 알 수 없다. run-*과 signals-* 전체 창 캡처에 같은 콘솔 문자열이 SPICE 시뮬레이터 창 안에 보여서 출처를 확인했다."
+        ],
+        "notes": "반박할 결함을 찾지 못해 confirmed로 판정했다. 캡처 11장과 CSV 2개, 콘솔 텍스트, GUI 넷리스트를 모두 직접 확인했다.\n\n1. 다른 회로나 오류 창이 아니다\n- open.png는 '03-opamp-noninv — 회로도 편집기' 창이다.\n- 회로도에는 V1, V2, V3, U1(POLE=20 GAIN=20k VOFF=0 ROUT=10), R1=1k, R2=9k가 있고, .tran/.ac 지시어와 .meas 3줄이 보인다.\n- 오류 대화상자는 없다. '이전 버전 KiCad 파일' 안내 배너만 떠 있다.\n\n2. 플롯에 실제 파형이 그려져 있다\n- signals-tran.png: V(in)은 ±0.1V, V(out)은 ±약 1.0V 사인파다. 피크는 약 0.25, 1.25, 2.25ms에 있다.\n- signals-ac.png: V(out) 게인은 약 20dB로 평탄하다가 약 40kHz부터 -20dB/dec로 떨어져 10MHz에서 약 -28dB가 된다. 위상(점선)은 0에서 약 -85.5°까지 내려간다. 단극 모델의 모양과 같다.\n- run-*.png의 빈 플롯은 신호를 추가하기 전 상태다. 같은 탭에서 신호를 추가한 뒤 캡처한 signals-*.png에는 파형이 있다.\n\n3. 캡처 숫자를 다시 읽은 값\n- vout_pk_1k = 9.991850e-01, at 2.254280e-03 s\n- f_3db = 3.98646e+04 Hz\n- gain_db_10hz = 1.999565e+01 dB\n- 세 값 모두 보고값과 같다. 콘솔 텍스트 파일 내용도 같다.\n\n4. CSV에서 독립적으로 다시 계산한 값\n- TRAN CSV(3008행, tmax=3ms): [2m,3m] 구간 V(out) 최대는 t=2.25428ms에서 0.999185다. V(in) 최대는 0.0999998이다.\n- AC CSV(701행, 1Hz~10MHz): 10Hz 지점 게인은 19.9957dB다(CSV에 10Hz 표본이 직접 있다).\n- 16.99565dB를 처음 내려가며 지나는 점을 선형 보간하면 39865.40Hz다(콘솔과 상대차 2.0e-5).\n- 그 지점의 위상은 -44.9°로 단극의 -45°와 맞는다. 10MHz에서는 -27.972dB, -89.77°다.\n- 이론값과 비교하면 이렇다.\n  - 10MHz 게인: 이론 20log10(10/(1e7/39960)) ≈ -27.97dB와 같다.\n  - f_3db: 이론 39959.8Hz와 0.24% 차이로 허용 2% 안이다.\n  - gain_db_10hz: 이론과 4e-6dB 차이로 허용 0.17dB 안이다.\n  - vout_pk_1k: 이론과 1.9e-6 상대차로 허용 2% 안이다.\n\n5. 사양과 같은 물리량인가\n- GUI 넷리스트의 .meas 3줄이 사양 measurements와 같다.\n  - vout_pk_1k: tran MAX v(out) FROM=2m TO=3m\n  - gain_db_10hz: ac FIND vdb(out) AT=10\n  - f_3db: ac WHEN vdb(out)=16.9957 FALL=1\n- 사양 val은 16.995653…이고 넷리스트에는 16.9957로 반올림돼 있다. 차이가 4.6e-5dB라 결과에 주는 영향은 무시할 수 있다.\n- 소자 줄도 사양과 같다. V2를 'GND vee DC 15'로 연결해 vee가 -15V가 되고, V3는 SIN(0 0.1 1k) AC 1이다.\n\n6. 남은 약점 (판정을 뒤집지는 않음)\n- AC 측정은 자동 생성 탭이 아니라 사람이 수동으로 추가한 AC 탭에서 얻었다.\n- TRAN 측정은 'AC Analysis' 머리말 아래 출력됐다."
+      }
+    }
+  ]
+}

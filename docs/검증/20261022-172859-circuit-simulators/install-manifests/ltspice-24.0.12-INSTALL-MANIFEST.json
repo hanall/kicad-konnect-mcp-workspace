@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "product": "LTspice",
+  "vendor": "Analog Devices Inc.",
+  "version": "24.0.12.0",
+  "format": "Windows MSI under Wine",
+  "installed_at": "2026-10-22T17:11:31+09:00",
+  "source_url": "https://ltspice.analog.com/download/latest/LTspice64.msi",
+  "msi": {
+    "name": "LTspice64.msi",
+    "sha256": "62a9f20b630738e6ade20a37551baa91b20760bfb718807d8a2be4caa3421a36",
+    "http_last_modified": "2024-04-19"
+  },
+  "exe_sha256": "17f5efb978c0df2e164328b7352801fdc1ed0225827e41669bd9da25893fe96d",
+  "wine": {
+    "source": "Debian 13 공식 저장소",
+    "package_version": "10.0~repack-6",
+    "runtime_version": "wine-10.0 (Debian 10.0~repack-6)",
+    "winearch": "win64",
+    "dll_overrides": "mscoree=d;mshtml=d"
+  },
+  "prefix": "/home/hanol/.local/share/wineprefixes/ltspice",
+  "entrypoints": [
+    "/home/hanol/.local/bin/ltspice"
+  ],
+  "approval": {
+    "status": "approved",
+    "approved_at": "2026-10-22",
+    "scope": "wine 전체 apt 설치와 LTspice64.msi 직접 URL 설치",
+    "source": "사용자 명시 승인 (그릴링 Q3, Q10)",
+    "exception": "공급망 지침 직접 URL 설치 기본 금지에 대한 사용자 승인 예외"
+  }
+}

@@ -1,0 +1,18 @@
+* Qucs 26.1.1  /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/05-precharge.sch
+.INCLUDE "/tmp/.mount_Qucs-SbfidHI/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+V1 in  0 PULSE(0 48 0 1u 1u 10 20)
+RPRE in  bus 47
+CBUS bus  0 4700u
+B1 p  0  V = i(V1)*i(V1)*47 
+B2 ia  0  V = -i(V1) 
+
+.control
+
+tran 0.0001 3 0 
+write spice4qucs.tr1.plot v(bus) v(ia) v(in) v(p)
+destroy all
+reset
+
+exit
+.endc
+.END

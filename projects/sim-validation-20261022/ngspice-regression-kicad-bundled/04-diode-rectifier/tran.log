@@ -1,0 +1,25 @@
+******
+** ngspice-45.2 shared library
+** Creation Date: Sat Feb 28 04:13:30 UTC 2026
+******
+******
+** ngspice-45.2
+** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html
+** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html
+** Creation Date: Sat Feb 28 04:13:30 UTC 2026
+******
+Current directory: /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/ngspice-regression-kicad-bundled/04-diode-rectifier
+Note: No compatibility mode selected!
+Circuit: * 04 half-wave rectifier
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+Using SPARSE 1.3 as Direct Linear Solver
+Initial Transient Solution
+--------------------------
+Node                                   Voltage
+----                                   -------
+in                                           0
+out                               -7.32338e-29
+v1#branch                          7.32338e-32
+No. of Data Rows : 2008
+Measurements for Transient Analysis
+vout_pk             =  9.287223e+00 at=  1.250280e-03

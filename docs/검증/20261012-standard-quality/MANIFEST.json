@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-10-11 21:58:33 UTC",
+  "status": "SCOPE_LIMITED_COMPLETE",
+  "package_identity": {
+    "schema_version": 1,
+    "algorithm": "sha256-path-size-content-v1",
+    "files": [
+      {
+        "path": "SKILL.md",
+        "size": 6100,
+        "sha256": "62d0277690166620656104b13a7bbea1bec6cd74f582c8a547a7acf8114e7d6d"
+      },
+      {
+        "path": "assets/common-plan.md",
+        "size": 3179,
+        "sha256": "e24084248b912ce2f51105dadf858f0989eff864b1e30e84a893daa085394aeb"
+      },
+      {
+        "path": "assets/page-plan.md",
+        "size": 5083,
+        "sha256": "9a9dfd7894be4fb8ec6a1d69b9011b0c0d0c03eb87224dfedca7d8706bf1c1b6"
+      },
+      {
+        "path": "assets/plan-index.example.json",
+        "size": 658,
+        "sha256": "29e7fdc230312ceac4a5f5a9b1792e468906411e0c29d8ab9c62c17e7f8d6751"
+      },
+      {
+        "path": "assets/review-record.md",
+        "size": 3218,
+        "sha256": "c5eec89eb9d3130195a8dc936851ab8c2967a37a26309beb4bde1b1a25b4ca4c"
+      },
+      {
+        "path": "profiles/general.md",
+        "size": 2971,
+        "sha256": "2eda8f482c1a1de0715e157922411605af4e48e403ffe4ad0b9212089cbbace8"
+      },
+      {
+        "path": "profiles/smps.md",
+        "size": 3571,
+        "sha256": "2576062415b47f3877641661ae75e5a31af6981974ba544af640cc424624faf5"
+      },
+      {
+        "path": "references/common-workflow.md",
+        "size": 8311,
+        "sha256": "b0b62110a253ec82477bddced19f6b9d8b1579e098c47238ecd7d86e3a73d0fc"
+      },
+      {
+        "path": "references/electrical-rules.md",
+        "size": 5751,
+        "sha256": "dcdc9f0150d239ec6bc2d39cdf31efcb51b46c3e9101904f8f4bd73299258b23"
+      },
+      {
+        "path": "references/legacy-skill-overrides.md",
+        "size": 12227,
+        "sha256": "f554c8487aa69fd24277fa7761f135ac6fb7aa2391bd88dc68a84733c197a4f3"
+      },
+      {
+        "path": "references/tool-compatibility.md",
+        "size": 6600,
+        "sha256": "b54968ce1c81e2bf9f218a056da1499b0a1264ca436c240e43e4cc4f15cbf531"
+      },
+      {
+        "path": "references/verification.md",
+        "size": 8426,
+        "sha256": "1eff12608c3f7a2b2740c0879970d1138f64c11fc1e55d84c5af7b56e032e1ae"
+      },
+      {
+        "path": "references/visual-rules.md",
+        "size": 4717,
+        "sha256": "2a77fd89e40265fb35b46bd3477543d0261e7286d289b807c0b49dd335cb69f8"
+      },
+      {
+        "path": "scripts/collect_evidence.py",
+        "size": 29846,
+        "sha256": "79013ea2280f7ab5f00788d77d2fadcad3dba6c7deb5ef0353c7bdaee8e76109"
+      },
+      {
+        "path": "scripts/guarded_mcp.py",
+        "size": 95505,
+        "sha256": "4fd8f5bc03fc6e3b053f52dad2c5f369d5f429fffe7c68fc23d14f7bd57bec44"
+      },
+      {
+        "path": "scripts/package_identity.py",
+        "size": 4071,
+        "sha256": "4bdf252d16baf1164d91d62e2b325b4135bc39ba908d7e2ae24bbf63b285f78e"
+      },
+      {
+        "path": "scripts/verify_quality.py",
+        "size": 68301,
+        "sha256": "1e816cb0e25fdbe49799dff6c5a6336744b5dec4fc2fb3c7262349986e1a1b9b"
+      }
+    ],
+    "sha256": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca"
+  },
+  "regular_files": [
+    {
+      "path": "AGENTS.md",
+      "size": 22795,
+      "sha256": "e112ee4dd698ab59cefa8b061960da6bf584af733bb0ecbf40e63818205bf09b"
+    },
+    {
+      "path": "Makefile",
+      "size": 2401,
+      "sha256": "013211f7f4a401074f658f83fbad6968e9abe66352423e128dcb352192cd1f89"
+    },
+    {
+      "path": "README.md",
+      "size": 11941,
+      "sha256": "14cdbcef69292ffca56344dd5dc32f8ae89ebe8abcb35cfbb0d36a2e143cd4e3"
+    },
+    {
+      "path": "docs/agents/20261012-040121_schematic-quality-standardization-plan.md",
+      "size": 5324,
+      "sha256": "ee4690be1fbad3cb132fca5bd226006e4e795fc7444bcc2dc3743c6f0cd57995"
+    },
+    {
+      "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+      "size": 29472,
+      "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/README.md",
+      "size": 4038,
+      "sha256": "bc0bd11550b5a2aea6bbc8485e68f15ef7f09796236968ad82c23acf9347aea9"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/c1-evidence.README.md",
+      "size": 7500,
+      "sha256": "7217e8f922d6f07c7bc7b1bf81a6aecbfd14aec3af55092ff3df019c31ce66c9"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/c1-evidence.manifest.json",
+      "size": 283852,
+      "sha256": "1616dabf4a52bd274ae8fb960833d2f2622147ed91c4cddfc43d3c64203ece05"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/c1-evidence.tar.gz",
+      "size": 885455,
+      "sha256": "d8c36e0c338b3246283255d109a669ef0d183a5393a982bbc8db9512345138a8"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/final-audit.json",
+      "size": 67097,
+      "sha256": "3e1bc8ea2a2711726dddea16a87d222e43e99cab92315372164060ff21ad1759"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/final-audit.md",
+      "size": 35620,
+      "sha256": "f618debaa1cd41421acf93ebf623484dad223581dc6ea1048859e58bae294d38"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/standard-evidence.README.md",
+      "size": 4585,
+      "sha256": "3eb2e1103b383cef1952074e122e1c5a4621294e8c0799ea0ea8341c9027f5a5"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/standard-evidence.manifest.json",
+      "size": 49755,
+      "sha256": "1f075b162fb334860be6039fda74b4bf01827e188cbb9b6186201748f7d31c0f"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/standard-evidence.tar.gz",
+      "size": 849256,
+      "sha256": "d691bdcc6a291e748921aed4608ea4a60313b68092290478830e7cd5a7bfd1f4"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/x1-evidence.README.md",
+      "size": 10920,
+      "sha256": "86be0bea82e4f88644896c63d93bfd7dd4766defc194e0f54ff93bf0aa119436"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/x1-evidence.manifest.json",
+      "size": 253790,
+      "sha256": "69fb37d04f68c88d2b4e1ff7f9b44c8866391c2f7f14025ddcc2fcc7b30d5f0d"
+    },
+    {
+      "path": "docs/검증/20261012-standard-quality/x1-evidence.tar.gz",
+      "size": 842610,
+      "sha256": "5a48aa895d105d3eb5fa72424e9781f926aade5dad2f7f8498ef423410d91413"
+    },
+    {
+      "path": "docs/보고서/20261012-040121_standard-quality.html",
+      "size": 66343,
+      "sha256": "cc42a3da2c2e9a62fb781f311c19a8b03092a437c6fce73458538a04b6ace7cf"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/SKILL.md",
+      "size": 6100,
+      "sha256": "62d0277690166620656104b13a7bbea1bec6cd74f582c8a547a7acf8114e7d6d"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/common-plan.md",
+      "size": 3179,
+      "sha256": "e24084248b912ce2f51105dadf858f0989eff864b1e30e84a893daa085394aeb"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/page-plan.md",
+      "size": 5083,
+      "sha256": "9a9dfd7894be4fb8ec6a1d69b9011b0c0d0c03eb87224dfedca7d8706bf1c1b6"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/plan-index.example.json",
+      "size": 658,
+      "sha256": "29e7fdc230312ceac4a5f5a9b1792e468906411e0c29d8ab9c62c17e7f8d6751"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/assets/review-record.md",
+      "size": 3218,
+      "sha256": "c5eec89eb9d3130195a8dc936851ab8c2967a37a26309beb4bde1b1a25b4ca4c"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/profiles/general.md",
+      "size": 2971,
+      "sha256": "2eda8f482c1a1de0715e157922411605af4e48e403ffe4ad0b9212089cbbace8"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/profiles/smps.md",
+      "size": 3571,
+      "sha256": "2576062415b47f3877641661ae75e5a31af6981974ba544af640cc424624faf5"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/common-workflow.md",
+      "size": 8311,
+      "sha256": "b0b62110a253ec82477bddced19f6b9d8b1579e098c47238ecd7d86e3a73d0fc"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/electrical-rules.md",
+      "size": 5751,
+      "sha256": "dcdc9f0150d239ec6bc2d39cdf31efcb51b46c3e9101904f8f4bd73299258b23"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/legacy-skill-overrides.md",
+      "size": 12227,
+      "sha256": "f554c8487aa69fd24277fa7761f135ac6fb7aa2391bd88dc68a84733c197a4f3"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/tool-compatibility.md",
+      "size": 6600,
+      "sha256": "b54968ce1c81e2bf9f218a056da1499b0a1264ca436c240e43e4cc4f15cbf531"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/verification.md",
+      "size": 8426,
+      "sha256": "1eff12608c3f7a2b2740c0879970d1138f64c11fc1e55d84c5af7b56e032e1ae"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/references/visual-rules.md",
+      "size": 4717,
+      "sha256": "2a77fd89e40265fb35b46bd3477543d0261e7286d289b807c0b49dd335cb69f8"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/collect_evidence.py",
+      "size": 29846,
+      "sha256": "79013ea2280f7ab5f00788d77d2fadcad3dba6c7deb5ef0353c7bdaee8e76109"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/guarded_mcp.py",
+      "size": 95505,
+      "sha256": "4fd8f5bc03fc6e3b053f52dad2c5f369d5f429fffe7c68fc23d14f7bd57bec44"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/package_identity.py",
+      "size": 4071,
+      "sha256": "4bdf252d16baf1164d91d62e2b325b4135bc39ba908d7e2ae24bbf63b285f78e"
+    },
+    {
+      "path": "skills/kicad-schematic-quality/scripts/verify_quality.py",
+      "size": 68301,
+      "sha256": "1e816cb0e25fdbe49799dff6c5a6336744b5dec4fc2fb3c7262349986e1a1b9b"
+    },
+    {
+      "path": "tests/test_standard_quality_collect.py",
+      "size": 19833,
+      "sha256": "a8b083412b612ba5b2222dd8ae103587205b5ca84463643481db4605bc6c998a"
+    },
+    {
+      "path": "tests/test_standard_quality_docs_safety.py",
+      "size": 13423,
+      "sha256": "c2589557b2ea6660dafe0d4cec5cf3e123bcff6221ff10305795042c99159399"
+    },
+    {
+      "path": "tests/test_standard_quality_identity.py",
+      "size": 3888,
+      "sha256": "a5719358fe6825283c96314be2a43bb0ce3912490319762cc1ab65e5c95cbfba"
+    },
+    {
+      "path": "tests/test_standard_quality_mcp.py",
+      "size": 48131,
+      "sha256": "f32bb8665dbf72ea95e8728809b072baa857a8279af1a364ca7baab12fc3281f"
+    },
+    {
+      "path": "tests/test_standard_quality_package.py",
+      "size": 2821,
+      "sha256": "11164e8264355c39d9275a113a1fceecfa8d6ec5cc5f97e8027e592c2eaa6a92"
+    },
+    {
+      "path": "tests/test_standard_quality_verify.py",
+      "size": 28982,
+      "sha256": "2375d73126dd7bbcc976b91e0618b7a9395f29f9877326de22b98b3581c7737c"
+    }
+  ],
+  "aliases": [
+    {
+      "path": ".claude/skills/kicad-schematic-quality",
+      "target": "../../skills/kicad-schematic-quality",
+      "resolved_package_sha256": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca"
+    },
+    {
+      "path": ".agents/skills/kicad-schematic-quality",
+      "target": "../../skills/kicad-schematic-quality",
+      "resolved_package_sha256": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca"
+    }
+  ],
+  "gate_summary": {
+    "schema_version": 1,
+    "make_rc": 0,
+    "rust_suites": 45,
+    "rust": {
+      "passed": 2513,
+      "failed": 0,
+      "ignored": 50
+    },
+    "python_tests": 190,
+    "standard_quality_tests": 107,
+    "core_tests": 92,
+    "docs_safety_tests": 15,
+    "source_package_sha256": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca",
+    "logs": {
+      "final-full-test.txt": "ee10cb773fdbadc2b78579aae9bdd5ffd117ff8b09f856175afd51f0e82825f8",
+      "final-full-test.stderr": "2ce05094b524847372be73e8140e2ac824953e4d76b8e90ebbdf6ed33bb8c917",
+      "final-full-test.rc": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "final-standard-tests.txt": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+      "final-standard-tests.rc": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "root-full-test-type-fixed.txt": "438d53f9d5c343dad2a9c715bbb151c09f6855bf8826f20c8cf3dec6397f6485",
+      "root-full-test-type-fixed.rc": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "original_failure_preserved": true,
+    "upstream_port_race_fixed": false,
+    "release_rebuild": false,
+    "new_dependency_install": false
+  },
+  "preservation": {
+    "baseline_paths": 73,
+    "intentional_preexisting_modifications": [
+      "AGENTS.md",
+      "Makefile",
+      "README.md"
+    ],
+    "unexpected_changes": [],
+    "external_changes": [],
+    "source_package_changes": [],
+    "external_skills_checked": 8,
+    "source_skill_files_checked": 8,
+    "index_unchanged": true,
+    "HEAD_unchanged": true,
+    "source_HEAD": "60a4847e23f0e891b810d3d8fd44823ee3c84706",
+    "source_HEAD_unchanged": true,
+    "source_status": "",
+    "source_status_unchanged": true,
+    "submodule_status": "caf7377e9cb6fa1535ec3596dcb8c99bf44a996e upstream/kicad (10.0.6)\n 94f80350cf67db27b179a06a8f6dbebfe4717927 upstream/konnect (v0.13.0-56-g94f8035)",
+    "scope": "baseline에 있던 파일 및 외부 정본 보존. 새 파일 완전성은 별도 manifest로 확인한다.",
+    "pass": true
+  },
+  "public_archive_readback": {
+    "status": "PASS",
+    "archives": [
+      {
+        "archive": "docs/검증/20261012-standard-quality/c1-evidence.tar.gz",
+        "sha256": "d8c36e0c338b3246283255d109a669ef0d183a5393a982bbc8db9512345138a8",
+        "members_verified": 260,
+        "size": 885455
+      },
+      {
+        "archive": "docs/검증/20261012-standard-quality/standard-evidence.tar.gz",
+        "sha256": "d691bdcc6a291e748921aed4608ea4a60313b68092290478830e7cd5a7bfd1f4",
+        "members_verified": 136,
+        "size": 849256
+      },
+      {
+        "archive": "docs/검증/20261012-standard-quality/x1-evidence.tar.gz",
+        "sha256": "5a48aa895d105d3eb5fa72424e9781f926aade5dad2f7f8498ef423410d91413",
+        "members_verified": 384,
+        "size": 842610
+      }
+    ],
+    "extracted": false
+  },
+  "current_x1_cad_sha256": {
+    "x1.kicad_sch": "fec0092cb81f57ca5e9d700a40978fd12503d161ab4079e5dd5120f9e63b522e",
+    "x1.kicad_pro": "f9656afbb2b56bdbe1ad54769c6174b56133df4b8a0449e0e511dde7aec6b590",
+    "x1.kicad_pcb": "d339432e9703afe9d86e25ef344078522aa166b4c78db6f36e6141cb87bb7690",
+    "sym-lib-table": "4e7e16efd5579f30621fbc683f068d6cb91a3792021a73006efb52ae498322f5"
+  },
+  "audit_sha256": "3e1bc8ea2a2711726dddea16a87d222e43e99cab92315372164060ff21ad1759",
+  "evidence_notes": [
+    "배포정본17파일과과거검증코드는서로다르다",
+    "원FAIL/제약/미실행은개별보고서에서유지",
+    "컴파일된bytecode와실행binary및자격증명은새배포근거에포함하지않는다"
+  ],
+  "manufacturing_energization_physical_safety": "NOT_CHECKED",
+  "commit": false,
+  "push": false,
+  "self_hash_rule": "MANIFEST.json은 regular_files에서 제외하며 SHA256SUMS가 이 manifest를 결속한다. SHA256SUMS 자체는 자기목록에서 제외한다.",
+  "updated_at_utc": "2026-10-11 22:03:40 UTC",
+  "report_summary_amendment": {
+    "previous_manifest_sha256": "429eb9f19adbd00fa339b5b0c897538fc9f3e2235c7b95d573d07fe87775e7fa",
+    "changed_files": [
+      "docs/검증/20261012-standard-quality/final-audit.json",
+      "docs/검증/20261012-standard-quality/final-audit.md",
+      "docs/보고서/20261012-040121_standard-quality.html"
+    ],
+    "executable_code_blocks_unchanged": true,
+    "independent_recheck": "final-audit.json"
+  }
+}

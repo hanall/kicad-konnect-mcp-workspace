@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "konnect": {
+      "type": "stdio",
+      "command": "C:\\Tools\\Konnect-MCP-Portable\\Start-Konnect.exe",
+      "args": []
+    }
+  }
+}

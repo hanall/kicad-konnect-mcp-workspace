@@ -1,0 +1,6 @@
+.title KiCad schematic
+.tran 1u 5m
+C1 out GND 1u
+R1 in out 1k
+V1 in GND PULSE( 0 5 0 1n 1n 10m 20m ) 
+.end

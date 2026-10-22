@@ -1,0 +1,18 @@
+* Qucs 26.1.1  /home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/04-diode-rectifier.sch
+.INCLUDE "/tmp/.mount_Qucs-SbfidHI/usr/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+V1 in  0 SIN(0 10 1k)
+D1 in  out DVAL
+RL 0  out 1k
+
+.model DVAL D(IS=1e-14 N=1 RS=0 CJO=0)
+
+.control
+
+tran 1e-06 0.002 0 
+write spice4qucs.tr1.plot v(in) v(out)
+destroy all
+reset
+
+exit
+.endc
+.END

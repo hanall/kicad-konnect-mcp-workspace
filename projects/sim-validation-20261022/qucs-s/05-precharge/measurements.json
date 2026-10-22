@@ -1,0 +1,80 @@
+{
+  "id": "05-precharge",
+  "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/05-precharge.dat.ngspice",
+  "dataset_header": "<Qucs Dataset 26.1.1>",
+  "dataset_vectors": [
+    "time",
+    "tran.v(bus)",
+    "tran.v(ia)",
+    "tran.v(in)",
+    "tran.v(p)"
+  ],
+  "independent_points": {
+    "time": 30023
+  },
+  "results": [
+    {
+      "name": "i_pk",
+      "kind": "MAX",
+      "theory": 1.0212765957446808,
+      "value": 1.021274283889,
+      "unit": "A",
+      "err_rel": 2.2636920206560904e-06,
+      "pass": true,
+      "note": "tran.v(ia) max over [0, 3] s; tol_rel=0.02"
+    },
+    {
+      "name": "p_pk",
+      "kind": "MAX",
+      "theory": 49.02127659574468,
+      "value": 49.02105465785,
+      "unit": "W",
+      "err_rel": 4.5273789279148205e-06,
+      "pass": true,
+      "note": "tran.v(p) max over [0, 3] s; tol_rel=0.02"
+    },
+    {
+      "name": "v_bus_at_tau",
+      "kind": "FIND",
+      "theory": 30.341786823770768,
+      "value": 30.34174684068808,
+      "unit": "V",
+      "err_rel": 1.3177563641428625e-06,
+      "pass": true,
+      "note": "tran.v(bus) at 0.2209 s (linear interpolation); tol_rel=0.02"
+    },
+    {
+      "name": "t_95",
+      "kind": "WHEN",
+      "theory": 0.6617572592280766,
+      "value": 0.6617577514072228,
+      "unit": "s",
+      "err_rel": 7.43745745669008e-07,
+      "pass": true,
+      "note": "tran.v(bus) RISE=1 crossing of 45.599999999999994; tol_rel=0.02"
+    },
+    {
+      "name": "e_r",
+      "kind": "INTEG",
+      "theory": 5.414399999991343,
+      "value": 5.414391756818877,
+      "unit": "J",
+      "err_rel": 1.5224535434246438e-06,
+      "pass": true,
+      "note": "tran.v(p) trapezoidal integral over [0, 3] s; tol_rel=0.02"
+    }
+  ],
+  "all_pass": true,
+  "alt_dataset": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/cli-run/05-precharge.cli-run.dat",
+    "all_pass": true,
+    "values": [
+      1.021274283889,
+      49.02105465785,
+      30.34174684068808,
+      0.6617577514072228,
+      5.414391756818877
+    ],
+    "max_rel_diff_vs_gui": 0.0
+  }
+}

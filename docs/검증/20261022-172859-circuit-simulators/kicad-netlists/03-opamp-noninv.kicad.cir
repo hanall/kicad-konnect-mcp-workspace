@@ -1,0 +1,11 @@
+.title KiCad schematic
+.include "/opt/kicad/10.0.6/share/kicad/symbols/Simulation_SPICE.sp"
+.tran 1u 3m
+.ac dec 100 1 10meg
+R1 inn GND 1k
+R2 out inn 9k
+XU1 in inn vcc vee out kicad_builtin_opamp POLE=20 GAIN=20k VOFF=0 ROUT=10
+V3 in GND DC 0 SIN( 0 0.1 1k 0 0 0 ) AC 1  
+V1 vcc GND DC 15 
+V2 GND vee DC 15 
+.end

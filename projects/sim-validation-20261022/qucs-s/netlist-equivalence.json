@@ -1,0 +1,59 @@
+[
+  {
+    "id": "01-rc-step",
+    "reference_cir": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/01-rc-step.cir",
+    "qucs_netlist": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/01-rc-step/01-rc-step.gui-netlist.cir",
+    "equivalent": true,
+    "elements_compared": 3,
+    "missing": [],
+    "extra": [],
+    "mismatch": {},
+    "renamed_instances": {}
+  },
+  {
+    "id": "02-mosfet-gate",
+    "reference_cir": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/02-mosfet-gate.cir",
+    "qucs_netlist": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/02-mosfet-gate.gui-netlist.cir",
+    "equivalent": true,
+    "elements_compared": 7,
+    "missing": [],
+    "extra": [],
+    "mismatch": {},
+    "renamed_instances": {}
+  },
+  {
+    "id": "03-opamp-noninv",
+    "reference_cir": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/03-opamp-noninv.cir",
+    "qucs_netlist": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/03-opamp-noninv.gui-netlist.cir",
+    "equivalent": true,
+    "elements_compared": 18,
+    "missing": [],
+    "extra": [],
+    "mismatch": {},
+    "renamed_instances": {
+      "x1": "xx1"
+    }
+  },
+  {
+    "id": "04-diode-rectifier",
+    "reference_cir": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/04-diode-rectifier.cir",
+    "qucs_netlist": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/04-diode-rectifier/04-diode-rectifier.gui-netlist.cir",
+    "equivalent": true,
+    "elements_compared": 4,
+    "missing": [],
+    "extra": [],
+    "mismatch": {},
+    "renamed_instances": {}
+  },
+  {
+    "id": "05-precharge",
+    "reference_cir": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/05-precharge.cir",
+    "qucs_netlist": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/05-precharge/05-precharge.gui-netlist.cir",
+    "equivalent": true,
+    "elements_compared": 5,
+    "missing": [],
+    "extra": [],
+    "mismatch": {},
+    "renamed_instances": {}
+  }
+]

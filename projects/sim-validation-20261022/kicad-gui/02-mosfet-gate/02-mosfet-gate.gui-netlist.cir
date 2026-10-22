@@ -1,0 +1,29 @@
+.title KiCad schematic
+.model __M1 NMOS
++           vto=2
++           kp=0.5
++           lambda=0
++           cbd=0
++           cbs=0
++           cgso=0
++           cgdo=0
++           tox=100n
+.save all
+.probe alli
+.probe p(V2)
+.probe p(M1)
+.probe p(V1)
+.probe p(R1)
+.probe p(R2)
+.probe p(C1)
+.meas tran vgs_at_tau FIND v(g) AT=1u
+.meas tran t_vth WHEN v(g)=2 RISE=1
+.meas tran vds_on FIND v(d) AT=15u
+.tran 1n 20u
+V2 gsrc GND PULSE( 0 10 0 1n 1n 50u 100u ) 
+M1 d g GND GND __M1 l=100u w=100u
+V1 vdd GND DC 12 
+R1 gsrc g 100
+R2 vdd d 100
+C1 g GND 10n
+.end

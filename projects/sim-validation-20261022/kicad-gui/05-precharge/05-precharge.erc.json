@@ -1,0 +1,237 @@
+{
+  "coordinates": {
+    "kicad_version": "10.0.6",
+    "reason": "KiCad 10.0.6 writes every ERC JSON coordinate at 1/100 of its true value (kicad#25582, fixed in 10.0.7); Konnect multiplied it back. A length quoted inside KiCad's own violation text is scaled the same way and is left as KiCad wrote it.",
+    "scale_applied": 100.0,
+    "status": "corrected"
+  },
+  "errors": 0,
+  "total": 14,
+  "violations": [
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG01 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG01 [PWR_FLAG]",
+          "uuid": "7a493995-5e50-4156-a988-86f2fa5dfd8e",
+          "x": 25.4,
+          "y": 63.5
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 25.4,
+      "y": 63.5
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #FLG02 [PWR_FLAG]",
+      "items": [
+        {
+          "description": "심볼 #FLG02 [PWR_FLAG]",
+          "uuid": "f6b773aa-d935-4cff-bdf3-66f19af54af3",
+          "x": 25.4,
+          "y": 101.6
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 25.4,
+      "y": 101.6
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR05 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR05 [GND]",
+          "uuid": "c28e834f-309f-4688-83ae-ad9a74ecaad1",
+          "x": 25.4,
+          "y": 104.14
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 25.4,
+      "y": 104.14
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 V1 [VPULSE]",
+      "items": [
+        {
+          "description": "심볼 V1 [VPULSE]",
+          "uuid": "889530f1-515a-46f0-b451-71dc905f4c04",
+          "x": 50.8,
+          "y": 76.2
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 76.2
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR01 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR01 [GND]",
+          "uuid": "71426116-9fc2-4f8f-96b7-f427e54b3545",
+          "x": 50.8,
+          "y": 83.82
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 83.82
+    },
+    {
+      "description": "Label connected to only one pin: 전역 라벨 'p'",
+      "items": [
+        {
+          "description": "전역 라벨 'p'",
+          "uuid": "350e890f-4ef1-4674-b280-69ee2795cd59",
+          "x": 50.8,
+          "y": 119.38
+        }
+      ],
+      "rule": "isolated_pin_label",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 119.38
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 B1 [BSOURCE]",
+      "items": [
+        {
+          "description": "심볼 B1 [BSOURCE]",
+          "uuid": "0f47fc8d-95a9-4945-83d5-df4e49ff3eac",
+          "x": 50.8,
+          "y": 127.0
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 127.0
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR03 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR03 [GND]",
+          "uuid": "61bc6c53-de05-4635-ae28-e25966e594f9",
+          "x": 50.8,
+          "y": 134.62
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 50.8,
+      "y": 134.62
+    },
+    {
+      "description": "Label connected to only one pin: 전역 라벨 'ia'",
+      "items": [
+        {
+          "description": "전역 라벨 'ia'",
+          "uuid": "7f10371e-bf24-49d7-bc39-5587479dbe79",
+          "x": 101.6,
+          "y": 119.38
+        }
+      ],
+      "rule": "isolated_pin_label",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 119.38
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Simulation_SPICE'가 포함되어 있지 않음: 심볼 B2 [BSOURCE]",
+      "items": [
+        {
+          "description": "심볼 B2 [BSOURCE]",
+          "uuid": "b337b58d-7428-41b7-968c-dc35150a5035",
+          "x": 101.6,
+          "y": 127.0
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 127.0
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR04 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR04 [GND]",
+          "uuid": "0047bf99-2d6b-4a89-8f83-2824b4ea4af7",
+          "x": 101.6,
+          "y": 134.62
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 101.6,
+      "y": 134.62
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Device'가 포함되어 있지 않음: 심볼 R1 [R]",
+      "items": [
+        {
+          "description": "심볼 R1 [R]",
+          "uuid": "d159a2e8-61b1-436c-93a4-4429cdceccb7",
+          "x": 127.0,
+          "y": 76.2
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 127.0,
+      "y": 76.2
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'Device'가 포함되어 있지 않음: 심볼 C1 [C]",
+      "items": [
+        {
+          "description": "심볼 C1 [C]",
+          "uuid": "9abc565c-42ed-4f98-8139-c990cb5dee86",
+          "x": 152.4,
+          "y": 76.2
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 152.4,
+      "y": 76.2
+    },
+    {
+      "description": "현재 설정에 심볼 라이브러리 'power'가 포함되어 있지 않음: 심볼 #PWR02 [GND]",
+      "items": [
+        {
+          "description": "심볼 #PWR02 [GND]",
+          "uuid": "9f192d15-325a-4c8c-9ad7-0ea7451feea6",
+          "x": 152.4,
+          "y": 82.55
+        }
+      ],
+      "rule": "lib_symbol_issues",
+      "severity": "warning",
+      "sheet": "/",
+      "x": 152.4,
+      "y": 82.55
+    }
+  ],
+  "warnings": 14
+}

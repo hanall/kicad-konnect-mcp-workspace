@@ -1,0 +1,1503 @@
+{
+  "schema_version": 2,
+  "audit_id": "standard-quality-final-closeout",
+  "status": "SCOPE_LIMITED_COMPLETE",
+  "verdict_basis": "S01~S14는 현재 동결 evidence와 최종 공개 문서로 PASS다. C01~C13과 T01~T16은 전부 대응됐으며 positive PWR_FLAG, actual 다중 hierarchy/PCB거리/정격/DFM/READY누락 fixture, T05 format exact, upstream port fixture 수정은 지원 범위 밖 또는 제한으로 명시했다. 따라서 관측된 조합의 범위 제한 인계만 완료로 판정한다.",
+  "claimed_scope": "KiCad10.0.6, Konnect0.13.0+hanall.1 commit94f80350, package c77, C1/T05/X1 합성 과제, 현재 local gates와 공개 문서",
+  "not_claimed": [
+    "모든 OS·모델·회로 유형 지원",
+    "PCB·실물 package·정격·동적 성능·제조·통전·인증·실물 안전",
+    "PWR_FLAG 자동 삽입 positive capability",
+    "미실행 actual PCB/정격/DFM fixture",
+    "upstream port fixture 수정",
+    "T05 출력 형식 exact 준수"
+  ],
+  "auditor_actions": {
+    "writes": "final-audit-closeout/만",
+    "canonical_package_writes": 0,
+    "CAD_GUI_model_native_runs": 0,
+    "global_Git_Rust_actions": 0,
+    "credential_raw_copy": 0
+  },
+  "canonical_package": {
+    "identity": "c77ca8ed6783532aaad86496f868f9d22af376c5756c9464c35938bdaf3ce3ca",
+    "files": 17,
+    "current_files_match_identity": true,
+    "evidence": [
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/type-fixed-package.identity.json",
+        "sha256": "fd56744c5825ef80bc3b10373ae4a5f418bcbc2215b9dff24153841f452bb6e2",
+        "size": 2866,
+        "scope": "canonical c77 17파일 identity"
+      },
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+        "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+        "size": 17496,
+        "scope": "최종 standard-quality 107 tests"
+      },
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+        "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+        "size": 9825,
+        "scope": "X1 c77 제한 완료 정본"
+      }
+    ]
+  },
+  "plan_requirements": [
+    {
+      "id": "S01",
+      "requirement": "단일 정본과 두 host 진입점",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/type-fixed-package.identity.json",
+          "sha256": "fd56744c5825ef80bc3b10373ae4a5f418bcbc2215b9dff24153841f452bb6e2",
+          "size": 2866,
+          "scope": "canonical c77 17파일 identity"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/model-observation.public.json",
+          "sha256": "41356dd146ec4bee1c12393799b0ded01dee2c9d474c958ba1f67e07287d8934",
+          "size": 1256,
+          "scope": "X1 gpt-6-astra/high 공개 관측"
+        }
+      ],
+      "scope_and_constraints": "canonical 17파일과 두 상대 alias, C1 Claude 실제 Skill 호출, X1 Codex .agents 자동노출·actual 읽기를 결속했다."
+    },
+    {
+      "id": "S02",
+      "requirement": "package 밖 제품 문서·절대 작업 경로 의존 제거",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "공백 cwd/relocated package와 battery/global을 가린 C1·X1 actual 과제로 확인했다. 다른 OS/도구판은 자동 승계하지 않는다."
+    },
+    {
+      "id": "S03",
+      "requirement": "세 기존 skill 및 연결 참조 전수 조사",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/source-audit/audit.json",
+          "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+          "size": 56424,
+          "scope": "global 세 스킬 7파일·C01~C13·T01~T16 정본"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/docs-dev/C01-C13-implementation-map.md",
+          "sha256": "53d3da836e9ed36783beb1fa1857b43d3991e3a9fcf7e18091b2d879164e02f6",
+          "size": 1668,
+          "scope": "C01~C13 package 행 대응"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        }
+      ],
+      "scope_and_constraints": "7/7파일·78절 그룹·차단11·교정13·시험안16을 전수 대응했다. global 원문은 불변이다."
+    },
+    {
+      "id": "S04",
+      "requirement": "신규/재작성/전기 변경/읽기 전용 구분",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        }
+      ],
+      "scope_and_constraints": "4모드와 review mutation0이 구현됐고 C1/X1 actual review에서 CAD SHA가 불변이다."
+    },
+    {
+      "id": "S05",
+      "requirement": "공통/페이지 계획의 작성 전 원문과 SHA",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/gui-evidence/roundtrip.json",
+          "sha256": "94415f6985ae0b277aaea00d3173ccfbc2604548cfed29610d33fd5dc5b0a529",
+          "size": 3670,
+          "scope": "C1 실제 GUI 저장·닫기·재열기"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/PRE-CAD-SEAL.json",
+          "sha256": "d208cc7dead2e9048989696aaa4653b3ea07b1c4ed672dc79ab98c81dea4b7a8",
+          "size": 622,
+          "scope": "X1 첫 CAD 전 계획/oracle 봉인"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "C1 및 X1 common/root 계획이 첫 CAD write 전 봉인되고 GUI 뒤까지 불변이다."
+    },
+    {
+      "id": "S06",
+      "requirement": "안전한 Konnect 호출·경로·lock·읽기 전용 경계",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "current schema/version/commit/config/allowlist/lock/readback 정책과 두 실제 소회로를 확인했다."
+    },
+    {
+      "id": "S07",
+      "requirement": "전기·실선·ERC·PDF·증거 분리 검증",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        }
+      ],
+      "scope_and_constraints": "XML·실선·ERC·PDF·aggregate/direct review를 분리했다. 동적·정격·PCB·제조는 비주장이다."
+    },
+    {
+      "id": "S08",
+      "requirement": "수치와 회로 유형 profile 분리",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/type-fixed-package.identity.json",
+          "sha256": "fd56744c5825ef80bc3b10373ae4a5f418bcbc2215b9dff24153841f452bb6e2",
+          "size": 2866,
+          "scope": "canonical c77 17파일 identity"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        }
+      ],
+      "scope_and_constraints": "general/SMPS profile 분리와 RC/분압필터 독립 예제를 확인했다. SMPS 수치는 공통 상수가 아니다."
+    },
+    {
+      "id": "S09",
+      "requirement": "과거 성공의 새 표준판 자동 승계 금지",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/strict-type-independent/audit.json",
+          "sha256": "6715a40ae758e3ae461b2f4f63f29284c040c79057db6a8d1f63bad7758c0f13",
+          "size": 14130,
+          "scope": "c77 strict type 독립 감사"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "b274 C1 작성과 c77 재검증을 구분했고 X1은 별도 current-c77 cold actual 작성이다."
+    },
+    {
+      "id": "S10",
+      "requirement": "실제 저장·재열기·전페이지 시각 검토",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/gui-evidence/roundtrip.json",
+          "sha256": "94415f6985ae0b277aaea00d3173ccfbc2604548cfed29610d33fd5dc5b0a529",
+          "size": 3670,
+          "scope": "C1 실제 GUI 저장·닫기·재열기"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-independent-post-gui/20261012-051541_c1-independent-post-gui.md",
+          "sha256": "37b1936214a912656f8087461cba1a1ab126c11944b9aa9a5ec184f37c78fb90",
+          "size": 12073,
+          "scope": "C1 독립 시각/전기 대조"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-gui/roundtrip.json",
+          "sha256": "ce937f520bfe88294251515e6d01cb5d6c506d4fc750c5ff38a2994b98ed6b31",
+          "size": 4042,
+          "scope": "X1 실제 GUI 왕복"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-independent/VERDICT.json",
+          "sha256": "e0cc58e082ab404aaebbc4bd6d9b8683bacafe4120dd6119253b6eecbebf4d28",
+          "size": 5368,
+          "scope": "X1 독립 43대조·제한 수용"
+        }
+      ],
+      "scope_and_constraints": "C1/X1 각각 한 페이지 실제 GUI save-close-reopen과 독립 전페이지 판독을 완료했다."
+    },
+    {
+      "id": "S11",
+      "requirement": "battery 저장소 접근 없는 이식성",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/model-observation.public.json",
+          "sha256": "41356dd146ec4bee1c12393799b0ded01dee2c9d474c958ba1f67e07287d8934",
+          "size": 1256,
+          "scope": "X1 gpt-6-astra/high 공개 관측"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "battery/global/account 원문을 가린 별도 환경에서 C1과 X1 loading·작성·검증을 실행했다."
+    },
+    {
+      "id": "S12",
+      "requirement": "정상·원인 재현·변이·재검증",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/results.json",
+          "sha256": "67d4bd42d404470bb8bb86e916c1af6c114623720c4a56067ebd1d2219452dd7",
+          "size": 54546,
+          "scope": "C1 current actual-input 인과/type 변이"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        }
+      ],
+      "scope_and_constraints": "MCP37/37, C1 actual-input/strict/scope, X1 20거부+control2/GREEN2, 공개 107 tests가 결속됐다."
+    },
+    {
+      "id": "S13",
+      "requirement": "기존 WIP·원 SMPS·global skill 보존",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-preservation-pre-audit.json",
+          "sha256": "c821c5c4e74f979ef2f009fb8f9891cc200aca06f836bea729315ef1d854a188",
+          "size": 795,
+          "scope": "baseline73 허용3외0/global8/source8/index/HEAD 보존"
+        },
+        {
+          "path": "docs/검증/20261012-standard-quality/c1-evidence.manifest.json",
+          "sha256": "1616dabf4a52bd274ae8fb960833d2f2622147ed91c4cddfc43d3c64203ece05",
+          "size": 283852,
+          "scope": "C1 공개 archive manifest"
+        },
+        {
+          "path": "docs/검증/20261012-standard-quality/standard-evidence.manifest.json",
+          "sha256": "1f075b162fb334860be6039fda74b4bf01827e188cbb9b6186201748f7d31c0f",
+          "size": 49755,
+          "scope": "공통 공개 archive manifest"
+        },
+        {
+          "path": "docs/검증/20261012-standard-quality/x1-evidence.manifest.json",
+          "sha256": "69fb37d04f68c88d2b4e1ff7f9b44c8866391c2f7f14025ddcc2fcc7b30d5f0d",
+          "size": 253790,
+          "scope": "X1 공개 archive manifest"
+        }
+      ],
+      "scope_and_constraints": "baseline73 중 허용3 외 변경0, global8/source8/index/HEAD/submodule 보존과 새 근거 manifest를 확인했다."
+    },
+    {
+      "id": "S14",
+      "requirement": "local gate와 사용·원복 문서",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        },
+        {
+          "path": "docs/보고서/20261012-040121_standard-quality.html",
+          "sha256": "cc42a3da2c2e9a62fb781f311c19a8b03092a437c6fce73458538a04b6ace7cf",
+          "size": 66343,
+          "scope": "최종 공개 자기완결 HTML; X1 누락 요약 2문장 정정판"
+        },
+        {
+          "path": "docs/검증/20261012-standard-quality/README.md",
+          "sha256": "bc0bd11550b5a2aea6bbc8485e68f15ef7f09796236968ad82c23acf9347aea9",
+          "size": 4038,
+          "scope": "공통/C1/X1 공개 근거 색인 후보"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-public-docs-check.json",
+          "sha256": "bc7f5d33204a5caa346f0816f366988a822d314022d25cc670b57e8ec8e86288",
+          "size": 687,
+          "scope": "현재 공개 문서 링크·외부자원·T05편차·codeblock 대조"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-docs-safety.txt",
+          "sha256": "d48161aacd112aa982e08e84a74df7dce4e90f408d12cb61f737528b444591f1",
+          "size": 2410,
+          "scope": "현재 공개 문서 안전 15 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-docs-safety.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "현재 공개 문서 안전 원 rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-audit-closeout/history/pre-html-summary-amendment/public-final-audit-placeholder.md",
+          "sha256": "813309cdbc2a37700841ae6fe39720fe2797b1fd2368fc4c090227b1d28acb9a",
+          "size": 176,
+          "scope": "공개 감사 교체 전 임시 문서 역사 bytes; 현재 공개 정본 아님"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/report-pre-summary-amendment.html",
+          "sha256": "28c242670c721d54b083196f9cb9abaaf24c9ee9a8d77ff924c4429d494203a2",
+          "size": 66258,
+          "scope": "HTML 요약 정정 전 bytes"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/report-summary-amendment.json",
+          "sha256": "033eccd3275af38a88a5ead5602d5ab8cf2cab3073416c0d90c16b1d44204419",
+          "size": 412,
+          "scope": "X1 누락 정정 이유·old/new SHA·code_changes0"
+        }
+      ],
+      "scope_and_constraints": "최종 사용자 가이드·self-contained HTML·공개 근거 색인·설치/원복 bash block·문서 안전15 rc0·유효링크를 확인했다. 실제 렌더에서 발견한 X1 요약 누락은 HTML 요약 2문장만 정정했고 실행 codeblock·세부판정은 불변이다."
+    }
+  ],
+  "correction_rules": [
+    {
+      "id": "C01",
+      "rule": "현재 build/schema가 먼저다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/source-audit/audit.json",
+          "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+          "size": 56424,
+          "scope": "global 세 스킬 7파일·C01~C13·T01~T16 정본"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        }
+      ],
+      "scope_and_constraints": "fresh build/schema/version/commit을 결속하고 tool count를 고정하지 않는다."
+    },
+    {
+      "id": "C02",
+      "rule": "모드와 권한을 분리한다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        }
+      ],
+      "scope_and_constraints": "4모드와 review write0을 actual/합성으로 확인했다."
+    },
+    {
+      "id": "C03",
+      "rule": "실선과 label을 분리한다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        }
+      ],
+      "scope_and_constraints": "wireless batch를 거부하고 C1/X1 모든 3망 solid-wire exact coverage를 확인했다."
+    },
+    {
+      "id": "C04",
+      "rule": "physical pin map이 필수다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        }
+      ],
+      "scope_and_constraints": "불완전 unit/pin 응답은 fail-closed이며 설치 source+endpoint로 두 합성 예제를 보완했다. exact MPN/footprint는 비대상이다."
+    },
+    {
+      "id": "C05",
+      "rule": "PWR_FLAG는 source 증거가 있을 때만 쓴다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "source 승인 schema가 없어 PWR_FLAG 자동 삽입 4경로를 전부 거부한다. positive capability는 미지원이다."
+    },
+    {
+      "id": "C06",
+      "rule": "ERC는 owning root에서 hierarchy 전체를 검사한다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        }
+      ],
+      "scope_and_constraints": "owning-root ERC actual은 확인했다. 다중 hierarchy child actual negative fixture는 미실행이다."
+    },
+    {
+      "id": "C07",
+      "rule": "aggregate는 direct check의 대체가 아니다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        }
+      ],
+      "scope_and_constraints": "aggregate와 direct ERC/orphan/short/single-pin을 actual로 분리했다."
+    },
+    {
+      "id": "C08",
+      "rule": "schematic과 PCB 거리를 분리한다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "pcb_distance_checked=false와 claim 승격 거부를 확인했다. 실제 먼 PCB capacitor fixture는 미실행이다."
+    },
+    {
+      "id": "C09",
+      "rule": "정격·전류는 profile 계산 대상이다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "power 0 findings의 정격 승격을 거부했다. actual current/voltage mismatch fixture는 미실행이다."
+    },
+    {
+      "id": "C10",
+      "rule": "저장 의미를 정확히 쓴다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/gui-evidence/roundtrip.json",
+          "sha256": "94415f6985ae0b277aaea00d3173ccfbc2604548cfed29610d33fd5dc5b0a529",
+          "size": 3670,
+          "scope": "C1 실제 GUI 저장·닫기·재열기"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-gui/roundtrip.json",
+          "sha256": "ce937f520bfe88294251515e6d01cb5d6c506d4fc750c5ff38a2994b98ed6b31",
+          "size": 4042,
+          "scope": "X1 실제 GUI 왕복"
+        }
+      ],
+      "scope_and_constraints": "save_project 의미를 분리하고 actual GUI 저장/readback SHA를 사용했다."
+    },
+    {
+      "id": "C11",
+      "rule": "coverage gap은 `INCOMPLETE`다.",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/strict-type-independent/audit.json",
+          "sha256": "6715a40ae758e3ae461b2f4f63f29284c040c79057db6a8d1f63bad7758c0f13",
+          "size": 14130,
+          "scope": "c77 strict type 독립 감사"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/results.json",
+          "sha256": "67d4bd42d404470bb8bb86e916c1af6c114623720c4a56067ebd1d2219452dd7",
+          "size": 54546,
+          "scope": "C1 current actual-input 인과/type 변이"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        }
+      ],
+      "scope_and_constraints": "missing/partial/type/source/scope/identity gap을 fail-closed로 확인했다."
+    },
+    {
+      "id": "C12",
+      "rule": "제조·발주 승인을 분리한다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "actual review는 footprint4/5 NOT READY이고 제조 checked 승격을 거부한다. actual DFM detector fixture는 미실행이다."
+    },
+    {
+      "id": "C13",
+      "rule": "symbol query 성공과 pin 완전성을 분리한다.",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/source-audit/audit.json",
+          "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+          "size": 56424,
+          "scope": "global 세 스킬 7파일·C01~C13·T01~T16 정본"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        }
+      ],
+      "scope_and_constraints": "actual LM358 pin0·불완전 response를 거부한다. 상속 pin0 원인은 미규명이라 단독 pin-map 승인은 미지원이다."
+    }
+  ],
+  "source_audit_tests": [
+    {
+      "id": "T01",
+      "kind": "schema refusal",
+      "mutation_or_input": "old `connect_pins(from_component,from_pin,to_component,to_pin)`",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        }
+      ],
+      "scope_and_constraints": "구 connect_pins 서명 dispatch 전 거부; 합성 경계."
+    },
+    {
+      "id": "T02",
+      "kind": "schema refusal",
+      "mutation_or_input": "old `connect_to_net(component_reference,pin_number,net_name)`",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        }
+      ],
+      "scope_and_constraints": "구 connect_to_net 서명 dispatch 전 거부; 합성 경계."
+    },
+    {
+      "id": "T03",
+      "kind": "schema refusal",
+      "mutation_or_input": "old `add_power_symbol(component_reference,pin_number,power_net)`",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        }
+      ],
+      "scope_and_constraints": "구 add_power_symbol 서명 dispatch 전 거부; 합성 경계."
+    },
+    {
+      "id": "T04",
+      "kind": "library refusal",
+      "mutation_or_input": "없는 Device transistor/Ferrite/구 IC ID",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/source-audit/audit.json",
+          "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+          "size": 56424,
+          "scope": "global 세 스킬 7파일·C01~C13·T01~T16 정본"
+        }
+      ],
+      "scope_and_constraints": "설치 library actual read에서 구 ID4건 not-found, CAD write0."
+    },
+    {
+      "id": "T05",
+      "kind": "polarity mutation",
+      "mutation_or_input": "`Device:LED`를 1=A,2=K로 뒤집은 plan",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/final-manifest.json",
+          "sha256": "3183d47213a9ae49387b56daec25e09fc504d2d65987f16379bcf61c4a837909",
+          "size": 1376,
+          "scope": "T05 의미 PASS·format exact FAIL·CAD0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/results/t05-verdict.json",
+          "sha256": "bfdd658b53f115b9cd894d27e6034865e87c52df037e604f9487833a2e277b67",
+          "size": 1391,
+          "scope": "T05 두 actual 모델 입력 판정"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "actual 모델이 역극성을 거부하고 정상 극성 sub-gate를 인정했다. 양쪽 code-fence 형식 편차로 format exact는 FAIL이며 CAD0."
+    },
+    {
+      "id": "T06",
+      "kind": "phantom tool",
+      "mutation_or_input": "`audit_esd_protection` 호출",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        }
+      ],
+      "scope_and_constraints": "phantom audit_esd_protection을 unknown 거부했다."
+    },
+    {
+      "id": "T07",
+      "kind": "solid-line mutation",
+      "mutation_or_input": "`batch_connect_to_net` 기본 `stub_length=0`",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/results.json",
+          "sha256": "67d4bd42d404470bb8bb86e916c1af6c114623720c4a56067ebd1d2219452dd7",
+          "size": 54546,
+          "scope": "C1 current actual-input 인과/type 변이"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        }
+      ],
+      "scope_and_constraints": "wireless batch 거부와 actual wire-gap mutation 검출."
+    },
+    {
+      "id": "T08",
+      "kind": "PWR_FLAG policy",
+      "mutation_or_input": "source 증거 없이 warning 제거 목적 PWR_FLAG",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "근거 없는 PWR_FLAG는 전 경로 거부. 승인 source positive fixture는 미지원."
+    },
+    {
+      "id": "T09",
+      "kind": "ERC scope",
+      "mutation_or_input": "hierarchy child에 `run_erc`",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "child ERC 합성 거부 통과. actual 다중 hierarchy fixture 미실행."
+    },
+    {
+      "id": "T10",
+      "kind": "aggregate omission",
+      "mutation_or_input": "`run_design_review`만 남기고 ERC/find evidence 삭제",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        }
+      ],
+      "scope_and_constraints": "C1/X1 actual aggregate와 direct evidence를 모두 실행했다."
+    },
+    {
+      "id": "T11",
+      "kind": "decoupling limitation",
+      "mutation_or_input": "same-net cap을 PCB에서 멀리 배치",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "PCB distance checked 승격 거부. 실제 먼 capacitor fixture 미실행."
+    },
+    {
+      "id": "T12",
+      "kind": "power limitation",
+      "mutation_or_input": "current/voltage mismatch지만 cap/testpoint는 존재",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "정격 checked 승격 거부. actual mismatch fixture 미실행."
+    },
+    {
+      "id": "T13",
+      "kind": "DFM claim mutation",
+      "mutation_or_input": "via-in-pad 또는 acid-trap만 가진 fixture",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/scope-claim-results.json",
+          "sha256": "5f57775a4fc8a1578bbe00a2b4fca7c8fa4edb3a35e823c63fa880bcb5faa53a",
+          "size": 14402,
+          "scope": "C1 금지 scope 승격 거부"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "제조 checked 승격 거부. actual via-in-pad/acid-trap fixture 미실행."
+    },
+    {
+      "id": "T14",
+      "kind": "save semantics",
+      "mutation_or_input": "offline schematic 증거로 `save_project`만 호출",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/gui-evidence/roundtrip.json",
+          "sha256": "94415f6985ae0b277aaea00d3173ccfbc2604548cfed29610d33fd5dc5b0a529",
+          "size": 3670,
+          "scope": "C1 실제 GUI 저장·닫기·재열기"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-gui/roundtrip.json",
+          "sha256": "ce937f520bfe88294251515e6d01cb5d6c506d4fc750c5ff38a2994b98ed6b31",
+          "size": 4042,
+          "scope": "X1 실제 GUI 왕복"
+        }
+      ],
+      "scope_and_constraints": "save_project-only를 거부하고 actual GUI/native readback을 사용했다."
+    },
+    {
+      "id": "T15",
+      "kind": "manufacturing boundary",
+      "mutation_or_input": "validate가 `READY`, BOM/CPL/Gerber/drill/preview 없음",
+      "status": "PASS_LIMITED",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "e5de3589774ba50dcf5fc6a4fb67259c98391bdcf7fafb08c0149564f2f51266",
+          "size": 9005,
+          "scope": "C1 aggregate/direct actual review와 NOT READY"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-actual-review/dispatch-records.json",
+          "sha256": "c2fadf5438309e3f7a8c2e07576fc1d4e2c5af0389fab368764d81c655922377",
+          "size": 9299,
+          "scope": "X1 aggregate/direct actual review, footprint5 NOT READY"
+        },
+        {
+          "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+          "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+          "size": 29472,
+          "scope": "최종 공개 사용자 가이드 후보"
+        }
+      ],
+      "scope_and_constraints": "actual NOT READY와 제조 claim 거부 확인. READY+산출물누락 exact fixture 미실행."
+    },
+    {
+      "id": "T16",
+      "kind": "symbol false-green",
+      "mutation_or_input": "`get_symbol_info(Amplifier_Operational:LM358)`가 성공하지만 pin 0개",
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/source-audit/audit.json",
+          "sha256": "30fa74d1e9ca12729240bc2864fd11b3f63976349f5e507a953f9e09d6066b6f",
+          "size": 56424,
+          "scope": "global 세 스킬 7파일·C01~C13·T01~T16 정본"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/mcp-dev/final-manifest.json",
+          "sha256": "f8f8b03fd887dca9f1990b551745b8de624b327b82e40111c9a5573a0520f35e",
+          "size": 3508,
+          "scope": "MCP 44 tests·37/37변이·경계"
+        }
+      ],
+      "scope_and_constraints": "actual LM358 success/pin0와 synthetic response gate로 false-green을 거부했다."
+    }
+  ],
+  "actual_task_receipts": {
+    "C1": {
+      "status": "PASS_LIMITED",
+      "authoring_package": "b274 historical",
+      "current_verifier_package": "c77",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/isolation/case/project/evidence/root-type-fixed/static-report.json",
+          "sha256": "62cdabc4c744f8a6f82cda98602d5c323f5394340a764a68e153d650c2f6ff37",
+          "size": 17602,
+          "scope": "C1 c77 actual-native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/gui-evidence/roundtrip.json",
+          "sha256": "94415f6985ae0b277aaea00d3173ccfbc2604548cfed29610d33fd5dc5b0a529",
+          "size": 3670,
+          "scope": "C1 실제 GUI 저장·닫기·재열기"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-independent-post-gui/20261012-051541_c1-independent-post-gui.md",
+          "sha256": "37b1936214a912656f8087461cba1a1ab126c11944b9aa9a5ec184f37c78fb90",
+          "size": 12073,
+          "scope": "C1 독립 시각/전기 대조"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/c1-type-fixed-mutations/results.json",
+          "sha256": "67d4bd42d404470bb8bb86e916c1af6c114623720c4a56067ebd1d2219452dd7",
+          "size": 54546,
+          "scope": "C1 current actual-input 인과/type 변이"
+        }
+      ]
+    },
+    "T05": {
+      "status": "PASS_LIMITED",
+      "semantic_pass": true,
+      "format_exact_pass": false,
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/final-manifest.json",
+          "sha256": "3183d47213a9ae49387b56daec25e09fc504d2d65987f16379bcf61c4a837909",
+          "size": 1376,
+          "scope": "T05 의미 PASS·format exact FAIL·CAD0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/polarity-g0/results/t05-verdict.json",
+          "sha256": "bfdd658b53f115b9cd894d27e6034865e87c52df037e604f9487833a2e277b67",
+          "size": 1391,
+          "scope": "T05 두 actual 모델 입력 판정"
+        }
+      ]
+    },
+    "X1": {
+      "status": "PASS_LIMITED",
+      "authoring_package": "c77 current cold",
+      "components_pins_nets": "5/10/3",
+      "independent_checks": "43/blocking0",
+      "mutations": "20 rejected, 2 controls, 0 survivors",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-closeout.json",
+          "sha256": "dd862d72b60aa857aead4f7f3d3ca850e4a5d7d937cc7935859c5000664137e6",
+          "size": 9825,
+          "scope": "X1 c77 제한 완료 정본"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/model-observation.public.json",
+          "sha256": "41356dd146ec4bee1c12393799b0ded01dee2c9d474c958ba1f67e07287d8934",
+          "size": 1256,
+          "scope": "X1 gpt-6-astra/high 공개 관측"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-gui/roundtrip.json",
+          "sha256": "ce937f520bfe88294251515e6d01cb5d6c506d4fc750c5ff38a2994b98ed6b31",
+          "size": 4042,
+          "scope": "X1 실제 GUI 왕복"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-managed/case/project/evidence/root-post-gui/static-report.json",
+          "sha256": "351b2842a8c8bb8d75590c4f18a5db788cf1af766241bc46274b069ce4fca302",
+          "size": 17588,
+          "scope": "X1 c77 post-GUI native deterministic PASS"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-independent/VERDICT.json",
+          "sha256": "e0cc58e082ab404aaebbc4bd6d9b8683bacafe4120dd6119253b6eecbebf4d28",
+          "size": 5368,
+          "scope": "X1 독립 43대조·제한 수용"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/run-01-result.json",
+          "sha256": "f2403a1c326e0d1a52f642176dad6f50568ba36b31c77aaf5bec86550ddac0a3",
+          "size": 1946,
+          "scope": "X1 actual-input 20거부·control2·survivor0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/x1-input-mutations/SCRIPT-CHANGE-RECEIPT.json",
+          "sha256": "434c3c850dc86bce7a3cb80cfa69baafeb5d18d2a3cf8d1a10f12193ab7908ff",
+          "size": 6111,
+          "scope": "X1 변이 runner 준비판/실행판 경로처리 차이 설명"
+        }
+      ]
+    }
+  },
+  "gates": {
+    "standard": {
+      "status": "PASS",
+      "tests": 107,
+      "breakdown": "92 core + 15 docs; Python190 안에 포함되어 중복합산 금지",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.txt",
+          "sha256": "356d8c76a073d2f3bdc65bb9303bb36d2df5530a89db8c6e3ac56cc64ac6dad6",
+          "size": 17496,
+          "scope": "최종 standard-quality 107 tests"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-standard-tests.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "최종 standard-quality 원 rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-gate-summary.json",
+          "sha256": "c95f12ef4308abacd4b29e62ec2c3f354d392645b8d094f6bcd3a2edfc33bdd0",
+          "size": 1182,
+          "scope": "107/190/2513/50ignored와 원 FAIL 보존 요약"
+        }
+      ]
+    },
+    "full": {
+      "status": "PASS",
+      "rust": "2513 pass,0 fail,50 ignored",
+      "python": "190 pass,0 fail",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-full-test.txt",
+          "sha256": "ee10cb773fdbadc2b78579aae9bdd5ffd117ff8b09f856175afd51f0e82825f8",
+          "size": 241288,
+          "scope": "최종 make test stdout와 Rust 결과"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-full-test.stderr",
+          "sha256": "2ce05094b524847372be73e8140e2ac824953e4d76b8e90ebbdf6ed33bb8c917",
+          "size": 34992,
+          "scope": "최종 make test Python 190 결과"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-full-test.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "최종 make test 원 rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-gate-summary.json",
+          "sha256": "c95f12ef4308abacd4b29e62ec2c3f354d392645b8d094f6bcd3a2edfc33bdd0",
+          "size": 1182,
+          "scope": "107/190/2513/50ignored와 원 FAIL 보존 요약"
+        }
+      ]
+    },
+    "verify_runtime_skill": {
+      "status": "PASS",
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-verify.txt",
+          "sha256": "617ab2be39073cd66bea09228bebeb3af9e47afed284fe09471436666ab878af",
+          "size": 246,
+          "scope": "프로젝트 verify rc0 출력"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-verify.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "프로젝트 verify 원 rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-runtime-verify.txt",
+          "sha256": "b77b25f0624fad30d9f41fd9a2ba9914a841f5c9f1ad5f63b804a014d4a2415f",
+          "size": 252,
+          "scope": "KiCad signature/library runtime verify rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-runtime-verify.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "runtime verify 원 rc0"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-skill-validation.txt",
+          "sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0",
+          "size": 16,
+          "scope": "skill quick validation 성공"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/final-skill-validation.rc",
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "size": 2,
+          "scope": "skill validation 원 rc0"
+        }
+      ]
+    },
+    "original_flake": {
+      "status": "PRESERVED_NOT_FIXED",
+      "original_make_rc": 2,
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/root-full-test-type-fixed.txt",
+          "sha256": "438d53f9d5c343dad2a9c715bbb151c09f6855bf8826f20c8cf3dec6397f6485",
+          "size": 196359,
+          "scope": "원 upstream port AddressInUse FAIL 보존"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/root-full-test-type-fixed.rc",
+          "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+          "size": 2,
+          "scope": "원 make rc2"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/upstream-flake-probe/20261012-055030_upstream-port-flake-diagnosis.md",
+          "sha256": "e547964eb2f84b46f82e07c2b7ca8faa9528727b1b94a8e7e00cd0d7852bd5a7",
+          "size": 7763,
+          "scope": "port 예약 공백 진단·fixture 미수정"
+        }
+      ]
+    }
+  },
+  "public_handover": {
+    "status": "PASS",
+    "documents": [
+      {
+        "path": "docs/agents/20261012-040121_standard-quality-user-guide.md",
+        "sha256": "b719bae22797c2f2d9b6894d5930d79ce9f20ca13b5e6162bdf0f9e14620daaa",
+        "size": 29472,
+        "scope": "최종 공개 사용자 가이드 후보"
+      },
+      {
+        "path": "docs/보고서/20261012-040121_standard-quality.html",
+        "sha256": "cc42a3da2c2e9a62fb781f311c19a8b03092a437c6fce73458538a04b6ace7cf",
+        "size": 66343,
+        "scope": "최종 공개 자기완결 HTML; X1 누락 요약 2문장 정정판"
+      },
+      {
+        "path": "docs/검증/20261012-standard-quality/README.md",
+        "sha256": "bc0bd11550b5a2aea6bbc8485e68f15ef7f09796236968ad82c23acf9347aea9",
+        "size": 4038,
+        "scope": "공통/C1/X1 공개 근거 색인 후보"
+      }
+    ],
+    "validation": [
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/final-public-docs-check.json",
+        "sha256": "bc7f5d33204a5caa346f0816f366988a822d314022d25cc670b57e8ec8e86288",
+        "size": 687,
+        "scope": "현재 공개 문서 링크·외부자원·T05편차·codeblock 대조"
+      },
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/final-docs-safety.txt",
+        "sha256": "d48161aacd112aa982e08e84a74df7dce4e90f408d12cb61f737528b444591f1",
+        "size": 2410,
+        "scope": "현재 공개 문서 안전 15 tests"
+      },
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/final-docs-safety.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+        "size": 2,
+        "scope": "현재 공개 문서 안전 원 rc0"
+      }
+    ],
+    "archives": [
+      {
+        "path": "docs/검증/20261012-standard-quality/standard-evidence.manifest.json",
+        "sha256": "1f075b162fb334860be6039fda74b4bf01827e188cbb9b6186201748f7d31c0f",
+        "size": 49755,
+        "scope": "공통 공개 archive manifest"
+      },
+      {
+        "path": "docs/검증/20261012-standard-quality/c1-evidence.manifest.json",
+        "sha256": "1616dabf4a52bd274ae8fb960833d2f2622147ed91c4cddfc43d3c64203ece05",
+        "size": 283852,
+        "scope": "C1 공개 archive manifest"
+      },
+      {
+        "path": "docs/검증/20261012-standard-quality/x1-evidence.manifest.json",
+        "sha256": "69fb37d04f68c88d2b4e1ff7f9b44c8866391c2f7f14025ddcc2fcc7b30d5f0d",
+        "size": 253790,
+        "scope": "X1 공개 archive manifest"
+      }
+    ],
+    "remaining": [],
+    "public_audit_paths": [
+      "docs/검증/20261012-standard-quality/final-audit.md",
+      "docs/검증/20261012-standard-quality/final-audit.json"
+    ],
+    "html_summary_amendment": {
+      "status": "PASS",
+      "old_sha256": "28c242670c721d54b083196f9cb9abaaf24c9ee9a8d77ff924c4429d494203a2",
+      "new_sha256": "cc42a3da2c2e9a62fb781f311c19a8b03092a437c6fce73458538a04b6ace7cf",
+      "changed_sentences": 2,
+      "code_changes": 0,
+      "evidence": [
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/report-pre-summary-amendment.html",
+          "sha256": "28c242670c721d54b083196f9cb9abaaf24c9ee9a8d77ff924c4429d494203a2",
+          "size": 66258,
+          "scope": "HTML 요약 정정 전 bytes"
+        },
+        {
+          "path": ".artifacts/20261012-040121-standard-quality/report-summary-amendment.json",
+          "sha256": "033eccd3275af38a88a5ead5602d5ab8cf2cab3073416c0d90c16b1d44204419",
+          "size": 412,
+          "scope": "X1 누락 정정 이유·old/new SHA·code_changes0"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "status": "PASS",
+    "evidence": [
+      {
+        "path": ".artifacts/20261012-040121-standard-quality/final-preservation-pre-audit.json",
+        "sha256": "c821c5c4e74f979ef2f009fb8f9891cc200aca06f836bea729315ef1d854a188",
+        "size": 795,
+        "scope": "baseline73 허용3외0/global8/source8/index/HEAD 보존"
+      }
+    ],
+    "constraint": "baseline/global/source/index/HEAD/submodule 보존 PASS. 본 감사 신규 파일과 공개 감사 한쌍은 승인된 additive 산출물이며 Root 최종 통합 manifest가 후속 결속한다."
+  },
+  "verdict": "SCOPE_LIMITED_COMPLETE",
+  "completion_statement": "관측된 KiCad10.0.6/Konnect0.13.0+hanall.1/c77/C1/T05/X1/local-gate/공개문서 조합의 범위 제한 closeout 완료. PCB·정격·동적·제조·통전·인증·실물 안전 완료가 아니다.",
+  "history": {
+    "pre_html_summary_amendment": ".artifacts/20261012-040121-standard-quality/final-audit-closeout/history/pre-html-summary-amendment/HISTORY.SHA256SUMS",
+    "previous_audit_sha256": "b83c9c8f33b24fbd95a8e13dbfadd7e2a1cc39320d8c17256f7857b0f3a99c05",
+    "previous_readme_sha256": "81a8a75a82a0c79eb7c5be0dda8be16af378e639f2d0f59430853b40406fa2d4"
+  }
+}

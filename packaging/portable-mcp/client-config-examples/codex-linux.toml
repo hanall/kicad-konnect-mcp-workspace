@@ -1,0 +1,3 @@
+[mcp_servers.konnect]
+command = "/absolute/path/to/Konnect-MCP-Portable/Start-Konnect"
+args = []

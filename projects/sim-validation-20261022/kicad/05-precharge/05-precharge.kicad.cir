@@ -1,0 +1,8 @@
+.title KiCad schematic
+.tran 100u 3
+C1 bus GND 4700u
+B1 p GND v=i(V1)*i(V1)*47
+V1 in GND PULSE( 0 48 0 1u 1u 10 20 ) 
+R1 in bus 47
+B2 ia GND v=-i(V1)
+.end

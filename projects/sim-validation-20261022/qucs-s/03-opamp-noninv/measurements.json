@@ -1,0 +1,67 @@
+{
+  "id": "03-opamp-noninv",
+  "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/03-opamp-noninv.dat.ngspice",
+  "dataset_header": "<Qucs Dataset 26.1.1>",
+  "dataset_vectors": [
+    "ac.gain_db",
+    "ac.v(in)",
+    "ac.v(inn)",
+    "ac.v(out)",
+    "ac.v(vcc)",
+    "ac.v(vee)",
+    "frequency",
+    "time",
+    "tran.v(in)",
+    "tran.v(inn)",
+    "tran.v(out)",
+    "tran.v(vcc)",
+    "tran.v(vee)"
+  ],
+  "independent_points": {
+    "time": 3008,
+    "frequency": 701
+  },
+  "results": [
+    {
+      "name": "vout_pk_1k",
+      "kind": "MAX",
+      "theory": 0.999186924427368,
+      "value": 0.9991849717728,
+      "unit": "V",
+      "err_rel": 1.9542435157037635e-06,
+      "pass": true,
+      "note": "tran.v(out) max over [0.002, 0.003] s; tol_rel=0.02"
+    },
+    {
+      "name": "gain_db_10hz",
+      "kind": "AC_FIND_DB",
+      "theory": 19.995653799782048,
+      "value": 19.995651789756334,
+      "unit": "dB",
+      "err_rel": 1.0052313037616801e-07,
+      "pass": true,
+      "note": "ac.v(out) 20*log10|V| at 10 Hz (log-f interpolation); tol_abs=0.17"
+    },
+    {
+      "name": "f_3db",
+      "kind": "AC_WHEN_DB",
+      "theory": 39959.771783613694,
+      "value": 39864.40924922355,
+      "unit": "Hz",
+      "err_rel": 0.002386463438944096,
+      "pass": true,
+      "note": "ac.v(out) dB FALL=1 crossing of 16.995653799782048 (log-f interpolation); tol_rel=0.02"
+    }
+  ],
+  "all_pass": true,
+  "alt_dataset": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/03-opamp-noninv/cli-run/03-opamp-noninv.cli-run.dat",
+    "all_pass": true,
+    "values": [
+      0.9991849717728,
+      19.995651789756334,
+      39864.40924922355
+    ],
+    "max_rel_diff_vs_gui": 0.0
+  }
+}

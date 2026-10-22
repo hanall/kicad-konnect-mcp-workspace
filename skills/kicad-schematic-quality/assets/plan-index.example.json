@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "mode": "design",
+  "project_stem": "sample",
+  "common_plan": "plans/common.md",
+  "plans": {
+    "sample.kicad_sch": "plans/root.md",
+    "01_power.kicad_sch": "plans/01_power.md"
+  },
+  "allowed_files": [
+    "sample.kicad_pro",
+    "sample.kicad_sch",
+    "01_power.kicad_sch",
+    "sample.kicad_pcb",
+    "sym-lib-table",
+    "evidence/candidate.kicadxml.xml",
+    "evidence/layout.json",
+    "evidence/erc.json",
+    "evidence/schematic.pdf"
+  ],
+  "read_only_files": [],
+  "read_only_library_refs": {
+    "InstalledDevice": "/replace/with/absolute/installed/Device.kicad_sym"
+  },
+  "require_all_plans_before_write": true
+}

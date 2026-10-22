@@ -1,0 +1,69 @@
+{
+  "id": "02-mosfet-gate",
+  "dataset_path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/02-mosfet-gate.dat.ngspice",
+  "dataset_header": "<Qucs Dataset 26.1.1>",
+  "dataset_vectors": [
+    "time",
+    "tran.v(d)",
+    "tran.v(g)",
+    "tran.v(gsrc)",
+    "tran.v(vdd)"
+  ],
+  "independent_points": {
+    "time": 20015
+  },
+  "results": [
+    {
+      "name": "vgs_at_tau",
+      "kind": "FIND",
+      "theory": 6.321205588285577,
+      "value": 6.31812523794267,
+      "unit": "V",
+      "err_rel": 0.0004873042491474922,
+      "pass": true,
+      "note": "tran.v(g) at 1e-06 s (linear interpolation); tol_rel=0.02"
+    },
+    {
+      "name": "t_vth",
+      "kind": "WHEN",
+      "theory": 2.2314355131420975e-07,
+      "value": 2.2371257279673785e-07,
+      "unit": "s",
+      "err_rel": 0.0025500243192188806,
+      "pass": true,
+      "note": "tran.v(g) RISE=1 crossing of 2.0; tol_rel=0.02"
+    },
+    {
+      "name": "vds_on",
+      "kind": "FIND",
+      "theory": 0.02998122655522195,
+      "value": 0.029981238100400934,
+      "unit": "V",
+      "err_rel": 3.85080275541901e-07,
+      "pass": true,
+      "note": "tran.v(d) at 1.5e-05 s (linear interpolation); tol_rel=0.02"
+    },
+    {
+      "name": "id_on_derived",
+      "kind": "DERIVED",
+      "theory": 0.11970018773444778,
+      "value": 0.11970018761899599,
+      "unit": "A",
+      "err_rel": 9.645079861993658e-10,
+      "pass": true,
+      "note": "formula (12 - vds_on)/100; tol_rel=0.02"
+    }
+  ],
+  "all_pass": true,
+  "alt_dataset": {
+    "path": "/home/hanol/kicad-konnect-mcp-workspace/projects/sim-validation-20261022/qucs-s/02-mosfet-gate/cli-run/02-mosfet-gate.cli-run.dat",
+    "all_pass": true,
+    "values": [
+      6.31812523794267,
+      2.2371257279673785e-07,
+      0.029981238100400934,
+      0.11970018761899599
+    ],
+    "max_rel_diff_vs_gui": 0.0
+  }
+}

@@ -1,0 +1,10 @@
+* 02 MOSFET gate drive switching
+VDD vdd 0 DC 12
+VG gsrc 0 PULSE(0 10 0 1n 1n 50u 100u)
+RG gsrc g 100
+CG g 0 10n
+RL vdd d 100
+M1 d g 0 0 NM1 W=100u L=100u
+.model NM1 NMOS(LEVEL=1 VTO=2 KP=0.5 LAMBDA=0 TOX=1e-7 CGSO=0 CGDO=0 CBD=0 CBS=0)
+.tran 1n 20u
+.end
