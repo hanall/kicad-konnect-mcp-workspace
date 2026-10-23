@@ -37,6 +37,40 @@
 - upstream tag를 이동시키지 않는다. 업그레이드는 새 tag와 commit을 `upstreams.lock.json`에 동시에 반영한다.
 - KiCad 갱신은 `make check-updates` 후 `make update-kicad`, Konnect 개발 준비는 `make setup-konnect-dev`를 사용한다.
 
+## 빌드·테스트 명령
+
+- 선행 조건: `make bootstrap`(protoc 3.21.12·Rust 1.96.0을 apt·rustup으로 고정, sudo 필요) 뒤 `make build`. `make build`는 server와 별도 workspace인 `crates/schematic-viewer`를 모두 `--locked`로 빌드하고 `Cargo.lock`에 Git source가 있으면 거부한다. release binary가 없으면 `scripts/run-konnect.sh`는 exit 127로 멈춘다.
+- `make test` = `make verify` + `scripts/test-konnect.sh`. 후자는 Konnect `cargo fmt --check`·`cargo test --locked`(lib/tests와 doc 분리)·`clippy --all-targets -D warnings`를 server와 viewer 각각 돌린 뒤 root `python3 -m unittest discover -s tests -p 'test_*.py' -v`를 실행한다. 변경 범위에 맞는 단일 시험을 먼저 돌린다.
+- root Python 단일 시험(Makefile 정본은 unittest, pytest 8도 설치돼 있다):
+  ```bash
+  python3 -m unittest tests.test_sim_mcp_extension -v                                     # 모듈 하나
+  python3 -m unittest tests.test_project_contract.ProjectContractTest.test_root_verifier  # 메서드 하나
+  ```
+- Konnect Rust 단일 시험(viewer는 `--manifest-path crates/schematic-viewer/Cargo.toml`을 붙인다):
+  ```bash
+  cd upstream/konnect && cargo test --workspace --locked <test_name>
+  cd upstream/konnect && cargo clippy --workspace --locked --all-targets -- -D warnings
+  ```
+- root 시험 일부는 설치 상태로 skip된다(ngspice·Qucs-S·LTspice 매니페스트·Konnect release binary 유무). skip은 통과가 아니다.
+- `make verify`(= `scripts/verify-project.py`)는 두 submodule의 origin·HEAD·tag commit이 `upstreams.lock.json`과 같고 **submodule working tree가 깨끗할 것**을 요구한다. `upstream/konnect`에 미커밋 변경이 있으면 `make verify`와 그에 의존하는 `make test`·`make check-local`이 실패한다. 미초기화 submodule만 `VERIFY_ALLOW_UNINITIALIZED=1`로 허용한다.
+- Konnect 변경 절차: `make setup-konnect-dev` → `upstream/konnect`의 `hanol-dev/v0.13.0`에서 시험 우선으로 수정 → submodule에서 commit·fork push → root gitlink와 `upstreams.lock.json`의 `commit`(필요 시 `version`)을 함께 갱신 → `make build` → `make check-local`. Makefile 타깃이 없는 공개 기능 전수 시험 4종(`scripts/mcp-catalogue-coverage.py`, `mcp-headless-functional.py`, `mcp-pcb-functional.py`, `mcp-service-functional.py`)의 인자와 순서는 [검증 계약](docs/20261006-112759_업그레이드-및-검증-계약.md) 「재현 gate」를 따른다.
+- `packaging/portable-mcp/`는 Windows/Linux 복사형 배포 묶음(launcher 소스·설정 예제·`build_bundle.py`)이며 현재 산출 ZIP은 Git 제외인 `dist/`에 있다. 빌드 절차는 그 디렉터리의 `BUILD-SOURCE.md`.
+
+## 실행기와 중계 체인
+
+`.mcp.json`과 `.codex/config.toml`은 둘 다 `scripts/run-konnect.sh --config config/konnect.toml`을 `KONNECT_GUI_SYNC=1 KONNECT_SIM=1`로 등록한다. 실행기는 **HOME 격리 전에** 플래그를 보고 Python STDIO 중계로 `exec`하며, 각 중계는 자기 플래그만 0으로 바꾼 같은 실행기를 자식으로 띄워 나머지 JSON-RPC를 전달한다.
+
+```text
+client → run-konnect.sh (GUI_SYNC=1) → konnect-mcp-gui.py  (+synchronize_schematic_edit, upstream 응답 제한 120초)
+       → run-konnect.sh (GUI_SYNC=0, SIM=1) → konnect-mcp-sim.py  (+도구 4종, 실행 제한 100초, scripts/sim_engines.py)
+       → run-konnect.sh (SIM=0) → HOME/XDG를 .runtime-home으로 격리 → exec upstream/konnect/target/release/konnect
+```
+
+- 중계 두 개는 사용자 실제 HOME에서 돈다(ACUW 레인과 `~/.local/bin/ltspice`를 호출할 수 있는 이유). 격리는 마지막 Konnect 프로세스에만 적용된다. `--version`·`--help`는 중계를 거치지 않는다.
+- 마지막 `run-konnect.sh`는 `KONNECT_RUNTIME_HOME`을 `.runtime-home` 또는 `.artifacts` 하위 canonical 경로로만 허용하고, `/opt/kicad/<lock tag>/share/kicad`가 있으면 `KICAD10_SYMBOL_DIR`·`KICAD10_FOOTPRINT_DIR`·`KICAD10_3DMODEL_DIR`를 호출자 값 우선으로 넣으며, `/tmp/kicad/api.sock`이 있으면 `KICAD_API_SOCKET`을 자동 발견한다.
+- 중계 도구는 schema만 추가한다. 회로도 쓰기는 모두 core 도구(`edit_schematic_component` 등)에 위임되고, `scripts/sim_engines.py`는 `.kicad_*`를 읽지도 쓰지도 않으며 `kicad-cli`가 내보낸 넷리스트·로그·dataset만 다룬다.
+- 현재 연결에 어떤 중계가 붙었는지는 `get_installation_info`의 `gui_sync_extension`·`simulation_extension`으로 확인한다. 데이터 경계와 검증 계층은 [`docs/아키텍처.md`](docs/아키텍처.md).
+
 ## 검증 계약
 
 - `hanall` 계정은 과금 방지를 위해 GitHub Actions를 사용하지 않는다. workflow를 추가하지 않고 저장소 Actions 권한을 비활성 상태로 유지한다.
