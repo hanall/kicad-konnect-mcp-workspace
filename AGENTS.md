@@ -26,13 +26,14 @@
 - `get_installation_info`가 없거나 버전·commit·실행 경로가 다르면 구 연결로 간주하고 **설계 쓰기를 중단**한다. 해당 Konnect 연결을 지원되는 클라이언트 재연결 절차로 갱신한 뒤, 같은 연결에서 버전·commit과 `list_toolboxes`를 다시 확인한다. 새 테스트 프로세스의 성공을 기존 등록 연결의 재시작 성공으로 대신 보고하지 않는다.
 - 재연결 시 다른 세션·다른 MCP 서버·KiCad GUI를 임의 종료하지 않는다. 단일 연결 재시작을 지원하지 않아 공유 daemon 전체에 영향을 주는 방법만 남으면, 영향 범위를 설명하고 별도 승인을 받은 뒤 수행한다.
 - 오래된 도구 목록·글로벌 스킬의 도구 개수보다 **현재 검증된 연결이 반환한 schema와 프로젝트 오버레이**를 우선한다. “최신”을 이유로 공급망 검증이나 잠금 파일 갱신 없이 자동 다운로드·업그레이드하지 않는다.
+- KiCad 잠금 tag가 바뀌면 이미 떠 있는 Konnect 연결은 기동 시점의 `KICAD10_*` 라이브러리 경로(구 버전)를 유지한다. 설계 쓰기 전에 지원되는 클라이언트 절차로 재연결하고 `get_installation_info`와 함께 실제 서버 PID의 `/proc/<PID>/environ`에서 `KICAD10_SYMBOL_DIR`이 잠금 tag 경로인지 확인한다(2026-10-23 10.0.7 사례).
 
 ## 소스 경계
 
 - `upstream/kicad`: 공식 KiCad 원본의 최신 안정 release를 추적하는 read-only 소스다. `.99.0` 개발 태그와 임의 patch는 반영하지 않는다.
 - `upstream/konnect`: `hanall/Konnect` fork의 MCP 구현이다. 공식 `mixelpixx/Konnect`는 `upstream` remote로 유지한다. 변경 시 upstream `CONTRIBUTING.md`, `DEV.md`, `docs/NAMING_CONVENTIONS.md`를 먼저 읽는다.
 - root의 `scripts`, `config`, `docs`, `projects`: 우리 통합 계층이다.
-- 회로 시뮬레이터(시스템 ngspice 44.2·Qucs-S 26.1.1·LTspice 24.0.12·Wine)는 upstream 소스가 아닌 외부 설치 런타임이다. 정본은 `config/qucs-s.lock.json`, `config/ltspice.lock.json`과 각 `INSTALL-MANIFEST.json`이며, KiCad 번들 ngspice 45.2는 `upstreams.lock.json`의 KiCad 10.0.6 AppImage에 속한다. 자동 갱신하지 않는다. 갱신은 새 SHA256·버전·게시일을 잠금 파일과 설치 스크립트 상단 상수에 동시에 반영한 뒤 `make install-qucs-s`/`make install-ltspice`로 수행하며 7일 age gate를 지킨다.
+- 회로 시뮬레이터(시스템 ngspice 44.2·Qucs-S 26.1.1·LTspice 24.0.12·Wine)는 upstream 소스가 아닌 외부 설치 런타임이다. 정본은 `config/qucs-s.lock.json`, `config/ltspice.lock.json`과 각 `INSTALL-MANIFEST.json`이며, KiCad 번들 ngspice 45.2는 `upstreams.lock.json`의 KiCad 10.0.7 AppImage에 속한다(10.0.6과 동일 libngspice). 자동 갱신하지 않는다. 갱신은 새 SHA256·버전·게시일을 잠금 파일과 설치 스크립트 상단 상수에 동시에 반영한 뒤 `make install-qucs-s`/`make install-ltspice`로 수행하며 7일 age gate를 지킨다.
 - `projects/sim-validation-20261022/`는 엔진 검증 fixture다. 사양 정본은 `spec/theory.py`가 생성하는 `spec/spec.json`이며, fixture 회로를 바꾸면 `make sim-verify` 기준선이 함께 바뀐다.
 - upstream tag를 이동시키지 않는다. 업그레이드는 새 tag와 commit을 `upstreams.lock.json`에 동시에 반영한다.
 - KiCad 갱신은 `make check-updates` 후 `make update-kicad`, Konnect 개발 준비는 `make setup-konnect-dev`를 사용한다.
@@ -75,6 +76,7 @@ client → run-konnect.sh (GUI_SYNC=1) → konnect-mcp-gui.py  (+synchronize_sch
 
 - `hanall` 계정은 과금 방지를 위해 GitHub Actions를 사용하지 않는다. workflow를 추가하지 않고 저장소 Actions 권한을 비활성 상태로 유지한다.
 - push 전 전체 로컬 gate: `make check-local`
+- `make check-local`은 첫 단계 `check-updates`에서 KiCad 또는 Konnect upstream 최신 안정판이 잠금과 다르면 exit 1로 멈춘다. 조회 신호이지 변경의 결함이 아니다. KiCad가 원인이면 `make update-kicad`(2026-10-23 10.0.7 사례), Konnect upstream tag가 원인이면 Konnect 업그레이드를 별도로 결정한다. 그 사이에는 `make test && make build && make mcp-smoke`를 따로 돌려 결과를 명시하고, 그 상태에서 push할지는 사용자가 정한다.
 - root: `make verify`
 - Konnect: `make test`
 - MCP: `make mcp-smoke`
@@ -86,6 +88,13 @@ client → run-konnect.sh (GUI_SYNC=1) → konnect-mcp-gui.py  (+synchronize_sch
 - 실제 GUI/IPC: ACUW 전용 레인에서 KiCad PCB Editor를 연 뒤 `make live-acceptance KICAD_PROJECT=... KICAD_BOARD=...`
 - 제조 기능 변경: 가능한 경우 실제 KiCad 10 `kicad-cli`로 ERC, DRC, Gerber, drill 생성과 결과 파일 존재를 함께 확인한다.
 - KiCad GUI/IPC 기능은 KiCad 10 PCB Editor가 실행된 상태에서 별도 통합 테스트로 확인한다.
+
+## 피어 배포(한올 아이 서버)
+
+- 인벤토리 정본은 `config/peers.json`, 실행기는 `scripts/deploy-peer.sh`, 진입점은 `make deploy-peer PEER=hanall-i-server DEPLOY_ARGS=--yes`다. 계약은 [피어 배포](docs/agents/20261023-125220_peer-deploy.md)를 먼저 읽는다.
+- 배포 방식이다. 피어에서 빌드·다운로드하지 않고 마스터가 검증한 작업 트리·Konnect release 바이너리·서명 검증된 AppImage/MSI 캐시를 rsync로 전달한 뒤 피어에서 같은 설치·검증 스크립트를 돌려 SHA·manifest·버전을 대조한다.
+- KiCad·Konnect·시뮬레이터 잠금을 올리고 로컬 게이트가 통과하면 같은 세션에서 피어 배포까지 실행하고 report(`.artifacts/deploy/<시각>-<alias>/report.json`)를 확인한 뒤 `hanall-ops-manager/inventory/i-server.md`에 기록한다. 건너뛰면 이유를 보고한다.
+- 피어에서는 cargo 게이트(`make test`·`make build`·`make check-local`)를 실행하지 않는다. wine 버전이 잠금과 다르면 `ltspice-wine`은 건너뛰고 보고하며, 교체·rustup 설치·홈 전역 설정 동기화는 사용자 결정 또는 `hanall-ops-manager` 절차다.
 
 ## 안전 계약
 
@@ -100,7 +109,20 @@ client → run-konnect.sh (GUI_SYNC=1) → konnect-mcp-gui.py  (+synchronize_sch
 - 시뮬레이션은 저장된 회로도를 `kicad-cli`가 읽어 넷리스트를 만든다. GUI 미저장 상태나 쓰기 뒤 readback 전에는 실행하지 않는다.
 - 산출물은 `run_spice_simulation`의 기본 `.artifacts/sim-runs/<시각>-<stem>/`에 둔다. `export_spice_netlist`는 `output`을 생략하면 대상 프로젝트 안 `.konnect-sim/`에 쓰므로, 사용자 프로젝트의 Git 상태를 바꾸지 않으려면 `output`을 `.artifacts/` 아래 절대경로로 준다.
 - 제조사 SPICE 모델(.lib/.sub/.sp)은 출처·SHA-256·라이선스·암호화 여부를 기록하고 사용자 승인 뒤 반입한다. 재배포 제한 모델과 시뮬레이터 바이너리를 저장소에 커밋하지 않는다.
-- LTspice·Qucs-S·KiCad 시뮬레이터 GUI와 LTspice 배치는 명명된 ACUW 전용 레인에서만 실행한다(아래 레인 메모리 상한).
+- LTspice·Qucs-S·KiCad 시뮬레이터 GUI와 LTspice 배치는 명명된 ACUW 전용 레인에서만 실행한다(레인 메모리 상한 절).
+- KiCad 10.0.7부터 BeginCommit/EndCommit에 문서 header가 필요해, 한 KiCad 프로세스에 회로도 편집기와 PCB 편집기가 함께 열려 있으면 Konnect의 commit 기반 PCB 쓰기가 `AS_BAD_REQUEST`로 거부된다(fail-closed). 2026-10-23에 `flip_component`로 실측했고 `set_component_placements`·동기화 등은 같은 BeginCommit 경로라 동일 거부가 예상된다(미실측). PCB 쓰기 전에는 standalone `pcbnew`로 보드를 열거나, 회로도 창을 닫되 GUI sync와 같은 기준(미저장 `*` 없음, 대화상자 없음, 같은 문서)을 먼저 확인하고 사용자 공유 창이면 사용자 확인을 받는다. 레인 창은 `instance.sh run <레인> -- wmctrl -ic <창ID>`처럼 레인 DISPLAY를 명시해 닫는다. ACUW `window-control.sh close`는 X 창 파괴라 KiCad 전체가 죽으므로 쓰지 않는다.
+
+## 레인 메모리 상한 (2026-10-06 추가 — OOM 사고 재발 방지)
+
+KiCad(kicad+pcbnew+eeschema)를 한 ACUW 레인에 동시에 띄우면 레인 합산 피크가 8G에 닿아 cgroup OOM으로 사살된다(2026-10-06 11:20 실사고: `kicad-native-capability-probe` 레인, slice 피크 8G, kicad PID 1484949 사살 → GNOME "앱 중지함 / 장치 메모리가 거의 가득 찼습니다" 알림). 이 레포에서 레인을 열 때는 **`ACUW_LANE_MEMORY_MAX=16G`를 env로 명시**한다. 전역 기본값(8G)은 호스트 보호용이므로 ACUW 쪽은 바꾸지 않는다(매뉴얼 §6-4).
+
+```bash
+ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/instance.sh open kicad-konnect
+# start-workspace.sh / run-in-workspace.sh 를 직접 부르는 경로도 같은 env 를 앞에 둔다
+```
+
+- `scripts/mcp-pcb-functional.py`(781행 부근)가 `run-in-workspace.sh`를 직접 호출한다 — 그 호출부에도 env 전달이 필요하다(코드 미수정, 담당 세션 판단).
+- 회로 시뮬레이터 GUI(LTspice·Qucs-S·KiCad 시뮬레이터)와 LTspice 배치도 같은 규칙을 따른다. 레인은 `ACUW_LANE_MEMORY_MAX=16G ... instance.sh open <레인>`으로 미리 연다. `run_spice_simulation(engine='ltspice', lane=...)`은 `instance.sh run`만 호출하며(레인을 열지 않음) `ACUW_LANE_MEMORY_MAX`가 비어 있으면 16G를 넣는다. 2026-10-22 LTspice 검증 1건은 이 env 없이 `MemoryMax=8G` 레인에서 실행됐다(`projects/sim-validation-20261022/results/ltspice-workflow.json`).
 
 ## 공개 API
 
@@ -143,11 +165,11 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 
 ## Available Skills
 
-이 프로젝트의 에이전트(Claude Code, Codex 등)는 사용자 글로벌 디렉토리 `~/.claude/skills/`에 설치된 **18개 스킬**을 사용할 수 있습니다. 비자명한 작업을 시작하기 전에 아래 목록에서 적용 가능한 스킬을 검토하고, 사용하려면 해당 스킬의 `SKILL.md`(예: `~/.claude/skills/<name>/SKILL.md`)를 먼저 읽은 뒤 그 지시를 따르세요. Claude Code는 자동 인식하지만, Codex 등 다른 에이전트는 이 인덱스를 명시적 진입점으로 사용합니다.
+이 프로젝트의 에이전트(Claude Code, Codex 등)는 사용자 글로벌 디렉토리 `~/.claude/skills/`에 설치된 **19개 스킬**을 사용할 수 있습니다. 비자명한 작업을 시작하기 전에 아래 목록에서 적용 가능한 스킬을 검토하고, 사용하려면 해당 스킬의 `SKILL.md`(예: `~/.claude/skills/<name>/SKILL.md`)를 먼저 읽은 뒤 그 지시를 따르세요. Claude Code는 자동 인식하지만, Codex 등 다른 에이전트는 이 인덱스를 명시적 진입점으로 사용합니다.
 
 - **`diagnose`** — Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
 - **`docx`** — Word 문서 생성, 편집, 분석. .docx 파일 작업: 새 문서 생성, 콘텐츠 수정, 변경 추적, 코멘트 추가.
-- **`gmail-agent-system`** — Use the shared local Gmail system in /home/hanol/gmail-agent-system when the user asks to read, search, analyze, send, reply to, forward, label, or delete email from the shared Google account across any project. Prefer the global `gmail-...
+- **`gmail-agent-system`** — Local mail system — Gmail (avrobot@gmail.com) + NAVER WORKS (hanol@root-works.net). Any email task from any project goes through the policy-gated `mail-gateway` CLI: metadata by default, body only for user-allowlisted senders after quara...
 - **`grill-with-docs`** — Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their pro...
 - **`grilling`** — Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 - **`html-report`** — Hanol 표준 HTML 보고서를 작성·생성·보고한다. 분석/진단/조사/감사/마이그레이션 계획 등의 결과를 자기완결형(외부 의존성 0) 다크테마 HTML 보고서로 만들고, 대화창에서 Ctrl+Click으로 바로 열리는 file:// 링크로 보고할 때 사용. "보고서로 정리", "HTML 보고서", "리포트 만들어", "결과를 문서로" 등의 요청에 트리거. 새 프로젝트에 이 보고서 시스템을 셋업/전파할 때도 사용.
@@ -162,6 +184,7 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 - **`security-ownership-map`** — Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a s...
 - **`security-threat-model`** — Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a c...
 - **`tdd`** — Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development.
+- **`tts-read`** — 로컬 TTS(Qwen3-TTS, 한국어 화자)로 텍스트·파일·직전 응답을 소리 내어 읽어준다. 사용자가 "읽어줘", "낭독해줘", "음성으로 들려줘", "소리로 알려줘", "tts", "말로 해줘"라고 하거나 보고서를 음성으로 듣고 싶어 할 때 사용. 자동 낭독(훅) 켜기/끄기 요청에도 사용.
 - **`user-screen-terminal`** — Open a shared terminal on the user's real screen (X session) and interact with it only through the tmux text channel — the user watches live while the agent types/reads without touching their keyboard, mouse, or focus. Use when the user ...
 
 <!-- SKILLS-INDEX:END -->
@@ -169,15 +192,29 @@ root 통합 계층과 Konnect 파생 변경은 `AGPL-3.0-only`를 따른다. KiC
 <!-- REPORT-SYSTEM:START -->
 ## HTML 보고서 시스템 (분석·진단·조사·계획 결과 보고 시 필수 준수)
 
-분석/진단/조사/마이그레이션 계획 등 결과물은 자기완결형 HTML 보고서로 작성하고, 대화창에서 Ctrl+Click으로 바로 열리는 `file://` 링크로 보고한다.
+분석/진단/조사/마이그레이션 계획 등 **결과물은 자기완결형 HTML 보고서로 작성**하고, 대화창에서 **Ctrl+Click으로 바로 열리는 `file://` 링크**로 보고한다. 표준 키트(템플릿·작성/생성/보고 가이드)는 다음 폴더에 있다 — **비자명한 보고 작업 전 먼저 읽을 것**:
 
-- 키트: `$AGENT_OS_ROOT/skills/skills/personal/html-report/` (`$AGENT_OS_ROOT` 미설정 시 `~/agent-os/skills/skills/personal/html-report/`)
-- git repo 안의 출력 위치: `<repo>/docs/보고서/`
-- 레포에 `docs/리뷰/`가 있으면 같은 timestamp의 Markdown도 생성한다.
-- 파일명: `YYYYMMDD-HHMMSS_slug.html`; 시각은 MCP time 또는 `date`로 실측한다.
-- CSS/JS는 inline으로 유지하고 외부 dependency를 사용하지 않는다.
-- 결론을 먼저 제시하고 측정값, 리스크, rollback을 포함한다.
-- 보고 시 `file://` 링크, 핵심 요약 3~5줄, 평문 절대경로를 함께 제공한다.
+- **스킬 로더가 있는 에이전트(Claude Code 등)**: `html-report` 스킬을 호출한다(Skill 도구). 그 외 에이전트는 아래 키트 경로를 직접 읽는다.
+- **키트 경로**: `~/.claude/skills/html-report/` (진입점 `README.md`; 전역 심링크라 원본 레포 위치와 무관하게 불변 — 원본은 `~/hanol-skills/skills/html-report/`)
+- **출력 위치 (레포 컨텍스트 우선 — 한국어 폴더)**:
+  - **현재 git 레포 안에서 작업 시** → 그 레포의 **`docs/보고서/`** 에 HTML 저장(없으면 `mkdir -p`로 생성). 레포 루트는 `git rev-parse --show-toplevel` 로 판정하고, `docs/` 가 없으면 레포 루트 바로 아래에 `docs/보고서/` 를 만든다.
+  - **그 레포에 `docs/리뷰/` 폴더가 있으면** → 같은 보고서를 **`.md` 로도 `docs/리뷰/` 에 동반 생성**한다(리뷰 누적 정책 준수: 기존 리뷰 삭제·본문 수정 금지, README 인덱스가 있으면 행 추가).
+  - **git 레포 밖(범용·시스템 작업)** → 전역 **`/home/hanol/보고서/`** (fallback).
+- **템플릿**: `~/.claude/skills/html-report/assets/template.html`
+
+### 작성·생성 규칙
+- `assets/template.html` 을 복사해 작성. CSS/JS **인라인(외부 의존성 0)**, 다크테마, 좌측 목차, 복사버튼, 콜아웃/표/단계블록 컴포넌트 사용. 상세는 `AUTHORING-GUIDE.md`.
+- **결론 먼저**: 최상단 요약 박스만 봐도 의사결정 가능하게. 측정값·근거 제시, 사실/추정 구분.
+- 파일명 `YYYYMMDD-HHMMSS_slug.html` (slug=영문 kebab-case). 현재시각은 `mcp__time__get_current_time` 또는 `date '+%Y%m%d-%H%M%S'` 로 **실측**(추측 금지). MD 동반본은 같은 timestamp를 쓰되, 레포에 한국어 리뷰 명명 규칙(`docs/리뷰/README.md`)이 있으면 그것을 우선한다.
+- 저장: 위 "출력 위치" 규칙을 따른다. 영문 `reports/` 폴더 신규 생성 금지. 상세는 `GENERATION-GUIDE.md`.
+- 비가역 작업(삭제·덮어쓰기·디스크 교체 등)은 `.big-warn` 경고 + 롤백 경로 포함.
+
+### 보고 규칙 (Ctrl+Click)
+보고 시 항상 3가지를 함께 제공 (상세 `REPORTING-PROCEDURE.md`):
+1. Ctrl+Click 링크: `[📄 <제목>](file://<퍼센트인코딩 절대경로>)` — 비ASCII 경로(한글 `보고서`/`리뷰`/레포명 등)는 반드시 퍼센트 인코딩. **MD 동반 생성 시 MD 경로도 함께 안내**.
+   - 인코딩 생성: `python3 -c "import urllib.parse,sys; print('file://'+urllib.parse.quote(sys.argv[1]))" "<절대경로>"`
+2. 핵심 요약 3~5줄.
+3. 평문 절대경로 1줄(클릭 안 되는 터미널 대비).
 <!-- REPORT-SYSTEM:END -->
 
 <!-- ACUW-MANUAL:START -->
@@ -225,15 +262,3 @@ bash /home/hanol/ai-computer-use-workspace/scripts/stop-workspace.sh && unset AC
 
 입력 표면(클릭/타이핑/키/스크롤/드래그/대기)·부분 확대 캡처(zoom)·클립보드·터미널·기본앱/데스크톱앱·브라우저 레인(CDP)·화면 녹화·host-mpx 레인(매뉴얼 §1-5, 계약 §2-3)·**계층적 읽기 채널**(tmux 버퍼 `term-text.sh`·Codex 이벤트 `codex-events.sh`·변화 감시 `watch.sh`/`damage-monitor.py`·PRIMARY 긁기 `read-terminal.sh`·AT-SPI `a11y.sh`·영상 `media.sh`·녹화 digest — 매뉴얼 §5.3-1~§5.3-6)·MCP(`workspace_*` 50종)·트러블슈팅은 위 매뉴얼을 참조하세요. 전체 도구 카탈로그는 `/home/hanol/ai-computer-use-workspace/scripts/REGISTRY.md`.
 <!-- ACUW-MANUAL:END -->
-
-## 레인 메모리 상한 (2026-10-06 추가 — OOM 사고 재발 방지)
-
-KiCad(kicad+pcbnew+eeschema)를 한 ACUW 레인에 동시에 띄우면 레인 합산 피크가 8G에 닿아 cgroup OOM으로 사살된다(2026-10-06 11:20 실사고: `kicad-native-capability-probe` 레인, slice 피크 8G, kicad PID 1484949 사살 → GNOME "앱 중지함 / 장치 메모리가 거의 가득 찼습니다" 알림). 이 레포에서 레인을 열 때는 **`ACUW_LANE_MEMORY_MAX=16G`를 env로 명시**한다. 전역 기본값(8G)은 호스트 보호용이므로 ACUW 쪽은 바꾸지 않는다(매뉴얼 §6-4).
-
-```bash
-ACUW_LANE_MEMORY_MAX=16G bash /home/hanol/ai-computer-use-workspace/scripts/instance.sh open kicad-konnect
-# start-workspace.sh / run-in-workspace.sh 를 직접 부르는 경로도 같은 env 를 앞에 둔다
-```
-
-- `scripts/mcp-pcb-functional.py`(781행 부근)가 `run-in-workspace.sh`를 직접 호출한다 — 그 호출부에도 env 전달이 필요하다(코드 미수정, 담당 세션 판단).
-- 회로 시뮬레이터 GUI(LTspice·Qucs-S·KiCad 시뮬레이터)와 LTspice 배치도 같은 규칙을 따른다. 레인은 `ACUW_LANE_MEMORY_MAX=16G ... instance.sh open <레인>`으로 미리 연다. `run_spice_simulation(engine='ltspice', lane=...)`은 `instance.sh run`만 호출하며(레인을 열지 않음) `ACUW_LANE_MEMORY_MAX`가 비어 있으면 16G를 넣는다. 2026-10-22 LTspice 검증 1건은 이 env 없이 `MemoryMax=8G` 레인에서 실행됐다(`projects/sim-validation-20261022/results/ltspice-workflow.json`).
